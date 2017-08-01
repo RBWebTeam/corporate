@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','LoginController@fire_calculator');
 Route::get('hotel-inn','UserController@hotel_inn');
 Route::get('register-form','LoginController@register_form');
 Route::get('fire-calculator','LoginController@fire_calculator');
