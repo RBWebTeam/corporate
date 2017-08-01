@@ -21,6 +21,7 @@ Route::get('searchpbcorporatecompanyajax',array('as'=>'searchpbcorporatecompanya
 Route::get('searchoccupiedajax',array('as'=>'searchoccupiedajax','uses'=>'AutoCompleteController@autoComplete_occupied_as'));
 Route::get('searchstateajax',array('as'=>'searchstateajax','uses'=>'AutoCompleteController@autoComplete_state'));  
 Route::post('corporate','LoginController@corporate');
-Route::post('district','LoginController@district');
+// Route::post('district','LoginController@district');
+Route::get('searchdistrictajax',array('as'=>'searchdistrictajax','uses'=>'AutoCompleteController@autoComplete_district'));  
 
 

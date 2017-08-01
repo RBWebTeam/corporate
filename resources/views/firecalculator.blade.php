@@ -109,8 +109,9 @@
                        <tr>
                           <td>District</td>
                           <td>
-                          <input type="hidden" name="districtid" id="districtid" value="">
-                          <div id="district"></div>
+                           <input type="hidden" name="districtid" id="districtid" value="">
+                          <input type="text" class="newsletter-name search_district" name="district" id="district" value="">
+                          <!-- <div id="district"></div> -->
                           </td> 
                        </tr>
                        <tr>
@@ -158,12 +159,12 @@
                        <tr>
                           <td>1.</td>
                           <td>Building (INCH. Plinch & Foundation)</td> 
-                          <td><input type="text" name="sum_building" id="sum_building" onkeypress="return fnAllowNumeric(event)" required class="newsletter-name"/></td>
+                          <td><input type="text" name="sum_building" id="sum_building" value="0" onkeypress="return fnAllowNumeric(event)" required class="newsletter-name"/></td>
                        </tr>
                        <tr>
                           <td>2.</td>
                           <td>Plinth & Foundation of Building</td> 
-                          <td><input type="text" name="sum_plith" id="sum_plith" onkeypress="return fnAllowNumeric(event)"  class="newsletter-name" required /></td>
+                          <td><input type="text" name="sum_plith" id="sum_plith" value="0" onkeypress="return fnAllowNumeric(event)"  class="newsletter-name" required /></td>
                        </tr>
                        <tr>
                           <td>3.</td>
@@ -185,7 +186,7 @@
                        <tr>
                           <td>6.</td>
                           <td>Other Contents*</td> 
-                          <td><input type="text" name="sum_others" id="sum_others" onkeypress="return fnAllowNumeric(event)" class="newsletter-name" /></td>
+                          <td><input type="text" name="sum_others" id="sum_others" value="0" onkeypress="return fnAllowNumeric(event)" class="newsletter-name" /></td>
                        </tr>
                        <!-- <tr>
                           <td></td>
@@ -587,7 +588,7 @@
 
 <script type="text/javascript">
   
- 
+ var stateid=0;
  $(document).ready(function(){
 
     
@@ -616,8 +617,9 @@
         }else{
            $(".search_state").attr("data-value", ui.item.datavalue);
             $("#stateid").val(ui.item.datavalue);       
-         
-         state(ui.item.datavalue);
+         stateid=ui.item.datavalue;
+         // alert(stateid);
+        // state(ui.item.datavalue);
          
           
              }
@@ -625,6 +627,53 @@
 
         
       });
+
+
+
+
+    $(".search_district").autocomplete({ 
+      source: function(request, response) {
+        if(stateid!=0){
+        $.ajax({
+          url: "{{ route('searchdistrictajax') }}",
+          dataType: "json",
+          data: {
+            term : stateid
+          },
+          success: function(data) {
+           
+
+            response(data);
+            
+          }
+        });
+}else{
+
+     // $('.search_city').val('');
+     alert("Please Select State");
+}
+
+      },
+      change: function (event, ui) {
+        if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
+         $(".search_district").attr("data-value",""); 
+          $("#districtid").val("");
+         
+        }else{
+           
+         $(".search_district").attr("data-value", ui.item.datavalue);
+            $("#districtid").val(ui.item.datavalue);       
+          
+             }
+           }
+
+        
+      });
+
+
+
+
+
    });
 
 </script>
@@ -652,6 +701,7 @@
                 url: "{{URL::to('corporate')}}",
                 data : $('#corporate_insurance').serialize(),
                 success: function(msg){
+                    console.log(msg);
                         var tablerows = new Array();
                          $.each(msg, function( index, value ) {
             tablerows.push('<tr><td>' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.discount_rate + '</td><td>' + value.tariffrate + '</td><td>' + value.base_rate + '</td><td>' + value.tot_rate + '</td><td>' + value.gross_premium + '</td></tr>');
@@ -707,7 +757,7 @@
 });
 </script>
  -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function state(id){
         var stateid = id;
        var v_token = "{{csrf_token()}}";
@@ -726,11 +776,11 @@
              //console.log(tablerows);
              //return false;            
                          if(msg){
-                            $('#district').empty().append('<td width="11%"><select class="select-sty drop-arr">'+tablerows+'</select></td>');
+                            $('#district').empty().append('<td width="11%"><select name="districtid" class="select-sty drop-arr">'+tablerows+'</select></td>');
                          }else{
                             $('#district').empty().append('No Result Found');
                          }
                     }
          }); 
     }
-</script>
+</script> -->

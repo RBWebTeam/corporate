@@ -66,6 +66,24 @@ class AutoCompleteController extends Controller
             return ['value'=>'No Result Found'];
     }
 
+    public function autoComplete_district(){
+    	$term = Input::get('term');
+        $products=DB::table('districtwise_zone_master')->select('district_name','district_id')
+        ->where('state_id', 'LIKE', '%'.$term.'%')
+        ->get();
+        //print_r( $products);
+        $data=array();
+        foreach ($products as $product) {
+                $data[]=array('value'=>$product->district_name,'datavalue'=>$product->district_id);
+        }
+        if(count($data)){
+           //    print_r($data);
+             return $data;
+         }
+        else
+            return ['value'=>'No Result Found'];
+    }
+
     }
 
         
