@@ -15,7 +15,8 @@ class LoginController extends Controller
     }
 
         public function fire_calculator(){
-        
+
+             
         return view('firecalculator');
     }
     

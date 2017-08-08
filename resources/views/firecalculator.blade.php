@@ -121,24 +121,29 @@
                           <input type="text" class="newsletter-name search_occupied " name="occ" value="" id="occ" required >
                           </td> 
                        </tr>
-                       <tr>
-                          <td>Period of Insurance</td>
-                          <td><input type="text" name="period_of_insurance" id="period_of_insurance" class="newsletter-name lastReporteddate"/></td> 
-                       </tr>
-                       <tr>
+                      
+                       <!-- <tr>
                           <td>USGI Policy No.</td>
                           <td><input type="text" name="usgi_no" id="usgi_no" onkeypress="return fnAllowNumeric(event)" class="newsletter-name"/></td> 
-                       </tr>
+                       </tr> -->
                        <tr>
                           <td>Business Type</td>
                           <td><select class="newsletter-name drop-arr" name="business_type" id="business_type" required>
-                        <option value="">Proposal</option>
+                        <option value="" >Select Proposal</option>
                         <option value="Fresh Proposal">Fresh Proposal</option>
                         <option value="Renewal Proposal">Renewal Proposal</option>
-                        <option value="New Business Proposal">New Business Proposal</option>
+                       
                         
                     </select></td> 
                        </tr>
+
+                        <tr id="periodofin_id" style="display:none;">
+                          <td>Period of Insurance</td>
+                          <td> From : <input type="text" name="period_from" id="period_from" class="newsletter-name lastReporteddate_from"/>
+                          <div id="hidden_id" style="display:none;"> To :
+                         <input type="text" name="period_to" id="period_to"   class="newsletter-name lastReporteddate" /></div></td>
+                       </tr>
+
                       </table>
                       </div>
                       </div>
@@ -211,33 +216,33 @@
                        </tr>
                        <tr>
                           <td width="11%">
-                             <select name="is_stfi"  class="select-sty drop-arr">
+                             <select name="is_stfi"  class="select-sty drop-arr" id="is_stfi">
                                     <option value="Y">Yes</option>
                                     <option selected value="N">No</option>
                              </select>
                           </td>
                           <td>STFI</td> 
-                          <td width="30%"><input type="text" name="sum_stfi" id="sum_stfi" value="0" onkeypress="return fnAllowNumeric(event)" class="newsletter-name"/></td>
+                          <td width="30%"><input type="text" name="sum_stfi" id="sum_stfi" value="0" onkeypress="return fnAllowNumeric(event)" class="newsletter-name" readonly/></td>
                         </tr>
                          <tr>
                           <td width="11%">
-                             <select name="is_earthquake" class="select-sty drop-arr">
+                             <select name="is_earthquake" class="select-sty drop-arr" id="is_earthquake">
                                     <option value="Y">Yes</option>
                                     <option selected value="N">No</option>
                              </select>
                           </td>
                           <td>Earthquake </td> 
-                          <td><input type="text" name="sum_earthquake" id="sum_earthquake" value="0" onkeypress="return fnAllowNumeric(event)" class="newsletter-name"/></td>
+                          <td><input type="text" name="sum_earthquake" id="sum_earthquake" value="0" onkeypress="return fnAllowNumeric(event)" class="newsletter-name" readonly/></td>
                         </tr>
                          <tr>
                           <td width="11%">
-                             <select name="is_terrorism" class="select-sty drop-arr">
+                             <select name="is_terrorism" class="select-sty drop-arr" id="is_terrorism">
                                     <option value="Y">Yes</option>
                                     <option selected value="N">No</option>
                              </select>
                           </td>
                           <td>Terrorism</td> 
-                          <td><input type="text" name="sum_terrorism" id="sum_terrorism" value="0" onkeypress="return fnAllowNumeric(event)" class="newsletter-name"/></td>
+                          <td><input type="text" name="sum_terrorism" id="sum_terrorism" value="0" onkeypress="return fnAllowNumeric(event)" class="newsletter-name" readonly/></td>
                         </tr>
                          <tr>
                           <td width="11%">
@@ -285,7 +290,7 @@
                         </tr>
                         <tr>
                           <td width="11%">
-                             <select name="is_forestfire" class="select-sty drop-arr">
+                             <select name="is_forestfire" class="select-sty drop-arr" >
                                     <option value="Y">Yes</option>
                                     <option selected value="N">No</option>
                              </select>
@@ -474,6 +479,7 @@
     var year = d.getFullYear() ;
     d.setFullYear(year);
 
+
     $(".lastReporteddate1").datepicker({ dateFormat: "dd-mm-yy",
       changeMonth: true,
       changeYear: true,
@@ -485,18 +491,52 @@
 </script>
 
 <script type="text/javascript">
-    var d = new Date();
-    var year = d.getFullYear() +20 ;
-    d.setFullYear(year);
 
-    $(".lastReporteddate").datepicker({ dateFormat: "dd-mm-yy",
-      changeMonth: true,
-      changeYear: true,
-      maxDate: year,
-      minDate: "-100Y",
-      yearRange: '-100:' + year + '',
-      defaultDate: d
-    });
+    var start = new Date();
+    start.setFullYear(start.getFullYear() - 70);
+    var end = new Date();
+    end.setFullYear(end.getFullYear() - 0);
+
+ $(".lastReporteddate_from").datepicker({ dateFormat: "dd-mm-yy",
+        changeMonth: true,
+        changeYear: true,
+        minDate: start,
+        maxDate: end,
+        yearRange: start.getFullYear() + ':' + end.getFullYear(),
+         onSelect: function(dateStr) {
+         
+              $("#hidden_id").show();
+
+        var ddd = $.datepicker.parseDate('dd-mm-yy', dateStr);
+        var years =1;
+        ddd.setFullYear(ddd.getFullYear() + years);
+        $('.lastReporteddate').datepicker('setDate', ddd);
+      }
+  });
+ 
+
+   
+$(".lastReporteddate").datepicker({
+    dateFormat: 'dd-mm-yy'
+});
+
+
+//     $(".lastReporteddate_from").datepicker({
+//     dateFormat: 'dd/mm/yy',
+//     onSelect: function(dateStr) {
+//         var d = $.datepicker.parseDate('dd/mm/yy', dateStr);
+//         var years =1;
+
+//         d.setFullYear(d.getFullYear() + years);
+
+//         $('.lastReporteddate').datepicker('setDate', d);
+        
+//     }
+// });
+// $(".lastReporteddate").datepicker({
+//     dateFormat: 'dd/mm/yy'
+// });
+
 </script>
 
 <script type="text/javascript">
@@ -638,7 +678,7 @@
           url: "{{ route('searchdistrictajax') }}",
           dataType: "json",
           data: {
-            term : stateid
+            term : stateid, district:request.term
           },
           success: function(data) {
            
@@ -722,6 +762,81 @@
 
     }
 });
+
+
+ 
+$('#business_type').change(function(){
+         if($(this).val()=="Fresh Proposal"){
+
+               $("#periodofin_id").hide();
+
+         }else{
+          $("#periodofin_id").show();
+         }
+});
+
+
+
+
+$('#is_stfi').change(function(){
+
+
+    if($(this).val()=="Y"){
+       // $('#sum_stfi').val($("#sum_plith").val());
+
+sum_building=parseFloat($("#sum_building").val());
+sum_fff=parseFloat($("#sum_fff").val());
+sum_electric=parseFloat($("#sum_electric").val());
+sum_stock=parseFloat($("#sum_stock").val());
+sum_others=parseFloat($("#sum_others").val());
+total=sum_building+sum_fff+sum_electric+sum_stock+sum_others;
+
+$('#sum_stfi').val(total);
+
+
+    }else{
+      $('#sum_stfi').val(0);
+    }
+              
+});
+
+$('#is_earthquake').change(function(){
+    if($(this).val()=="Y"){
+      sum_plith=parseFloat($("#sum_plith").val());
+      sum_building=parseFloat($("#sum_building").val());
+      sum_fff=parseFloat($("#sum_fff").val());
+      sum_electric=parseFloat($("#sum_electric").val());
+      sum_stock=parseFloat($("#sum_stock").val());
+      sum_others=parseFloat($("#sum_others").val());
+      total=sum_building+sum_fff+sum_electric+sum_stock+sum_others + sum_plith;
+      $('#sum_earthquake').val(total);
+
+
+    }else{
+       $('#sum_earthquake').val(0);
+    }
+              
+});
+
+
+$('#is_terrorism').change(function(){
+    if($(this).val()=="Y"){      
+      sum_building=parseFloat($("#sum_building").val());
+      sum_fff=parseFloat($("#sum_fff").val());
+      sum_electric=parseFloat($("#sum_electric").val());
+      sum_stock=parseFloat($("#sum_stock").val());
+      sum_others=parseFloat($("#sum_others").val());
+      total=sum_building+sum_fff+sum_electric+sum_stock+sum_others ;
+
+      $('#sum_terrorism').val(total);
+
+
+    }else{
+       $('#sum_terrorism').val(0);
+    }
+              
+});
+
 </script>
 
 <!-- <script type="text/javascript">

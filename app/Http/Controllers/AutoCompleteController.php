@@ -67,9 +67,15 @@ class AutoCompleteController extends Controller
     }
 
     public function autoComplete_district(){
+
+
     	$term = Input::get('term');
+        $district = Input::get('district');
+        
+
         $products=DB::table('districtwise_zone_master')->select('district_name','district_id')
-        ->where('state_id', 'LIKE', '%'.$term.'%')
+        ->where('state_id',$term)
+        ->where('district_name', 'LIKE', '%'.$district.'%')
         ->get();
         //print_r( $products);
         $data=array();
