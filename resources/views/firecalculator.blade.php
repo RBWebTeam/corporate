@@ -137,11 +137,12 @@
                     </select></td> 
                        </tr>
 
-                        <tr id="periodofin_id" style="display:none;">
+                        <tr id="periodofin_id" style="display:none;" colspan="2">
                           <td>Period of Insurance</td>
                           <td> From : <input type="text" name="period_from" id="period_from" class="newsletter-name lastReporteddate_from"/>
                           <div id="hidden_id" style="display:none;"> To :
-                         <input type="text" name="period_to" id="period_to"   class="newsletter-name lastReporteddate" /></div></td>
+                         <input type="text" name="period_to" id="period_to"   class="newsletter-name lastReporteddate" /></div>
+                         </td>
                        </tr>
 
                       </table>
@@ -495,21 +496,23 @@
     var start = new Date();
     start.setFullYear(start.getFullYear() - 70);
     var end = new Date();
-    end.setFullYear(end.getFullYear() - 0);
+    end.setFullYear(end.getFullYear() - 10);
+
+
 
  $(".lastReporteddate_from").datepicker({ dateFormat: "dd-mm-yy",
         changeMonth: true,
         changeYear: true,
-        minDate: start,
-        maxDate: end,
-        yearRange: start.getFullYear() + ':' + end.getFullYear(),
+        // minDate: start,
+        // maxDate: end,
+        // yearRange: start.getFullYear() + ':' + end.getFullYear(),
          onSelect: function(dateStr) {
-         
               $("#hidden_id").show();
-
         var ddd = $.datepicker.parseDate('dd-mm-yy', dateStr);
         var years =1;
+        ddd.setDate(ddd.getDate()-1); 
         ddd.setFullYear(ddd.getFullYear() + years);
+
         $('.lastReporteddate').datepicker('setDate', ddd);
       }
   });
