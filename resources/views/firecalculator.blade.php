@@ -62,6 +62,25 @@
 </style>
 
 <div class="container" id="fh5co-hero">
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="occupiedPop">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Type of Occupation</h4>
+      </div>
+      <div class="modal-body" style="border:1px solid black;height:500px;overflow:scroll;">
+       <div id="occ_company"><ul>
+        </ul></div>
+    </div>
+  </div>
+</div>  
+</div>
+
+
+
 <form id="corporate_insurance" name="corporate_insurance" method="POST">
  {{ csrf_field() }}
      <div class="fh5co-contact animate-box">
@@ -82,43 +101,43 @@
                        
                        <tr>
                           <td width="60%">Date</td>
-                          <td width="38%"><input type="text" id="date" name="date" required class="newsletter-name lastReporteddate1"/></td>
+                          <td width="38%" colspan="2"><input type="text" id="date" name="date" required class="newsletter-name  " readonly="" /></td>
                           
                        </tr>
                        <tr>
                           <td>Client</td>
                           <!-- <input type="hidden" name="company_name" id="company_name" value="">
                           <td><input type="text" name="company" id="company" class="newsletter-name search_company"/></td>  -->
-                          <td><input type="text" name="company_name" id="company_name" class="newsletter-name"/></td>
+                          <td colspan="2"><input type="text" name="company_name" id="company_name" class="newsletter-name"/></td>
                        </tr>
                        <tr>
                           <td>Correspondence Address</td>
-                          <td><input type="text" name="address" id="address" class="newsletter-name"/></td> 
+                          <td colspan="2"><input type="text" name="address" id="address" class="newsletter-name"/></td> 
                        </tr>
                        <tr>
                           <td>Risk Location</td>
-                          <td><input type="text" name="location" id="location" class="newsletter-name"/></td> 
+                          <td colspan="2"><input type="text" name="location" id="location" class="newsletter-name"/></td> 
                        </tr>
                        <tr>
                           <td>State</td>
-                          <td>
+                          <td colspan="2">
                           <input type="hidden" name="stateid" id="stateid" value="">
                           <input type="text" class="newsletter-name search_state " name="state" value="" id="state">
                           </td> 
                        </tr>
                        <tr>
                           <td>District</td>
-                          <td>
+                          <td colspan="2">
                            <input type="hidden" name="districtid" id="districtid" value="">
                           <input type="text" class="newsletter-name search_district" name="district" id="district" value="">
                           <!-- <div id="district"></div> -->
                           </td> 
                        </tr>
                        <tr>
-                          <td>Occupied As</td>
-                          <td>
+                          <td>Occupied As </td> 
+                          <td colspan="2"><span id="occupied_id"><a>view</a></span>
                           <input type="hidden" name="occ_id" id="occ_id" value="">
-                          <input type="text" class="newsletter-name search_occupied " name="occ" value="" id="occ" required >
+                          <input type="text" class="newsletter-name search_occupied " name="occ"   id="occ" required >
                           </td> 
                        </tr>
                       
@@ -128,7 +147,7 @@
                        </tr> -->
                        <tr>
                           <td>Business Type</td>
-                          <td><select class="newsletter-name drop-arr" name="business_type" id="business_type" required>
+                          <td colspan="2"><select class="newsletter-name drop-arr" name="business_type" id="business_type" required>
                         <option value="" >Select Proposal</option>
                         <option value="Fresh Proposal">Fresh Proposal</option>
                         <option value="Renewal Proposal">Renewal Proposal</option>
@@ -139,10 +158,19 @@
 
                         <tr id="periodofin_id" style="display:none;" colspan="2">
                           <td>Period of Insurance</td>
-                          <td> From : <input type="text" name="period_from" id="period_from" class="newsletter-name lastReporteddate_from"/>
-                          <div id="hidden_id" style="display:none;"> To :
+                          <td> From : <input type="text" name="period_from" id="period_from" class="newsletter-name lastReporteddate_from"/></td>
+                          <td><div id="hidden_id" style="display:none;"> To :
                          <input type="text" name="period_to" id="period_to"   class="newsletter-name lastReporteddate" /></div>
                          </td>
+                       </tr>
+
+ 
+
+                       <tr style="display:none;" id="Insurer_id">
+                          <td>Current Insurer</td>
+                          <td colspan="2">
+                          <input type="text" placeholder="Select Insurer" class="newsletter-name  current_insurer_company" name="current_insurer" value="" id="current_insurer" required >
+                          </td> 
                        </tr>
 
                       </table>
@@ -455,8 +483,9 @@
                       </div>
                       </div>
                       
-                      
-                      
+                     
+
+  
                       
                        <div class="col-md-12 container white-bg box-shadow">
                       <div class="col-md-1"></div>
@@ -468,27 +497,26 @@
                     </div>
                     </div>
                     </form>
-                          
+
+
+
+
+             
 </div>
+
+
+
 <br>
 
 <script src="{{URL::to('js/Myapp.js')}}"></script>
     <script src="{{URL::to('js/jsPdf.js')}}"></script>
      <script src="{{URL::to('js/freshslider.min.js')}}"></script>
 <script type="text/javascript">
-    var d = new Date();
-    var year = d.getFullYear() ;
-    d.setFullYear(year);
-
-
-    $(".lastReporteddate1").datepicker({ dateFormat: "dd-mm-yy",
-      changeMonth: true,
-      changeYear: true,
-      maxDate: year,
-      minDate: "-100Y",
-      yearRange: '-100:' + year + '',
-      defaultDate: d
-    });
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+if(dd<10){dd='0'+dd;} if(mm<10){mm='0'+mm;} $('#date').val(dd+'-'+mm+'-'+yyyy);
 </script>
 
 <script type="text/javascript">
@@ -586,14 +614,13 @@ $(".lastReporteddate").datepicker({
 </script>
 
 <script type="text/javascript">
-  
+ 
+ $( "#occ_company" ).scroll();
+ 
  
  $(document).ready(function(){
-
-    
     $(".search_occupied").autocomplete({ 
       source: function(request, response) {
-        
         $.ajax({
           url: "{{ route('searchoccupiedajax') }}",
           dataType: "json",
@@ -601,30 +628,69 @@ $(".lastReporteddate").datepicker({
             term : request.term
           },
           success: function(data) {
-           
+              //  
+                response(data);
 
-            response(data);
+
+    
+
+
+
             
           }
         });
       },
       change: function (event, ui) {
-        if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
+        if (ui.item == null || ui.item === undefined || ui.item.value=='No Result Found' ) {
          $(".search_occupied").attr("data-value",""); 
           $("#occ_id").val("");
+           $("#occ").val("");
+          
          
         }else{
            $(".search_occupied").attr("data-value", ui.item.datavalue);
-            $("#occ_id").val(ui.item.datavalue);       
-         
+           // $("#occ_id").val(ui.item.datavalue);  
          $(".Q6").show();
-         
-          
              }
            }
 
         
       });
+
+
+
+ $("#occupied_id").click(function(){ 
+      
+
+         
+        $.ajax({
+          url: "{{ route('searchoccupiedajax') }}",
+          dataType: "json",
+          data: {
+            occupied :'occupied'
+          },
+          success: function(data) {
+        var i=0;
+          $.each( data, function( key, val ) {
+           $("#occ_company ul").append('<li><a href="#" style="font-size: 15px;">'+val.occupied +'</span></a></li>');
+
+          });
+           $('#occupiedPop').modal('show');
+          
+          }
+
+        });
+  
+    
+
+        
+      });
+
+
+
+
+
+
    });
 
 </script>
@@ -744,14 +810,14 @@ $(".lastReporteddate").datepicker({
                 url: "{{URL::to('corporate')}}",
                 data : $('#corporate_insurance').serialize(),
                 success: function(msg){
-                    console.log(msg);
+                   
                         var tablerows = new Array();
                          $.each(msg, function( index, value ) {
             tablerows.push('<tr><td>' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.discount_rate + '</td><td>' + value.tariffrate + '</td><td>' + value.base_rate + '</td><td>' + value.tot_rate + '</td><td>' + value.gross_premium + '</td></tr>');
         }); 
                          
                          if(msg){
-                            $('#premium_table').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td>Company ID</td><td>Comapny Name</td><td>Discount Rate</td><td>Tariff Rate</td><td>Base Rate</td><td>Total Rate</td><td>Gross Premium</td></tr><tr>'+tablerows+'</tr></table>');
+                            $('#premium_table').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td>Company ID</td><td>Comapny Name</td><td>Discount Rate</td><td>Tariff Rate</td><td>Base Rate</td><td>Total Rate</td><td>Gross Premium</td></tr><tr>'+tablerows.join("")+'</tr></table>');
                          }else{
                             $('#premium_table').empty().append('No Result Found');
                          }
@@ -772,9 +838,11 @@ $('#business_type').change(function(){
          if($(this).val()=="Fresh Proposal"){
 
                $("#periodofin_id").hide();
-
+                $("#Insurer_id").hide();
          }else{
           $("#periodofin_id").show();
+          $("#Insurer_id").show();
+          
          }
 });
 
@@ -841,6 +909,56 @@ $('#is_terrorism').change(function(){
 });
 
 </script>
+
+
+<script type="text/javascript">        //Insurer 
+   $(document).ready(function(){
+    $(".current_insurer_company").autocomplete({ 
+      source: function(request, response) {
+        
+        $.ajax({
+          url: "{{route('insurercompany') }}",
+          dataType: "json",
+          data: {
+            term : request.term
+          },
+          success: function(data) {
+            response(data);
+            
+          }
+        });
+      },
+      change: function (event, ui) {
+        if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
+        }else{
+
+            }
+           }
+      });
+   });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- <script type="text/javascript">
     $('#state').blur(function(){

@@ -6,7 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Support\Facades\Input;
-
+use Illuminate\Http\Request;
 class AutoCompleteController extends Controller
 {
     public function autoComplete_pb_corporatecompany(){
@@ -28,23 +28,44 @@ class AutoCompleteController extends Controller
             return ['value'=>'No Result Found'];
     }
 
-    public function autoComplete_occupied_as(){
+    public function autoComplete_occupied_as(Request $request){
+
+
+                   if($request->occupied=="occupied"){
+                      $arry=array();
+                      $occupied=DB::table('occupancy_master')->select('occupancy_name')->get();
+                      
+                      foreach ($occupied as $occ) {
+                       $arry[]=array('occupied'=>$occ->occupancy_name);
+
+                      }
+                    
+                      return $arry;
+
+
+                   }else{
+
+                  
         
-       $term = Input::get('term');
+        $term = Input::get('term');
         $products=DB::table('occupancy_master')->select('occupancy_name','occup_id')
         ->where('occupancy_name', 'LIKE', '%'.$term.'%')
         ->take(5)->get();
-        //print_r( $products);
         $data=array();
         foreach ($products as $product) {
                 $data[]=array('value'=>$product->occupancy_name,'datavalue'=>$product->occup_id);
         }
+
         if(count($data)){
-           //    print_r($data);
              return $data;
          }
         else
             return ['value'=>'No Result Found'];
+
+
+    }
+
+
     }
 
     public function autoComplete_state(){
@@ -89,6 +110,34 @@ class AutoCompleteController extends Controller
         else
             return ['value'=>'No Result Found'];
     }
+
+
+
+
+
+
+public function insurercompany(Request $request){
+         $term = $request->term;
+         $products=DB::table('company_master')->select('company_name')
+        ->where('company_name', 'LIKE', '%'.$term.'%')
+        ->take(5)->get();
+        $data=array();
+        foreach ($products as $product) {
+                $data[]=array('value'=>$product->company_name);
+        }
+        if(count($data)){
+             return $data;
+         }
+        else
+            return ['value'=>'No Result Found'];
+
+}
+
+
+
+
+
+
 
     }
 

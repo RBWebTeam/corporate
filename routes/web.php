@@ -22,4 +22,4 @@ Route::post('corporate','LoginController@corporate');
 // Route::post('district','LoginController@district');
 Route::get('searchdistrictajax',array('as'=>'searchdistrictajax','uses'=>'AutoCompleteController@autoComplete_district'));  
 
-
+Route::get('insurercompany',array('as'=>'insurercompany','uses'=>'AutoCompleteController@insurercompany')); 
