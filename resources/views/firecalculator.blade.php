@@ -81,7 +81,7 @@
 
 
 
-<form id="corporate_insurance" name="corporate_insurance" method="POST">
+<form id="corporate_insurance" name="corporate_insurance" method="POST"   >
  {{ csrf_field() }}
      <div class="fh5co-contact animate-box">
                          <div>
@@ -128,7 +128,7 @@
                        <tr>
                           <td>District</td>
                           <td colspan="2">
-                           <input type="hidden" name="districtid" id="districtid" value="">
+                           <input type="hidden" name="districtid" id="districtid"  >
                           <input type="text" class="newsletter-name search_district" name="district" id="district" value="">
                           <!-- <div id="district"></div> -->
                           </td> 
@@ -136,10 +136,21 @@
                        <tr>
                           <td>Occupied As </td> 
                           <td colspan="2"><span id="occupied_id"><a>view</a></span>
-                          <input type="hidden" name="occ_id" id="occ_id" value="">
+                          <input type="hidden" name="occ_id" id="occ_id"  >
                           <input type="text" class="newsletter-name search_occupied " name="occ"   id="occ" required >
                           </td> 
                        </tr>
+
+                       
+                       <tr  id="occupiedType" style="display: none;">
+                         <td>Storage Type </td> 
+                        <td> 
+                      <span><input type="radio" name="storage_type" value="Closed" checked="true">Closed</span>  
+                      <span><input type="radio" name="storage_type" value="Open"  >Open</span>
+                        </td>
+
+                       </tr>
+
                       
                        <!-- <tr>
                           <td>USGI Policy No.</td>
@@ -151,8 +162,6 @@
                         <option value="" >Select Proposal</option>
                         <option value="Fresh Proposal">Fresh Proposal</option>
                         <option value="Renewal Proposal">Renewal Proposal</option>
-                       
-                        
                     </select></td> 
                        </tr>
 
@@ -631,25 +640,31 @@ $(".lastReporteddate").datepicker({
               //  
                 response(data);
 
-
-    
-
-
+              
 
             
           }
         });
+
+        
+
       },
       change: function (event, ui) {
         if (ui.item == null || ui.item === undefined || ui.item.value=='No Result Found' ) {
          $(".search_occupied").attr("data-value",""); 
-          $("#occ_id").val("");
-           $("#occ").val("");
+          $("#occ_id").val("0");
+           $("#occ").val("0");
           
          
         }else{
            $(".search_occupied").attr("data-value", ui.item.datavalue);
-           // $("#occ_id").val(ui.item.datavalue);  
+                    $("#occ_id").val(ui.item.datavalue);  
+                     if(ui.item.section_id==6){
+                         $('#occupiedType').show();
+
+
+                     }
+
          $(".Q6").show();
              }
            }
@@ -721,7 +736,7 @@ $(".lastReporteddate").datepicker({
       change: function (event, ui) {
         if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
          $(".search_state").attr("data-value",""); 
-          $("#stateid").val("");
+          $("#state").val("");
          
         }else{
            $(".search_state").attr("data-value", ui.item.datavalue);
@@ -742,7 +757,7 @@ $(".lastReporteddate").datepicker({
 
     $(".search_district").autocomplete({ 
       source: function(request, response) {
-        if(stateid!=0){
+      //  if(stateid!=0){
         $.ajax({
           url: "{{ route('searchdistrictajax') }}",
           dataType: "json",
@@ -756,17 +771,18 @@ $(".lastReporteddate").datepicker({
             
           }
         });
-}else{
+//}else{
 
      // $('.search_city').val('');
-     alert("Please Select State");
-}
+    // alert("Please Select State");
+//}
 
       },
       change: function (event, ui) {
         if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
          $(".search_district").attr("data-value",""); 
-          $("#districtid").val("");
+          $("#district").val('');
+          alert("Please Select State");
          
         }else{
            
@@ -811,13 +827,15 @@ $(".lastReporteddate").datepicker({
                 data : $('#corporate_insurance').serialize(),
                 success: function(msg){
                    
+                
+
                         var tablerows = new Array();
                          $.each(msg, function( index, value ) {
-            tablerows.push('<tr><td>' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.discount_rate + '</td><td>' + value.tariffrate + '</td><td>' + value.base_rate + '</td><td>' + value.tot_rate + '</td><td>' + value.gross_premium + '</td></tr>');
+            tablerows.push('<tr><td>' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.discount_rate + '</td><td>' + value.buildingrate + '</td><td>' + value.contentrate + '</td><td>' + value.base_build_rate + '</td><td>' + value.base_content_rate + '</td><td>'  + value.tot_rate + '</td><td>' + value.gross_premium + '</td></tr>');
         }); 
                          
                          if(msg){
-                            $('#premium_table').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td>Company ID</td><td>Comapny Name</td><td>Discount Rate</td><td>Tariff Rate</td><td>Base Rate</td><td>Total Rate</td><td>Gross Premium</td></tr><tr>'+tablerows.join("")+'</tr></table>');
+                            $('#premium_table').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td>Company ID</td><td>Comapny Name</td><td>Discount Rate</td><td>Building Rate</td><td>Content Rate</td><td>Base Building Rate</td><td>Base Content Rate</td><td>Total Rate</td><td>Gross Premium</td></tr><tr>'+tablerows.join("")+'</tr></table>');
                          }else{
                             $('#premium_table').empty().append('No Result Found');
                          }

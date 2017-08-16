@@ -34,7 +34,7 @@ class AutoCompleteController extends Controller
                    if($request->occupied=="occupied"){
                       $arry=array();
                       $occupied=DB::table('occupancy_master')->select('occupancy_name')->get();
-                      
+
                       foreach ($occupied as $occ) {
                        $arry[]=array('occupied'=>$occ->occupancy_name);
 
@@ -48,12 +48,12 @@ class AutoCompleteController extends Controller
                   
         
         $term = Input::get('term');
-        $products=DB::table('occupancy_master')->select('occupancy_name','occup_id')
+        $products=DB::table('occupancy_master')->select('occupancy_name','occup_id','section_id')
         ->where('occupancy_name', 'LIKE', '%'.$term.'%')
         ->take(5)->get();
         $data=array();
         foreach ($products as $product) {
-                $data[]=array('value'=>$product->occupancy_name,'datavalue'=>$product->occup_id);
+                $data[]=array('value'=>$product->occupancy_name,'datavalue'=>$product->occup_id,'section_id'=>$product->section_id);
         }
 
         if(count($data)){
