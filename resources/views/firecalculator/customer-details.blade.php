@@ -13,7 +13,7 @@
           <form id="corporate_insurance" name="corporate_insurance" method="POST"  >
           
             <div class="fields-grid col-md-12 bg-white box-shadow">
-            <h2 class="bg-sucsess">Customer Details</h2>
+            <h2 class="bg-sucsess" style="font-style:italic;">Customer Details</h2>
               <div class="styled-input agile-styled-input-top col-md-12">
               <span>Name of Insured</span>
                     {{ csrf_field() }}
@@ -118,7 +118,7 @@
               </div>
               
               <div class="styled-input agile-styled-input-top col-md-12">
-              <span id="occupied_idmodel" style="margin: 157px"><a>view</a></span>
+              <span id="occupied_idmodel" style="margin: 157px" ><a  class="glyphicon glyphicon-question-sign" href="#" data-toggle="tooltip" title="click here!"></a></span>
                <input type="hidden" name="occ_id" id="occ_id"  ><td colspan="2"></td>
                 <input type="text" name="occ"  class=" search_occupied "  id="occ" required>
                 <label>Occupancy Type<span class="text-danger">*</span> </label> 
@@ -259,20 +259,20 @@
                 <tr class="addon5">
                  <td><input type="checkbox" name="is_architect" id="is_architect" value="0" /></td>
                  <td>Architects, Surveyors and Consulting Engineers Fees ( in excess of 3% claim amount)</td>
-                 <td><input type="text" class="is_architect" name="sum_architect" id="sum_architect" value="0" onkeypress="return Numeric(event)"/></td>
+                 <td><input type="text" class="is_architect" name="sum_architect" id="sum_architect" value="0" onkeypress="return Numeric(event)" oninput=" return sum_architectto(this);"/></td>
                </tr>
 
                <tr class="addon6">
                  <td><input type="checkbox" name="is_removedebris" id="is_removedebris" value="0" /></td>
                  <td>Removal of Debris (in excess of 1% claim amount)</td>
-                 <td><input type="text" class="is_removedebris" name="sum_removedebris" id="sum_removedebris" value="0" onkeypress="return Numeric(event)"/></td>
+                 <td><input type="text" class="is_removedebris" name="sum_removedebris" id="sum_removedebris" value="0" onkeypress="return Numeric(event)"  oninput="return s_removedebristotal(this);" /></td>
                </tr>
 
 
                <tr class="addon7">
                  <td><input type="checkbox" name="is_spontcomb" id="is_spontcomb" value="0" /></td>
                  <td>Spontaneous Combustion</td>
-                 <td><input type="text" class="is_spontcomb" name="sum_spontcomb" id="sum_spontcomb" value="0" onkeypress="return Numeric(event)"/></td>
+                 <td><input type="text" class="is_spontcomb" name="sum_spontcomb" id="sum_spontcomb" value="0" onkeypress="return Numeric(event)" readonly  /></td>
                </tr>
          
                 <tr class="addon8">
@@ -284,20 +284,22 @@
                 <tr class="addon9">
                  <td><input type="checkbox" name="is_floater" id="is_floater" value="0" /></td>
                  <td>Floater Clause</td>
-                 <td><input type="text" class="is_floater" name="sum_floater" id="sum_floater" value="0" onkeypress="return Numeric(event)"/></td>
+                 <td><input type="text" class="is_floater" name="sum_floater" id="sum_floater" value="0" onkeypress="return Numeric(event)" readonly/></td>
                </tr>
 
                <tr class="addon10">
                  <td><input type="checkbox" name="is_impactdamage" id="is_impactdamage" value="0" /></td>
                  <td>Impact Damage due to Insured's own Rail/Road Vehicles, Fork lifts, Cranes, Stackers and the like and articles dropped therefrom.</td>
-                 <td><input type="text" class="is_impactdamage" name="sum_impactdamage" id="sum_impactdamage" value="0" onkeypress="return Numeric(event)"/></td>
+                 <td><input type="text" class="is_impactdamage" name="sum_impactdamage" id="sum_impactdamage" value="0" onkeypress="return Numeric(event)" oninput=" return sum_lossrentfn(this);" /></td>
                </tr>
-
-               
               </table>
                   <div class="col-md-12 mrg-btm">
-             <!--   <input type="submit" value="Get Quote"  id="insurance"/> -->
-               <button id="insurance">Get Quote</button>
+        
+           
+    <div class="col-md-2 col-md-offset-5">
+    <button id="insurance" class="btn btn-success">Get Quote</button>
+    </div>
+ 
             </div>
             
             <div class="clear"> </div>  
@@ -352,6 +354,9 @@
  var section_id='{{$section_id}}';
  var escalationval=0;
  var sum_omissionpublic=0;
+  var architecttotal=0;
+ var removedebristotal=0;
+  var sm_spontcomb=0;
   $(document).ready(function(){
     for (i = 0; i<15 ; i++) {
        $(".addon"+i).hide();
@@ -541,29 +546,10 @@ $(".risksearch_state").autocomplete({
              }
            }    
       });
-
-
-
-// Block Level Add on Covers
-// var sum_stfi=$('#sum_stfi').val();
-// var sum_earthquake=$('#sum_earthquake').val();
-// var sum_terrorism=$('#sum_terrorism').val();
-// var sum_escalation=$('#sum_escalation').val();
-// var sum_omission=$('#sum_omission').val();
-// var sum_lossrent=$('#sum_lossrent').val();
-// var sum_accommodation=$('#sum_accommodation').val();
-// var sum_architect=$('#sum_architect').val();
-// var sum_removedebris=$('#sum_removedebris').val();
-// var sum_spontcomb=$('#sum_spontcomb').val();
-// var sum_startup=$('#sum_startup').val();
-// var sum_floater=$('#sum_floater').val();
-// var sum_impactdamage=$('#sum_impactdamage').val();
-
-
-
       
       $('input[type="checkbox"]').click(function(){
             if($(this).prop("checked") == true){
+
             var totlacal=0;
             var percent=0;
             var totalper=0;
@@ -584,7 +570,7 @@ $(".risksearch_state").autocomplete({
                        totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
                         $('#sum_earthquake').val(totlacal);
                         }else if(attr_id=='is_terrorism'){
-                        totlacal=sum_building+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
+                        totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
                         $('#sum_terrorism').val(totlacal);
                         }else if(attr_id=='is_escalation'){
                         totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff;
@@ -599,32 +585,36 @@ $(".risksearch_state").autocomplete({
                         }else if(attr_id=='is_lossrent'){
                        totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff;
                         sum_omissionpublic=totlacal;
-                        $('#sum_lossrent').val(totlacal);
+                        $('#sum_lossrent').val(0);
                         }else if(attr_id=='is_accommodation'){
                        totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff;
                         sum_omissionpublic=totlacal;
-                        $('#sum_accommodation').val(totlacal);
+                        $('#sum_accommodation').val(0);
                         }else if(attr_id=='is_architect'){
                         totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff;
-                        totalper=(7.5*totlacal)/100;
-                        $('#sum_architect').val(totalper);
+                        totalper=(7.5*totlacal)/100;  
+                        architecttotal=totalper;
+                       // $('#sum_architect').val(totalper);
                         }else if(attr_id=='is_removedebris'){
                         totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff;
-                        totalper=(10*totlacal)/100;
-                        $('#sum_removedebris').val(totlacal);
+                        totalper=(10*totlacal)/100; 
+                        removedebristotal=totalper;                       
+                      //  $('#sum_removedebris').val(totalper);
                         }else if(attr_id=='is_spontcomb'){
                         totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
-                        $('#sum_spontcomb').val(0);
+                        //$('#sum_spontcomb').val(0);
+                        sm_spontcomb=totlacal;
                         }else if(attr_id=='is_startup'){
                          totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff;
                          sum_omissionpublic=totlacal;
-                        $('#sum_startup').val(totlacal);
+                        $('#sum_startup').val(0);
                         }else if(attr_id=='is_floater'){
                         totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
                         $('#sum_floater').val(0);
                         }else if(attr_id=='is_impactdamage'){
                         totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
-                        $('#sum_impactdamage').val(totlacal);
+                        sum_omissionpublic=totlacal;
+                        $('#sum_impactdamage').val(0);
                         }
 
 
@@ -670,6 +660,34 @@ function sum_lossrentfn(val){
 }
 
 
+function sum_architectto(val){
+   if(architecttotal>=val.value){  
+         return true;
+   }else{
+         alert("Sum Insured value cannot exceeding 7.5 % of Policy Sum Insured.");
+         return val.value=0;
+   }
+}
+
+
+function s_removedebristotal(val){
+   if(removedebristotal>=val.value){  
+         return true;
+   }else{
+         alert("Sum Insured value cannot exceeding 10 % of Policy Sum Insured.");
+         return val.value=0;
+   }
+}
+
+
+function s_spontcomb(val){
+   if(sm_spontcomb>=val.value){  
+         return true;
+   }else{
+         alert("Sum Insured value cannot exceeding the Policy Sum Insured.");
+         return val.value=0;
+   }
+}
 
 
 
@@ -693,13 +711,20 @@ function sum_lossrentfn(val){
                 url: "{{URL::to('corporate')}}",
                 data : $('#corporate_insurance').serialize(),
                 success: function(msg){
+
+    $('html, body').animate({
+        scrollTop: $("#premium_table").offset().top
+    }, 300);
+
+
+
                          var tablerows = new Array();
                          $.each(msg, function( index, value ) {  
-                         tablerows.push('<tr><td>' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.premium_amt + '</td><td>' + value.gst_amt + '</td><td>' + value.net_premium_amt +'</td></tr>');
+                         tablerows.push('<tr><td>' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.premium_amt + '</td><td>' + value.gst_amt + '</td><td>' + value.net_premium_amt +'</td> <td><a href="#" class="btn btn-success">Apply Now</a></td> </tr>');
         }); 
 
                       if(msg){
-                            $('#premium_table').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td>Company ID</td><td>Comapny Name</td><td>Premium Amount</td><td>GST Amount</td><td>Net Premium Amount Rate</td></tr><tr>'+tablerows.join("")+'</tr></table>');
+                            $('#premium_table').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td>Company ID</td><td>Company Name</td><td>Premium Amount</td><td>GST Amount</td><td>Net Premium Amount </td><td>Action</td></tr><tr>'+tablerows.join("")+'</tr></table>');
                          }else{
                             $('#premium_table').empty().append('No Result Found');
                          }          
