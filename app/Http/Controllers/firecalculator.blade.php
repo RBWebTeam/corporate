@@ -144,9 +144,9 @@
                        
                        <tr  id="occupiedType" style="display: none;">
                          <td>Storage Type </td> 
-                        <td colspan="2"> 
-                      <span><input type="radio" name="storage_type" value="Closed" checked="true">Closed 
-                      <input type="radio" name="storage_type" value="Open"  >Open</span>
+                        <td> 
+                      <span><input type="radio" name="storage_type" value="Closed" checked="true">Closed</span>  
+                      <span><input type="radio" name="storage_type" value="Open"  >Open</span>
                         </td>
 
                        </tr>
@@ -1009,8 +1009,8 @@ $('#is_terrorism').change(function(){
     });
 
 });
-</script>
- -->
+</script> -->
+
 <!-- <script type="text/javascript">
     function state(id){
         var stateid = id;
