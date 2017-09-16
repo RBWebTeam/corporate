@@ -33,10 +33,10 @@ class AutoCompleteController extends Controller
 
                    if($request->occupied=="occupied"){
                       $arry=array();
-                      $occupied=DB::table('occupancy_master')->select('occupancy_name','occup_id')->where('section_id','=',$request->section_id)->get();
+                      $occupied=DB::table('occupancy_master')->select('occupancy_name','occup_id','section_id')->where('section_id','=',$request->section_id)->get();
 
                       foreach ($occupied as $occ) {
-                       $arry[]=array('occupied'=>$occ->occupancy_name,'occupied_id'=>$occ->occup_id);
+                       $arry[]=array('occupied'=>$occ->occupancy_name,'occupied_id'=>$occ->occup_id,'section_id'=>$occ->section_id);
 
                       }
                     
@@ -119,12 +119,12 @@ class AutoCompleteController extends Controller
 
 public function insurercompany(Request $request){
          $term = $request->term;
-         $products=DB::table('company_master')->select('company_name')
+         $products=DB::table('company_master')->select('company_name','company_id')
         ->where('company_name', 'LIKE', '%'.$term.'%')
         ->take(5)->get();
         $data=array();
         foreach ($products as $product) {
-                $data[]=array('value'=>$product->company_name);
+                $data[]=array('value'=>$product->company_name,'company_id'=>$product->company_id);
         }
         if(count($data)){
              return $data;

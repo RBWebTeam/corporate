@@ -13,12 +13,19 @@
           <form id="corporate_insurance" name="corporate_insurance" method="POST"  >
           
             <div class="fields-grid col-md-12 bg-white box-shadow">
-            <h2 class="bg-sucsess" style="font-style:italic;">Customer Details</h2>
+            <h2 class="bg-sucsess"  >Customer Details</h2>
               <div class="styled-input agile-styled-input-top col-md-12">
               <span>Name of Insured</span>
-                    {{ csrf_field() }}
-                <input type="hidden" name="section_id" value="{{$section_id}}">
-     
+                      {{ csrf_field() }}
+                     <input type="hidden" name="section_id" value="{{$section_id}}">
+                     <input type="hidden" name="business_type"   value="{{$business_type}}">
+                     <input type="hidden" name="frshcash"   value="{{$frshcash}}">
+                     <input type="hidden" name="newcustomer"   value="{{$newcustomer}}">
+                     <input type="hidden" name="period_from"   value="{{$period_from}}">
+                     <input type="hidden" name="period_to"   value="{{$period_to}}">
+                     <input type="hidden" name="current_insurer_id"   value="{{$current_insurer_id}}">
+
+
                 <input type="text" name="insure_name" id="insure_name" required  > 
                 
                 <span></span>
@@ -27,7 +34,7 @@
               <div class="bg-danger">
               <div class="styled-input agile-styled-input-top col-md-12">
               <span>Address Line 1</span>
-                <input type="text" name="address_one" id="address_one" required=""> 
+                <input type="text" name="address_one" id="address_one" required> 
                 
                 <span></span>
               </div>
@@ -51,7 +58,7 @@
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select State</span>
               <input type="hidden" name="stateid" id="stateid" value="">
-              <input type="text" class="newsletter-name search_state " name="state" value="" id="state">
+              <input type="text" class="newsletter-name search_state " name="state" value="" id="state" required>
               </div>
 
 
@@ -60,7 +67,7 @@
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select city</span>
                <input type="hidden" name="districtid" id="districtid"  >
-               <input type="text" class="newsletter-name search_district" name="district" id="district"  >
+               <input type="text" class="newsletter-name search_district" name="district" id="district" required >
               </div>
               
               <div class="styled-input agile-styled-input-top col-md-6">
@@ -68,22 +75,46 @@
                 <input type="text" name="pincode"  id="pincode" minlength="6" maxlength="6" required=""> 
                 <span></span>
               </div>
-              
+              </div><br>
+
+            <h4 class="col-md-12"><span class="text-sucsess">Contact Details </span></h4>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Name of Contact Person</span>
+                 <input type="text" name="contact_person"  id="contact_person"   required=""> 
+                <span></span>
               </div>
-              <br>
-              
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Designation</span>
+                 <input type="text" name="designation"  id="designation" > 
+                <span></span>
+              </div>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Email</span>
+                 <input type="email" name="email"  id="email"   required=""> 
+                <span></span>
+              </div>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Mobile Number</span>
+                 <input type="text" name="mobile"  id="mobile" minlength="10" maxlength="10" required=""> 
+                <span></span>
+              </div>
+ 
+
+
+
+
               
               <h4 class="col-md-12"><span class="text-sucsess">Risk Location Address</span></h4>
               
                 <div class="styled-input agile-styled-input-top col-md-12">
               <span>Address Line 1</span>
-                <input type="text" name="address_one" id="riskaddress_one" required=""> 
+                <input type="text" name="riskaddress_one" id="riskaddress_one" required > 
                 
                 <span></span>
               </div>
               <div class="styled-input agile-styled-input-top col-md-12">
               <span>Address Line 2</span>
-                <input type="text" name="address_two" id=riskaddress_two required=""> 
+                <input type="text" name="riskaddress_two" id=riskaddress_two required > 
                 
                 <span></span>
               </div>
@@ -101,28 +132,35 @@
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select State</span>
               <input type="hidden" name="riskstateid" id="riskstateid"  >
-              <input type="text" class="newsletter-name  risksearch_state" name="riskstate" value="" id="risksearch_state">
+              <input type="text" class="newsletter-name  risksearch_state" name="riskstate" value="" id="risksearch_state" required>
               </div>
 
 
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select city</span>
                <input type="hidden" name="riskdistrictid" id="risksdistrictid"  > 
-               <input type="text" class="newsletter-name risksearchdistrict" name="riskdistrict" id="riskdistrict"  >
+               <input type="text" class="newsletter-name risksearchdistrict" name="riskdistrict" id="riskdistrict"  required>
               </div>
               
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Pincode</span>
-                <input type="text" name="riskpincode"  id="riskpincode" minlength="6" maxlength="6" required=""> 
+                <input type="text" name="riskpincode"  id="riskpincode" minlength="6" maxlength="6" required > 
                 <span></span>
               </div>
               
+
+               <div class="styled-input agile-styled-input-top col-md-12">
+              <input type="text" name="occup_desc"     id="description" required>
+                <label>Occupancy Description<span class="text-danger">*</span> </label> 
+                <span></span>
+              </div>
+
+
               <div class="styled-input agile-styled-input-top col-md-12">
               <span id="occupied_idmodel" style="margin: 157px" ><a  class="glyphicon glyphicon-question-sign" href="#" data-toggle="tooltip" title="click here!"></a></span>
                <input type="hidden" name="occ_id" id="occ_id"  ><td colspan="2"></td>
                 <input type="text" name="occ"  class=" search_occupied "  id="occ" required>
                 <label>Occupancy Type<span class="text-danger">*</span> </label> 
-
                 <span></span>
               </div>
 
@@ -145,7 +183,7 @@
                  <tr>
                  <td>Sum Insured for Building</td>
                  <td>
-                 <input type="text" name="sum_building" id="sum_building" value="0" onkeypress="return Numeric(event)"/>
+                 <input type="text" name="sum_building" id="sum_building" value="0" onkeypress="return Numeric(event)"/ >
                  </td>
                  </tr>
                  <tr>
@@ -305,9 +343,10 @@
             <div class="clear"> </div>  
           </form>
 
-
+          
+          
           <div id="premium_table"></div>
-
+         
 
         </div>
 
@@ -334,7 +373,7 @@
           <h4 class="modal-title">Type of Occupation</h4>
         </div>
         <div class="modal-body" id=occ_company>
-          <ul></ul>
+          <ul class="list-group" style="height: auto;max-height: 500px;overflow-x: hidden;"></ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -347,7 +386,6 @@
  
 
 
- 
 
 
 <script type="text/javascript">
@@ -434,7 +472,11 @@
           success: function(data) {
            $("#occ_company ul").empty();
           $.each( data, function( key, val ) {
-           $("#occ_company ul").append('<li ><a href="#" class="occupied_id" style="font-size: 15px;">'+val.occupied +'</a> <input type="hidden" name="abc" class="accupied_id_name"  value='+val.occupied_id +'></li>');
+           $("#occ_company ul").append('<li class="list-group-item" ><a href="#" class="occupied_id" style="font-size: 15px;"><p class="mb-0">'+val.occupied +'</p></a> <input type="hidden" name="abc" class="accupied_id_name"  value='+val.occupied_id +'></li>');
+
+            if(val.section_id==6){
+                         $('#occupiedType').show();
+                     }
           });
           $('#occupiedPop').modal('toggle');
  
@@ -546,6 +588,11 @@ $(".risksearch_state").autocomplete({
              }
            }    
       });
+
+  function nancheck(rows) {
+              rows=parseInt(rows);
+           return a= isNaN(rows)==true ? 0 : rows;
+  }
       
       $('input[type="checkbox"]').click(function(){
             if($(this).prop("checked") == true){
@@ -554,13 +601,15 @@ $(".risksearch_state").autocomplete({
             var percent=0;
             var totalper=0;
             
-            var sum_building=parseFloat($('#sum_building').val());
-            var sum_plith=parseFloat($('#sum_plith').val());
-            var sum_plant=parseFloat($('#sum_plant').val());
-            var sum_electric=parseFloat($('#sum_electric').val());
-            var sum_fff=parseFloat($('#sum_fff').val());
-            var sum_others=parseFloat($('#sum_others').val());
-            var sum_stock=parseFloat($('#sum_stock').val());
+            var sum_building=nancheck(parseFloat($('#sum_building').val()));
+            var sum_plith=nancheck(parseFloat($('#sum_plith').val()));
+            var sum_plant=nancheck(parseFloat($('#sum_plant').val()));
+            var sum_electric=nancheck(parseFloat($('#sum_electric').val()));
+            var sum_fff=nancheck(parseFloat($('#sum_fff').val()));
+            var sum_others=nancheck(parseFloat($('#sum_others').val()));
+            var sum_stock=nancheck(parseFloat($('#sum_stock').val()));
+
+
                 attr_id=$(this).attr('id');
                         $('#'+attr_id).val(1);
                         if(attr_id=='is_stfi'){
@@ -637,7 +686,11 @@ $(".risksearch_state").autocomplete({
     $('#occ').empty().val(closest.text());
     $('#occ_id').val($(this).closest('li').find('.accupied_id_name').val());
     $('#occupiedPop').modal('hide');
-    $('#occ').focus();
+    //
+
+    $('html, body').animate({ scrollTop: $('#occ').offset().top -300}, 500);
+
+//$('#occ').focus();
   })
 
 
@@ -645,7 +698,8 @@ $(".risksearch_state").autocomplete({
 var  percent1 =0;
 var  otalper =0;
 $('input[type="radio"]').click(function(){
-percent1 = $('input[name=escalper]:checked').val();
+
+percent1 =  $('input[name=escalper]:checked').val();
  otalper=(percent1*parseFloat(escalationval))/100;
 $('#sum_escalation').val(otalper); 
 });
@@ -720,11 +774,11 @@ function s_spontcomb(val){
 
                          var tablerows = new Array();
                          $.each(msg, function( index, value ) {  
-                         tablerows.push('<tr><td>' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.premium_amt + '</td><td>' + value.gst_amt + '</td><td>' + value.net_premium_amt +'</td> <td><a href="#" class="btn btn-success">Apply Now</a></td> </tr>');
+                         tablerows.push('<tr><td class="ab">' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.premium_amt + '</td><td>' + value.gst_amt + '</td><td>' + value.net_premium_amt +'</td> <td><a href="#" class="btn btn-success getval">Apply Now</a></td>        <input type="hidden" name="c_id[]" value="'+value.company_id+'" class="c_id"><input type="hidden" name="c_name[]" value="'+value.company_name+'" class="c_name"><input type="hidden" name="p_amount[]" value="'+value.premium_amt+'" class="p_amount"><input type="hidden" name="gst_amount[]" value="'+value.gst_amt+'" class="gst_amount"><input type="hidden" name="net_p_amount[]" value="'+value.net_premium_amt+'" class="net_p_amount"></tr>');
         }); 
 
                       if(msg){
-                            $('#premium_table').empty().append('<table class="table table-striped table-bordered"><tr class="text-capitalize"><td>Company ID</td><td>Company Name</td><td>Premium Amount</td><td>GST Amount</td><td>Net Premium Amount </td><td>Action</td></tr><tr>'+tablerows.join("")+'</tr></table>');
+                            $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Download Quotes</button></form>');
                          }else{
                             $('#premium_table').empty().append('No Result Found');
                          }          
@@ -732,6 +786,70 @@ function s_spontcomb(val){
     });
 
     }
+});
+
+
+  
+ 
+
+ $(document).on('click','.getval',function(){
+ event.preventDefault(); 
+
+    comapny_id=$(this).closest('tr').find('.c_id').val();
+     c_name=$(this).closest('tr').find('.c_name').val();
+      p_amount=$(this).closest('tr').find('.p_amount').val();
+       gst_amount=$(this).closest('tr').find('.gst_amount').val();
+        net_p_amount=$(this).closest('tr').find('.net_p_amount').val();
+
+
+       // var  serialize=$('#getquote').serialize();
+     var data = $('#getquote').serializeArray();
+         data.push({name: 'comapny_id', value: comapny_id});
+            
+          $.ajax({  
+                type: "POST",  
+                url: "{{URL::to('quotes-add')}}",
+                data :data,
+                success: function(msg){
+
+                   window.location.href = "{{url('thank-you')}}";
+                     
+
+                  }
+
+                });
+ 
+
+});
+
+  $(document).on('click','.apply_id',function(){
+   event.preventDefault(); 
+
+  
+
+  // if(! $('#getquote').valid()){
+        
+  //        return false;
+  //   }else{
+    
+
+      $.ajax({  
+                type: "POST",  
+                url: "{{URL::to('quotes-add')}}",
+                data : $('#getquote').serialize(),
+                success: function(msg){
+
+                   window.location.href = "{{url('thank-you')}}";
+                   
+
+                  }
+
+                });
+       
+
+ //   }
+ 
+
 });
 
 </script>

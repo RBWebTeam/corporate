@@ -11,22 +11,22 @@
      <table class="table table-striped table-bordered col-md-8">
    <tr>
       <td><b>Transaction Type</b></td>
-     <td><input type="radio" name="business_type" checked  id="business_type_mar1"/> Fresh Proposal</td>
-     <td><input type="radio" name="business_type"  id="business_type_mar2" /> Renewal Policy</td>
-     <td><input type="radio" name="business_type"  id="business_type_mar3"/> Market Renewal</td>
+     <td><input type="radio" name="business_type" checked value="0"  id="business_type_mar1"/> Fresh Proposal</td>
+     <td><input type="radio" name="business_type" value="1"  id="business_type_mar2" /> Renewal Policy</td>
+     <td><input type="radio" name="business_type" value="2"  id="business_type_mar3"/> Market Renewal</td>
    </tr>
    <tr>
        <td><b>Action</b></td>
-     <td><input type="radio" name="frshcash" checked/> Start Fresh case</td>
-     <td><input type="radio" name="frshcash" /> Copy From Save Template</td>
+     <td><input type="radio" value="0" name="frshcash" checked/> Start Fresh case</td>
+     <td><input type="radio" value="1" name="frshcash" /> Copy From Save Template</td>
      <td></td>
    </tr>
 
 
    <tr>
        <td><b>Customer</b></td>
-     <td><input type="radio" name="newcustomer" checked/>New Customer </td>
-     <td><input type="radio" name="newcustomer" />Existing Customer</td>
+     <td><input type="radio" name="newcustomer" value="0" checked/>New Customer </td>
+     <td><input type="radio" name="newcustomer" value="1" />Existing Customer</td>
       <td></td>
    </tr> 
 
@@ -40,7 +40,7 @@
 
     <tr style="display: none" class="policy_in">
        <td><b>Current Insurer </b></td>
-     <td ><input type="text" placeholder="Select Insurer" value=" " class="newsletter-name  current_insurer_company" name="current_insurer" value=" " id="current_insurer" required /> </td>
+     <td ><input type="text" placeholder="Select Insurer" value=" " class="newsletter-name  current_insurer_company" name="current_insurer" value=" " id="current_insurer" required /> <input type="hidden" name="current_insurer_id" id="current_insurer_id" value="0"> </td>
     <td></td>
      <td></td>
    </tr> 
@@ -103,7 +103,10 @@ $(".lastReporteddate").datepicker({
       },
       change: function (event, ui) {
         if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
+            $('#current_insurer_id').val(0);
         }else{
+ 
+           $('#current_insurer_id').val(ui.item.company_id);
 
             }
            }
@@ -113,14 +116,22 @@ $(".lastReporteddate").datepicker({
 $('#business_type_mar3').click(function(){
     $("#period_from").removeAttr("value");
     $("#period_to").removeAttr("value");
-     $("#current_insurer").removeAttr("value");
+    $("#current_insurer").removeAttr("value");
     
     $('.policy_in').show();
 });
 $('#business_type_mar2').click(function(){
+
+     $("#period_from").val(' ');
+     $("#period_to").val(' ');
+     $("#current_insurer").val(' ');
+
    $('.policy_in').hide();
 });
 $('#business_type_mar1').click(function(){
+       $("#period_from").val(' ');
+     $("#period_to").val(' ');
+     $("#current_insurer").val(' ');
    $('.policy_in').hide();
 });
 

@@ -17,11 +17,16 @@ Route::get('/',function(){
 
 Route::post('calculator-login','LoginController@calculator_login');
 Route::group(['middleware' => 'fire','namespace' => 'Firecalculator'], function () {
-Route::get('home','FirecalculatorController@home');
+//Route::get('home','FirecalculatorController@home');
 Route::post('firecal-sectionlist','FirecalculatorController@firecal_sectionlist');
 Route::get('home','FirecalculatorController@home');
 Route::get('section/{id}','FirecalculatorController@section');
-Route::post('customer-details','FirecalculatorController@customerdetails');        
+Route::post('customer-details','FirecalculatorController@customerdetails');
+Route::post('quotes-add','FirecalculatorController@quotes_add');
+Route::get('thank-you','FirecalculatorController@thank_You');
+Route::get('downlaod-pdf','FirecalculatorController@downlaod_pdf');
+
+Route::get('my-profile','ProfileController@my_profile');
 
     });
 Route::get('insurercompany',array('as'=>'insurercompany','uses'=>'AutoCompleteController@insurercompany')); 
@@ -30,16 +35,23 @@ Route::get('searchstateajax',array('as'=>'searchstateajax','uses'=>'AutoComplete
 Route::get('searchdistrictajax',array('as'=>'searchdistrictajax','uses'=>'AutoCompleteController@autoComplete_district'));  
 Route::post('corporate','LoginController@corporate');
 
+/*
+|--------------------------------------------------------------------------
+|  Admin Pannel
+|--------------------------------------------------------------------------
+*/
+Route::get('login',function(){
+  return view('admin.login');
+});
 
-//Route::get('/','LoginController@fire_calculator');
-// Route::get('hotel-inn','UserController@hotel_inn');
-// Route::get('register-form','LoginController@register_form');
-// Route::get('fire-calculator','LoginController@fire_calculator');
-// Route::get('searchpbcorporatecompanyajax',array('as'=>'searchpbcorporatecompanyajax','uses'=>'AutoCompleteController@autoComplete_pb_corporatecompany')); 
-
-// 
-// 
-// // Route::post('district','LoginController@district');
-// 
-
-// 
+Route::post('admin-login','admin\AdminloginController@login');
+Route::group(['middleware' => 'dashboard','namespace'=>'admin'], function () {
+Route::get('dashboard','DashboardController@dashboard');
+Route::get('dashboard/registration','DashboardController@registration');
+Route::post('dashboard/registration-form','AdminloginController@registrationform');
+Route::post('dashboard/notification','HeaderController@notification');
+Route::get('dashboard/user-show-groups','DashboardController@user_show');
+Route::get('dashboard/approved','DashboardController@approved');
+Route::get('logout','AdminloginController@logout');
+});
+ 

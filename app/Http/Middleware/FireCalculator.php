@@ -20,7 +20,7 @@ class FireCalculator
          //   }  return $next($request);
          
 
-          if (!$request->session()->exists('admin')){
+          if (!$request->session()->exists('userid')){
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
