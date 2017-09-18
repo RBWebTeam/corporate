@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'fire' => \App\Http\Middleware\FireCalculator::class,
         'dashboard'=> \App\Http\Middleware\Dashboard::class,
+        'mainadmin'=> \App\Http\Middleware\Mainadmin::class,
     ];
 }

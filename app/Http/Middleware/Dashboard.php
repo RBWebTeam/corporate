@@ -15,7 +15,7 @@ class Dashboard
      */
     public function handle($request, Closure $next)
     {
-         if (!$request->session()->exists('dashUserid')){
+         if (!$request->session()->exists('userid')){
              
             if ($request->ajax()) {
                 //return response('Unauthorized.', 401);

@@ -20,21 +20,22 @@ class AdminloginController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('login')
+            return redirect('/')
                         ->withErrors($validator)
                         ->withInput();
         }else{
-           $value=DB::table('user_master')->select('userid','email','password','firstname','mobile','user_type_id')->where('email','=',$request->email)
+           $value=DB::table('user_master')->select('userid','email','password','firstname','mobile','user_type_id','branch_id')->where('email','=',$request->email)
           ->where('password','=', $request->password)
           //->where('user_type_id','!=','0')
           ->first();
           	if($value){ 
 
-                  $request->session()->put('dashUserid',$value->userid);
+                  $request->session()->put('userid',$value->userid);
 		          	  $request->session()->put('firstname',$value->firstname);
 		          	  $request->session()->put('email',$value->email);
 		              $request->session()->put('mobile',$value->mobile);
                   $request->session()->put('user_type_id',$value->user_type_id);
+                  $request->session()->put('branch_id',$value->branch_id);
                   
 
                      return redirect('dashboard');
@@ -56,6 +57,12 @@ class AdminloginController extends Controller
                 'mobile' => 'required|regex:/^[0-9]{10}+$/',
                 'password' =>'required|min:6',
                 'confirm_password' => 'required|min:6|same:password',
+                'user_type_id'=>'required',
+                'vertical_id'=>'required',
+                'branch_id'=>'required',
+                'empcode'=>'required|numeric',
+                'reporting_emp'=>'required|numeric',
+
                             ]);
 
            if ($vali->fails()){
@@ -68,9 +75,13 @@ class AdminloginController extends Controller
 							'lastname' =>$req->lastname,
 							'email' =>$req->email,
 							'mobile' =>$req->mobile,
+              'empcode'=>$req->empcode,
 							'password' =>$req->password,
-							'is_admin' =>0,
-							'datetime_created' =>date('Y-m-d H:i:s'),
+							'user_type_id' =>$req->user_type_id,
+              'vertical_id' =>$req->vertical_id,
+              'branch_id' =>$req->branch_id,
+              'reporting_emp'=>$req->reporting_emp,
+							//'datetime_created' =>date('Y-m-d H:i:s'),
                         );
               DB::table('user_master')->insert($arr);
               Session::flash('msg', "registration successfully completed.....");

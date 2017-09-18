@@ -15,17 +15,17 @@ Route::get('/',function(){
  return view('index');
 });
 
-Route::post('calculator-login','LoginController@calculator_login');
+//Route::post('calculator-login','LoginController@calculator_login');
+
 Route::group(['middleware' => 'fire','namespace' => 'Firecalculator'], function () {
-//Route::get('home','FirecalculatorController@home');
-Route::post('firecal-sectionlist','FirecalculatorController@firecal_sectionlist');
 Route::get('home','FirecalculatorController@home');
+Route::post('firecal-sectionlist','FirecalculatorController@firecal_sectionlist');
+//Route::get('home','FirecalculatorController@home');
 Route::get('section/{id}','FirecalculatorController@section');
 Route::post('customer-details','FirecalculatorController@customerdetails');
 Route::post('quotes-add','FirecalculatorController@quotes_add');
 Route::get('thank-you','FirecalculatorController@thank_You');
 Route::get('downlaod-pdf','FirecalculatorController@downlaod_pdf');
-
 Route::get('my-profile','ProfileController@my_profile');
 
     });
@@ -45,13 +45,22 @@ Route::get('login',function(){
 });
 
 Route::post('admin-login','admin\AdminloginController@login');
+
 Route::group(['middleware' => 'dashboard','namespace'=>'admin'], function () {
 Route::get('dashboard','DashboardController@dashboard');
-Route::get('dashboard/registration','DashboardController@registration');
+Route::get('dashboard/registration','DashboardController@registration')->middleware('mainadmin');
 Route::post('dashboard/registration-form','AdminloginController@registrationform');
 Route::post('dashboard/notification','HeaderController@notification');
 Route::get('dashboard/user-show-groups','DashboardController@user_show');
-Route::get('dashboard/approved','DashboardController@approved');
+
+//Route::get('dashboard/approved','DashboardController@approved');
+//approved
+Route::get('approved','UserquotesController@approved');
+
+//user-quotes
+Route::get('user-quotes','UserquotesController@user_quotes');
+Route::get('quotes-details/{id}','UserquotesController@quotes_details');
+
 Route::get('logout','AdminloginController@logout');
 });
  
