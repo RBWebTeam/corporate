@@ -23,6 +23,8 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?></a>
+                        </li>
                        <!--  <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
@@ -44,9 +46,10 @@
                         <li>
                             <a href="{{url('dashboard')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+
                          @if(Session::get('user_type_id')==1)
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Admin<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{url('dashboard/registration')}}">User Registration</a>
@@ -59,9 +62,31 @@
                         </li>
                         @endif
 
-                        <li>
-                           <!--  <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a> -->
+                        @if(Session::get('user_type_id')==2)
+                         <li>
+                            <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approved </a>
                         </li>
+                        @elseif (Session::get('user_type_id')==3)
+                        <li>
+                            <a href="home"><i class="fa fa-wrench fa-fw"></i> line </a>
+                        </li>
+                        @elseif (Session::get('user_type_id')==4)
+                         <li>
+                            <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
+                        </li>
+                        @endif
+                  
+
+                       <!--  <li>
+                            <a href="approver"><i class="fa fa-wrench fa-fw"></i> Approver </a>
+                        </li>
+                        <li>
+                            <a href="enduser"><i class="fa fa-wrench fa-fw"></i> End User </a>
+                        </li>
+                        <li>
+                            <a href="line-manager"><i class="fa fa-wrench fa-fw"></i> Line Manager</a>
+                        </li> -->
+                         
                         
                             </ul>
                             <!-- /.nav-second-level -->

@@ -4,7 +4,7 @@
   <div class="col-md-3"></div>
     <div class="login col-md-6">
 							      <h2>login Now</h2>
-							<form action="{{url('calculator-login')}}" method="post" >
+							<form action="{{url('admin-login')}}" method="post" >
 							{{ csrf_field() }}
 								<div class="login-inp">
 									<input type="text" name="email" placeholder="Email ID"  >

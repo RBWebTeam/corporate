@@ -15,7 +15,11 @@ class Mainadmin
      */
     public function handle($request, Closure $next)
     {
+
         if (Session::get('user_type_id')==1) {
+            //return redirect('login');
+            return $next($request);
+        }else{
             return redirect('login');
         }
 

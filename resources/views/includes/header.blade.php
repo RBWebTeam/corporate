@@ -21,14 +21,8 @@
 
 
           <li class="dropdown">
-            <a style="    margin: -54px;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profile <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{url('my-profile')}}">My Profile</a></li>
-              
-              <li class="divider"></li>
-              
-              <li><a href="{{url('logout')}}">log out</a></li>
-            </ul>
+            <a style="    margin: -54px;" href="{{url('dashboard')}}"  >Dashboard </a>
+             
           </li>
         </ul>
       </div> 

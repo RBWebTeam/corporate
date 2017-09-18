@@ -27,19 +27,22 @@ class DashboardController extends Controller
 
      public function dashboard(){
      	
-
+             $quotes=DB::table('firecal_quote_master')->where('userid','=',Session::get('userid'))->get();
+             $count=$quotes->count();
         //   print_r($query);exit;
 
-     	 return view('admin.index');
+     	 return view('admin.index',['count'=>$count]);
 
      }
 
      public function registration(){
 
+         $user_type_master= DB::table('user_type_master')->get();
+         $vertical_master= DB::table('vertical_master')->get();
+         $branch_master= DB::table('branch_master')->get();
+        
 
-      
-
-     	return view('admin.registration-form');
+     	return view('admin.registration-form',['user_type_master'=>$user_type_master,'vertical_master'=>$vertical_master,'branch_master'=>$branch_master]);
      }
 
         public function user_show(){
@@ -57,11 +60,11 @@ class DashboardController extends Controller
         }
 
          
-         public function approved(Request $req){
+         // public function approved(Request $req){
                
-            DB::table('firecal_quote_master')
-            ->where('quote_id', $req->approved_id)
-            ->update(['is_approve' =>1]);
+         //    DB::table('firecal_quote_master')
+         //    ->where('quote_id', $req->approved_id)
+         //    ->update(['is_approve' =>1]);
 
 
               // $data ="Please use   as password to login for ur email ";
@@ -87,6 +90,6 @@ class DashboardController extends Controller
 
                  
          	  
-         }
+       //  }
 
 }
