@@ -19,7 +19,7 @@ class Dashboard
              
             if ($request->ajax()) {
                 //return response('Unauthorized.', 401);
-                  return redirect('login');
+                 // return redirect('login');
             } else {
                 return redirect()->back();
             }
