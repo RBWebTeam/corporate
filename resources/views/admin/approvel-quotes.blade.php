@@ -25,7 +25,7 @@
                                        
                                         <th>Company name</th>
                                          <th>Date</th>
-                                        <th> </th>
+                                        <th> Approve</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -53,17 +53,22 @@
              @else
                 <td   >{{facebook_time_ago($vl->datetime_created)}}</td>
              @endif
-      
-
             
-
-                                        <td class="center"> </td>
-                                        <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">show quotes</a>||<a <a href="{{url('quotes-edite')}}/{{$vl->quote_id}}">Edit</a></td>
-                                    </tr>
-                                    @endforeach
-                                    
-                                </tbody>
-                            </table>
+               @if((Session::get('user_type_id')==3) && ($vl->is_approve==1 ) )
+                <td class="center">Approved </td>
+                @elseif(Session::get('user_type_id')==2 && ($vl->is_approve1==1 )) 
+                <td class="center">Approved </td>
+                @else 
+                  <td class="center"><a  class="approve-it" data-id="{{$vl->quote_id}}">Approve</a> </td>
+                  @endif
+            
+             
+                <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">show quotes</a>||<a <a href="{{url('quotes-edite')}}/{{$vl->quote_id}}">Edit</a></td>
+            </tr>
+            @endforeach
+            
+        </tbody>
+  </table>
                             <!-- /.table-responsive -->
                            
                         </div>
@@ -79,27 +84,32 @@
 
 
         @endsection
- <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  
   <script type="text/javascript">
-            $(document).on('click','.approved_id',function(){event.preventDefault(); 
-            //   comapny_id=$(this).closest('tr').find('.approved_id').text();
-              var approved_id=$(this).attr("href");
-               $(this).closest("tr").hide();
-                $.ajax({  
-                type: "GET",  
-                url: "{{URL::to('dashboard/approved')}}",
-                data :{"approved_id":approved_id},
+            $(document).on('click','.approve-it',function(){event.preventDefault(); 
+                var id=$(this).attr('data-id');
+               update_approve(id,$(this));
+            });
+           function update_approve(id,elem){
+               $.ajax({  
+                type: "POST",  
+                url: "{{URL::to('approve-it')}}?_token={{csrf_token()}}",
+                data :{"approved_id":id},
                 success: function(msg){
-
-                   console.log(msg);
+                  parent=elem.parent();
+                    
+                   if(msg==1){
+                    parent.empty().text('Approved');
+                   }
                      
 
                   }
+                   
 
                 });
-            });
-        </script> -->
+            }
+        </script>
 <?php  
 
    

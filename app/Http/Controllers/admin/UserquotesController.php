@@ -119,4 +119,18 @@ class UserquotesController extends Controller
 
 
      }
+     public function approve_specific_quote(Request $req){
+      //print_r(Session::all());exit();
+        try{
+          $id=$req['approved_id'];
+          $user_type=Session::get('user_type_id');
+          $user=Session::get('empcode');
+          $date=date('Y-m-d H:i:s');
+          $is_approve=1;
+          $query_output=DB::select('Call usp_approve_quote(?,?,?,?)',array($id,$is_approve,$user,$user_type));
+          }catch(\Exception $ee){
+              return 0;
+          }
+        return 1;
+     }
 }

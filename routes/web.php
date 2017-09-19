@@ -56,6 +56,7 @@ Route::get('dashboard/user-show-groups','DashboardController@user_show');
 //Route::get('dashboard/approved','DashboardController@approved');
 //approved
 Route::get('approved','UserquotesController@approved');
+Route::post('approve-it','UserquotesController@approve_specific_quote');
 
 //user-quotes
 Route::get('user-quotes/{id}','UserquotesController@user_quotes');
