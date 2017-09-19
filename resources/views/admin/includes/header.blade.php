@@ -64,7 +64,7 @@
 
                         @if(Session::get('user_type_id')==2)
                          <li>
-                            <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approved </a>
+                            <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a>
                         </li>
                         @elseif (Session::get('user_type_id')==3)
                         <li>

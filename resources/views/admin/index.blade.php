@@ -21,7 +21,7 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-             @if(Session::get('user_type_id')==4)
+          
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="user-quotes">
+                        <a href="user-quotes/0">
                             <div class="panel-footer">
                                 <span class="pull-left">All Quotes</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                       <a href="user-quotes/1">
                             <div class="panel-footer">
                                 <span class="pull-left"> Approved Quotes</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                      <a href="user-quotes/2">
                             <div class="panel-footer">
                                 <span class="pull-left">Pending Quotes</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -112,7 +112,7 @@
                     </div>
                 </div> -->
             </div>
-            @endif
+          
             <!-- /.row -->
             <div class="row"> 
             

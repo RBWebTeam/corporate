@@ -9,18 +9,38 @@ use Session;
 class UserquotesController extends Controller
 {
      public function user_quotes(Request $req){
+                    
+                 $usertypeid=Session::get('user_type_id');
+                 $emp_code=Session::get('empcode');
+                 $verticalid=Session::get('vertical_id');
+                 $branchid=Session::get('branch_id');
+                  
+ 
+                    if($req->id==0){
+                        $all='All';
+                    }elseif($req->id==1){
+                        $all='Approved';
+                    }elseif($req->id==2){
+                        $all='Pending';
+                    }elseif($req->id==3){
+                        $all='All';
+                    }
 
+                  $queryuser=DB::select('call usp_get_quote_detail ("'.$emp_code.'","'.$usertypeid.'","'.$verticalid.'","'.$branchid.'","'.$all.'")');
 
-     	 $queryuser = DB::table('user_master')
-            ->leftjoin('firecal_quote_master', 'firecal_quote_master.userid', '=', 'user_master.userid')
-            ->select('user_master.*','firecal_quote_master.*')
-            ->where('firecal_quote_master.userid',Session::get('userid'))
-           // ->where('user_master.is_approve','!=','NULL')
-            ->orderBy('firecal_quote_master.userid', 'DESC')
-            ->get();
+           
+                  
+
+     	 // $queryuser = DB::table('user_master')
+       //      ->leftjoin('firecal_quote_master', 'firecal_quote_master.userid', '=', 'user_master.userid')
+       //      ->select('user_master.*','firecal_quote_master.*')
+       //      ->where('firecal_quote_master.userid',Session::get('userid'))
+       //     // ->where('user_master.is_approve','!=','NULL')
+       //      ->orderBy('firecal_quote_master.userid', 'DESC')
+       //      ->get();
 
              
-             return view('admin.user-quotes',['queryuser'=>$queryuser]);
+        return view('admin.user-quotes',['queryuser'=>$queryuser]);
               
                
 
@@ -62,6 +82,18 @@ class UserquotesController extends Controller
      public function approved(Request $req){
 
 
+      $time_ago = strtotime('2017-09-18 23:60:60');  
+      $current_time = time();  
+      $time_difference = $current_time - $time_ago;  
+      $seconds = $time_difference;  
+       $days          = round($seconds / 86400);   
+
+         if($days>=1) {  
+      
+          // echo "24 hours";
+             }
+
+
               $queryuser = DB::table('user_master')
             ->leftjoin('firecal_quote_master', 'firecal_quote_master.userid', '=', 'user_master.userid')
             ->select('user_master.*','firecal_quote_master.*')
@@ -69,6 +101,22 @@ class UserquotesController extends Controller
             ->orderBy('firecal_quote_master.userid', 'DESC')
             ->get();
 
+
            return view('admin.approvel-quotes',['queryuser'=>$queryuser]);
+
+     }
+
+
+     public function quotes_edite(Request $req){
+              $getdetail = DB::table('firecal_quote_master')
+            ->select('firecal_quote_master.*')
+            ->where('firecal_quote_master.quote_id',$req->id)
+            ->first();
+
+               
+           return view('firecalculator.quotes-edite',['getdetail'=>$getdetail]);
+              
+
+
      }
 }

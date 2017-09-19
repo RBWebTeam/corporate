@@ -31,7 +31,7 @@ $validator = Validator::make($request->all(), [
                         ->withErrors($validator)
                         ->withInput();
         }else{
-           $value=DB::table('user_master')->select('userid','email','password','firstname','mobile')->where('email','=',$request->email)
+           $value=DB::table('user_master')->select('userid','email','password','firstname','mobile','user_type_id','branch_id')->where('email','=',$request->email)
           ->where('password','=', $request->password)
           //->where('is_admin','!=','0')
           ->first();
@@ -40,6 +40,11 @@ $validator = Validator::make($request->all(), [
                   $request->session()->put('userfirstname',$value->firstname);
                   $request->session()->put('useremail',$value->email);
                   $request->session()->put('usermobile',$value->mobile);
+                  $request->session()->put('mobile',$value->mobile);
+                  $request->session()->put('user_type_id',$value->user_type_id);
+                  $request->session()->put('branch_id',$value->branch_id);
+                  $request->session()->put('empcode',$value->empcode);
+                  
                       return redirect()->intended('home');
                 }else{
                  Session::flash('msg', "Invalid email or password. Please Try again! ");
@@ -127,7 +132,7 @@ $validator = Validator::make($request->all(), [
       $is_stfi=$req['is_stfi']?$req['is_stfi']:0;
       $sum_stfi=$req['sum_stfi']?$req['sum_stfi']:0;
       $is_earthquake=$req['is_earthquake']?$req['is_earthquake']:0;
-      $sum_earthquake=$req['is_earthquake']?$req['is_earthquake']:0;
+      $sum_earthquake=$req['sum_earthquake']?$req['sum_earthquake']:0;
       $is_terrorism=$req['is_terrorism']?$req['is_terrorism']:0;
       $sum_terrorism=$req['sum_terrorism']?$req['sum_terrorism']:0;
       $is_escalation  =$req['is_escalation']?$req['is_escalation']:0;

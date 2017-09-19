@@ -16,19 +16,23 @@ class DashboardController extends Controller
  
 
     public function __construct() {
-       $is_approve=DB::table('firecal_quote_master')->where('is_approve','=',0)->get();
-       $count=$is_approve->count();
+       // $is_approve=DB::table('firecal_quote_master')->where('is_approve','=',0)->get();
+       // $count=$is_approve->count();
        
-       View::share (['is_approve'=>$is_approve,'count'=>$count] );
+       // View::share (['is_approve'=>$is_approve,'count'=>$count] );
        
-     
+                  // $query=DB::select('call usp_get_quote_detail (101100,1,2,3,"All")');
+
+                  // print_r($query);exit;
+
+
       // View::share ( 'variable4', ['name'=>'Franky','address'=>'Mars'] );
     }  
 
      public function dashboard(){
      	
              $quotes=DB::table('firecal_quote_master')->where('userid','=',Session::get('userid'))->get();
-             $count=$quotes->count();
+            $count=$quotes->count(); 
         //   print_r($query);exit;
 
      	 return view('admin.index',['count'=>$count]);
@@ -46,6 +50,8 @@ class DashboardController extends Controller
      }
 
         public function user_show(){
+
+
 
              $queryuser = DB::table('user_master')
             ->leftjoin('firecal_quote_master', 'firecal_quote_master.userid', '=', 'user_master.userid')

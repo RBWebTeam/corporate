@@ -24,18 +24,25 @@ class AdminloginController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }else{
-           $value=DB::table('user_master')->select('userid','email','password','firstname','mobile','user_type_id','branch_id')->where('email','=',$request->email)
+           $value=DB::table('user_master')
+           ->select('user_master.*')
+           ->where('email','=',$request->email)
           ->where('password','=', $request->password)
           //->where('user_type_id','!=','0')
           ->first();
           	if($value){ 
-
+ 
                   $request->session()->put('userid',$value->userid);
 		          	  $request->session()->put('firstname',$value->firstname);
 		          	  $request->session()->put('email',$value->email);
 		              $request->session()->put('mobile',$value->mobile);
-                  $request->session()->put('user_type_id',$value->user_type_id);
+                   $request->session()->put('user_type_id',$value->user_type_id);
+                  
                   $request->session()->put('branch_id',$value->branch_id);
+
+                   $request->session()->put('empcode',$value->empcode);
+                   $request->session()->put('vertical_id',$value->vertical_id);
+                   
                   
 
                      return redirect('dashboard');

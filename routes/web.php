@@ -58,9 +58,9 @@ Route::get('dashboard/user-show-groups','DashboardController@user_show');
 Route::get('approved','UserquotesController@approved');
 
 //user-quotes
-Route::get('user-quotes','UserquotesController@user_quotes');
+Route::get('user-quotes/{id}','UserquotesController@user_quotes');
 Route::get('quotes-details/{id}','UserquotesController@quotes_details');
-
+Route::get('quotes-edite/{id}','UserquotesController@quotes_edite');
 Route::get('logout','AdminloginController@logout');
 });
  

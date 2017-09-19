@@ -21,21 +21,28 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Company name</th>
-                                        <th> </th>
-                                        <th>Status</th>
+                                        <th>Customer name</th>
+                                        <th>Contact Person</th>
+                                        <th>Email</th>
+                                         <th>Mobile</th>
+                                          <th>Datetime Created</th>
+                                           <th>Days Diff</th>
+                                          <th>Quote Status</th>
+                                        <th>Show Quotes</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                      @foreach($queryuser as $vl)
                                     <tr class="odd gradeX approve">
-                                        <td>{{$vl->firstname}}</td>
-                                        <td>{{$vl->lastname}}</td>
                                         <td>{{$vl->customer_name}}</td>
-                                        <td class="center"> </td>
-                                        <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">show quotes</a></td>
+                                        <td>{{$vl->contact_person}}</td>
+                                        <td>{{$vl->email}}</td>
+                                        <td>{{$vl->mobile}}</td>
+                                        <td>{{$vl->datetime_created}}</td>
+                                        <td>{{$vl->days_diff}}</td>
+                                        <td>{{$vl->quote_status}}</td>
+                                        
+                                        <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">View</a></td>
                                     </tr>
                                     @endforeach
                                     
