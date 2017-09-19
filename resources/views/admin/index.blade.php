@@ -1,3 +1,4 @@
+ 
  @extends('admin.includes.master')
  @section('content')
  
@@ -31,7 +32,7 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$count}}</div>
+                                    <div class="huge">{{$count->all_cnt}}</div>
                                     <div>All Quotes</div>
                                 </div>
                             </div>
@@ -53,7 +54,7 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge">{{$count->approve_cnt}}</div>
                                     <div>Approved Quotes</div>
                                 </div>
                             </div>
@@ -75,7 +76,7 @@
                                     <i class="fa fa-shopping-cart fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
+                                    <div class="huge">{{$count->pending_cnt}}</div>
                                     <div>Pending Quotes</div>
                                 </div>
                             </div>

@@ -31,11 +31,13 @@ class DashboardController extends Controller
 
      public function dashboard(){
      	
-             $quotes=DB::table('firecal_quote_master')->where('userid','=',Session::get('userid'))->get();
-            $count=$quotes->count(); 
-        //   print_r($query);exit;
-
-     	 return view('admin.index',['count'=>$count]);
+      $emp=Session::get('empcode');
+      $ver=Session::get('vertical_id');
+      $type=Session::get('user_type_id');
+      $branch=Session::get('branch_id');
+      $count=DB::select('Call usp_get_quote_count(?,?,?,?)',array($emp,$ver,$type,$branch));
+          
+     	 return view('admin.index',['count'=>$count[0]]);
 
      }
 
