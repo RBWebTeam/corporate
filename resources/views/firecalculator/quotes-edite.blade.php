@@ -139,7 +139,7 @@
 
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select city</span>
-               <input type="hidden" name="riskdistrictid" id="risksdistrictid" value="{{$getdetail->risk_district_id}}"  > 
+               <input type="hidden" name="riskdistrictid" id="riskdistrictid" value="{{$getdetail->risk_district_id}}"  > 
                <input type="text" class="newsletter-name risksearchdistrict" value="{{$getdetail->risk_district_id}}" name="riskdistrict" id="riskdistrict"  required>
               </div>
               
@@ -159,7 +159,7 @@
 
               <div class="styled-input agile-styled-input-top col-md-12">
               <span id="occupied_idmodel" style="margin: 157px" ><a  class="glyphicon glyphicon-question-sign" href="#" data-toggle="tooltip" title="click here!"></a></span>
-               <input type="hidden" name="occ_id" id="occ_id"  ><td colspan="2" value="{{$getdetail->occ_id}}"></td>
+               <input type="hidden" name="occ_id" id="occ_id" value="{{$getdetail->occ_id}}" ><td colspan="2" ></td>
                 <input type="text" name="occ"  class=" search_occupied "  id="occ" required value="{{$getdetail->occ_id}}">
                 <label>Occupancy Type<span class="text-danger">*</span> </label> 
                 <span></span>
@@ -587,8 +587,8 @@ $(".risksearch_state").autocomplete({
          
           alert("Please Select State");
         }else{
-         
-            $("#risksdistrictid").val(ui.item.datavalue);       
+          
+            $("#riskdistrictid").val(ui.item.datavalue);       
              }
            }    
       });

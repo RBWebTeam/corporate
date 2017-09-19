@@ -8,6 +8,8 @@
   <form action="{{url('customer-details')}}" method="post">
    {{ csrf_field() }}
      <input type="hidden" name="section_id" value="{{$query->section_id}}">
+     <input type="hidden" name="pro_id" value="{{$pro_id}}">
+     
      <table class="table table-striped table-bordered col-md-8">
    <tr>
       <td><b>Transaction Type</b></td>

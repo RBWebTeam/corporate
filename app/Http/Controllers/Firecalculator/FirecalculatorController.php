@@ -34,12 +34,11 @@ class FirecalculatorController extends Controller
         public function section(Request $req){
 
 
-                 
-                
+                  
                    $query=DB::table('section_master')->select('section_name','section_id')
                       ->where('section_id','=',$req->id)->first(); 
 
-        	    return view('firecalculator.section-wise-fire',['query'=>$query]);
+        	    return view('firecalculator.section-wise-fire',['query'=>$query,'pro_id'=>$req->pro_id]);
         }
 
 

@@ -3,7 +3,7 @@
 <div class="row">
  <div class="col-md-4">
  <ul class="menu" type="1">
-   <li> <a href="#" id="firecalc">Standard Fire and Special Perils (SFSP)</a></li>
+   <li> <a href="1" id="firecalc">Standard Fire and Special Perils (SFSP)</a></li>
     <li><a href="#">Group Mediclaim</a></li>
     <li><a href="#">Group Personal Accident</a></li>
     <li><a href="#">Director and Officers Liability</a></li>
@@ -24,7 +24,11 @@
 <script>
 $(document).ready(function(){
 	var maxAppend = 0;
-    $("#firecalc").click(function(){
+    $("#firecalc").click(function(e){
+       e.preventDefault();
+
+         //alert($(this).attr('href'));
+
     	maxAppend++;
           $.ajax({
           method: "POST",
@@ -37,7 +41,7 @@ $(document).ready(function(){
               if(maxAppend==1){
               $.each(data, function( key, val ) {
  //.replace(/\d+/,',','-').toLowerCase()
-              $(".header_li ul").append('<li><a href="section/'+val.section_id+'" class="btn-default">'+val.section_name +'</a></li>');
+              $(".header_li ul").append('<li><a href="section/'+val.section_id+'/1" class="btn-default">'+val.section_name +'</a></li>');
             });
           }else{
           	return false;  
