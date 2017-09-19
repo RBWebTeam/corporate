@@ -50,8 +50,9 @@ class FirecalculatorController extends Controller
                       $period_from=$req->period_from?$req->period_from:0;
                       $period_to=$req->period_to?$req->period_to:0;
                       $current_insurer_id=$req->current_insurer_id?$req->current_insurer_id:0;
+                      $pro_id=$req->pro_id; 
         
-        	return view('firecalculator.customer-details',['section_id'=>$req->section_id,'business_type'=>$business_type,'frshcash'=>$frshcash,'newcustomer'=>$newcustomer,'period_from'=>$period_from,'period_to'=>$period_to,'current_insurer_id'=>$current_insurer_id]);
+        	return view('firecalculator.customer-details',['section_id'=>$req->section_id,'business_type'=>$business_type,'frshcash'=>$frshcash,'newcustomer'=>$newcustomer,'period_from'=>$period_from,'period_to'=>$period_to,'current_insurer_id'=>$current_insurer_id,'pro_id'=>$pro_id]);
              }catch (\Exception $e) {
                    
                              return $e->getMessage();
@@ -60,17 +61,24 @@ class FirecalculatorController extends Controller
 
 
         public function quotes_add(Request $req){
+
+
                Session::forget('pdfarray');
                Session::forget('comapny_id');
                Session::forget('quote_id');
-           try {
-              $arr=Session::get('quote_dataValue');
-              $quote_id=DB::select('call usp_insert_firecal_quote(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$arr);
 
-             
+
+           try {
+
+
+              $arr=Session::get('quote_dataValue');
+
+              $quote_id=DB::select('call usp_insert_firecal_quote(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$arr);
+
+        
 
                          $quote_id=$quote_id[0]->quote_id;
-                          //print_r($quote_id);exit;
+                        
 
                          $is_selected= $req->comapny_id?$req->comapny_id:0;
                          $length=sizeof($req->c_name);
@@ -92,6 +100,18 @@ class FirecalculatorController extends Controller
         }
 
    
+
+   public function quotes_update(Request $req){
+
+             $arr=Session::get('quote_dataValue');
+             $is_selected= $req->comapny_id?$req->comapny_id:0;
+             $length=sizeof($req->c_name);
+             $pdfarray=array();
+
+               $quote_id= $req->quote_id;
+
+             
+   }
   
  
 

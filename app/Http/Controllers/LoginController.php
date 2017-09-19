@@ -164,6 +164,9 @@ $validator = Validator::make($request->all(), [
       $designation=$req['designation']?$req['designation']:0;
       $email=$req['email']?$req['email']:0;
       $mobile=$req['mobile']?$req['mobile']:0;
+      $pro_id=$req['pro_id'];
+
+      
 
 $arr= array('section_id' =>$section_id,
      'transaction_type' =>$transaction_type,
@@ -229,15 +232,16 @@ $arr= array('section_id' =>$section_id,
 'designation' =>$designation,
 'email' =>$email,
 'mobile' =>$mobile,
+'pro_id' =>$pro_id,
 );
 
-
+ 
  
 $array = array_values($arr);
          Session::put('quote_dataValue', $array);
  
  
-      $quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['riskdistrictid'].'","'.$storage_type.'")');
+      $quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'")');
        
            //$this::CorporateSave($req);
      return $quote_data;
