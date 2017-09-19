@@ -35,8 +35,7 @@ class DashboardController extends Controller
       $ver=Session::get('vertical_id');
       $type=Session::get('user_type_id');
       $branch=Session::get('branch_id');
-      $count=DB::select('Call usp_get_quote_count(?,?,?,?)',array($emp,$ver,$type,$branch));
-          
+      $count=DB::select('Call usp_get_quote_count(?,?,?,?)',array($emp,$type,$ver,$branch));
      	 return view('admin.index',['count'=>$count[0]]);
 
      }

@@ -1,8 +1,6 @@
- 
- @extends('admin.includes.master')
+  @extends('admin.includes.master')
  @section('content')
- 
- 
+
  <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">

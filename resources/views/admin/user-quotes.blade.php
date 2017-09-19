@@ -21,26 +21,43 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
+                                        <th>Quote Id</th>
                                         <th>Customer name</th>
-                                        <th>Contact Person</th>
-                                        <th>Email</th>
-                                         <th>Mobile</th>
-                                          <th>Datetime Created</th>
-                                           <th>Days Diff</th>
-                                          <th>Quote Status</th>
+                                        <th>Product Name</th>
+                                        <th>Section</th>
+                                        <th>Vertical Name</th>
+                                        <th>Approver Status</th>
+                                        <th>Manager Status</th>
+                                        <th>Days Diff</th>
+                                        <th>Datetime Created</th>
+                                        <th>Employee Name</th>
+                                        <th>Reporting To</th>
+                                        <th>Approver Name</th>
+                                        
+                                        
+                                           
+                                         
                                         <th>Show Quotes</th>
+                                                                  
                                     </tr>
                                 </thead>
                                 <tbody>
                                      @foreach($queryuser as $vl)
                                     <tr class="odd gradeX approve">
+                                        <td>{{$vl->quote_id}}</td>
                                         <td>{{$vl->customer_name}}</td>
-                                        <td>{{$vl->contact_person}}</td>
-                                        <td>{{$vl->email}}</td>
-                                        <td>{{$vl->mobile}}</td>
+                                        <td>{{$vl->product_name}}</td>
+                                        <td>{{$vl->section_type}}</td>
+                                        <td>{{$vl->vertical_name}}</td>
+                                        <td>{{$vl->approver_status}}</td>
+                                        <td>{{$vl->manager_status}}</td>
+                                         <td>{{$vl->days_diff}}</td>
                                         <td>{{$vl->datetime_created}}</td>
-                                        <td>{{$vl->days_diff}}</td>
-                                        <td>{{$vl->quote_status}}</td>
+                                        <td>{{$vl->empname}}</td>
+                                        <td>{{$vl->reporting_empname}}</td>
+                                        <td>{{$vl->approver_empname}}</td>
+                                       
+                                              
                                         
                                         <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">View</a></td>
                                     </tr>
