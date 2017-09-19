@@ -112,11 +112,55 @@ class UserquotesController extends Controller
             ->select('firecal_quote_master.*')
             ->where('firecal_quote_master.quote_id',$req->id)
             ->first();
+          
+            $state_id=$this->getstate($getdetail->state_id);
+            $data['st_name']=$state_id->state;
+            $district_id=$this->getcity($getdetail->district_id); 
+            $data['dis_name']=$district_id->district_name;
 
-               
-           return view('firecalculator.quotes-edite',['getdetail'=>$getdetail]);
+            $risktate_id=$this->getstate($getdetail->risk_state_id);
+            $data['rst_name']=$risktate_id->state;
+            $riskdistrict_id=$this->getcity($getdetail->risk_district_id); 
+ 
+            $data['rdt_name']=$riskdistrict_id->district_name;  
+              
+            $occupancy_name=$this->geoccu($getdetail->occ_id);
+            $data['occupancy_name']= $occupancy_name->occupancy_name;
+            
+           // $data['quote_id']= $getdetail->quote_id;
+
+
+        
+ 
+      
+       
+
+           return view('firecalculator.quotes-edite',['getdetail'=>$getdetail,'data'=>$data]);
               
 
 
      }
+
+
+ public function getstate($risk_state_id){
+        return  DB::table('state_master')->select('state','state_id')
+         ->where('state_id','=',$risk_state_id)
+         ->first();
+ }
+
+
+ public function getcity($district_id){
+        return DB::table('districtwise_zone_master')->select('district_name','district_id')
+         ->where('district_id','=',$district_id)
+         ->first();
+ }
+
+
+public function geoccu($occup_id){
+        return DB::table('occupancy_master')->select('occupancy_name','occup_id')
+        ->where('occup_id', '=',$occup_id)->first();
+ }
+
+
+
 }

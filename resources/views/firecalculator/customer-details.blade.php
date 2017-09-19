@@ -24,7 +24,7 @@
                      <input type="hidden" name="period_from"   value="{{$period_from}}">
                      <input type="hidden" name="period_to"   value="{{$period_to}}">
                      <input type="hidden" name="current_insurer_id"   value="{{$current_insurer_id}}">
-
+                     <input type="hidden" name="pro_id" value="{{$pro_id}}">
 
                 <input type="text" name="insure_name" id="insure_name" required  > 
                 
@@ -77,34 +77,11 @@
               </div>
               </div><br>
 
-            <h4 class="col-md-12"><span class="text-sucsess">Contact Details </span></h4>
-              <div class="styled-input agile-styled-input-top col-md-6">
-                <span>Name of Contact Person</span>
-                 <input type="text" name="contact_person"  id="contact_person"   required=""> 
-                <span></span>
-              </div>
-              <div class="styled-input agile-styled-input-top col-md-6">
-                <span>Designation</span>
-                 <input type="text" name="designation"  id="designation" > 
-                <span></span>
-              </div>
-              <div class="styled-input agile-styled-input-top col-md-6">
-                <span>Email</span>
-                 <input type="email" name="email"  id="email"   required=""> 
-                <span></span>
-              </div>
-              <div class="styled-input agile-styled-input-top col-md-6">
-                <span>Mobile Number</span>
-                 <input type="text" name="mobile"  id="mobile" minlength="10" maxlength="10" required=""> 
-                <span></span>
-              </div>
+                   
+             <h6 class="col-md-12"><span class="text-sucsess"><input type="checkbox" name="sameas" id="sameas">Same as above </span></h6>
  
-
-
-
-
               
-              <h4 class="col-md-12"><span class="text-sucsess">Risk Location Address</span></h4>
+              <h4 class="col-md-12"><span class="text-sucsess">Risk Location Address</span> </h4>
               
                 <div class="styled-input agile-styled-input-top col-md-12">
               <span>Address Line 1</span>
@@ -138,13 +115,36 @@
 
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select city</span>
-               <input type="hidden" name="riskdistrictid" id="risksdistrictid"  > 
+               <input type="hidden" name="risksdistrictid" id="risksdistrictid"  > 
                <input type="text" class="newsletter-name risksearchdistrict" name="riskdistrict" id="riskdistrict"  required>
               </div>
               
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Pincode</span>
                 <input type="text" name="riskpincode"  id="riskpincode" minlength="6" maxlength="6" required > 
+                <span></span>
+              </div>
+
+
+               <h4 class="col-md-12"><span class="text-sucsess">Contact Details </span></h4>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Name of Contact Person</span>
+                 <input type="text" name="contact_person"  id="contact_person"   required=""> 
+                <span></span>
+              </div>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Designation</span>
+                 <input type="text" name="designation"  id="designation" > 
+                <span></span>
+              </div>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Email</span>
+                 <input type="email" name="email"  id="email"   required=""> 
+                <span></span>
+              </div>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Mobile Number</span>
+                 <input type="text" name="mobile"  id="mobile" minlength="10" maxlength="10" required=""> 
                 <span></span>
               </div>
               
@@ -579,7 +579,7 @@ $(".risksearch_state").autocomplete({
       change: function (event, ui) {
         if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
          
-          $("#riskdistrict").val('');
+          $("#risksdistrictid").val('');
          
           alert("Please Select State");
         }else{
@@ -812,7 +812,7 @@ function s_spontcomb(val){
                 data :data,
                 success: function(msg){
 
-                   window.location.href = "{{url('thank-you')}}";
+                  window.location.href = "{{url('thank-you')}}";
                      
 
                   }
@@ -826,12 +826,7 @@ function s_spontcomb(val){
    event.preventDefault(); 
 
   
-
-  // if(! $('#getquote').valid()){
-        
-  //        return false;
-  //   }else{
-    
+ 
 
       $.ajax({  
                 type: "POST",  
@@ -846,11 +841,34 @@ function s_spontcomb(val){
 
                 });
        
-
- //   }
+ 
  
 
 });
+
+
+$(document).on('click','#sameas',function(){
+  if($(this).is(':checked')){
+  $('#riskaddress_one').val($('#address_one').val());
+  $('#riskaddress_two').val($('#address_two').val());
+  $('#riskstateid').val($('#stateid').val());
+  $('#risksearch_state').val($('#state').val());
+  $('#risksdistrictid').val($('#districtid').val());  
+  $('#riskdistrict').val($('#district').val());
+  $('#riskpincode').val($('#pincode').val());
+  }else{
+  $('#riskaddress_one').val('');
+  $('#riskaddress_two').val('');
+  $('#riskstateid').val('');
+  $('#risksearch_state').val('');
+  $('#risksdistrictid').val('');
+  $('#riskdistrict').val('');
+  $('#riskpincode').val('');
+   }
+ 
+  
+})
+
 
 </script>
 @endsection

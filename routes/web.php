@@ -24,6 +24,8 @@ Route::post('firecal-sectionlist','FirecalculatorController@firecal_sectionlist'
 Route::get('section/{id}/{pro_id}','FirecalculatorController@section');
 Route::post('customer-details','FirecalculatorController@customerdetails');
 Route::post('quotes-add','FirecalculatorController@quotes_add');
+Route::post('quotes-update','FirecalculatorController@quotes_update');
+ 
 Route::get('thank-you','FirecalculatorController@thank_You');
 Route::get('downlaod-pdf','FirecalculatorController@downlaod_pdf');
 Route::get('my-profile','ProfileController@my_profile');

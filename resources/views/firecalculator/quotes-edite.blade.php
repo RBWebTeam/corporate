@@ -25,6 +25,7 @@
                      <input type="hidden" name="period_from"   value="{{$getdetail->period_from}}">
                      <input type="hidden" name="period_to"   value="{{$getdetail->period_to}}">
                      <input type="hidden" name="current_insurer_id"   value="{{$getdetail->current_insurer_id}}">
+
                      
 
                 <input type="text" name="insure_name" id="insure_name" value="{{$getdetail->customer_name}}" required  > 
@@ -55,20 +56,20 @@
                 
                 <span></span>
               </div>
-
+ 
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select State</span>
               <input type="hidden" name="stateid" id="stateid" value="{{$getdetail->state_id}}" >
-              <input type="text" class="newsletter-name search_state " name="state"  value="{{$getdetail->state_id}}"   id="state" required>
+              <input type="text" class="newsletter-name search_state " name="state"  value="{{$data['st_name']}}"   id="state" required>
               </div>
-
+ 
 
 
             
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select city</span>
                <input type="hidden" name="districtid" id="districtid"  value="{{$getdetail->district_id}}"  >
-               <input type="text" class="newsletter-name search_district"  value="{{$getdetail->district_id}}"  name="district" id="district" required >
+               <input type="text" class="newsletter-name search_district"  value="{{$data['dis_name']}}"  name="district" id="district" required >
               </div>
               
               <div class="styled-input agile-styled-input-top col-md-6">
@@ -78,28 +79,7 @@
               </div>
               </div><br>
 
-            <h4 class="col-md-12"><span class="text-sucsess">Contact Details </span></h4>
-              <div class="styled-input agile-styled-input-top col-md-6">
-                <span>Name of Contact Person</span>
-                 <input type="text" name="contact_person"  id="contact_person"  value="{{$getdetail->contact_person}}" required=""> 
-                <span></span>
-              </div>
-              <div class="styled-input agile-styled-input-top col-md-6">
-                <span>Designation</span>
-                 <input type="text" name="designation"  id="designation" value="{{$getdetail->designation}}" > 
-                <span></span>
-              </div>
-              <div class="styled-input agile-styled-input-top col-md-6">
-                <span>Email</span>
-                 <input type="email" name="email"  id="email" value="{{$getdetail->email}}"  required=""> 
-                <span></span>
-              </div>
-              <div class="styled-input agile-styled-input-top col-md-6" >
-                <span>Mobile Number</span>
-                 <input type="text" name="mobile"  id="mobile" minlength="10" value="{{$getdetail->mobile}}" maxlength="10" required=""> 
-                <span></span>
-              </div>
- 
+      
 
 
 
@@ -133,14 +113,15 @@
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select State</span>
               <input type="hidden" name="riskstateid" id="riskstateid"  value="{{$getdetail->risk_state_id}}">
-              <input type="text" class="newsletter-name  risksearch_state" value="{{$getdetail->risk_state_id}}" name="riskstate" value="" id="risksearch_state" required>
+              <input type="text" class="newsletter-name  risksearch_state" value="{{$data['rst_name']}}" name="riskstate" value="" id="risksearch_state" required>
               </div>
 
 
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select city</span>
-               <input type="hidden" name="riskdistrictid" id="riskdistrictid" value="{{$getdetail->risk_district_id}}"  > 
-               <input type="text" class="newsletter-name risksearchdistrict" value="{{$getdetail->risk_district_id}}" name="riskdistrict" id="riskdistrict"  required>
+
+               <input type="hidden" name="risksdistrictid" id="risksdistrictid" value="{{$getdetail->risk_district_id}}"  > 
+               <input type="text" class="newsletter-name risksearchdistrict" value="{{$data['rdt_name']}}" name="riskdistrict" id="riskdistrict"  required>
               </div>
               
               <div class="styled-input agile-styled-input-top col-md-6">
@@ -149,6 +130,30 @@
                 <span></span>
               </div>
               
+
+                    <h4 class="col-md-12"><span class="text-sucsess">Contact Details </span></h4>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Name of Contact Person</span>
+                 <input type="text" name="contact_person"  id="contact_person"  value="{{$getdetail->contact_person}}" required=""> 
+                <span></span>
+              </div>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Designation</span>
+                 <input type="text" name="designation"  id="designation" value="{{$getdetail->designation}}" > 
+                <span></span>
+              </div>
+              <div class="styled-input agile-styled-input-top col-md-6">
+                <span>Email</span>
+                 <input type="email" name="email"  id="email" value="{{$getdetail->email}}"  required=""> 
+                <span></span>
+              </div>
+              <div class="styled-input agile-styled-input-top col-md-6" >
+                <span>Mobile Number</span>
+                 <input type="text" name="mobile"  id="mobile" minlength="10" value="{{$getdetail->mobile}}" maxlength="10" required=""> 
+                <span></span>
+              </div>
+ 
+
 
                <div class="styled-input agile-styled-input-top col-md-12">
               <input type="text" name="occup_desc"  value="{{$getdetail->occup_desc}}"     id="description" required>
@@ -160,7 +165,7 @@
               <div class="styled-input agile-styled-input-top col-md-12">
               <span id="occupied_idmodel" style="margin: 157px" ><a  class="glyphicon glyphicon-question-sign" href="#" data-toggle="tooltip" title="click here!"></a></span>
                <input type="hidden" name="occ_id" id="occ_id" value="{{$getdetail->occ_id}}" ><td colspan="2" ></td>
-                <input type="text" name="occ"  class=" search_occupied "  id="occ" required value="{{$getdetail->occ_id}}">
+                <input type="text" name="occ"  class=" search_occupied "  id="occ" required value="{{$data['occupancy_name']}}">
                 <label>Occupancy Type<span class="text-danger">*</span> </label> 
                 <span></span>
               </div>
@@ -791,7 +796,7 @@ function s_spontcomb(val){
         }); 
 
                       if(msg){
-                            $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Download Quotes</button></form>');
+                            $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<input type="hidden" name="quote_id"   value="{{$getdetail->quote_id}}"><table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Download Quotes</button></form>');
                          }else{
                             $('#premium_table').empty().append('No Result Found');
                          }          
@@ -821,11 +826,11 @@ function s_spontcomb(val){
             
           $.ajax({  
                 type: "POST",  
-                url: "{{URL::to('quotes-add')}}",
+                url: "{{URL::to('quotes-update')}}",
                 data :data,
                 success: function(msg){
 
-                   window.location.href = "{{url('thank-you')}}";
+                //   window.location.href = "{{url('thank-you')}}";
                      
 
                   }
@@ -848,11 +853,11 @@ function s_spontcomb(val){
 
       $.ajax({  
                 type: "POST",  
-                url: "{{URL::to('quotes-add')}}",
+                url: "{{URL::to('quotes-update')}}",
                 data : $('#getquote').serialize(),
                 success: function(msg){
 
-                   window.location.href = "{{url('thank-you')}}";
+                  // window.location.href = "{{url('thank-you')}}";
                    
 
                   }
