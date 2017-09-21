@@ -7,7 +7,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{url('dashboard')}}">  <?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?></a>
+                <a class="navbar-brand" href="{{url('dashboard')}}"> 
+
+<img src="{{url('images/landmark.png')}}" width="60"  style="margin:  -16px 10px 4px 41px"  >
+               <!--   <?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?> --></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -39,6 +42,8 @@
             </ul>
             <!-- /.navbar-top-links -->
 
+            
+
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -53,6 +58,7 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{url('dashboard/registration')}}">User Registration</a>
+                                    <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
                                 </li>
                                 <li>
                                   <!--   <a href="dashboard/approve">User Approval </a> -->
@@ -65,10 +71,12 @@
                         @if(Session::get('user_type_id')==2)
                          <li>
                             <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a>
+                             <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
                         </li>
                         @elseif (Session::get('user_type_id')==3)
                         <li>
-                            <a href="home"><i class="fa fa-wrench fa-fw"></i> line </a>
+                           <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a>
+                            <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
                         </li>
                         @elseif (Session::get('user_type_id')==4)
                          <li>

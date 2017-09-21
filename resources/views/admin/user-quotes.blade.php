@@ -1,4 +1,3 @@
- 
  @extends('admin.includes.master')
  @section('content')
  
@@ -18,9 +17,9 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example" style="font-size: 14px;">
                                 <thead>
-                                    <tr>
+                                    <tr class="warning">
                                         <th>Quote Id</th>
                                         <th>Customer name</th>
                                         <th>Product Name</th>
@@ -41,10 +40,12 @@
                                                                   
                                     </tr>
                                 </thead>
-                                <tbody>
-                                     @foreach($queryuser as $vl)
-                                    <tr class="odd gradeX approve">
-                                        <td>{{$vl->quote_id}}</td>
+                                <tbody>    <!-- class="danger" class="warning" class="info" class="success" -->
+                                     @foreach($queryuser as $x=> $vl)  
+
+                                       <?php  $class = ($x%2==0)? 'danger': 'success';?>
+                                        <tr class='odd gradeX approve {{$class}}'>
+                                        <td >{{$vl->quote_id}}</td>
                                         <td>{{$vl->customer_name}}</td>
                                         <td>{{$vl->product_name}}</td>
                                         <td>{{$vl->section_type}}</td>

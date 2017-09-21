@@ -37,3 +37,8 @@
     <!-- Custom Fonts -->
     <link href="{{url('admin/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
    
+    <link href="{{url('dist/css/sb-admin-2.css')}}" rel="stylesheet">
+
+
+
+   

@@ -56,8 +56,27 @@ class UserquotesController extends Controller
             ->select('firecal_quote_detail.*')
             ->where('firecal_quote_detail.quote_id',$req->id)
             ->get();
+              $comapny_id=0;
 
- $comapny_id=0;
+
+             foreach ($loan_detail as $key => $value) {
+                      
+                         if($value->is_selected!=0){
+                            $comapny_id=$value->is_selected;
+
+                            break;
+                         }
+             }
+
+        
+           if($comapny_id!=0){
+             
+              return view('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id]);
+
+           }else{
+             return view('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id]);
+
+           }
 
              
         // try{
@@ -72,7 +91,7 @@ class UserquotesController extends Controller
 
         // }catch (\Exception $e) { return $e->getMessage(); }
                    
-     return view('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id]);
+     
 
  
 
