@@ -32,11 +32,8 @@
                                         <th>Employee Name</th>
                                         <th>Reporting To</th>
                                         <th>Approver Name</th>
-                                        
-                                        
-                                           
-                                         
                                         <th>Show Quotes</th>
+                                        <th>Comment</th>
                                                                   
                                     </tr>
                                 </thead>
@@ -57,10 +54,15 @@
                                         <td>{{$vl->empname}}</td>
                                         <td>{{$vl->reporting_empname}}</td>
                                         <td>{{$vl->approver_empname}}</td>
-                                       
-                                              
-                                        
                                         <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">View</a></td>
+                                        <td class="center"> 
+                                        <div id="" style="overflow-y:scroll;">
+                                        @foreach($comments as $comm=> $val) 
+                                           {{$val->user_name}}<h4> :: {{$val->text}}</h4>
+                                        @endforeach   
+                                    </div>
+                                        </td> 
+                                        
                                     </tr>
                                     @endforeach
                                     
