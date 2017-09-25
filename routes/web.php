@@ -65,5 +65,6 @@ Route::get('user-quotes/{id}','UserquotesController@user_quotes');
 Route::get('quotes-details/{id}','UserquotesController@quotes_details');
 Route::get('quotes-edite/{id}','UserquotesController@quotes_edite');
 Route::get('logout','AdminloginController@logout');
+ //document upload
+Route::get('upload','UploadController@UploadPage');
 });
- 
