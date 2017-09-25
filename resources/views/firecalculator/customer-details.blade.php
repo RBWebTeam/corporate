@@ -72,7 +72,7 @@
               
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Pincode</span>
-                <input type="text" name="pincode"  id="pincode" minlength="6" maxlength="6" required=""> 
+                <input type="text" name="pincode"  id="pincode" minlength="6" maxlength="6" > 
                 <span></span>
               </div>
               </div><br>
@@ -109,7 +109,7 @@
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Select State</span>
               <input type="hidden" name="riskstateid" id="riskstateid"  >
-              <input type="text" class="newsletter-name  risksearch_state" name="riskstate" value="" id="risksearch_state" required>
+              <input type="text" placeholder="search State" class="newsletter-name  risksearch_state" name="riskstate" value="" id="risksearch_state" required>
               </div>
 
 
@@ -121,7 +121,7 @@
               
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Pincode</span>
-                <input type="text" name="riskpincode"  id="riskpincode" minlength="6" maxlength="6" required > 
+                <input type="text" name="riskpincode"  id="riskpincode" minlength="6" maxlength="6"  > 
                 <span></span>
               </div>
 
@@ -139,7 +139,7 @@
               </div>
               <div class="styled-input agile-styled-input-top col-md-6">
                 <span>Email</span>
-                 <input type="email" name="email"  id="email"   required=""> 
+                 <input type="email" name="email"  id="email"   required > 
                 <span></span>
               </div>
               <div class="styled-input agile-styled-input-top col-md-6">
@@ -778,7 +778,7 @@ function s_spontcomb(val){
         }); 
 
                       if(msg){
-                            $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Download Quotes</button></form>');
+                            $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Compare Quotes</button></form>');
                          }else{
                             $('#premium_table').empty().append('No Result Found');
                          }          
