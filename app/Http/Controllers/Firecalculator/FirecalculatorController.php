@@ -136,32 +136,56 @@ class FirecalculatorController extends Controller
 
  
                  
-                  return view('thank-You');
+                //  return view('thank-You');
+                     
+               Session::flash('msg', "Your Quotes Successfully Added.....");
+               return redirect('dashboard');
+
+                
          }
 
   
-      public function downlaod_pdf(){
+      public function downlaod_pdf(Request $req){
+
+
                   
-            $quote_id=Session::get('quote_id');
-            $query_master=DB::select('call usp_show_fircal_quote("'.$quote_id.'")');
-            $query=$query_master[0];
-// print_r($quote_id);exit;
+            // $quote_id=Session::get('quote_id');
+            // $query_master=DB::select('call usp_show_fircal_quote("'.$quote_id.'")');
+            // $query=$query_master[0];
  
 
-
-              $loan_detail = DB::table('firecal_quote_detail')
-            ->select('firecal_quote_detail.*')
-            ->where('firecal_quote_detail.quote_id',$quote_id)
-            ->get();
+            //   $loan_detail = DB::table('firecal_quote_detail')
+            // ->select('firecal_quote_detail.*')
+            // ->where('firecal_quote_detail.quote_id',$quote_id)
+            // ->get();
 
  
 
              
         try{
-                $pdfarray=Session::get('pdfarray');
-                $comapny_id=Session::get('comapny_id');
+                // $pdfarray=Session::get('pdfarray');
+                // $comapny_id=Session::get('comapny_id');
+
+              $query_master=DB::select('call usp_show_fircal_quote("'.$req->quote_id.'")');
+              $query=$query_master[0];
+
+              $loan_detail = DB::table('firecal_quote_detail')
+            ->select('firecal_quote_detail.*')
+            ->where('firecal_quote_detail.quote_id',$req->quote_id)
+            ->get();
+              $comapny_id=0;
+
+
+             foreach ($loan_detail as $key => $value) {
+                      
+                         if($value->is_selected!=0){
+                            $comapny_id=$value->is_selected;
+
+                            break;
+                         }
+             }
                   
-                  if($comapny_id!=0){
+        if($comapny_id!=0){
           return  PDF::loadView('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id])->pageSize('A3')->download();
         }else{
            return  PDF::loadView('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail])->pageSize('A3')->download();

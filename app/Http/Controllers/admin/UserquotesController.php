@@ -198,4 +198,16 @@ public function geoccu($occup_id){
 
 
 
+ public function mail_to_customer(Request $req){
+    try{
+       $quote_id=$req->quote_id;
+         $userid=Session::get('userid');
+   $query_output=DB::select('Call usp_update_mail_status(?,?)',array($quote_id,$userid));
+                 Session::flash('msg', "Mail Sent Successfully .....");
+          return redirect('dashboard');
+    }catch (\Exception $e) { return $e->getMessage(); }
+
+
+}
+
 }

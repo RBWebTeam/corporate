@@ -27,6 +27,8 @@
     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
+            "order": [[0, "desc" ]],
+
             responsive: true
         });
     });

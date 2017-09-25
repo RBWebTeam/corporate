@@ -27,7 +27,7 @@ Route::post('quotes-add','FirecalculatorController@quotes_add');
 Route::post('quotes-update','FirecalculatorController@quotes_update');
  
 Route::get('thank-you','FirecalculatorController@thank_You');
-Route::get('downlaod-pdf','FirecalculatorController@downlaod_pdf');
+Route::get('downlaod-pdf/{quote_id}','FirecalculatorController@downlaod_pdf');
 Route::get('my-profile','ProfileController@my_profile');
 
     });
@@ -59,6 +59,7 @@ Route::get('dashboard/user-show-groups','DashboardController@user_show');
 //approved
 Route::get('approved','UserquotesController@approved');
 Route::post('approve-it','UserquotesController@approve_specific_quote');
+Route::get('mail-to-customer/{quote_id}','UserquotesController@mail_to_customer');
 
 //user-quotes
 Route::get('user-quotes/{id}','UserquotesController@user_quotes');

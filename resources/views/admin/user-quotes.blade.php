@@ -4,7 +4,7 @@
  <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tables</h1>
+                    <h1 class="page-header">All Quotes</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -37,22 +37,29 @@
                                            
                                          
                                         <th>Show Quotes</th>
+                                        <th>Mail Status</th>
+                                        <th>Download PDF</th>
+
                                                                   
                                     </tr>
                                 </thead>
                                 <tbody>    <!-- class="danger" class="warning" class="info" class="success" -->
                                      @foreach($queryuser as $x=> $vl)  
 
-                                       <?php  $class = ($x%2==0)? 'danger': 'success';?>
-                                        <tr class='odd gradeX approve {{$class}}'>
-                                        <td >{{$vl->quote_id}}</td>
+                                       
+                                       <?php  //$classtr = ($x%2==0)? 'danger': 'success';
+                                              $class =($vl->approver_status=="Approved")? 'background-color: #00C851': 'background-color:#CC0000';
+                                              $class1 =($vl->manager_status=="Approved")? 'background-color: #00C851': 'background-color:#CC0000';
+                                       ?>
+                                        <tr class='odd gradeX approve '>
+                                        <td  >{{$vl->quote_id}}</td>
                                         <td>{{$vl->customer_name}}</td>
                                         <td>{{$vl->product_name}}</td>
                                         <td>{{$vl->section_type}}</td>
                                         <td>{{$vl->vertical_name}}</td>
-                                        <td>{{$vl->approver_status}}</td>
-                                        <td>{{$vl->manager_status}}</td>
-                                         <td>{{$vl->days_diff}}</td>
+                                        <td style='{{$class}} '>{{$vl->approver_status}}</td>
+                                        <td style='{{$class1}}'>{{$vl->manager_status}}</td>
+                                        <td>{{$vl->days_diff}}</td>
                                         <td>{{$vl->datetime_created}}</td>
                                         <td>{{$vl->empname}}</td>
                                         <td>{{$vl->reporting_empname}}</td>
@@ -61,6 +68,22 @@
                                               
                                         
                                         <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">View</a></td>
+                                         <td>
+
+                                            @if($vl->approver_status=="Approved" && $vl->manager_status=="Approved")
+                                            <a href="{{url('mail-to-customer')}}/{{$vl->quote_id}}">{{$vl->mail_status}}</a>
+                                            @else
+                                            <a class="btn btn-link disabled">{{$vl->mail_status}}</a>
+                                            @endif
+                                         </td>
+                                         <td>
+                                          
+                                            @if($vl->approver_status=="Approved" && $vl->manager_status=="Approved")
+                                           <a href="{{url('downlaod-pdf')}}/{{$vl->quote_id}}">Download PDF</a>
+                                            @else
+                                            <a class="btn btn-link disabled">Download</a>
+                                            @endif
+                                         </td>
                                     </tr>
                                     @endforeach
                                     
