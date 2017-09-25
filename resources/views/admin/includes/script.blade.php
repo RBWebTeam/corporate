@@ -138,3 +138,10 @@ $(document).on('click','.mail_status',function(event){
 
 
 </script>
+ <script type="text/javascript">
+   $('.add-more').click(function(){
+   
+      div=$('#upload_div');
+      div.append(div);
+   });
+ </script>

@@ -68,4 +68,5 @@ Route::get('quotes-edite/{id}','UserquotesController@quotes_edite');
 Route::get('logout','AdminloginController@logout');
  //document upload
 Route::get('upload','UploadController@UploadPage');
+Route::post('upload-file','UploadController@UploadPost');
 });
