@@ -1,7 +1,5 @@
  @extends('admin.includes.master')
  @section('content')
- 
-<script src="js/jquery.min.js"></script>
  <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -130,11 +128,3 @@
   </div>
 </div>
 
-<script type="text/javascript">
-    $(document).on('click','issue',function(){
-        event.preventdefault();
-        console.log($(this));
-            $('#myModal').modal('toggle');
-    }
-    );
-</script>
