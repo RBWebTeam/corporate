@@ -1,6 +1,7 @@
  @extends('admin.includes.master')
  @section('content')
  
+<script src="js/jquery.min.js"></script>
  <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -55,12 +56,9 @@
                                         <td>{{$vl->reporting_empname}}</td>
                                         <td>{{$vl->approver_empname}}</td>
                                         <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">View</a></td>
-                                        <td class="center"> 
-                                        <div id="" style="overflow-y:scroll;">
-                                        @foreach($comments as $comm=> $val) 
-                                           {{$val->user_name}}<h4> :: {{$val->text}}</h4>
-                                        @endforeach   
-                                    </div>
+                                        <td > 
+                                        <span id="{{$vl->quote_id}}" class="issue btn btn-info btn-lg" >
+                                        Open Issue</span>
                                         </td> 
                                         
                                     </tr>
@@ -83,24 +81,31 @@
 
 
         @endsection
- <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 
-  <script type="text/javascript">
-            $(document).on('click','.approved_id',function(){event.preventDefault(); 
-            //   comapny_id=$(this).closest('tr').find('.approved_id').text();
-              var approved_id=$(this).attr("href");
-               $(this).closest("tr").hide();
-                $.ajax({  
-                type: "GET",  
-                url: "{{URL::to('dashboard/approved')}}",
-                data :{"approved_id":approved_id},
-                success: function(msg){
+ <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-                   console.log(msg);
-                     
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 
-                  }
+  </div>
+</div>
 
-                });
-            });
-        </script> -->
+<script type="text/javascript">
+    $(document).on('click','issue',function(){
+        event.preventdefault();
+        console.log($(this));
+            $('#myModal').modal('toggle');
+    }
+    );
+</script>
