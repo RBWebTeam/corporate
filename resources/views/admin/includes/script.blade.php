@@ -76,16 +76,67 @@
           }
              });
     }
-    var reloadXML = setInterval(refresh_Div, 5000);
+    var reloadXML = setInterval(refresh_Div, 50000);
     <!---->
 
 
-    $(document).on('click','issue',function(){    
+    $(document).on('click','issue',function(event){    
         event.preventdefault();
         console.log($(this));
             $('#myModal').modal('toggle');
-    }
-    );
+    });
+
+$(document).on('click','.mail_status',function(event){  
+                 console.log($(this));
+            $('#mailModal').modal('toggle');
+    });
+
+
+ 
+
+  $('#mail_sent').click(function(e){    // mail 
+     e.preventDefault();
+
+ 
+
+        $.ajax({  
+                type: "POST",  
+                url: "{{URL::to('mail-to-customer')}}",
+                data : $('#maile_sent_form').serialize(),
+                
+                success: function(msg){
+                }
+            });
+
+
+
+        
+// var formData = new FormData($("#uploaded_file")[0]);
+
+// $.ajax({
+//     url: "{{URL::to('mail-to-customer')}}",
+//     type: 'POST',
+//     data: formData,
+//     headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+//     success: function (data) {
+//         alert(data)
+//     },
+//     cache: false,
+//     processData: false
+// });
+
+// return false;
+
+    
+
+})
+
+
+
+
+
+
+
 </script>
  <script type="text/javascript">
   $(document).ready(function(){

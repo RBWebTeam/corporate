@@ -5,7 +5,12 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Validator;
+use Redirect;
 use Session;
+use URL;
+use Mail;
+use PDF;
 class UserquotesController extends Controller
 {
      public function user_quotes(Request $req){
@@ -202,13 +207,76 @@ public function geoccu($occup_id){
 
 
  public function mail_to_customer(Request $req){
-    try{
-       $quote_id=$req->quote_id;
-         $userid=Session::get('userid');
-   $query_output=DB::select('Call usp_update_mail_status(?,?)',array($quote_id,$userid));
-                 Session::flash('msg', "Mail Sent Successfully .....");
-          return redirect('dashboard');
-    }catch (\Exception $e) { return $e->getMessage(); }
+
+              $query_master=DB::select('call usp_show_fircal_quote("'.$req->quote_id.'")');
+              $query=$query_master[0];
+
+              $loan_detail = DB::table('firecal_quote_detail')
+            ->select('firecal_quote_detail.*')
+            ->where('firecal_quote_detail.quote_id',$req->quote_id)
+            ->get();
+              $comapny_id=0;
+
+
+             foreach ($loan_detail as $key => $value) {
+                      
+                         if($value->is_selected!=0){
+                            $comapny_id=$value->is_selected;
+
+                            break;
+                         }
+             }
+                  
+        if($comapny_id!=0){
+            $pdf = PDF::loadView('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id])->pageSize('A3')->download();
+        }else{
+           $pdf = PDF::loadView('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail])->pageSize('A3')->download();
+        }
+           
+ 
+
+                  $to_email=$req->to_email?$req->to_email:NULL;
+                  $cc_email=$req->cc_email?$req->cc_email:NULL;
+                  $bcc_email=$req->bcc_email?$req->bcc_email:NULL;
+                  $data=$req->mail_ms?$req->mail_ms:NULL;
+                  $subject_email=$req->subject_email?$req->subject_email:NULL;
+                 
+               
+                $mail = Mail::send('admin.approvedmail',['data' => $data], function($message) use($email) {
+                $message->from('scriptdp@gmail.com', 'RupeeBoss');
+                $message->to($to_email)
+                ->subject($subject_email);
+                $message->cc($cc_email );
+                $message->bcc($bcc_email);
+                $message->attach($pdf);
+                });
+                 
+                    if(Mail::failures()){
+                            $error=3;
+                            echo $error;
+                    }else{
+
+                    
+                            $error=2;
+                            echo $error;
+                    }
+
+
+                 
+
+      
+
+         
+
+
+
+   //  try{
+   //     $quote_id=$req->quote_id;
+   //       $userid=Session::get('userid');
+   // $query_output=DB::select('Call usp_update_mail_status(?,?)',array($quote_id,$userid));
+   //               Session::flash('msg', "Mail Sent Successfully .....");
+   //        return redirect('dashboard');
+   //  }catch (\Exception $e) { return $e->getMessage(); }
 
 
 }

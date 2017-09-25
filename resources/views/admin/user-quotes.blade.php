@@ -68,7 +68,9 @@
                                          <td>
 
                                             @if($vl->approver_status=="Approved" && $vl->manager_status=="Approved")
-                                            <a href="{{url('mail-to-customer')}}/{{$vl->quote_id}}">{{$vl->mail_status}}</a>
+
+                                          <!--   <a href="{{url('mail-to-customer')}}/{{$vl->quote_id}}">{{$vl->mail_status}}</a> -->
+                                          <a href="#" class="mail_status">{{$vl->mail_status}}</a>
                                             @else
                                             <a class="btn btn-link disabled">{{$vl->mail_status}}</a>
                                             @endif
@@ -126,5 +128,63 @@
     </div>
 
   </div>
+</div>
+
+
+
+<div id="mailModal" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header modal-header-info">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title"><span class="glyphicon glyphicon-envelope"></span> Compose Message</h4>
+          </div>
+          <div class="modal-body">
+            <form   class="form-horizontal"  enctype="multipart/form-data" id="maile_sent_form" role="form" method="POST" action="">
+                <div class="form-group">
+                        <label for="to" class="col-sm-1 control-label">To:</label>
+                        <div class="col-sm-11">
+                              <input type="email" name="to_email" class="form-control select2-offscreen" id="to" placeholder="Type email" tabindex="-1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cc" class="col-sm-1 control-label">CC:</label>
+                        <div class="col-sm-11">
+                              <input type="email" name="cc_email" class="form-control select2-offscreen" id="cc" placeholder="Type email" tabindex="-1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bcc" class="col-sm-1 control-label">BCC:</label>
+                        <div class="col-sm-11">
+                              <input type="email" name="bcc_email" class="form-control select2-offscreen" id="bcc" placeholder="Type email" tabindex="-1">
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="bcc" class="col-sm-1 control-label">Subject:</label>
+                        <div class="col-sm-11">
+                              <input type="email" name="subject_email" class="form-control select2-offscreen" id="bcc" placeholder="Subject" tabindex="-1">
+                        </div>
+                    </div>
+                <div class="form-group">
+                  <label class="col-sm-12" for="inputBody"><span class="glyphicon glyphicon-list"></span>Message</label>
+                  <div class="col-sm-12"><textarea class="form-control" name="mail_ms" id="inputBody" rows="8" ></textarea></div>
+                </div>
+
+         <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button> 
+           <!--  <button type="button" class="btn btn-warning pull-left">Save Draft</button> -->
+            <input type="file" name="attachment_path" id="attachment_path"  class="btn btn-warning pull-left"> 
+            <input type="hidden" name="quote_id" value="{{$vl->quote_id}}">
+                {{ csrf_field() }}
+
+            <button type="button" class="btn btn-primary " id="mail_sent">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+            
+          </div>
+            </form>
+          </div>
+         
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
 </div>
 
