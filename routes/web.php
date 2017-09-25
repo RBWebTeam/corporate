@@ -59,7 +59,7 @@ Route::get('dashboard/user-show-groups','DashboardController@user_show');
 //approved
 Route::get('approved','UserquotesController@approved');
 Route::post('approve-it','UserquotesController@approve_specific_quote');
-Route::get('mail-to-customer/{quote_id}','UserquotesController@mail_to_customer');
+Route::post('mail-to-customer','UserquotesController@mail_to_customer');
 
 //user-quotes
 Route::get('user-quotes/{id}','UserquotesController@user_quotes');

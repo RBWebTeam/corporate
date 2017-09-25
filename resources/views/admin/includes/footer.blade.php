@@ -21,4 +21,7 @@
     <script src="{{url('admin/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('admin/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{url('admin/datatables-responsive/dataTables.responsive.js')}}"></script>
+    <script type="text/javascript" src="{{URL::to('js/validation.js')}}"></script>
+
+ 
     @include('admin.includes.script')
