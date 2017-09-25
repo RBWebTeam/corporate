@@ -42,7 +42,10 @@ return [
     */
 
     'disks' => [
-
+        'policy_container' => [
+            'driver' => 'local',
+            'root' => storage_path('app/policies'),
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
