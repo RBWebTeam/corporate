@@ -87,3 +87,10 @@
     }
     );
 </script>
+ <script type="text/javascript">
+   $('.add-more').click(function(){
+   
+      div=$('#upload_div');
+      div.append(div);
+   });
+ </script>
