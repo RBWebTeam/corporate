@@ -44,7 +44,7 @@ class UserquotesController extends Controller
        //      ->orderBy('firecal_quote_master.userid', 'DESC')
        //      ->get();
 
-        $comments=DB::select('Select * from Quote_comment_thread');
+        $comments=DB::select('Select * from quote_comment_thread');
        // print "<pr>";
         //print_r(json_encode($comments));
         //exit();
@@ -235,22 +235,33 @@ public function geoccu($occup_id){
            
  
 
-                  $to_email=$req->to_email?$req->to_email:NULL;
-                  $cc_email=$req->cc_email?$req->cc_email:NULL;
-                  $bcc_email=$req->bcc_email?$req->bcc_email:NULL;
-                  $data=$req->mail_ms?$req->mail_ms:NULL;
-                  $subject_email=$req->subject_email?$req->subject_email:NULL;
+                //   $to_email=$req->to_email?$req->to_email:NULL;
+                //   $cc_email=$req->cc_email?$req->cc_email:NULL;
+                //   $bcc_email=$req->bcc_email?$req->bcc_email:NULL;
+                //   $data=$req->mail_ms?$req->mail_ms:NULL;
+                //   $subject_email=$req->subject_email?$req->subject_email:NULL;
                  
                
+                // $mail = Mail::send('admin.approvedmail',['data' => $data], function($message) use($email) {
+                // $message->from('scriptdp@gmail.com', 'RupeeBoss');
+                // $message->to($to_email)
+                // ->subject($subject_email);
+                // $message->cc($cc_email );
+                // $message->bcc($bcc_email);
+                // $message->attach($pdf);
+                // });
+
+
+            
+                $data ="Please use ";
+                $email = $req->to_email;
                 $mail = Mail::send('admin.approvedmail',['data' => $data], function($message) use($email) {
                 $message->from('scriptdp@gmail.com', 'RupeeBoss');
-                $message->to($to_email)
-                ->subject($subject_email);
-                $message->cc($cc_email );
-                $message->bcc($bcc_email);
-                $message->attach($pdf);
+                $message->to($email)
+                ->subject('Your New Password');
+                $message->attach($pdf->output());
                 });
-                 
+                
                     if(Mail::failures()){
                             $error=3;
                             echo $error;
@@ -260,6 +271,8 @@ public function geoccu($occup_id){
                             $error=2;
                             echo $error;
                     }
+                 
+                   
 
 
                  
