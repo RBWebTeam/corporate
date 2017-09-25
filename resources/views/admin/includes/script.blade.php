@@ -88,9 +88,12 @@
     );
 </script>
  <script type="text/javascript">
-   $('.add-more').click(function(){
-   
-      div=$('#upload_div');
-      div.append(div);
-   });
+  $(document).ready(function(){
+        $('body').on('click', '.add-more', function(e) {
+          
+          e.preventDefault();
+          $(this).before('<div class="form-group"><label  class="col-sm-2 col-form-label">Choose File</label><input type="file" name="file[]" class="col-sm-10" required><input type="date" name="expiry_date" class="form-control "><a class="upload btn btn-primary">upload</a></div>');
+          
+        });
+      });
  </script>
