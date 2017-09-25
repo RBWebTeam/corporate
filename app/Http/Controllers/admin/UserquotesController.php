@@ -39,8 +39,11 @@ class UserquotesController extends Controller
        //      ->orderBy('firecal_quote_master.userid', 'DESC')
        //      ->get();
 
-             
-        return view('admin.user-quotes',['queryuser'=>$queryuser]);
+        $comments=DB::select('Select * from Quote_comment_thread');
+       // print "<pr>";
+        //print_r(json_encode($comments));
+        //exit();
+        return view('admin.user-quotes',['queryuser'=>$queryuser,'comments'=>($comments)]);
               
                
 

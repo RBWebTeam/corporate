@@ -1,6 +1,7 @@
 <html>
 <head>
     @include('admin.includes.head')
+    
 </head>
 <body>
  <div id="wrapper">
