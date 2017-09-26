@@ -79,20 +79,45 @@
     var reloadXML = setInterval(refresh_Div, 50000);
     <!---->
 
-
-    $(document).on('click','issue',function(event){    
-        event.preventdefault();
-        console.log($(this));
-            $('#myModal').modal('toggle');
+   
+    $(document).on('click','.issue',function(){  
+          
+          $('#after_sub').hide();
+          issue_id=$(this).attr('id');
+          $('#issue_id').val(issue_id);  
+          $('.comment').hide();
+          $('.comment_'+issue_id).show();
+          $('#myModal').modal('toggle');
     });
 
 $(document).on('click','.mail_status',function(event){  
-                 console.log($(this));
+              console.log($(this));
             $('#mailModal').modal('toggle');
     });
 
-
- 
+$('#issue_form_submit').click(function(){
+ // console.log($('li:last'));return;
+   if(!$('#issue_form').valid()){
+    return false;
+   }
+    $.ajax({  
+                type: "POST",  
+                url: "{{URL::to('issue-submit')}}",
+                data : $('#issue_form').serialize(),
+                
+                success: function(msg){
+                  append_issue($('#issue_text').val());
+                  
+                 // $('#myModal').modal('toggle');
+                }
+            });
+});
+  function append_issue(text){
+    console.log('appending');
+    data='<li class="left clearfix comment "><span class="chat-img pull-left"><img src="/images/U.png" alt="You" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">You</strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>Just Now</small></div><p>'+text+'</p></div></li>';
+      $('.comment:last').after(data);
+      $('#issue_text').val('');
+  }
 
   $('#mail_sent').click(function(e){    // mail 
      e.preventDefault();
@@ -139,12 +164,30 @@ $(document).on('click','.mail_status',function(event){
 
 </script>
  <script type="text/javascript">
+
   $(document).ready(function(){
         $('body').on('click', '.add-more', function(e) {
-          
-          e.preventDefault();
-          $(this).before('<div class="form-group"><label  class="col-sm-2 col-form-label">Choose File</label><input type="file" name="file[]" class="col-sm-10" required><input type="date" name="expiry_date" class="form-control "><a class="upload btn btn-primary">upload</a></div>');
-          
+
+          var $tr    = $('.clone_row').last();
+          var $clone = $tr.clone();
+          $tr.after($clone);
         });
+      });
+
+
+  $('.upload').click(function(e){    // mail 
+     e.preventDefault();
+     data=$(this).attr('id').split('_');
+  
+
+        $.ajax({  
+                type: "POST",  
+                url: "{{URL::to('upload-file')}}",
+                data : $('#form_'+data[1]).serialize(),
+                
+                success: function(msg){
+                  console.log(msg);
+                }
+            });
       });
  </script>

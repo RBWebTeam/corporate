@@ -11,11 +11,15 @@ use Session;
 use URL;
 use Mail;
 use PDF;
+ 
 use Storage;
 use GrahamCampbell\Flysystem\Facades\Flysystem;
 
 use League\Flysystem\Filesystem;
 use League\Flysystem\Adapter\Local;
+ 
+use App\Issue_submission;
+ 
 class UserquotesController extends Controller
 {
      public function user_quotes(Request $req){
@@ -51,7 +55,8 @@ class UserquotesController extends Controller
 
         $comments=DB::select('Select * from quote_comment_thread');
        // print "<pr>";
-        //print_r(json_encode($comments));
+       //  print_r(json_encode($queryuser));
+       //  print_r(Session::all());
         //exit();
         return view('admin.user-quotes',['queryuser'=>$queryuser,'comments'=>($comments)]);
               
@@ -310,7 +315,18 @@ public function geoccu($occup_id){
    //  }catch (\Exception $e) { return $e->getMessage(); }
 
 
-}
+  }
+  public function issue_submit(Request $req){
+    //print_r($req->all());
+    $query=new Issue_submission();
+    $query->uid=Session::get('userid');
+    $query->user_name=Session::get('firstname');
+    $query->quote_id=$req['issue_id'];
+    $query->text=$req['issue'];
+    $query->flag=1;
+    $status=$query->save();
+    return '{"status":'.$status.'}';
+  }
 
  public function pdf_f(){
      return  PDF::loadHTML('<strong>Hello World</strong>')->lowquality()->pageSize('A2')->download();

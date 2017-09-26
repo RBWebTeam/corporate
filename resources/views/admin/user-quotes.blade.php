@@ -71,9 +71,8 @@
  
                                          <td>
 
-                                            @if($vl->approver_status=="Approved" && $vl->manager_status=="Approved")
+                            @if($vl->approver_status=="Approved" && $vl->manager_status=="Approved")
 
-                                          <!--   <a href="{{url('mail-to-customer')}}/{{$vl->quote_id}}">{{$vl->mail_status}}</a> -->
                                           <a href="#" class="mail_status">{{$vl->mail_status}}</a>
                                             @else
                                             <a class="btn btn-link disabled">{{$vl->mail_status}}</a>
@@ -121,14 +120,72 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Issues</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div class="panel-body">
+                    <ul class="chat">
+                        @foreach($comments as $val)
+                        @if($val->uid==Session::get('userid'))
+                        <li class="left clearfix comment comment_{{$val->quote_id}}"><span class="chat-img pull-left">
+                            <img src="{{URL::to('images/U.png')}}" alt="You" class="img-circle" />
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">{{$val->user_name}}</strong> <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>{{$val->created_at}}</small>
+                                </div>
+                                <p>
+                                   {{$val->text}}
+                                </p>
+                            </div>
+                        </li>
+
+                        @else
+                        <li class="right clearfix comment comment_{{$val->quote_id}}"><span class="chat-img pull-right">
+                            <img src="{{URL::to('images/O.png')}}" alt="You" class="img-circle" />
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font pull-right" >{{$val->user_name}}</strong> 
+                                    <small class="pull-left text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>{{$val->created_at}}</small>
+                                </div>
+                                <br>
+                                <p>
+                                   {{$val->text}}
+                                </p>
+                            </div>
+                        </li>
+                        @endif
+                        
+                    
+                    @endforeach
+                    </ul>
+                </div>
+                <form id="issue_form">
+                <div class="panel-footer">
+                    <div class="input-group">
+                      
+                        <input type="hidden" name="issue_id" id="issue_id">
+                        {{csrf_field()}}
+                        <input id="issue_text" type="text" name="issue" class="form-control input-sm" placeholder="Type your message here..." required />
+                        
+                        <span class="input-group-btn">
+                          <a class="btn btn-warning btn-sm" id="issue_form_submit">
+                        Send</a>
+                        </span>
+                     
+                        
+                    </div>
+                </div>
       </div>
+      
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
+    </form>
     </div>
 
   </div>
