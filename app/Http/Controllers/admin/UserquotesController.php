@@ -11,6 +11,11 @@ use Session;
 use URL;
 use Mail;
 use PDF;
+use Storage;
+use GrahamCampbell\Flysystem\Facades\Flysystem;
+
+use League\Flysystem\Filesystem;
+use League\Flysystem\Adapter\Local;
 class UserquotesController extends Controller
 {
      public function user_quotes(Request $req){
@@ -207,6 +212,10 @@ public function geoccu($occup_id){
 
 
  public function mail_to_customer(Request $req){
+   $adapter = new Local(public_path('pdf'));
+   $filename=date('Y-m-d-h-i-s'); 
+ 
+
 
               $query_master=DB::select('call usp_show_fircal_quote("'.$req->quote_id.'")');
               $query=$query_master[0];
@@ -216,7 +225,7 @@ public function geoccu($occup_id){
             ->where('firecal_quote_detail.quote_id',$req->quote_id)
             ->get();
               $comapny_id=0;
-
+ 
 
              foreach ($loan_detail as $key => $value) {
                       
@@ -228,20 +237,25 @@ public function geoccu($occup_id){
              }
                   
         if($comapny_id!=0){
-            $pdf = PDF::loadView('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id])->pageSize('A3')->download();
+             PDF::loadView('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id])->save($filename.".pdf",$adapter);
         }else{
-           $pdf = PDF::loadView('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail])->pageSize('A3')->download();
-        }
-           
- 
+            PDF::loadView('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail])->save($filename.".pdf",$adapter);
+        } 
 
-                //   $to_email=$req->to_email?$req->to_email:NULL;
-                //   $cc_email=$req->cc_email?$req->cc_email:NULL;
-                //   $bcc_email=$req->bcc_email?$req->bcc_email:NULL;
-                //   $data=$req->mail_ms?$req->mail_ms:NULL;
-                //   $subject_email=$req->subject_email?$req->subject_email:NULL;
-                 
-               
+       
+            
+ 
+ 
+        
+     
+                  $attac=url('pdf'."/".$filename.".pdf");
+                  $to_email=$req->to_email?$req->to_email:NULL;
+                  $cc_email=$req->cc_email?$req->cc_email:NULL;
+                  $bcc_email=$req->bcc_email?$req->bcc_email:NULL;
+                  $data=$req->mail_ms?$req->mail_ms:NULL;
+                  $subject_email=$req->subject_email?$req->subject_email:NULL;
+              
+              
                 // $mail = Mail::send('admin.approvedmail',['data' => $data], function($message) use($email) {
                 // $message->from('scriptdp@gmail.com', 'RupeeBoss');
                 // $message->to($to_email)
@@ -251,17 +265,21 @@ public function geoccu($occup_id){
                 // $message->attach($pdf);
                 // });
 
-
+ 
             
-                $data ="Please use ";
+               
                 $email = $req->to_email;
                 $mail = Mail::send('admin.approvedmail',['data' => $data], function($message) use($email) {
                 $message->from('scriptdp@gmail.com', 'RupeeBoss');
                 $message->to($email)
-                ->subject('Your New Password');
-                $message->attach($pdf->output());
+              // ->bcc(array('rajbhardp@gmail.com','TESsdT@example.com','TESjxfjT@example.com','TESfssdT@example.com'))
+               ->subject('Welcome!');
+                $message->attach($attac);
+
                 });
                 
+
+
                     if(Mail::failures()){
                             $error=3;
                             echo $error;
@@ -293,5 +311,11 @@ public function geoccu($occup_id){
 
 
 }
+
+ public function pdf_f(){
+     return  PDF::loadHTML('<strong>Hello World</strong>')->lowquality()->pageSize('A2')->download();
+ }
+
+
 
 }
