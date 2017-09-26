@@ -159,28 +159,29 @@
                     @endforeach
                     </ul>
                 </div>
+                <form id="issue_form">
                 <div class="panel-footer">
                     <div class="input-group">
-                      <form id="issue_form">
+                      
                         <input type="hidden" name="issue_id" id="issue_id">
                         {{csrf_field()}}
                         <input id="issue_text" type="text" name="issue" class="form-control input-sm" placeholder="Type your message here..." required />
                         
                         <span class="input-group-btn">
-                            <a class="btn btn-warning btn-sm" id="issue_form_submit">
-                                Send</a>
+                          <a class="btn btn-warning btn-sm" id="issue_form_submit">
+                        Send</a>
                         </span>
-                        <span id="after_sub" style="color: red; display: none;">Issue Submitted
-                          <br>Issue can be seen after refreshing the page only.
-                        </span>
-                      </form>
+                     
                         
                     </div>
                 </div>
       </div>
+      
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
+    </form>
     </div>
 
   </div>

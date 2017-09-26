@@ -96,20 +96,28 @@ $(document).on('click','.mail_status',function(event){
     });
 
 $('#issue_form_submit').click(function(){
-   
+ // console.log($('li:last'));return;
+   if(!$('#issue_form').valid()){
+    return false;
+   }
     $.ajax({  
                 type: "POST",  
                 url: "{{URL::to('issue-submit')}}",
                 data : $('#issue_form').serialize(),
                 
                 success: function(msg){
-                  $('#after_sub').show();
-                  $('#issue_text').val('');
+                  append_issue($('#issue_text').val());
+                  
                  // $('#myModal').modal('toggle');
                 }
             });
 });
- 
+  function append_issue(text){
+    console.log('appending');
+    data='<li class="left clearfix comment "><span class="chat-img pull-left"><img src="/images/U.png" alt="You" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">You</strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>Just Now</small></div><p>'+text+'</p></div></li>';
+      $('.comment:last').after(data);
+      $('#issue_text').val('');
+  }
 
   $('#mail_sent').click(function(e){    // mail 
      e.preventDefault();
