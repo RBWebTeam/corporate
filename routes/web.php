@@ -69,4 +69,5 @@ Route::get('logout','AdminloginController@logout');
  //document upload
 Route::get('upload','UploadController@UploadPage');
 Route::post('upload-file','UploadController@UploadPost');
+Route::post('issue-submit','UserquotesController@issue_submit');
 });
