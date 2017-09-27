@@ -171,19 +171,20 @@ $('#issue_form_submit').click(function(){
           var $tr    = $('.clone_row').last();
           var $clone = $tr.clone();
           $tr.after($clone);
+         $('.upload_row').last().html(parseInt($('.upload_row').last().html(), 10)+1)
         });
       });
 
 
   $('.upload').click(function(e){    // mail 
      e.preventDefault();
-     data=$(this).attr('id').split('_');
+     
   
 
         $.ajax({  
                 type: "POST",  
                 url: "{{URL::to('upload-file')}}",
-                data : $('#form_'+data[1]).serialize(),
+                data : $('#upload_policy_form').serialize(),
                 
                 success: function(msg){
                   console.log(msg);
