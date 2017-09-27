@@ -114,7 +114,7 @@ $('#issue_form_submit').click(function(){
 });
   function append_issue(text){
     console.log('appending');
-    data='<li class="left clearfix comment "><span class="chat-img pull-left"><img src="/images/U.png" alt="You" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">You</strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>Just Now</small></div><p>'+text+'</p></div></li>';
+    data='<li class="left clearfix comment "><span class="chat-img pull-left"><img src="/images/U.png" alt="You" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">{{Session::get("firstname")}}</strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>Just Now</small></div><p>'+text+'</p></div></li>';
       $('.comment:last').after(data);
       $('#issue_text').val('');
   }
