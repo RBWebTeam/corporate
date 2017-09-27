@@ -226,6 +226,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Novanti\LaravelPDF\PDFFacade::class,
+        'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
 
     ],
 

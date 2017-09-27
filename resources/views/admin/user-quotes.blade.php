@@ -15,8 +15,10 @@
                             DataTables Advanced Tables
                         </div>
                         <!-- /.panel-heading -->
+
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example" style="font-size: 14px;">
+                     <!--    <input type="text" class="id='datetimepicker1'" id="myInput1" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> -->
+<table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12" id="dataTables-example" style="font-size: 14px;">
                                 <thead>
                                     <tr class="warning">
                                         <th>Quote Id</th>
@@ -28,6 +30,7 @@
                                         <th>Manager Status</th>
                                         <th>Days Diff</th>
                                         <th>Datetime Created</th>
+                                        <th>Expiry Date</th>
                                         <th>Employee Name</th>
                                         <th>Reporting To</th>
                                         <th>Approver Name</th>
@@ -60,10 +63,11 @@
                                         <td style='{{$class1}}'>{{$vl->manager_status}}</td>
                                         <td>{{$vl->days_diff}}</td>
                                         <td>{{$vl->datetime_created}}</td>
+                                          <td>{{$vl->expiry_dt}}</td>
                                         <td>{{$vl->empname}}</td>
                                         <td>{{$vl->reporting_empname}}</td>
                                         <td>{{$vl->approver_empname}}</td>
-                                        <td class="center"><a href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">View</a></td>
+                                        <td class="center"><a target="_blank" href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">View</a></td>
  
                                          <td>
 
@@ -245,3 +249,26 @@
       </div><!-- /.modal-dialog -->
 </div>
 
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput1");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("dataTables-example");
+  
+ tr = table.getElementsByTagName("tr");
+ 
+  
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+
+}
+</script>

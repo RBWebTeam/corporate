@@ -372,8 +372,10 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Type of Occupation</h4>
         </div>
+        
+         <input type="text" id="myInput" onkeyup="myFunction()" class="  search-query form-control" placeholder="Search for names.." />
         <div class="modal-body" id=occ_company>
-          <ul class="list-group" style="height: auto;max-height: 500px;overflow-x: hidden;"></ul>
+          <ul class="list-group" style="height: auto;max-height: 500px;overflow-x: hidden;" id="myUL"></ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -870,6 +872,26 @@ $(document).on('click','#sameas',function(){
 })
 
 
+</script>
+
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+
+        }
+    }
+}
 </script>
 @endsection
 
