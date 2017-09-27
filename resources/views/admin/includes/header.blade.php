@@ -70,12 +70,12 @@
 
                         @if(Session::get('user_type_id')==2)
                          <li>
-                            <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a>
+                       <!--      <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a> -->
                              <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
                         </li>
                         @elseif (Session::get('user_type_id')==3)
                         <li>
-                           <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a>
+                         <!--   <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a> -->
                             <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
                         </li>
                         @elseif (Session::get('user_type_id')==4)
