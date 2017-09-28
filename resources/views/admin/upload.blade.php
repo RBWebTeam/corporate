@@ -17,7 +17,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body table-responsive">
-                          <form id="upload_policy_form" enctype="multipart/form-data">
+                          <form id="upload_policy_form" enctype="multipart/form-data" action="upload-file" method="POST">
                             {{csrf_field()}}
                             <table width="100%" class="table table-striped table-bordered table-hover" >
                               <!-- id="dataTables-example" -->
@@ -49,6 +49,7 @@
                                     
                                 </tbody>
                             </table>
+                              <button>Upload</button>
                            </form>
                             
                            
@@ -58,7 +59,7 @@
                    
                 </div>
                 <a class="add-more btn btn-primary" >add</a>
-                <a class="upload btn btn-primary pull-right" >upload</a>
+              
             </div>
             
         </div>
