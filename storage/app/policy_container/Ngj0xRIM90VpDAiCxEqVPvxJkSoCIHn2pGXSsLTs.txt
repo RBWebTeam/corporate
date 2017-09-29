@@ -1,0 +1,1221 @@
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+--
+-- Host: 35.154.72.18    Database: pb_corporate
+-- ------------------------------------------------------
+-- Server version	5.5.57-0ubuntu0.14.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `addons_master`
+--
+
+DROP TABLE IF EXISTS `addons_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `addons_master` (
+  `addon_id` int(11) NOT NULL AUTO_INCREMENT,
+  `addon_name` varchar(200) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`addon_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `addons_master`
+--
+
+LOCK TABLES `addons_master` WRITE;
+/*!40000 ALTER TABLE `addons_master` DISABLE KEYS */;
+INSERT INTO `addons_master` VALUES (1,'STFI','2017-08-23 00:00:00'),(2,'EARTHQUAKE','2017-08-23 00:00:00'),(3,'TERRORISM','2017-08-23 00:00:00'),(4,'Escalation','2017-08-23 00:00:00'),(5,'Omission to Insure additions, alterations or extensions','2017-08-23 00:00:00'),(6,'Loss Of Rent clause','2017-08-23 00:00:00'),(7,'Insurance Of Additional Expenses of Rent For An Alternative Accommodation','2017-08-23 00:00:00'),(8,'Architects, Surveyors and Consulting Engineers Fees ( in excess of 3% claim amount)','2017-08-23 00:00:00'),(9,'Removal of Debris (in excess of 1% claim amount)','2017-08-23 00:00:00'),(10,'Spontaneous Combustion','2017-08-23 00:00:00'),(11,'Start up Expenses','2017-08-23 00:00:00'),(12,'Floater Clause','2017-08-23 00:00:00'),(13,'Impact Damage due to Insured\'s own Rail/Road Vehicles, Fork lifts, Cranes, Stackers and the like and articles dropped therefrom.','2017-08-23 00:00:00');
+/*!40000 ALTER TABLE `addons_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `asset_master`
+--
+
+DROP TABLE IF EXISTS `asset_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asset_master` (
+  `asset_id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_name` varchar(500) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`asset_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asset_master`
+--
+
+LOCK TABLES `asset_master` WRITE;
+/*!40000 ALTER TABLE `asset_master` DISABLE KEYS */;
+INSERT INTO `asset_master` VALUES (1,'BUILDING (INCL. PLINTH & FOUNDATION)','2017-07-26 00:00:00'),(2,'PLINTH & FOUNDATION OF BUILDING','2017-07-26 00:00:00'),(3,'FFF','2017-07-26 00:00:00'),(4,'ELECTRIC FITTINGS','2017-07-26 00:00:00'),(5,'STOCK - FINISH, RM, SIP','2017-07-26 00:00:00'),(6,'OTHER CONTENTS**','2017-07-26 00:00:00'),(7,'STFI','2017-07-26 00:00:00'),(8,'Earthquake','2017-07-26 00:00:00'),(9,'Terrorism','2017-07-26 00:00:00'),(10,'Architects, Surveyors and Consulting Engineers Fees ( in excess of 3% claim amount)','2017-07-26 00:00:00'),(11,'Removal of Debris (in excess of 1% claim amount)','2017-07-26 00:00:00'),(12,'(A) Deterioration of Stocks in Cold Storage premises due to accidental power failure consequent to damage at the premises of Power Station due to an insured peril','2017-07-26 00:00:00'),(13,'(B) Deterioration of stocks in cold storage premises due to change in temperature arising out of loss or damage to the cold storage machinery(ies) in the Insured’s premises due to operation of insured peril.','2017-07-26 00:00:00'),(14,'Forest Fire','2017-07-26 00:00:00'),(15,'Impact Damage due to Insured’s own Rail/Road Vehicles, Fork lifts, Cranes, Stackers and the like and articles dropped therefrom.','2017-07-26 00:00:00'),(16,'Spontaneous Combustion','2017-07-26 00:00:00'),(17,'Ommission to insure additions, deletions etc','2017-07-26 00:00:00'),(18,'Spoilage Material Damage Cover for stocks','2017-07-26 00:00:00'),(19,'Spoilage Material Damage Cover for Plant and Machinery','2017-07-26 00:00:00'),(20,'Temporary Removal of Stocks Clause','2017-07-26 00:00:00'),(21,'Loss Of Rent clause ','2017-07-26 00:00:00'),(22,'Rent for alternative accomodation','2017-07-26 00:00:00'),(23,'Escalation','2017-07-26 00:00:00'),(24,'Start Up Expenses','2017-07-26 00:00:00'),(25,'Leakage Cover for tanks in insured\'s premises','2017-07-26 00:00:00'),(26,'Leakage Cover for tanks outside insured\'s premises','2017-07-26 00:00:00'),(27,'Contamination Cover for tanks outside insured\'s premises','2017-07-26 00:00:00'),(28,'Contamination Cover for tanks located else where','2017-07-26 00:00:00');
+/*!40000 ALTER TABLE `asset_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `branch_master`
+--
+
+DROP TABLE IF EXISTS `branch_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `branch_master` (
+  `branch_id` int(11) NOT NULL AUTO_INCREMENT,
+  `branch_name` varchar(45) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`branch_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `branch_master`
+--
+
+LOCK TABLES `branch_master` WRITE;
+/*!40000 ALTER TABLE `branch_master` DISABLE KEYS */;
+INSERT INTO `branch_master` VALUES (1,'Delhi','2017-09-15 10:35:27'),(2,'Pune','2017-09-15 10:35:27'),(3,'Mumbai','2017-09-15 10:35:27');
+/*!40000 ALTER TABLE `branch_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `company_master`
+--
+
+DROP TABLE IF EXISTS `company_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company_master` (
+  `company_id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_name` varchar(100) DEFAULT NULL,
+  `discount_rate` int(11) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`company_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company_master`
+--
+
+LOCK TABLES `company_master` WRITE;
+/*!40000 ALTER TABLE `company_master` DISABLE KEYS */;
+INSERT INTO `company_master` VALUES (1,'The New India Assurance Co. Ltd.',90,'2017-08-08 00:00:00'),(2,'The Oriental Insurance Co. Ltd.',80,'2017-08-08 00:00:00'),(3,'National Insurance Co. Ltd.',90,'2017-08-08 00:00:00'),(4,'United India Insurance Co. Ltd.',70,'2017-08-08 00:00:00'),(5,'ICICI Lombard General Insurance Co. Ltd.',89,'2017-08-08 00:00:00'),(6,'Bajaj Allianz General Insurance Co. Ltd.',79,'2017-08-08 00:00:00'),(7,'IFFCO Tokio General Insurance Co. Ltd.',60,'2017-08-08 00:00:00'),(8,'Reliance General Insurance Co. Ltd.',90,'2017-08-08 00:00:00'),(9,'Royal Sundaram General Insurance Co. Limited',90,'2017-08-08 00:00:00'),(10,'Tata AIG General Insurance Co. Ltd.',90,'2017-08-08 00:00:00'),(11,'Cholamandalam MS General Insurance Co. Ltd.',90,'2017-08-08 00:00:00'),(12,'HDFC ERGO General Insurance Co. Ltd.',90,'2017-08-08 00:00:00'),(13,'Future Generali India Insurance Company Limited',90,'2017-08-08 00:00:00'),(14,'Universal Sompo General Insurance Co. Ltd.',90,'2017-08-08 00:00:00'),(15,'Shriram General Insurance Company Limited',90,'2017-08-08 00:00:00'),(16,'Bharti AXA General Insurance Company Limited',90,'2017-08-08 00:00:00'),(17,'Raheja QBE General Insurance Company Limited',90,'2017-08-08 00:00:00'),(18,'SBI General Insurance Company Limited',90,'2017-08-08 00:00:00'),(19,'Liberty Videocon General Insurance Company Limited',90,'2017-08-08 00:00:00'),(20,'Magma HDI General Insurance Company Limited',90,'2017-08-08 00:00:00'),(21,'Liberty Videocon General Insurance Company Limited',90,'2017-08-08 00:00:00'),(22,'Kotak Mahindra General Insurance Company Limited',90,'2017-08-08 00:00:00');
+/*!40000 ALTER TABLE `company_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `districtwise_zone_master`
+--
+
+DROP TABLE IF EXISTS `districtwise_zone_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `districtwise_zone_master` (
+  `district_id` int(11) NOT NULL AUTO_INCREMENT,
+  `district_name` varchar(100) DEFAULT NULL,
+  `zone_id` int(11) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`district_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=524 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `districtwise_zone_master`
+--
+
+LOCK TABLES `districtwise_zone_master` WRITE;
+/*!40000 ALTER TABLE `districtwise_zone_master` DISABLE KEYS */;
+INSERT INTO `districtwise_zone_master` VALUES (1,'West Godavari',3,2,'2017-07-21 00:00:00'),(2,'Krishna',3,2,'2017-07-21 00:00:00'),(3,'Khammam',3,2,'2017-07-21 00:00:00'),(4,'Warangal',3,2,'2017-07-21 00:00:00'),(5,'Karimnagar',3,2,'2017-07-21 00:00:00'),(6,'Anantapur',3,2,'2017-07-21 00:00:00'),(7,'Chitoor',4,2,'2017-07-21 00:00:00'),(8,'Nellore',4,2,'2017-07-21 00:00:00'),(9,'Cuddapah',4,2,'2017-07-21 00:00:00'),(10,'Kurnool',4,2,'2017-07-21 00:00:00'),(11,'Mahboobnagar',4,2,'2017-07-21 00:00:00'),(12,'Ranga Reddy',4,2,'2017-07-21 00:00:00'),(13,'Medak',4,2,'2017-07-21 00:00:00'),(14,'Nizamabad',4,2,'2017-07-21 00:00:00'),(15,'Adilabad',4,2,'2017-07-21 00:00:00'),(16,'Nalgonda',4,2,'2017-07-21 00:00:00'),(17,'Prakasam',4,2,'2017-07-21 00:00:00'),(18,'East Godavari',4,2,'2017-07-21 00:00:00'),(19,'Visakhapatnam',4,2,'2017-07-21 00:00:00'),(20,'Guntur',4,2,'2017-07-21 00:00:00'),(21,'Vizianagarm',4,2,'2017-07-21 00:00:00'),(22,'Srikakulam',4,2,'2017-07-21 00:00:00'),(23,'Hyderabad',4,2,'2017-07-21 00:00:00'),(24,'Pondicherry',4,2,'2017-07-21 00:00:00'),(25,'Sitamarhi',1,5,'2017-07-21 00:00:00'),(26,'Madhubani',1,5,'2017-07-21 00:00:00'),(27,'Darbhanga',1,5,'2017-07-21 00:00:00'),(28,'Saharsa',1,5,'2017-07-21 00:00:00'),(29,'Purnia',2,5,'2017-07-21 00:00:00'),(30,'Champaran (East)',2,5,'2017-07-21 00:00:00'),(31,'Champaran (West)',2,5,'2017-07-21 00:00:00'),(32,'Katihar',2,5,'2017-07-21 00:00:00'),(33,'Bighusarai',2,5,'2017-07-21 00:00:00'),(34,'Samastipur',2,5,'2017-07-21 00:00:00'),(35,'Muzaffarpur',2,5,'2017-07-21 00:00:00'),(36,'Gopalganj',2,5,'2017-07-21 00:00:00'),(37,'Siwan',2,5,'2017-07-21 00:00:00'),(38,'Saran',2,5,'2017-07-21 00:00:00'),(39,'Vaishali',2,5,'2017-07-21 00:00:00'),(40,'Nalanda',2,5,'2017-07-21 00:00:00'),(41,'Patna',2,5,'2017-07-21 00:00:00'),(42,'Monghyr',2,5,'2017-07-21 00:00:00'),(43,'Bhagalpur',2,5,'2017-07-21 00:00:00'),(44,'Santhal pragana',3,5,'2017-07-21 00:00:00'),(45,'Bhojpur',3,5,'2017-07-21 00:00:00'),(46,'Rohtas',3,5,'2017-07-21 00:00:00'),(47,'Gaya',3,5,'2017-07-21 00:00:00'),(48,'Aurangabad',3,5,'2017-07-21 00:00:00'),(49,'Surguja',3,6,'2017-07-21 00:00:00'),(50,'Raigarh',3,6,'2017-07-21 00:00:00'),(51,'Muhasmud',3,6,'2017-07-21 00:00:00'),(52,'Jashpur',3,6,'2017-07-21 00:00:00'),(53,'Bastar',4,6,'2017-07-21 00:00:00'),(54,'Bilaspur',4,6,'2017-07-21 00:00:00'),(55,'Durg',4,6,'2017-07-21 00:00:00'),(56,'Raipur',4,6,'2017-07-21 00:00:00'),(57,'Kavardha',4,6,'2017-07-21 00:00:00'),(58,'West Surguja',4,6,'2017-07-21 00:00:00'),(59,'Rajnandgaon',4,6,'2017-07-21 00:00:00'),(60,'Korba',4,6,'2017-07-21 00:00:00'),(61,'Dantewara',4,6,'2017-07-21 00:00:00'),(62,'Dhamtari',4,6,'2017-07-21 00:00:00'),(63,'Janjgir',4,6,'2017-07-21 00:00:00'),(64,'Kanker',4,6,'2017-07-21 00:00:00'),(65,'Katch',1,12,'2017-07-21 00:00:00'),(66,'Jamnagar',2,12,'2017-07-21 00:00:00'),(67,'Rajkot',3,12,'2017-07-21 00:00:00'),(68,'Surendernagar',3,12,'2017-07-21 00:00:00'),(69,'Mehsana',3,12,'2017-07-21 00:00:00'),(70,'Banaskantha',3,12,'2017-07-21 00:00:00'),(71,'Sabarkantha',3,12,'2017-07-21 00:00:00'),(72,'Panchmaha',3,12,'2017-07-21 00:00:00'),(73,'Baroda',3,12,'2017-07-21 00:00:00'),(74,'Kheda',3,12,'2017-07-21 00:00:00'),(75,'Ahmedabad',3,12,'2017-07-21 00:00:00'),(76,'Bhavnagar',3,12,'2017-07-21 00:00:00'),(77,'Amreli',3,12,'2017-07-21 00:00:00'),(78,'Junagadh',3,12,'2017-07-21 00:00:00'),(79,'Bharuch',3,12,'2017-07-21 00:00:00'),(80,'Surat',3,12,'2017-07-21 00:00:00'),(81,'Valsad',3,12,'2017-07-21 00:00:00'),(82,'Dang (Ahwa)',3,12,'2017-07-21 00:00:00'),(83,'Gandhinagar',3,12,'2017-07-21 00:00:00'),(84,'Union Territories-of Diu',3,12,'2017-07-21 00:00:00'),(85,'Daman',3,12,'2017-07-21 00:00:00'),(86,'Dadra and Nagar Haveli',3,12,'2017-07-21 00:00:00'),(87,'Ambala',2,14,'2017-07-21 00:00:00'),(88,'Sonepat',2,14,'2017-07-21 00:00:00'),(89,'Rohtak',2,14,'2017-07-21 00:00:00'),(90,'Karnal',2,14,'2017-07-21 00:00:00'),(91,'Gurgaon',2,14,'2017-07-21 00:00:00'),(92,'Faridabad',2,14,'2017-07-21 00:00:00'),(93,'Panipat',2,14,'2017-07-21 00:00:00'),(94,'Rewari',2,14,'2017-07-21 00:00:00'),(95,'Yamunanagar',2,14,'2017-07-21 00:00:00'),(96,'Kurukshetra',3,14,'2017-07-21 00:00:00'),(97,'Jind',3,14,'2017-07-21 00:00:00'),(98,'Hissar',3,14,'2017-07-21 00:00:00'),(99,'Bhiwani',3,14,'2017-07-21 00:00:00'),(100,'Mahendragarh',3,14,'2017-07-21 00:00:00'),(101,'Kaithal',3,14,'2017-07-21 00:00:00'),(102,'Sirsa',4,14,'2017-07-21 00:00:00'),(103,'Chamba',1,13,'2017-07-21 00:00:00'),(104,'Kullu',1,13,'2017-07-21 00:00:00'),(105,'Kangra',1,13,'2017-07-21 00:00:00'),(106,'Una',1,13,'2017-07-21 00:00:00'),(107,'Hamirpur',1,13,'2017-07-21 00:00:00'),(108,'Mandi',1,13,'2017-07-21 00:00:00'),(109,'Bilaspur',1,13,'2017-07-21 00:00:00'),(110,'Lahul and Spiti',2,13,'2017-07-21 00:00:00'),(111,'Kinnaur',2,13,'2017-07-21 00:00:00'),(112,'Shimla',2,13,'2017-07-21 00:00:00'),(113,'Solan',2,13,'2017-07-21 00:00:00'),(114,'Sirmaur',2,13,'2017-07-21 00:00:00'),(115,'Baramula',1,15,'2017-07-21 00:00:00'),(116,'Srinagar',1,15,'2017-07-21 00:00:00'),(117,'Gilgit',2,15,'2017-07-21 00:00:00'),(118,'Chilas',2,15,'2017-07-21 00:00:00'),(119,'Gilgit Wazarat',2,15,'2017-07-21 00:00:00'),(120,'Muzaffarabad',2,15,'2017-07-21 00:00:00'),(121,'Punch',2,15,'2017-07-21 00:00:00'),(122,'Anantnag',2,15,'2017-07-21 00:00:00'),(123,'Mirapur',2,15,'2017-07-21 00:00:00'),(124,'Riasi',2,15,'2017-07-21 00:00:00'),(125,'Udhampur',2,15,'2017-07-21 00:00:00'),(126,'Jammu',2,15,'2017-07-21 00:00:00'),(127,'Kathua',2,15,'2017-07-21 00:00:00'),(128,'Leh',2,15,'2017-07-21 00:00:00'),(129,'Tribal Territory',2,15,'2017-07-21 00:00:00'),(130,'Hazirabagh',3,16,'2017-07-21 00:00:00'),(131,'Palamau',3,16,'2017-07-21 00:00:00'),(132,'Giridh',3,16,'2017-07-21 00:00:00'),(133,'Dhandbad',3,16,'2017-07-21 00:00:00'),(134,'Sahibganj',3,16,'2017-07-21 00:00:00'),(135,'Pakaur',3,16,'2017-07-21 00:00:00'),(136,'Lohardaga',3,16,'2017-07-21 00:00:00'),(137,'Koderma',3,16,'2017-07-21 00:00:00'),(138,'Godda',3,16,'2017-07-21 00:00:00'),(139,'Garwah',3,16,'2017-07-21 00:00:00'),(140,'Dumka',3,16,'2017-07-21 00:00:00'),(141,'Deogarh',3,16,'2017-07-21 00:00:00'),(142,'Chatra',3,16,'2017-07-21 00:00:00'),(143,'Bokaro',3,16,'2017-07-21 00:00:00'),(144,'Ranchi',4,16,'2017-07-21 00:00:00'),(145,'East Singhbhum',4,16,'2017-07-21 00:00:00'),(146,'West Singhbhum',4,16,'2017-07-21 00:00:00'),(147,'Gumla',4,16,'2017-07-21 00:00:00'),(148,'Dakshin Kannad',3,18,'2017-07-21 00:00:00'),(149,'Belgaum',4,18,'2017-07-21 00:00:00'),(150,'Bijapur',4,18,'2017-07-21 00:00:00'),(151,'Bidar',4,18,'2017-07-21 00:00:00'),(152,'Gulbarga',4,18,'2017-07-21 00:00:00'),(153,'Raichur',4,18,'2017-07-21 00:00:00'),(154,'Bellary',4,18,'2017-07-21 00:00:00'),(155,'Dharwad',4,18,'2017-07-21 00:00:00'),(156,'Shimoga',4,18,'2017-07-21 00:00:00'),(157,'Chitradurga',4,18,'2017-07-21 00:00:00'),(158,'Chikmagalur',4,18,'2017-07-21 00:00:00'),(159,'Tumkur',4,18,'2017-07-21 00:00:00'),(160,'Hassan',4,18,'2017-07-21 00:00:00'),(161,'Bangalore',4,18,'2017-07-21 00:00:00'),(162,'Kolar',4,18,'2017-07-21 00:00:00'),(163,'Kodagu',4,18,'2017-07-21 00:00:00'),(164,'Mandya',4,18,'2017-07-21 00:00:00'),(165,'Mysore',4,18,'2017-07-21 00:00:00'),(166,'Uttar Kannnad',4,18,'2017-07-21 00:00:00'),(167,'West Nimar',3,23,'2017-07-21 00:00:00'),(168,'East Nimar',3,23,'2017-07-21 00:00:00'),(169,'Betul',3,23,'2017-07-21 00:00:00'),(170,'Chhindwara',3,23,'2017-07-21 00:00:00'),(171,'Hoshangabad',3,23,'2017-07-21 00:00:00'),(172,'Raisen',3,23,'2017-07-21 00:00:00'),(173,'Narsimhapur',3,23,'2017-07-21 00:00:00'),(174,'Jabalpur',3,23,'2017-07-21 00:00:00'),(175,'Shahdul',3,23,'2017-07-21 00:00:00'),(176,'Sidhi',3,23,'2017-07-21 00:00:00'),(177,'Balaghat',4,23,'2017-07-21 00:00:00'),(178,'Bhind',4,23,'2017-07-21 00:00:00'),(179,'Bhopal',4,23,'2017-07-21 00:00:00'),(180,'Chhatarpur',4,23,'2017-07-21 00:00:00'),(181,'Damoh',4,23,'2017-07-21 00:00:00'),(182,'Datia',4,23,'2017-07-21 00:00:00'),(183,'Dewas',4,23,'2017-07-21 00:00:00'),(184,'Dhar',4,23,'2017-07-21 00:00:00'),(185,'Guna',4,23,'2017-07-21 00:00:00'),(186,'Gwalior',4,23,'2017-07-21 00:00:00'),(187,'Indore',4,23,'2017-07-21 00:00:00'),(188,'Jhabua',4,23,'2017-07-21 00:00:00'),(189,'Mandsaur',4,23,'2017-07-21 00:00:00'),(190,'Mandla',4,23,'2017-07-21 00:00:00'),(191,'Morena',4,23,'2017-07-21 00:00:00'),(192,'Panna',4,23,'2017-07-21 00:00:00'),(193,'Rajgarh',4,23,'2017-07-21 00:00:00'),(194,'Sagar',4,23,'2017-07-21 00:00:00'),(195,'Satna',4,23,'2017-07-21 00:00:00'),(196,'Sehore',4,23,'2017-07-21 00:00:00'),(197,'Shajapur',4,23,'2017-07-21 00:00:00'),(198,'Shivpuri',4,23,'2017-07-21 00:00:00'),(199,'Tikamgarh',4,23,'2017-07-21 00:00:00'),(200,'Ujjain',4,23,'2017-07-21 00:00:00'),(201,'Vidisha',4,23,'2017-07-21 00:00:00'),(202,'Ratlam',4,23,'2017-07-21 00:00:00'),(203,'Rewa',4,23,'2017-07-21 00:00:00'),(204,'Seoni',4,23,'2017-07-21 00:00:00'),(205,'Ratnagiri',1,21,'2017-07-21 00:00:00'),(206,'Satara',1,21,'2017-07-21 00:00:00'),(207,'Sindhudurg',3,21,'2017-07-21 00:00:00'),(208,'Kolhapur',3,21,'2017-07-21 00:00:00'),(209,'Pune',3,21,'2017-07-21 00:00:00'),(210,'Nasik',3,21,'2017-07-21 00:00:00'),(211,'Chandrapur',3,21,'2017-07-21 00:00:00'),(212,'Thane',3,21,'2017-07-21 00:00:00'),(213,'Raigad',3,21,'2017-07-21 00:00:00'),(214,'Dhule',3,21,'2017-07-21 00:00:00'),(215,'MUMBAI',3,21,'2017-07-21 00:00:00'),(216,'Sangli',4,21,'2017-07-21 00:00:00'),(217,'Solapur',4,21,'2017-07-21 00:00:00'),(218,'Osmanabad',4,21,'2017-07-21 00:00:00'),(219,'Latur',4,21,'2017-07-21 00:00:00'),(220,'Bid',4,21,'2017-07-21 00:00:00'),(221,'Ahmadnagar',4,21,'2017-07-21 00:00:00'),(222,'Nanded',4,21,'2017-07-21 00:00:00'),(223,'Parbani',4,21,'2017-07-21 00:00:00'),(224,'Jalna',4,21,'2017-07-21 00:00:00'),(225,'Aurangabad',4,21,'2017-07-21 00:00:00'),(226,'Akola',4,21,'2017-07-21 00:00:00'),(227,'Yavatmal',4,21,'2017-07-21 00:00:00'),(228,'Amravati',4,21,'2017-07-21 00:00:00'),(229,'Wardha',4,21,'2017-07-21 00:00:00'),(230,'Nagpur',4,21,'2017-07-21 00:00:00'),(231,'Bhandara',4,21,'2017-07-21 00:00:00'),(232,'Gadchiroli',4,21,'2017-07-21 00:00:00'),(233,'Buldana',4,21,'2017-07-21 00:00:00'),(234,'Jalgaon',4,21,'2017-07-21 00:00:00'),(235,'Cuttack',3,26,'2017-07-21 00:00:00'),(236,'Dhenkanal',3,26,'2017-07-21 00:00:00'),(237,'Sambalpur',3,26,'2017-07-21 00:00:00'),(238,'Puri',4,26,'2017-07-21 00:00:00'),(239,'Koraput',4,26,'2017-07-21 00:00:00'),(240,'Kalahandi',4,26,'2017-07-21 00:00:00'),(241,'Bolangir',4,26,'2017-07-21 00:00:00'),(242,'Balasore',4,26,'2017-07-21 00:00:00'),(243,'Keonjhar',4,26,'2017-07-21 00:00:00'),(244,'Mayjurbhganj',4,26,'2017-07-21 00:00:00'),(245,'Baudhkhondmals',4,26,'2017-07-21 00:00:00'),(246,'Ganjam',4,26,'2017-07-21 00:00:00'),(247,'Sundargarh',4,26,'2017-07-21 00:00:00'),(248,'Gurdaspur',2,27,'2017-07-21 00:00:00'),(249,'Hoshiarpur',2,27,'2017-07-21 00:00:00'),(250,'Amritsar',2,27,'2017-07-21 00:00:00'),(251,'Fatehgarh Sahib',2,27,'2017-07-21 00:00:00'),(252,'Kapurthala',2,27,'2017-07-21 00:00:00'),(253,'Jalandhar',2,27,'2017-07-21 00:00:00'),(254,'Ludhiana',2,27,'2017-07-21 00:00:00'),(255,'Rupnagar',2,27,'2017-07-21 00:00:00'),(256,'Ferozepur',3,27,'2017-07-21 00:00:00'),(257,'Faridkot',3,27,'2017-07-21 00:00:00'),(258,'Patiala',3,27,'2017-07-21 00:00:00'),(259,'Mansa',3,27,'2017-07-21 00:00:00'),(260,'Sangrur',3,27,'2017-07-21 00:00:00'),(261,'Bhatinda',3,27,'2017-07-21 00:00:00'),(262,'Jaisalmer',3,29,'2017-07-21 00:00:00'),(263,'Alwar',3,29,'2017-07-21 00:00:00'),(264,'Bharatpur',3,29,'2017-07-21 00:00:00'),(265,'Barmer',3,29,'2017-07-21 00:00:00'),(266,'Jalor',3,29,'2017-07-21 00:00:00'),(267,'Sirohi',3,29,'2017-07-21 00:00:00'),(268,'Ganganagar',4,29,'2017-07-21 00:00:00'),(269,'Churu',4,29,'2017-07-21 00:00:00'),(270,'Jhunjhunu',4,29,'2017-07-21 00:00:00'),(271,'Jodhpur',4,29,'2017-07-21 00:00:00'),(272,'Nagaur',4,29,'2017-07-21 00:00:00'),(273,'Sikar',4,29,'2017-07-21 00:00:00'),(274,'Jaipur',4,29,'2017-07-21 00:00:00'),(275,'Daulpur',4,29,'2017-07-21 00:00:00'),(276,'Sawai Madhopur',4,29,'2017-07-21 00:00:00'),(277,'Tonk',4,29,'2017-07-21 00:00:00'),(278,'Ajmer',4,29,'2017-07-21 00:00:00'),(279,'Pali',4,29,'2017-07-21 00:00:00'),(280,'Bhilwara',4,29,'2017-07-21 00:00:00'),(281,'Bundi',4,29,'2017-07-21 00:00:00'),(282,'Kota',4,29,'2017-07-21 00:00:00'),(283,'Udaipur',4,29,'2017-07-21 00:00:00'),(284,'Chittaurgarh',4,29,'2017-07-21 00:00:00'),(285,'Jahlawar',4,29,'2017-07-21 00:00:00'),(286,'Banswara',4,29,'2017-07-21 00:00:00'),(287,'Dungarpur',4,29,'2017-07-21 00:00:00'),(288,'Bikaner',4,29,'2017-07-21 00:00:00'),(289,'Nilgiri',3,31,'2017-07-21 00:00:00'),(290,'Coimbatore',3,31,'2017-07-21 00:00:00'),(291,'Kannyakumari',3,31,'2017-07-21 00:00:00'),(292,'Tirunelveli',3,31,'2017-07-21 00:00:00'),(293,'Chengalpattu',4,31,'2017-07-21 00:00:00'),(294,'North-Arcot',4,31,'2017-07-21 00:00:00'),(295,'Tiruvannamalai',4,31,'2017-07-21 00:00:00'),(296,'South Arcot',4,31,'2017-07-21 00:00:00'),(297,'Dharampuri',4,31,'2017-07-21 00:00:00'),(298,'Salem',4,31,'2017-07-21 00:00:00'),(299,'Periyar',4,31,'2017-07-21 00:00:00'),(300,'Trichirapalli',4,31,'2017-07-21 00:00:00'),(301,'Thanjavur',4,31,'2017-07-21 00:00:00'),(302,'Nagapattinam',4,31,'2017-07-21 00:00:00'),(303,'Pudukottai',4,31,'2017-07-21 00:00:00'),(304,'Dindigul',4,31,'2017-07-21 00:00:00'),(305,'Madurai',4,31,'2017-07-21 00:00:00'),(306,'Kamarajar',4,31,'2017-07-21 00:00:00'),(307,'Pasumpon',4,31,'2017-07-21 00:00:00'),(308,'Muthuramalinga Thevar',4,31,'2017-07-21 00:00:00'),(309,'Ramanathapuram',4,31,'2017-07-21 00:00:00'),(310,'Chidambaranar',4,31,'2017-07-21 00:00:00'),(311,'Chennai',4,31,'2017-07-21 00:00:00'),(312,'Chamoli',1,33,'2017-07-21 00:00:00'),(313,'Almora',1,33,'2017-07-21 00:00:00'),(314,'Pithoragarn',1,33,'2017-07-21 00:00:00'),(315,'Bageswar',1,33,'2017-07-21 00:00:00'),(316,'Champawat',1,33,'2017-07-21 00:00:00'),(317,'Uttarkashi',2,33,'2017-07-21 00:00:00'),(318,'Tehri',2,33,'2017-07-21 00:00:00'),(319,'Garwal',2,33,'2017-07-21 00:00:00'),(320,'Dehradun',2,33,'2017-07-21 00:00:00'),(321,'Pauri',2,33,'2017-07-21 00:00:00'),(322,'Garhwal',2,33,'2017-07-21 00:00:00'),(323,'Nainital',2,33,'2017-07-21 00:00:00'),(324,'Haridwar',2,33,'2017-07-21 00:00:00'),(325,'Udamsinghnagar',2,33,'2017-07-21 00:00:00'),(326,'Rudraprayag',2,33,'2017-07-21 00:00:00'),(327,'Saharanpur',2,34,'2017-07-21 00:00:00'),(328,'Muzaffarnagar',2,34,'2017-07-21 00:00:00'),(329,'Bijnor',2,34,'2017-07-21 00:00:00'),(330,'Moradabad',2,34,'2017-07-21 00:00:00'),(331,'Meerut',2,34,'2017-07-21 00:00:00'),(332,'Ghaziabad',2,34,'2017-07-21 00:00:00'),(333,'Rampur',2,34,'2017-07-21 00:00:00'),(334,'Pilibhit',2,34,'2017-07-21 00:00:00'),(335,'Bulandshahr',2,34,'2017-07-21 00:00:00'),(336,'Kheri',2,34,'2017-07-21 00:00:00'),(337,'Bhraich',2,34,'2017-07-21 00:00:00'),(338,'Gondha',2,34,'2017-07-21 00:00:00'),(339,'Basti',2,34,'2017-07-21 00:00:00'),(340,'Gorakhpur',2,34,'2017-07-21 00:00:00'),(341,'Deoria',2,34,'2017-07-21 00:00:00'),(342,'Bareilly',3,34,'2017-07-21 00:00:00'),(343,'Badaun',3,34,'2017-07-21 00:00:00'),(344,'Shahejehanpur',3,34,'2017-07-21 00:00:00'),(345,'Aligarh',3,34,'2017-07-21 00:00:00'),(346,'Mathura',3,34,'2017-07-21 00:00:00'),(347,'Ethah',3,34,'2017-07-21 00:00:00'),(348,'Hardoi',3,34,'2017-07-21 00:00:00'),(349,'Sitapur',3,34,'2017-07-21 00:00:00'),(350,'Agra',3,34,'2017-07-21 00:00:00'),(351,'Mainpuri',3,34,'2017-07-21 00:00:00'),(352,'Farukkabad',3,34,'2017-07-21 00:00:00'),(353,'Unnao',3,34,'2017-07-21 00:00:00'),(354,'Lucknow',3,34,'2017-07-21 00:00:00'),(355,'Barabanki',3,34,'2017-07-21 00:00:00'),(356,'Rae Bareli',3,34,'2017-07-21 00:00:00'),(357,'Sultanpur',3,34,'2017-07-21 00:00:00'),(358,'Faizabad',3,34,'2017-07-21 00:00:00'),(359,'Azamgarh',3,34,'2017-07-21 00:00:00'),(360,'Ballia',3,34,'2017-07-21 00:00:00'),(361,'Pratapgarh',3,34,'2017-07-21 00:00:00'),(362,'Jaunpur',3,34,'2017-07-21 00:00:00'),(363,'Ghazipur',3,34,'2017-07-21 00:00:00'),(364,'Varanasi',3,34,'2017-07-21 00:00:00'),(365,'Mirzapur',3,34,'2017-07-21 00:00:00'),(366,'Etawah',4,34,'2017-07-21 00:00:00'),(367,'Kanpur',4,34,'2017-07-21 00:00:00'),(368,'Jalaun',4,34,'2017-07-21 00:00:00'),(369,'Jhansi',4,34,'2017-07-21 00:00:00'),(370,'Hamirpur',4,34,'2017-07-21 00:00:00'),(371,'Banda',4,34,'2017-07-21 00:00:00'),(372,'Fatehpur',4,34,'2017-07-21 00:00:00'),(373,'Allahabad',4,34,'2017-07-21 00:00:00'),(374,'Lalitpur',4,34,'2017-07-21 00:00:00'),(375,'Cooch Bihar',1,35,'2017-07-21 00:00:00'),(376,'Darjeeling',2,35,'2017-07-21 00:00:00'),(377,'West Dinajpur',2,35,'2017-07-21 00:00:00'),(378,'Jalpaiguri',2,35,'2017-07-21 00:00:00'),(379,'Calcutta',2,35,'2017-07-21 00:00:00'),(380,'24 Parganas',2,35,'2017-07-21 00:00:00'),(381,'Maldah',2,35,'2017-07-21 00:00:00'),(382,'Murshidabad',3,35,'2017-07-21 00:00:00'),(383,'Birbhum',3,35,'2017-07-21 00:00:00'),(384,'Bardhaman',3,35,'2017-07-21 00:00:00'),(385,'Hoogli',3,35,'2017-07-21 00:00:00'),(386,'Howrah',3,35,'2017-07-21 00:00:00'),(387,'Nadia',3,35,'2017-07-21 00:00:00'),(388,'Bankura',3,35,'2017-07-21 00:00:00'),(389,'Midnapore',3,35,'2017-07-21 00:00:00'),(390,'Purulia',4,35,'2017-07-21 00:00:00'),(391,'Tawang',1,3,'2017-08-01 00:00:00'),(392,'West Kameng',1,3,'2017-08-01 00:00:00'),(393,'East Kameng',1,3,'2017-08-01 00:00:00'),(394,'Papum Pare',1,3,'2017-08-01 00:00:00'),(395,'Kurung Kumey',1,3,'2017-08-01 00:00:00'),(396,'Kra Daadi',1,3,'2017-08-01 00:00:00'),(397,'Lower Subansiri',1,3,'2017-08-01 00:00:00'),(398,'Upper Subansiri',1,3,'2017-08-01 00:00:00'),(399,'West Siang',1,3,'2017-08-01 00:00:00'),(400,'East Siang',1,3,'2017-08-01 00:00:00'),(401,'Central Siang',1,3,'2017-08-01 00:00:00'),(402,'Upper Siang',1,3,'2017-08-01 00:00:00'),(403,'Lower Dibang Valley',1,3,'2017-08-01 00:00:00'),(404,'Upper Dibang Valley',1,3,'2017-08-01 00:00:00'),(405,'Anjaw',1,3,'2017-08-01 00:00:00'),(406,'Lohit',1,3,'2017-08-01 00:00:00'),(407,'Namsai',1,3,'2017-08-01 00:00:00'),(408,'Changlang',1,3,'2017-08-01 00:00:00'),(409,'Tirap',1,3,'2017-08-01 00:00:00'),(410,'Longding',1,3,'2017-08-01 00:00:00'),(411,'Tinsukia',1,4,'2017-08-01 00:00:00'),(412,'Dibrugarh',1,4,'2017-08-01 00:00:00'),(413,'Dhemaji',1,4,'2017-08-01 00:00:00'),(414,'Charaideo',1,4,'2017-08-01 00:00:00'),(415,'Sivasagar',1,4,'2017-08-01 00:00:00'),(416,'Lakhimpur',1,4,'2017-08-01 00:00:00'),(417,'Majuli',1,4,'2017-08-01 00:00:00'),(418,'Jorhat',1,4,'2017-08-01 00:00:00'),(419,'Biswanath',1,4,'2017-08-01 00:00:00'),(420,'Golaghat',1,4,'2017-08-01 00:00:00'),(421,'Karbi Anglong East',1,4,'2017-08-01 00:00:00'),(422,'Sonitpur',1,4,'2017-08-01 00:00:00'),(423,'Nagaon',1,4,'2017-08-01 00:00:00'),(424,'Hojai',1,4,'2017-08-01 00:00:00'),(425,'Karbi Anglong West',1,4,'2017-08-01 00:00:00'),(426,'Dima Hassao',1,4,'2017-08-01 00:00:00'),(427,'Cachar',1,4,'2017-08-01 00:00:00'),(428,'Hailakandi',1,4,'2017-08-01 00:00:00'),(429,'Karimganj',1,4,'2017-08-01 00:00:00'),(430,'Morigaon',1,4,'2017-08-01 00:00:00'),(431,'Udalguri',1,4,'2017-08-01 00:00:00'),(432,'Darrang',1,4,'2017-08-01 00:00:00'),(433,'Kamrup Metro',1,4,'2017-08-01 00:00:00'),(434,'Baksa',1,4,'2017-08-01 00:00:00'),(435,'Nalbari',1,4,'2017-08-01 00:00:00'),(436,'Kamrup',1,4,'2017-08-01 00:00:00'),(437,'Barpeta',1,4,'2017-08-01 00:00:00'),(438,'Chirang',1,4,'2017-08-01 00:00:00'),(439,'Bongaigaon',1,4,'2017-08-01 00:00:00'),(440,'Goalpara',1,4,'2017-08-01 00:00:00'),(441,'Kokrajhar',1,4,'2017-08-01 00:00:00'),(442,'Dhubri',1,4,'2017-08-01 00:00:00'),(443,'South Salmara-Mankachar',1,4,'2017-08-01 00:00:00'),(444,'CHANDIGARH',2,7,'2017-08-01 00:00:00'),(445,'North Goa',3,11,'2017-08-01 00:00:00'),(446,'South Goa',3,11,'2017-08-01 00:00:00'),(447,'North Delhi',2,9,'2017-08-01 00:00:00'),(448,'North West Delhi',2,9,'2017-08-01 00:00:00'),(449,'New Delhi',2,9,'2017-08-01 00:00:00'),(450,'West Delhi',2,9,'2017-08-01 00:00:00'),(451,'South West Delhi',2,9,'2017-08-01 00:00:00'),(452,'South Delhi',2,9,'2017-08-01 00:00:00'),(453,'South East Delhi',2,9,'2017-08-01 00:00:00'),(454,'Central Delhi',2,9,'2017-08-01 00:00:00'),(455,'North East Delhi',2,9,'2017-08-01 00:00:00'),(456,'Shahdara',2,9,'2017-08-01 00:00:00'),(457,'East Delhi',2,9,'2017-08-01 00:00:00'),(458,'Alappuzha',3,17,'2017-08-01 00:00:00'),(459,'Ernakulam',3,17,'2017-08-01 00:00:00'),(460,'Idukki',3,17,'2017-08-01 00:00:00'),(461,'Kannur',3,17,'2017-08-01 00:00:00'),(462,'Kasaragod',3,17,'2017-08-01 00:00:00'),(463,'Kollam',3,17,'2017-08-01 00:00:00'),(464,'Kottayam',3,17,'2017-08-01 00:00:00'),(465,'Kozhikode',3,17,'2017-08-01 00:00:00'),(466,'Malappuram',3,17,'2017-08-01 00:00:00'),(467,'Palakkad',3,17,'2017-08-01 00:00:00'),(468,'Pathanamthitta',3,17,'2017-08-01 00:00:00'),(469,'Thiruvananthapuram',3,17,'2017-08-01 00:00:00'),(470,'Thrissur',3,17,'2017-08-01 00:00:00'),(471,'Wayanad',3,17,'2017-08-01 00:00:00'),(472,'LAKSHADWEEP',4,19,'2017-08-01 00:00:00'),(473,'Bishnupur',1,22,'2017-08-01 00:00:00'),(474,'Thoubal',1,22,'2017-08-01 00:00:00'),(475,'Imphal East',1,22,'2017-08-01 00:00:00'),(476,'Imphal West',1,22,'2017-08-01 00:00:00'),(477,'Senapati',1,22,'2017-08-01 00:00:00'),(478,'Ukhrul',1,22,'2017-08-01 00:00:00'),(479,'Chandel',1,22,'2017-08-01 00:00:00'),(480,'Churachandpur',1,22,'2017-08-01 00:00:00'),(481,'Tamenglong',1,22,'2017-08-01 00:00:00'),(482,'Jowai',1,20,'2017-08-01 00:00:00'),(483,'Khliehriat',1,20,'2017-08-01 00:00:00'),(484,'Shillong',1,20,'2017-08-01 00:00:00'),(485,'Nongstoin',1,20,'2017-08-01 00:00:00'),(486,'Mawkyrwat',1,20,'2017-08-01 00:00:00'),(487,'Nongpoh',1,20,'2017-08-01 00:00:00'),(488,'Resubelpara',1,20,'2017-08-01 00:00:00'),(489,'Williamnagar',1,20,'2017-08-01 00:00:00'),(490,'Baghmara',1,20,'2017-08-01 00:00:00'),(491,'Tura',1,20,'2017-08-01 00:00:00'),(492,'Ampati',1,20,'2017-08-01 00:00:00'),(493,'Aizawl',1,24,'2017-08-01 00:00:00'),(494,'Kolasib',1,24,'2017-08-01 00:00:00'),(495,'Lawngtlai',1,24,'2017-08-01 00:00:00'),(496,'Lunglei',1,24,'2017-08-01 00:00:00'),(497,'Mamit',1,24,'2017-08-01 00:00:00'),(498,'Siaha',1,24,'2017-08-01 00:00:00'),(499,'Serchhip',1,24,'2017-08-01 00:00:00'),(500,'Champhai',1,24,'2017-08-01 00:00:00'),(501,'Dimapur',1,25,'2017-08-01 00:00:00'),(502,'Kiphire',1,25,'2017-08-01 00:00:00'),(503,'Kohima',1,25,'2017-08-01 00:00:00'),(504,'Longleng',1,25,'2017-08-01 00:00:00'),(505,'Mokokchung',1,25,'2017-08-01 00:00:00'),(506,'Mon',1,25,'2017-08-01 00:00:00'),(507,'Peren',1,25,'2017-08-01 00:00:00'),(508,'Phek',1,25,'2017-08-01 00:00:00'),(509,'Tuensang',1,25,'2017-08-01 00:00:00'),(510,'Wokha',1,25,'2017-08-01 00:00:00'),(511,'Zunheboto',1,25,'2017-08-01 00:00:00'),(512,'Karaikal',4,28,'2017-08-01 00:00:00'),(513,'Mahé',4,28,'2017-08-01 00:00:00'),(514,'Pondicherry',4,28,'2017-08-01 00:00:00'),(515,'Yanam',4,28,'2017-08-01 00:00:00'),(516,'East Sikkim',2,30,'2017-08-01 00:00:00'),(517,'North Sikkim',2,30,'2017-08-01 00:00:00'),(518,'South Sikkim',2,30,'2017-08-01 00:00:00'),(519,'West Sikkim',2,30,'2017-08-01 00:00:00'),(520,'Dhalai',1,32,'2017-08-01 00:00:00'),(521,'North Tripura',1,32,'2017-08-01 00:00:00'),(522,'South Tripura',1,32,'2017-08-01 00:00:00'),(523,'West Tripura',1,32,'2017-08-01 00:00:00');
+/*!40000 ALTER TABLE `districtwise_zone_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `earthquake_zone_master`
+--
+
+DROP TABLE IF EXISTS `earthquake_zone_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `earthquake_zone_master` (
+  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
+  `zone` varchar(45) DEFAULT NULL,
+  `zone_rate` decimal(18,2) DEFAULT NULL,
+  `datetime_created` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`zone_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `earthquake_zone_master`
+--
+
+LOCK TABLES `earthquake_zone_master` WRITE;
+/*!40000 ALTER TABLE `earthquake_zone_master` DISABLE KEYS */;
+INSERT INTO `earthquake_zone_master` VALUES (1,'zone 1',0.50,'2017-07-21'),(2,'zone 2',0.25,'2017-07-21'),(3,'zone 3',0.10,'2017-07-21'),(4,'zone 4',0.05,'2017-07-21');
+/*!40000 ALTER TABLE `earthquake_zone_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `firecal_quote_detail`
+--
+
+DROP TABLE IF EXISTS `firecal_quote_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `firecal_quote_detail` (
+  `quote_detail_id` int(11) NOT NULL AUTO_INCREMENT,
+  `quote_id` int(11) DEFAULT NULL,
+  `comapny_id` int(11) DEFAULT NULL,
+  `company_name` varchar(200) DEFAULT NULL,
+  `premium_amt` int(11) DEFAULT NULL,
+  `gst_amt` int(11) DEFAULT NULL,
+  `net_premium_amt` int(11) DEFAULT NULL,
+  `is_selected` int(11) DEFAULT NULL,
+  PRIMARY KEY (`quote_detail_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `firecal_quote_detail`
+--
+
+LOCK TABLES `firecal_quote_detail` WRITE;
+/*!40000 ALTER TABLE `firecal_quote_detail` DISABLE KEYS */;
+INSERT INTO `firecal_quote_detail` VALUES (1,3,7,'IFFCO Tokio General Insurance Co. Ltd.',1179,212,3,0),(2,3,4,'United India Insurance Co. Ltd.',1318,237,3,4),(3,3,6,'Bajaj Allianz General Insurance Co. Ltd.',1438,259,3,0),(4,3,2,'The Oriental Insurance Co. Ltd.',1451,261,3,0),(5,3,5,'ICICI Lombard General Insurance Co. Ltd.',1573,283,3,0),(6,4,7,'IFFCO Tokio General Insurance Co. Ltd.',29,5,4,0),(7,4,4,'United India Insurance Co. Ltd.',29,5,4,0),(8,4,14,'Universal Sompo General Insurance Co. Ltd.',36,6,4,0),(9,4,15,'Shriram General Insurance Company Limited',36,6,4,0),(10,4,16,'Bharti AXA General Insurance Company Limited',36,6,4,0),(11,5,7,'IFFCO Tokio General Insurance Co. Ltd.',33,6,5,7),(12,5,4,'United India Insurance Co. Ltd.',33,6,5,0),(13,5,14,'Universal Sompo General Insurance Co. Ltd.',40,7,5,0),(14,5,15,'Shriram General Insurance Company Limited',40,7,5,0),(15,5,16,'Bharti AXA General Insurance Company Limited',40,7,5,0),(16,6,7,'IFFCO Tokio General Insurance Co. Ltd.',24,4,6,0),(17,6,4,'United India Insurance Co. Ltd.',25,5,6,0),(18,6,14,'Universal Sompo General Insurance Co. Ltd.',30,5,6,0),(19,6,15,'Shriram General Insurance Company Limited',30,5,6,0),(20,6,16,'Bharti AXA General Insurance Company Limited',30,5,6,0),(21,7,7,'IFFCO Tokio General Insurance Co. Ltd.',19,3,7,0),(22,7,4,'United India Insurance Co. Ltd.',20,4,7,0),(23,7,14,'Universal Sompo General Insurance Co. Ltd.',24,4,7,0),(24,7,15,'Shriram General Insurance Company Limited',24,4,7,0),(25,7,16,'Bharti AXA General Insurance Company Limited',24,4,7,0),(26,8,7,'IFFCO Tokio General Insurance Co. Ltd.',425,77,502,0),(27,8,4,'United India Insurance Co. Ltd.',486,87,573,0),(28,8,6,'Bajaj Allianz General Insurance Co. Ltd.',540,97,637,0),(29,8,2,'The Oriental Insurance Co. Ltd.',547,98,645,0),(30,8,5,'ICICI Lombard General Insurance Co. Ltd.',601,108,709,0),(31,9,7,'IFFCO Tokio General Insurance Co. Ltd.',10,2,12,0),(32,9,4,'United India Insurance Co. Ltd.',10,2,12,0),(33,9,14,'Universal Sompo General Insurance Co. Ltd.',13,2,15,0),(34,9,15,'Shriram General Insurance Company Limited',13,2,15,0),(35,9,16,'Bharti AXA General Insurance Company Limited',13,2,15,0),(36,10,7,'IFFCO Tokio General Insurance Co. Ltd.',10076,1814,11890,0),(37,10,4,'United India Insurance Co. Ltd.',10939,1969,12908,0),(38,10,6,'Bajaj Allianz General Insurance Co. Ltd.',11713,2108,13821,0),(39,10,2,'The Oriental Insurance Co. Ltd.',11799,2124,13923,0),(40,10,5,'ICICI Lombard General Insurance Co. Ltd.',12576,2264,14840,0),(41,11,1,'The New India Assurance Co. Ltd.',1,0,1,0),(42,11,13,'Future Generali India Insurance Company Limited',1,0,1,0),(43,11,14,'Universal Sompo General Insurance Co. Ltd.',1,0,1,0),(44,11,15,'Shriram General Insurance Company Limited',1,0,1,0),(45,11,16,'Bharti AXA General Insurance Company Limited',1,0,1,0),(46,12,7,'IFFCO Tokio General Insurance Co. Ltd.',13,2,15,0),(47,12,4,'United India Insurance Co. Ltd.',16,3,19,0),(48,12,2,'The Oriental Insurance Co. Ltd.',19,3,22,0),(49,12,6,'Bajaj Allianz General Insurance Co. Ltd.',19,3,22,0),(50,12,15,'Shriram General Insurance Company Limited',21,4,25,0),(51,13,7,'IFFCO Tokio General Insurance Co. Ltd.',56,10,66,0),(52,13,4,'United India Insurance Co. Ltd.',63,11,74,0),(53,13,2,'The Oriental Insurance Co. Ltd.',66,12,78,0),(54,13,6,'Bajaj Allianz General Insurance Co. Ltd.',66,12,78,0),(55,13,5,'ICICI Lombard General Insurance Co. Ltd.',69,12,81,0),(56,14,7,'IFFCO Tokio General Insurance Co. Ltd.',38675,6962,45637,7),(57,14,4,'United India Insurance Co. Ltd.',44425,7997,52422,0),(58,14,6,'Bajaj Allianz General Insurance Co. Ltd.',49600,8928,58528,0),(59,14,2,'The Oriental Insurance Co. Ltd.',50175,9032,59207,0),(60,14,5,'ICICI Lombard General Insurance Co. Ltd.',55350,9963,65313,0),(61,15,7,'IFFCO Tokio General Insurance Co. Ltd.',3522,634,4156,0),(62,15,4,'United India Insurance Co. Ltd.',4071,733,4804,0),(63,15,6,'Bajaj Allianz General Insurance Co. Ltd.',4560,821,5381,0),(64,15,2,'The Oriental Insurance Co. Ltd.',4613,830,5443,0),(65,15,5,'ICICI Lombard General Insurance Co. Ltd.',5103,919,6022,0),(66,16,7,'IFFCO Tokio General Insurance Co. Ltd.',2283,411,2694,0),(67,16,4,'United India Insurance Co. Ltd.',2664,480,3144,0),(68,16,6,'Bajaj Allianz General Insurance Co. Ltd.',3004,541,3545,6),(69,16,2,'The Oriental Insurance Co. Ltd.',3040,547,3587,0),(70,16,5,'ICICI Lombard General Insurance Co. Ltd.',3380,608,3988,0);
+/*!40000 ALTER TABLE `firecal_quote_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `firecal_quote_master`
+--
+
+DROP TABLE IF EXISTS `firecal_quote_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `firecal_quote_master` (
+  `quote_id` int(11) NOT NULL AUTO_INCREMENT,
+  `section_id` int(11) DEFAULT NULL,
+  `transaction_type` int(11) DEFAULT NULL,
+  `cust_action` int(11) DEFAULT NULL,
+  `customer_type` int(11) DEFAULT NULL,
+  `period_from` varchar(45) DEFAULT NULL,
+  `period_to` varchar(45) DEFAULT NULL,
+  `current_insurer_id` int(11) DEFAULT NULL,
+  `customer_name` varchar(200) DEFAULT NULL,
+  `address1` varchar(200) DEFAULT NULL,
+  `address2` varchar(200) DEFAULT NULL,
+  `district_id` int(11) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `pincode` int(11) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL,
+  `risk_address1` varchar(200) DEFAULT NULL,
+  `risk_address2` varchar(200) DEFAULT NULL,
+  `risk_district_id` int(11) DEFAULT NULL,
+  `risk_state_id` int(11) DEFAULT NULL,
+  `risk_pincode` int(11) DEFAULT NULL,
+  `risk_country` varchar(45) DEFAULT NULL,
+  `occ_id` int(11) DEFAULT NULL,
+  `storage_type` varchar(45) DEFAULT NULL,
+  `sum_building` decimal(18,0) DEFAULT NULL,
+  `sum_plith` decimal(18,0) DEFAULT NULL,
+  `sum_plant` decimal(18,0) DEFAULT NULL,
+  `sum_electric` decimal(18,0) DEFAULT NULL,
+  `sum_fff` decimal(18,0) DEFAULT NULL,
+  `sum_others` decimal(18,0) DEFAULT NULL,
+  `sum_stock` decimal(18,0) DEFAULT NULL,
+  `is_stfi` int(11) DEFAULT NULL,
+  `sum_stfi` decimal(18,0) DEFAULT NULL,
+  `is_earthquake` int(11) DEFAULT NULL,
+  `sum_earthquake` decimal(18,0) DEFAULT NULL,
+  `is_terrorism` int(11) DEFAULT NULL,
+  `sum_terrorism` decimal(18,0) DEFAULT NULL,
+  `is_escalation` int(11) DEFAULT NULL,
+  `escalation_percent` int(11) DEFAULT NULL,
+  `sum_escalation` decimal(18,0) DEFAULT NULL,
+  `is_omission` int(11) DEFAULT NULL,
+  `sum_omission` decimal(18,0) DEFAULT NULL,
+  `is_lossrent` int(11) DEFAULT NULL,
+  `sum_lossrent` decimal(18,0) DEFAULT NULL,
+  `is_accommodation` int(11) DEFAULT NULL,
+  `sum_accommodation` decimal(18,0) DEFAULT NULL,
+  `is_architect` int(11) DEFAULT NULL,
+  `sum_architect` decimal(18,0) DEFAULT NULL,
+  `is_removedebris` int(11) DEFAULT NULL,
+  `sum_removedebris` decimal(18,0) DEFAULT NULL,
+  `is_spontcomb` int(11) DEFAULT NULL,
+  `sum_spontcomb` decimal(18,0) DEFAULT NULL,
+  `is_startup` int(11) DEFAULT NULL,
+  `sum_startup` decimal(18,0) DEFAULT NULL,
+  `is_floater` int(11) DEFAULT NULL,
+  `sum_floater` decimal(18,0) DEFAULT NULL,
+  `is_impactdamage` int(11) DEFAULT NULL,
+  `sum_impactdamage` decimal(18,0) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  `occup_desc` varchar(500) DEFAULT NULL,
+  `contact_person` varchar(200) DEFAULT NULL,
+  `designation` varchar(100) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `mobile` varchar(20) DEFAULT NULL,
+  `is_approve` int(11) DEFAULT NULL,
+  `approved_by` varchar(45) DEFAULT NULL,
+  `approved_datetime` datetime DEFAULT NULL,
+  `is_approve1` int(11) DEFAULT NULL,
+  `approved_by1` varchar(45) DEFAULT NULL,
+  `approved_datetime1` datetime DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`quote_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `firecal_quote_master`
+--
+
+LOCK TABLES `firecal_quote_master` WRITE;
+/*!40000 ALTER TABLE `firecal_quote_master` DISABLE KEYS */;
+INSERT INTO `firecal_quote_master` VALUES (1,6,0,0,0,'0','0',0,'Durgapratap','mumbai','mumbai',209,21,400075,'India','mumbai','mumbai',0,21,400075,'India',237,'Closed',100000,100000,100000,100000,100000,100000,100000,1,600000,1,1,1,700000,1,0,25000,1,25000,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,'2017-09-04 00:00:00','Test entry',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1),(2,6,0,0,0,'0','0',0,'Durgapratap','mumbai','mumbai',209,21,400075,'India','mumbai','mumbai',0,21,400075,'India',237,'Closed',100000,100000,100000,100000,100000,100000,100000,1,600000,1,1,1,700000,1,0,25000,1,25000,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,'2017-09-04 00:00:00','Test entry',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1),(3,6,0,0,0,'0','0',0,'Durgapratap','mumbai','mumbai',208,21,400075,'India','mumbai','mumbai',0,21,400075,'India',237,'Closed',100000,100000,100000,100000,100000,100000,100000,1,600000,1,1,1,700000,1,0,25000,1,25000,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,'2017-09-05 00:00:00','Test entry',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1),(4,3,0,0,0,'0','0',0,'Vinay','Mumbai','Mumbai',215,21,400070,'India','Mumbai','Mumbai',0,21,400070,'India',3,'Closed',10000,10000,10000,10000,10000,10000,0,1,50000,1,1,1,60000,1,0,2500,1,2500,1,1000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'2017-09-05 00:00:00','Test entry',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1),(5,3,0,0,0,'0','0',0,'Vinay','Mumbai','Mumbai',215,21,400070,'India','Mumbai','Mumbai',0,21,400070,'India',3,'Closed',10000,10000,10000,10000,10000,10000,10000,1,60000,1,1,1,70000,1,0,2500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'2017-09-05 00:00:00','Test entry',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1),(6,3,0,0,0,'0','0',0,'vinay','mumbai','Mumbai',215,21,400070,'India','Mumbai','Mumbai',0,21,400070,'India',2,'Closed',10000,1000,10000,10000,10000,10000,0,1,50000,1,1,1,51000,1,0,2050,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'2017-09-05 00:00:00','Test entry',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1),(7,3,0,0,0,'0','0',0,'Vinay','Mumbai','Mumbai',215,21,400070,'India','Mumbai','Mumbai',0,21,400070,'India',3,'Closed',10000,10000,1000,10000,10000,1000,1000,1,33000,1,1,1,43000,1,0,2050,1,2050,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'2017-09-11 00:00:00','Test entry',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1),(8,5,0,0,0,'0','0',0,'Durgapratap','mumbai','mumbai',208,21,400075,'India','mumbai','mumbai',0,21,400075,'India',223,'Closed',100000,0,100000,0,0,100000,0,1,300000,1,1,0,0,1,5,10000,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,'2017-09-11 00:00:00','Test entry',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,1),(9,3,0,0,0,'0','0',0,'Vinay','Mumbai','Mumbai',215,21,400070,'India','Mumbai','Mumbai',0,21,400070,'India',3,'Closed',10000,1000,10000,1000,1000,1000,1000,1,24000,1,1,1,25000,1,5,1150,1,1150,1,1000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'2017-09-11 00:00:00','Test entry',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,1),(10,4,0,0,0,'0','0',0,'bdkjnvkj','Agra','Agra',350,34,400028,'India','Agra','Agra',0,34,400028,'India',109,'Closed',4000000,200000,500000,4999999,288888,0,0,1,9788887,1,1,1,9988887,1,20,1997777,1,499444,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'2017-09-11 00:00:00','Test entry',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1),(11,3,0,0,0,'0','0',0,'Vinay','Mumbai','Mumbai',215,21,400070,'India','Mumbai','Mumbai',0,21,400070,'India',2,'Closed',1000,1000,1000,100,100,100,100,1,2400,1,1,1,3400,1,5,160,1,160,1,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'2017-09-11 00:00:00','Test entry',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,1),(12,5,0,2,0,'20-09-2017','19-09-2018',2,'Durgapratap','mumbai','mumbai',209,21,400075,'India','mumbai2','mumbai',0,21,400075,'India',223,'Closed',1000,0,10000,0,55,0,0,0,0,0,0,0,0,1,5,553,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,'2017-09-11 00:00:00','Test entry',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,1),(13,3,0,0,0,'0','0',0,'Rupeeboss Services Pvt Ltd','LBS Marg','Phoenix Market City, Kurla',215,21,400070,'India','LBS Marg','Phoenix Market City, Kurla',0,21,400070,'India',5,'Closed',100000,11111,11111,0,0,0,0,1,111111,1,1,1,122222,1,15,18333,1,6111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,'2017-09-14 06:03:11','Test entry',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,1),(14,6,0,0,0,'0','0',0,'Pradeep','Mumbai','Mumbai',215,21,400070,'India','Mumbai','Mumbai',0,21,400070,'India',238,'Closed',0,0,0,0,0,10000000,0,1,10000000,1,1,1,10000000,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,'2017-09-14 07:36:12','Office Cum Godown',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,1),(15,6,0,0,0,'0','0',0,'pratap','mumbai','mumbai',107,13,400075,'India','mumbai','mumbai',0,21,400075,'India',241,'Closed',100000,100000,100000,1,100000,100000,100000,1,500001,1,1,1,600001,1,5,20000,1,20000,1,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,'2017-09-14 12:28:23','wqeqw',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,1),(16,6,0,0,0,'0','0',0,'Durgapratap','mumbai','mumbai',209,21,400075,'India','mumbai','mumbai',0,21,400075,'India',239,'Open',100000,100000,0,100000,0,100000,100000,0,0,0,0,0,0,1,5,15000,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,'2017-09-14 12:30:00','iqwe',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,1);
+/*!40000 ALTER TABLE `firecal_quote_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `occupancy_master`
+--
+
+DROP TABLE IF EXISTS `occupancy_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `occupancy_master` (
+  `occup_id` int(11) NOT NULL AUTO_INCREMENT,
+  `occupancy_name` varchar(500) DEFAULT NULL,
+  `building_rate` decimal(18,2) NOT NULL,
+  `content_rate` decimal(18,2) DEFAULT NULL,
+  `stfi_rate` decimal(18,4) DEFAULT NULL,
+  `stfi_open_rate` decimal(18,4) DEFAULT NULL,
+  `eq_rate` decimal(18,2) DEFAULT NULL,
+  `terrorism_rate` decimal(18,2) DEFAULT NULL,
+  `section_id` int(11) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`occup_id`,`building_rate`)
+) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `occupancy_master`
+--
+
+LOCK TABLES `occupancy_master` WRITE;
+/*!40000 ALTER TABLE `occupancy_master` DISABLE KEYS */;
+INSERT INTO `occupancy_master` VALUES (1,'Dwellings, Residential Premises or Society',0.35,0.35,0.0500,NULL,0.05,0.08,3,'2017-08-10 00:00:00'),(2,'Places of worships, Libraries, Museums, Schools, Colleges, Educational and Research Institutes imparting training in various crafts',0.35,0.35,0.0500,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(3,'Hospitals including X-ray and other Diagnostic clinics',0.35,0.35,0.0500,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(4,'Office premises, Meeting Rooms',0.35,0.35,0.0500,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(5,'Auditoriums, Planetarium, Mess Houses, Clubs, Marriage Halls',0.35,0.35,0.0500,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(6,'Showrooms and display centres where goods are kept for display and no sales are carried out',0.35,0.35,0.0500,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(7,'Lodging/Boarding Houses',0.35,0.35,0.0500,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(8,'Cycle Shed and Dish Antenna, Indoor stadiums',0.35,0.35,0.0500,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(9,'Cafes, Restaurants, Hotels, Confectioner & Sweet meat sellers',1.65,1.65,0.0750,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(10,'Shops dealing in goods otherwise not provided for including Laundries, Battery Charging Service Stations, Dry Cleaning, Amusement parks, Hoarding, Neon signs and Sports Galleries, Outdoor stadiums',1.65,2.65,0.0750,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(11,'Shops dealing in hazardous goods as per the list below and Arms & Ammunition dealers, Motor Vehicle showroom including sales and service, Petrol / Diesel Kiosks',1.65,3.65,0.0750,NULL,0.05,0.15,3,'2017-08-10 00:00:00'),(12,'Abrasive Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(13,'Aerated Water Factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(14,'Aerial Ropeway including trolley stations',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(15,'Agarbatti manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(16,'Aircraft Hangers',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(17,'Airport Terminal Buildings (including all facilities like Cafes, Shops etc) N.B: Airport Cargo complex shall be rated under Section VI',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(18,'Aluminium/ Magnesium Powder Plants',5.25,5.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(19,'Aluminium ,Zinc,Copper Factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(20,'Arecanut and/or Betelnut factories',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(21,'Asbestos Steam Packing and lagging manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(22,'Atta and Cereal Grinding (excluding Dal Mills)',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(23,'Audio/Video Cassette Manufacturing',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(24,'Automobile Manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(25,'Bakeries',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(26,'Basket Weavers and Cane Furniture Makers',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(27,'Battery Manufacturing',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(28,'Beedi Factories',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(29,'Biscuit Factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(30,'Bitumenised Paper and / or Hessian Cloth Manufacturing including Tar Felt Manufacturing',3.75,3.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(31,'Book Binders, Envelope and Paper Bag Manufacturing',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(32,'Breweries',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(33,'Brickworks (including refractories and fire bricks)',0.75,0.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(34,'Bridges - Concrete/Steel',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(35,'Bridges-Wooden',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(36,'Building In course of construction',0.75,0.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(37,'Cable Manufacturing',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(38,'Camphor Manufacturing',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(39,'Candle Works',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(40,'Canning Factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(41,'Capsule Manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(42,'Carbon paper / Typewriter Ribbon Manufacturing',2.50,2.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(43,'Cardamom Factories',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(44,'Cardboard Box Manufacturing',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(45,'Carpenters, Wood wool Manufacturing, Furniture Manufacturing and other wood worker shops (excluding saw mill)',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(46,'Carpet and Drugget Manufacturing (Cotton/jute/wool)',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(47,'Carpet and Drugget Manufacturing (Others)',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(48,'Cashew nut Factories',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(49,'Cattle feed Mill',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(50,'Celluloid Goods Manufacturing',14.75,14.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(51,'Cement / asbestos/concrete products Manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(52,'Cement Factories',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(53,'Ceramic Factories and Crockery and Stoneware pipe Manufacturing/Clay Works',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(54,'Chemical Manufacturing(Using materials with Flash Point below 32OC), Bulk Drug Manufacturing',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(55,'Chemical Manufacturing(others), Pharmaceuticals, Toiletry products',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(56,'Cigar and Cigarette Manufacturing',2.50,2.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(57,'Cigarette Filter Manufacturing (Using Solvents with Flash Point below 32OC )',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(58,'Cigarette Filter Manufacturing (Others)',2.50,2.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(59,'Cinema Film Production Studios',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(60,'Cinematography Film Editing, Laboratory and Sound recording rooms where Film processing is carried out',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(61,'Cinematography Film Editing, Laboratory and Sound recording rooms without Film processing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(62,'Cinema Theatres',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(63,'Circus, Touring Drama Troupes and Touring Cinema Theatres',10.25,10.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(64,'Cloth Processing units situated outside the compound of Textile mills',1.50,1.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(65,'Coal/Coke/Charcoal ball & briquettes Manufacturing',5.25,5.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(66,'Coal Processing Plants',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(67,'Coffee Curing, Roasting / Grinding',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(68,'Coir Factories',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(69,'Collieries - underground Mechinery and pit head gear',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(70,'Condensed Milk Factories, Milk Pasturisings Plants and Dairies',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(71,'Confectionery Manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(72,'Contractors Plant and Machinery At one location only',3.50,3.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(73,'Contractors Plant and Machinery Anywhere in India (at specified locations)',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(74,'Cork Products Manufacturing',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(75,'Cotton Gin and Press Houses',10.25,10.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(76,'Cotton Seed cleaning / Delinting Factory',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(77,'Dehydration Factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(78,'Detergent Manufacturing with Sulphonation Plant',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(79,'Detergent Manufacturing (Others)',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(80,'Distilleries',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(81,'Duplicating/stencil paper Manufacturing',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(82,'Electric Generation Stations Hydro Power stations',1.00,1.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(83,'Electric Generation Stations Others',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(84,'Electric Lamp /T.V. Picture Tube Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(85,'Electronic Goods Manufacturing /Assembly',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(86,'Electronic Software Parks',1.00,1.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(87,'Enamel-ware factories',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(88,'Engineering Workshop - - Structural Steel fabricators, Sheet Metal fabricators, Hot/Cold Rolling, Pipe Extruding, Stamping, Pressing, Forging Mills, Metal smelting, Foundries, Galvanising works, Metal Extraction, Ore processing (other than Aluminium, Copper, Zinc)',1.00,1.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(89,'Engineering Workshop (Others), Clock/Watch Manufacturing , Motor Vehicle Garages',1.50,1.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(90,'Exhibitions, Fetes, Mandaps',10.25,10.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(91,'Explosives / Blasting Factories',5.25,5.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(92,'Fertiliser Manufacturing (other than those rateable under Petrochemical Tariff)',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(93,'Filter and wax paper Manufacturing',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(94,'Fireworks Manufacturing',5.25,5.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(95,'Flax / Hemp Mills',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(96,'Flour Mills',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(97,'Foamed Plastics Manufacturing and / or converting plants',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(98,'Foam Rubber Manufacturing',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(99,'French Polish Manufacturing',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(100,'Fruit and vegetable drying/dehydrating factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(101,'Fruit products and Condiment Factories (including fruit pulp making)',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(102,'Garment Makers, Topee, Hats and the like makers',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(103,'Ghee Factories including vegetable Ghee mfg.',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(104,'Glass Fibre Manufacturing',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(105,'Glass wool Manufacturing',2.50,2.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(106,'Glass Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(107,'Gold thread factories / Gilding factories',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(108,'Granite Factories using inflammable solvents',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(109,'Granite Factories (Others)',0.75,0.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(110,'Graphite electrode Manufacturing',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(111,'Grain/seeds disintegrating/crushing/ Decorticating factories/ Dal mills.',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(112,'Grease / Wax Manufacturing',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(113,'Green Houses/ Algae/ Spirulina and the like',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(114,'Gum/Glue/Gelatine Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(115,'Gypsum  board manufacturer',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(116,'Hoisery,lace, Embroidery/Thread factories',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(117,'Ice candy and Ice cream Manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(118,'Ice factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(119,'Incandescent Gas mantle Manufacturing',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(120,'Industrial Diamonds Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(121,'Industrial Gas Manufacturing',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(122,'Ink (excluding printing ink) Manufacturing',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(123,'Jaggery Manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(124,'Jute Mills',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(125,'Katha Manufacturing',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(126,'Khandsari Sugar Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(127,'Lac or Shellac Factories',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(128,'Leather Cloth Factories',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(129,'Leather Goods Manufacturing ( incl. boot/shoe)',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(130,'Lime Kiln',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(131,'Lithographic presses',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(132,'Liquified Gas Bottling Plants',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(133,'Malt Extraction Plants',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(134,'Man-made Fibre Manufacturing (using Cellulose)',1.00,1.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(135,'Man-made Fibre Manufacturing Plant (Others)',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(136,'Manure Blending works',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(137,'Match Factories',5.25,5.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(138,'Mattress and Pillow making',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(139,'Metallizing works ( involving metals only)',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(140,'Metallising Works (others)',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(141,'Metal/Tin printers',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(142,'Mica Products Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(143,'Mineral Oil blending and processing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(144,'Mosaic Factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(145,'Mushroom Growing Premises (Excluding Crops)',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(146,'Nitro Cellulose Manufacturing',14.75,14.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(147,'Non-woven fabric Manufacturing',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(148,'Oil Extraction',3.50,3.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(149,'Oil Distillation Plants (essential)',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(150,'Oil Mills refining ( Veg/Animal)',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(151,'Oil Mills (Vegetable)',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(152,'Oil and Leather Cloth Factories',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(153,'Paint factories (Water based)',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(154,'Paint (others) & Varnish Factories',3.50,3.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(155,'Paints - Nitrocellulose based',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(156,'Pan Masala making',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(157,'Paper and Cardboard Mills (including Lamination)',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(158,'Particle Board Manufacturing',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(159,'Pencil Manufacturing',3.75,3.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(160,'Petroleum Coke Calcination',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(161,'Plastic Goods Manufacturing (excluding Foam Plastics)',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(162,'Plywood / Wood veneering Factories/ Laminating Factories',5.25,5.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(163,'Polyester Film Manufacturing / BOPP Film Manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(164,'Port Premises including jetties and equipment thereon And other port facilities',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(165,'Poultry Farms (Excluding birds therein)',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(166,'Presses for coir fibres/waste/Grass/fodder/boosa/Jute',10.25,10.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(167,'Presses for coir yarn / cotton/senna leaves',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(168,'Presses for carpets, rugs and tobacco',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(169,'Presses for hides and skins',2.50,2.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(170,'Printing Ink Manufacturing / Roller composition factories',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(171,'Printing Press',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(172,'Pulverising Plants(Metals and non-hazardous goods)',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(173,'Pulverizing Plants (Others)',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(174,'Rice Mills',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(175,'Rice Polishing Units',1.50,1.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(176,'Rope works (Plastic), Assembling of Plastic Goods such as Toys and the like',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(177,'Rope Works (others)',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(178,'Rubber Factories',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(179,'Rubber Goods Mfg with Spreading',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(180,'Rubber Goods Manufacturing without spreading',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(181,'Salt crushing Factories and Refineries',0.75,0.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(182,'Saw Mills (including Timber Merchants premises where sawing is done)',5.25,5.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(183,'Sea Food / Meat Processing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(184,'Silk Mills / Spun Silk Mills',1.50,1.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(185,'Snuff Manufacturing',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(186,'Soap Manufacturing',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(187,'Sponge Iron Plants',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(188,'Spray Painting, Powder coating',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(189,'Stables (excluding animals)',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(190,'Starch Factories',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(191,'Stone quarries',0.75,0.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(192,'Sugar Candy Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(193,'Sugar factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(194,'Surgical Cotton Manufacturing',4.25,4.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(195,'Sweetmeat Manufacturing',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(196,'Tanneries',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(197,'Tapioca factories',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(198,'Tarpaulin and canvas proofing factories',3.75,3.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(199,'Tea blending/packing factories',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(200,'Tea Factories',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(201,'Telephone Exchanges',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(202,'Textile Mills - Spinning mills',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(203,'Textile Mills - Composite mills (Composite Mills are those where activities from Blow Room to Cloth processing are involved)',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(204,'Tile & Pottery works',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(205,'Tiny sector Industries with values at risk not exceeding Rs 10 lakhs',0.75,0.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(206,'Tissue Culture Premises (Excluding Crops)',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(207,'Tobacco Curing / Redrying Factories',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(208,'Tobacco grinding/ crushing Manufacturing',3.25,3.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(209,'Turpentine and rosin distilleries',6.25,6.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(210,'Tyres and Tubes Manufacturing',2.00,2.00,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(211,'Tyre Retreading and Resoling factories',2.75,2.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(212,'Umbrella Assembly factories',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(213,'Velvet Cloth Manufacturing',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(214,'Vermicelli factories',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(215,'Weigh Bridges',1.25,1.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(216,'Weaving Mills',1.50,1.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(217,'Wheat Threshers',10.25,10.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(218,'Wood seasoning/treatment/ impregnation',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(219,'Wool cleaning and pressing factories',2.25,2.25,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(220,'Woollen Mills',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(221,'Yarn Processing',1.50,1.50,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(222,'Zip fasteners Manufacturing',1.75,1.75,0.1875,NULL,0.00,0.23,4,'2017-08-10 00:00:00'),(223,'Analytical / Quality Control Laboratories',2.00,2.00,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(224,'Boiler House',1.25,1.25,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(225,'Dam',0.75,0.75,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(226,'Effluent /Sewage Treatment Plant',1.25,1.25,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(227,'Electric Sub-Station',1.25,1.25,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(228,'Electric Transmission / Distribution Lines',1.25,1.25,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(229,'Pipe lines (carrying water only)',0.75,0.75,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(230,'Pipe lines (others)',1.00,1.00,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(231,'Pump House (Water)',1.25,1.25,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(232,'Pump House (Others)',2.25,2.25,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(233,'Railway tracks',2.75,2.75,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(234,'Roads',1.75,1.75,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(235,'Water Treatment Plant',0.75,0.75,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(236,'Wireless Transmitting Stations',1.25,1.25,0.1875,NULL,0.00,0.23,5,'2017-08-10 00:00:00'),(237,'Storage of Non-hazardous goods subject to warranty that hazardous  goods of Category I, II, III , Coir waste, Coir fibre and Caddies are not stored therein.',0.75,2.25,0.1875,1.1250,0.00,0.23,6,'2017-08-10 00:00:00'),(238,'Storage of Category I hazaardous Goods subject to warranty that goods listed in Category II, III, Coir waste, Coir fibre and  Caddies are not stored therein.',2.25,5.75,0.1875,1.1250,0.00,0.23,6,'2017-08-10 00:00:00'),(239,'Storage of hazardous Goods listed in Category II subject to warranty that goods listed in Category III, Coir waste, Coir fibre and  Caddies are not stored therein.',4.25,8.25,0.1875,1.1250,0.00,0.23,6,'2017-08-10 00:00:00'),(240,'Storage of hazardous Goods listed in Category III subject to warranty that Coir waste, Coir fibre and , Caddies are not stored therein.',5.25,10.25,0.1875,1.1250,0.00,0.23,6,'2017-08-10 00:00:00'),(241,'Transporter’s godowns & Godowns of clearing and forwarding agents.',5.25,10.25,0.1875,1.1250,0.00,0.23,6,'2017-08-10 00:00:00'),(242,'Storage of Coir Waste ,Coir Fibre, Caddies',11.75,16.75,0.1875,1.1250,0.00,0.23,6,'2017-08-10 00:00:00'),(243,'Cold Storage premises',2.25,2.25,0.1875,1.1250,0.00,0.23,6,'2017-08-10 00:00:00'),(244,'Gas Holders/ Bullets/spheres and storages for liquified gases except for Nitrogen, Carbon dioxide and inert gases',4.75,4.75,0.1875,NULL,0.00,0.23,7,'2017-08-10 00:00:00'),(245,'Gas Holders/ Vessels for Nitrogen, Carbon dioxide and inert gases',1.75,1.75,0.1875,NULL,0.00,0.23,7,'2017-08-10 00:00:00'),(246,'Tanks containing liquids flashing at 32 0C and below',3.25,3.25,0.1875,NULL,0.00,0.23,7,'2017-08-10 00:00:00'),(247,'Tanks (others)',1.75,1.75,0.1875,NULL,0.00,0.23,7,'2017-08-10 00:00:00');
+/*!40000 ALTER TABLE `occupancy_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_master`
+--
+
+DROP TABLE IF EXISTS `product_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `product_master` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(100) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_master`
+--
+
+LOCK TABLES `product_master` WRITE;
+/*!40000 ALTER TABLE `product_master` DISABLE KEYS */;
+INSERT INTO `product_master` VALUES (1,'Standard Fire and Special Perils (SFSP)','2017-09-18 14:02:18'),(2,'Group Mediclaim','2017-09-18 14:02:18'),(3,'Group Personal Accident','2017-09-18 14:02:18'),(4,'Director and Officers Liability','2017-09-18 14:02:18'),(5,'Workmen\'s Compensation','2017-09-18 14:02:18'),(6,'Project Insurance - CAR/EAR','2017-09-18 14:02:18');
+/*!40000 ALTER TABLE `product_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `section_master`
+--
+
+DROP TABLE IF EXISTS `section_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `section_master` (
+  `section_id` int(11) NOT NULL AUTO_INCREMENT,
+  `section_name` varchar(500) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`section_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `section_master`
+--
+
+LOCK TABLES `section_master` WRITE;
+/*!40000 ALTER TABLE `section_master` DISABLE KEYS */;
+INSERT INTO `section_master` VALUES (1,'GENERAL RULES AND REGULATIONS','2017-08-18 00:00:00'),(2,'STANDARD FIRE AND SPECIAL PERILS POLICY','2017-08-18 00:00:00'),(3,'Section III - DWELLINGS, OFFICES, HOTELS, SHOPS ETC.','2017-08-18 00:00:00'),(4,'Section IV - INDUSTRIAL/MANUFACTURING RISKS','2017-08-18 00:00:00'),(5,'Section V - UTILITIES LOCATED OUTSIDE THE COMPOUND OF INDUSTRIAL/MANUFACTURING RISKS','2017-08-18 00:00:00'),(6,'Section VI - STORAGE RISKS LOCATED OUTSIDE THE COMPOUND OF INDUSTRIAL/MANUFACTURING RISKS','2017-08-18 00:00:00'),(7,'Section VII - TANK FARMS/GAS HOLDERS LOCATED OUTSIDE THE COMPOUND OF INDUSTRIAL/MANUFACTURING RISKS','2017-08-18 00:00:00');
+/*!40000 ALTER TABLE `section_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sectionwise_addon_mapping`
+--
+
+DROP TABLE IF EXISTS `sectionwise_addon_mapping`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sectionwise_addon_mapping` (
+  `map_id` int(11) NOT NULL AUTO_INCREMENT,
+  `section_id` int(11) DEFAULT NULL,
+  `add_on_id` int(11) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`map_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sectionwise_addon_mapping`
+--
+
+LOCK TABLES `sectionwise_addon_mapping` WRITE;
+/*!40000 ALTER TABLE `sectionwise_addon_mapping` DISABLE KEYS */;
+INSERT INTO `sectionwise_addon_mapping` VALUES (1,3,1,'2017-08-23 00:00:00'),(2,3,2,'2017-08-23 00:00:00'),(3,3,3,'2017-08-23 00:00:00'),(4,3,4,'2017-08-23 00:00:00'),(5,3,5,'2017-08-23 00:00:00'),(6,3,6,'2017-08-23 00:00:00'),(7,3,7,'2017-08-23 00:00:00'),(8,4,1,'2017-08-23 00:00:00'),(9,4,2,'2017-08-23 00:00:00'),(10,4,3,'2017-08-23 00:00:00'),(11,4,4,'2017-08-23 00:00:00'),(12,4,5,'2017-08-23 00:00:00'),(13,4,6,'2017-08-23 00:00:00'),(14,4,7,'2017-08-23 00:00:00'),(15,4,8,'2017-08-23 00:00:00'),(16,4,9,'2017-08-23 00:00:00'),(17,4,10,'2017-08-23 00:00:00'),(18,4,11,'2017-08-23 00:00:00'),(19,4,12,'2017-08-23 00:00:00'),(20,4,13,'2017-08-23 00:00:00'),(21,5,1,'2017-08-23 00:00:00'),(22,5,2,'2017-08-23 00:00:00'),(23,5,3,'2017-08-23 00:00:00'),(24,5,4,'2017-08-23 00:00:00'),(25,5,5,'2017-08-23 00:00:00'),(26,5,8,'2017-08-23 00:00:00'),(27,5,9,'2017-08-23 00:00:00'),(28,5,13,'2017-08-23 00:00:00'),(29,6,1,'2017-08-23 00:00:00'),(30,6,2,'2017-08-23 00:00:00'),(31,6,3,'2017-08-23 00:00:00'),(32,6,4,'2017-08-23 00:00:00'),(33,6,5,'2017-08-23 00:00:00'),(34,6,6,'2017-08-23 00:00:00'),(35,6,7,'2017-08-23 00:00:00'),(36,6,8,'2017-08-23 00:00:00'),(37,6,9,'2017-08-23 00:00:00'),(38,6,10,'2017-08-23 00:00:00'),(39,6,12,'2017-08-23 00:00:00'),(40,6,13,'2017-08-23 00:00:00');
+/*!40000 ALTER TABLE `sectionwise_addon_mapping` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `state_master`
+--
+
+DROP TABLE IF EXISTS `state_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `state_master` (
+  `state_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `state` varchar(50) NOT NULL,
+  PRIMARY KEY (`state_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `state_master`
+--
+
+LOCK TABLES `state_master` WRITE;
+/*!40000 ALTER TABLE `state_master` DISABLE KEYS */;
+INSERT INTO `state_master` VALUES (1,'ANDAMAN AND NICOBAR ISLANDS'),(2,'ANDHRA PRADESH'),(3,'ARUNACHAL PRADESH'),(4,'ASSAM'),(5,'BIHAR'),(6,'CHATTISGARH'),(7,'CHANDIGARH'),(8,'DAMAN AND DIU'),(9,'DELHI'),(10,'DADRA AND NAGAR HAVELI'),(11,'GOA'),(12,'GUJARAT'),(13,'HIMACHAL PRADESH'),(14,'HARYANA'),(15,'JAMMU AND KASHMIR'),(16,'JHARKHAND'),(17,'KERALA'),(18,'KARNATAKA'),(19,'LAKSHADWEEP'),(20,'MEGHALAYA'),(21,'MAHARASHTRA'),(22,'MANIPUR'),(23,'MADHYA PRADESH'),(24,'MIZORAM'),(25,'NAGALAND'),(26,'ORISSA'),(27,'PUNJAB'),(28,'PONDICHERRY'),(29,'RAJASTHAN'),(30,'SIKKIM'),(31,'TAMIL NADU'),(32,'TRIPURA'),(33,'UTTARAKHAND'),(34,'UTTAR PRADESH'),(35,'WEST BENGAL');
+/*!40000 ALTER TABLE `state_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_master`
+--
+
+DROP TABLE IF EXISTS `user_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_master` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(100) DEFAULT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `email` varchar(300) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `empcode` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `user_type_id` int(11) DEFAULT NULL,
+  `vertical_id` int(11) DEFAULT NULL,
+  `branch_id` int(11) DEFAULT NULL,
+  `reporting_emp` varchar(45) DEFAULT NULL,
+  `user_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_master`
+--
+
+LOCK TABLES `user_master` WRITE;
+/*!40000 ALTER TABLE `user_master` DISABLE KEYS */;
+INSERT INTO `user_master` VALUES (1,'Sagar','Tejuja','sagar.tejuja@gmail.com','9819600699','101100','123456',1,2,3,'101100','2017-09-18 12:51:03'),(2,'Vinaykumar','Rai','vinaykumar.rai@landmarkinsurance.in','9619977857','101101','vinay123',2,2,3,'101100','2017-09-18 12:51:03'),(3,'Kishor','Sagar','kishore.sagar@rupeeboss.com','9930968796','101181','123456',3,2,3,'101101','2017-09-18 12:51:03'),(4,'Durgapratap','Rajbhar','durga.rajbhar@rupeeboss.com','8898540057','101178','123456',4,2,3,'101181','2017-09-18 12:51:03'),(5,'manish','dixit','manish.dixit@rupeeboss.com','9821982346','101186','123456',4,2,3,'101181','2017-09-18 12:51:03'),(6,'Durgaprataprb','rajbhar','rajbhardp@gmail.com','8898540057','400075','1234567',2,2,1,'400075',NULL);
+/*!40000 ALTER TABLE `user_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_type_master`
+--
+
+DROP TABLE IF EXISTS `user_type_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_type_master` (
+  `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_type_name` varchar(45) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`user_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_type_master`
+--
+
+LOCK TABLES `user_type_master` WRITE;
+/*!40000 ALTER TABLE `user_type_master` DISABLE KEYS */;
+INSERT INTO `user_type_master` VALUES (1,'Admin','2017-09-15 10:27:57'),(2,'Approver','2017-09-15 10:27:57'),(3,'Line Manager','2017-09-15 10:27:58'),(4,'End User','2017-09-15 10:27:58');
+/*!40000 ALTER TABLE `user_type_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vertical_master`
+--
+
+DROP TABLE IF EXISTS `vertical_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vertical_master` (
+  `vertical_id` int(11) NOT NULL AUTO_INCREMENT,
+  `vertical_name` varchar(45) DEFAULT NULL,
+  `datetime_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`vertical_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vertical_master`
+--
+
+LOCK TABLES `vertical_master` WRITE;
+/*!40000 ALTER TABLE `vertical_master` DISABLE KEYS */;
+INSERT INTO `vertical_master` VALUES (1,'Affliate','2017-09-15 10:31:31'),(2,'Corporate','2017-09-15 10:31:31'),(3,'Cross Sell','2017-09-15 10:31:31');
+/*!40000 ALTER TABLE `vertical_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'pb_corporate'
+--
+
+--
+-- Dumping routines for database 'pb_corporate'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `usp_get_addons` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_get_addons`(IN sectionid INT )
+BEGIN
+
+select add_ons from add_ons_master where section_id=sectionid;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_get_district` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_get_district`(IN stateid INT)
+Begin
+
+select district_id,district_name from districtwise_zone_master where state_id=stateid;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_get_firecal_quote` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_get_firecal_quote`(IN occ_id INT,section_id INT, sum_building INT, sum_plith INT,sum_plant INT,sum_electric INT, sum_fff INT,sum_others INT,sum_stock INT,
+ is_stfi INT,sum_stfi INT, is_earthquake INT, sum_earthquake INT, is_terrorism INT,sum_terrorism INT,
+ is_escalation INT,sum_escalation INT,is_omission INT, sum_omission INT,is_lossrent INT,sum_lossrent INT,
+ is_accommodation INT, sum_accommodation INT, is_architect INT,sum_architect INT,is_removedebris INT, sum_removedebris INT,
+ is_spontcomb INT,sum_spontcomb INT, is_startup INT, sum_startup INT, is_floater INT, sum_floater INT, 
+ is_impactdamage INT, sum_impactdamage INT,riskdistrictid INT,storage_type varchar(20)
+ 
+ )
+BEGIN
+ 
+declare grand_premium long default 0 ;
+declare tot_preminum long default 0;
+declare zonerate  decimal(18,2);
+declare cnt INT default 0;
+declare zoneid INT default 0;
+declare id INT default 1;
+declare buildingrate decimal(18,2);
+declare contentrate decimal(18,2);
+declare stfirate decimal(18,4);
+declare terr_rate decimal(18,2);
+
+SET zoneid = (select zone_id from districtwise_zone_master where district_id=riskdistrictid);
+SET terr_rate = (select terrorism_rate from occupancy_master where occup_id=occ_id);
+SET buildingrate = (select building_rate from occupancy_master where occup_id=occ_id);
+SET contentrate = (select content_rate from occupancy_master where occup_id=occ_id);
+if(storage_type ='Closed') then
+SET stfirate = (select ifnull(stfi_rate,0.0000) from occupancy_master where occup_id=occ_id);
+elseif (storage_type ='Open') then
+SET stfirate = (select ifnull(stfi_open_rate,0.0000) from occupancy_master where occup_id=occ_id);
+else
+SET stfirate = (select ifnull(stfi_rate,0.0000) from occupancy_master where occup_id=occ_id);
+end if;
+
+if(section_id = 3) then
+SET zonerate = (select eq_rate from occupancy_master where occup_id=occ_id);
+else
+SET zonerate = (select zone_rate from earthquake_zone_master where zone_id=zoneid);
+end if;
+
+DROP TEMPORARY TABLE IF EXISTS temp_company;
+CREATE TEMPORARY TABLE temp_company AS  
+SELECT company_id,company_name,discount_rate,buildingrate,contentrate,0.0000 as base_build_rate,0.0000 as base_content_rate, 
+0.0000 as tot_rate, 0 as pre_building,0 as pre_plinth,0 as pre_plant,0 as pre_electric, 0 as pre_fff,0 as pre_others,0 as pre_stock, 
+0 as pre_stfi, 0 as pre_earthquake, 0 as pre_terrorism, 0 as pre_escalation,0 as pre_omission,0 as pre_lossrent,0 as pre_accommodation,
+0 as pre_architect, 0 as pre_removedebris, 0 as pre_spontcomb,0 as pre_startup,0 as pre_floater,0 as pre_impactdamage, 0 as premium_amt,
+0 as gst_amt,0 as net_premium_amt FROM company_master;
+
+SET cnt =(select count(company_id) from temp_company);
+
+
+While ( id <= cnt )
+DO
+SET SQL_SAFE_UPDATES = 0;
+update temp_company SET base_build_rate = ( buildingrate * (discount_rate/100)),
+base_content_rate = ( contentrate * (discount_rate/100)),
+tot_rate = (base_content_rate + zonerate + stfirate  + terr_rate),
+pre_building = ((sum_building * base_build_rate)/1000) , pre_plinth = ((sum_plith * base_content_rate)/1000),
+pre_plant = ((sum_plant * base_build_rate)/1000) , pre_electric=((sum_electric * base_content_rate)/1000),
+pre_fff = ((sum_fff * base_content_rate)/1000),pre_others=((sum_others * base_content_rate)/1000),
+pre_stock = ((sum_stock * base_content_rate)/1000), 
+pre_stfi= case when is_stfi =1 then (sum_stfi *( stfirate/1000) ) else 0 end,
+pre_earthquake = case when is_earthquake =1 then (sum_earthquake * (zonerate/1000)) else 0 end,
+pre_terrorism = case when is_terrorism =1 then (sum_terrorism * (terr_rate/1000)) else 0 end,
+pre_escalation = case when is_escalation =1 then (sum_escalation * ((tot_rate * 50/100)/1000)) else 0 end,
+pre_omission = case when is_omission =1 then (sum_omission * (tot_rate/1000)) else 0 end,
+pre_lossrent = case when is_lossrent =1 then (sum_lossrent * (tot_rate/1000)) else 0 end,
+pre_accommodation = case when is_accommodation =1 then (sum_accommodation * (tot_rate/1000)) else 0 end,
+pre_architect = case when is_architect =1 then (sum_architect * (tot_rate/1000)) else 0 end,
+pre_removedebris = case when is_removedebris =1 then (sum_removedebris * (tot_rate/1000)) else 0 end,
+pre_spontcomb = case when is_spontcomb =1 then 0 else 0 end,
+pre_startup = case when is_startup =1 then (sum_startup * (tot_rate/1000)) else 0 end,
+pre_floater = case when is_floater =1 then 0 else 0 end,
+pre_impactdamage = case when is_impactdamage =1 then ( sum_impactdamage* ((tot_rate * 5/100)/1000)) else 0 end,
+premium_amt = (pre_building + pre_plinth + pre_plant + pre_fff + pre_electric + pre_stock + pre_others + pre_stfi + pre_earthquake +
+pre_terrorism + pre_escalation + pre_omission + pre_lossrent +  pre_accommodation + pre_architect + pre_removedebris + pre_spontcomb +
+pre_floater + pre_impactdamage),gst_amt= (premium_amt * (18/100)),net_premium_amt= (premium_amt + gst_amt)
+where company_id = id;
+
+set id = id + 1;
+
+END WHILE;
+
+select company_id,company_name,premium_amt,gst_amt,net_premium_amt
+from temp_company order by net_premium_amt LIMIT 5;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_get_firecal_sectionlist` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_get_firecal_sectionlist`()
+BEGIN
+
+select section_id,section_name from section_master where section_id not in (1,2);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_get_premium_manufacture` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_get_premium_manufacture`(IN occ_id INT, sum_building INT, sum_plith INT, sum_fff INT,sum_electric INT,sum_stock INT ,sum_others INT,
+ is_stfi char(1),sum_stfi INT, is_earthquake char(1), sum_earthquake INT, is_terrorism char(1),sum_terrorism INT,
+ is_architect char(1),sum_architect INT,is_removedebris char(1), sum_removedebris INT, is_powerfail char(1),
+ sum_powerfail INT, is_temprise char(1), sum_temprise INT,is_forestfire char(1), sum_forestfire INT,
+ is_accident char(1), sum_accident INT, is_spontcomb char(1), sum_spontcomb INT, is_omission char(1), sum_omission INT,
+ is_materialstock char(1), sum_materialstock  INT, is_materialplant char(1), sum_materialplant INT, is_tempstock char(1),
+ sum_tempstock INT, is_lossrent char(1), sum_lossrent INT,is_accomrent char(1), sum_accomrent INT, is_escalation char(1),
+ sum_escalation INT, is_startup char(1), sum_startup INT, is_leakage char(1), sum_leakage INT, is_leakageoutside char(1),
+ sum_leakageoutside INT, is_contaminate char(1), sum_contaminate INT, is_contamoutside char(1), sum_contamoutside INT,
+ districtid INT,storage_type varchar(20)
+ 
+ )
+BEGIN
+ 
+declare grand_premium long default 0 ;
+declare tot_preminum long default 0;
+declare zonerate  decimal(18,2);
+declare cnt INT default 0;
+declare zoneid INT default 0;
+declare id INT default 1;
+declare sectionId INT;
+declare buildingrate decimal(18,2);
+declare contentrate decimal(18,2);
+declare stfirate decimal(18,4);
+declare terr_rate decimal(18,2);
+
+
+
+SET zoneid = (select zone_id from districtwise_zone_master where district_id=districtid);
+SET terr_rate = (select terrorism_rate from occupancy_master where occup_id=occ_id);
+SET sectionId =(select section_id from occupancy_master where occup_id=occ_id);
+SET buildingrate = (select building_rate from occupancy_master where occup_id=occ_id);
+SET contentrate = (select content_rate from occupancy_master where occup_id=occ_id);
+
+if(storage_type ='Closed') then
+SET stfirate = (select ifnull(stfi_rate,0.0000) from occupancy_master where occup_id=occ_id);
+elseif (storage_type ='Open') then
+SET stfirate = (select ifnull(stfi_open_rate,0.0000) from occupancy_master where occup_id=occ_id);
+else
+SET stfirate = (select ifnull(stfi_rate,0.0000) from occupancy_master where occup_id=occ_id);
+end if;
+
+if(sectionId = 3) then
+SET zonerate = (select eq_rate from occupancy_master where occup_id=occ_id);
+else
+SET zonerate = (select zone_rate from earthquake_zone_master where zone_id=zoneid);
+end if;
+
+
+DROP TEMPORARY TABLE IF EXISTS temp_company;
+CREATE TEMPORARY TABLE temp_company AS  
+SELECT company_id,company_name,discount_rate,buildingrate,contentrate,0.0000 as base_build_rate,0.0000 as base_content_rate, 
+0.0000 as tot_rate, 0 as pre_building,0 as pre_plinth, 0 as pre_fff, 0 as pre_electric, 0 as pre_stock, 0 as pre_others,
+ 0 as pre_stfi, 0 as pre_earthquake, 0 as pre_terrorism, 0 as pre_architect, 0 as pre_removedebris, 0 as pre_powerfail,
+0 as pre_temprise, 0 as pre_forestfire, 0 as pre_accident, 0 as pre_spontcomb, 0 as pre_omission,
+0 as pre_materialstock,0 as pre_materialplant,0 as pre_tempstock, 0 as pre_lossrent, 0 as pre_accomrent,
+0 as pre_escalation, 0 as pre_startup, 0 as pre_leakage, 0 as pre_leakageoutside,0 as pre_contaminate,
+0 as pre_contamoutside, 0 as gross_premium
+FROM company_master;
+
+
+
+SET cnt =(select count(company_id) from temp_company);
+
+While ( id <= cnt )
+DO
+SET SQL_SAFE_UPDATES = 0;
+update temp_company SET base_build_rate = ( buildingrate * (discount_rate/100)),
+base_content_rate = ( contentrate * (discount_rate/100)),
+tot_rate = (base_content_rate + zonerate + stfirate  + terr_rate),
+pre_building = ((sum_building * base_build_rate)/1000) , pre_plinth = ((sum_plith * base_content_rate)/1000),
+pre_fff = ((sum_fff * base_content_rate)/1000), pre_electric=((sum_electric * base_content_rate)/1000),
+pre_stock = ((sum_stock * base_content_rate)/1000), pre_others=((sum_others * base_content_rate)/1000),
+pre_stfi= case when is_stfi = 'Y' then (sum_stfi *( stfirate/1000) ) else 0 end,
+pre_earthquake = case when is_earthquake ='Y' then (sum_earthquake * (zonerate/1000)) else 0 end,
+pre_terrorism = case when is_terrorism ='Y' then (sum_terrorism * (terr_rate/1000)) else 0 end,
+pre_architect = case when is_architect ='Y' then (sum_architect * tot_rate) else 0 end,
+pre_removedebris = case when is_removedebris ='Y' then (sum_removedebris * tot_rate ) else 0 end,
+pre_powerfail = case when is_powerfail ='Y' then 0 else 0 end,
+pre_temprise = case when is_temprise ='Y' then 0 else 0 end,
+pre_forestfire = case when is_forestfire ='Y' then 0 else 0 end,
+pre_accident =  case when is_accident ='Y' then ( sum_accident * (tot_rate * 5/100) ) else 0 end,
+pre_spontcomb = case when is_spontcomb ='Y' then 0 else 0 end,
+pre_omission = case when is_omission ='Y' then (sum_omission * tot_rate) else 0 end,
+pre_materialstock = case when is_materialstock ='Y' then 0 else 0 end,
+pre_materialplant = case when is_materialplant ='Y' then 0 else 0 end,
+pre_tempstock = case when is_tempstock ='Y' then 0 else 0 end,
+pre_lossrent = case when is_lossrent ='Y' then (sum_lossrent * tot_rate) else 0 end,
+pre_accomrent = case when is_accomrent ='Y' then (sum_accomrent * tot_rate) else 0 end,
+pre_escalation = case when is_escalation ='Y' then (sum_escalation * (tot_rate * 50/100)) else 0 end,
+pre_startup = case when is_startup ='Y' then (sum_startup * tot_rate) else 0 end,
+pre_leakage = case when is_leakage ='Y' then 0 else 0 end,
+pre_leakageoutside = case when is_leakageoutside ='Y' then 0 else 0 end,
+pre_contaminate = case when is_contaminate ='Y' then 0 else 0 end, 
+pre_contamoutside = case when is_contamoutside ='Y' then 0 else 0 end, 
+gross_premium = (pre_building + pre_plinth + pre_fff + pre_electric + pre_stock + pre_others + pre_stfi + pre_earthquake +
+pre_terrorism + pre_architect + pre_removedebris + pre_powerfail + pre_temprise + pre_forestfire + pre_accident + pre_spontcomb +
+pre_omission + pre_materialstock + pre_materialplant + pre_tempstock + pre_lossrent + pre_accomrent + pre_escalation + 
+pre_startup + pre_leakage + pre_leakageoutside + pre_contaminate + pre_contamoutside)
+where company_id = id;
+
+set id = id + 1;
+
+END WHILE;
+ 
+select company_id,company_name,discount_rate,buildingrate,contentrate,base_build_rate,
+base_content_rate,tot_rate,gross_premium 
+from temp_company order by gross_premium;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_get_quote_count` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_get_quote_count`(IN emp_code varchar(50), usertypeid INT, verticalid INT, branchid INT)
+BEGIN
+declare all_cnt int default 0;
+declare approve_cnt int default 0;
+declare pending_cnt int default 0;
+ 
+
+if(usertypeid=1) then
+
+ set all_cnt = (select count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id);
+     
+ set approve_cnt = (select count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id where fq.is_approve=1);   
+     
+set pending_cnt = (select count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id where fq.is_approve!=1);  
+
+elseif(usertypeid=2) then
+
+ set all_cnt =  (select count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id = verticalid);
+     
+ set approve_cnt =  (select count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id = verticalid and fq.is_approve=1);
+     
+  set pending_cnt =  (select count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id = verticalid and fq.is_approve!=1);
+
+elseif(usertypeid=3) then
+
+ set all_cnt =  (select  count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid    
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id
+     where um.reporting_emp=emp_code);
+     
+  set approve_cnt =  (select  count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid    
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id
+     where um.reporting_emp=emp_code and fq.is_approve=1 );   
+     
+     
+ set pending_cnt =  (select  count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid    
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id
+     where um.reporting_emp=emp_code and fq.is_approve!=1); 
+
+elseif(usertypeid=4) then
+
+    set all_cnt = (select  count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id=verticalid and um.branch_id=branchid and um.empcode=emp_code);
+     
+     set approve_cnt = (select  count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id=verticalid and um.branch_id=branchid and um.empcode=emp_code 
+     and fq.is_approve=1);
+     
+      set pending_cnt = (select  count(fq.quote_id)
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id=verticalid and um.branch_id=branchid and um.empcode=emp_code 
+     and fq.is_approve!=1);
+
+end if;
+
+select all_cnt,approve_cnt,pending_cnt;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_get_quote_detail` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_get_quote_detail`(IN emp_code varchar(50), usertypeid INT, verticalid INT, branchid INT, quote_status varchar(100))
+BEGIN
+ 
+ if(usertypeid=1) then
+ 
+	 if(quote_status='All') then
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile, fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,  case when fq.is_approve =1  then 'Approved'  
+	 else 'Pending' end as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id;
+	 
+	 elseif (quote_status='Approved') then
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,'Approved' as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where fq.is_approve=1;
+	 
+	 elseif (quote_status='Pending') then  
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,'Pending' as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where fq.is_approve!=1;
+	 
+	 end if;
+      
+   elseif(usertypeid=2) then
+	 
+	  if(quote_status='All') then
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     case when fq.is_approve =1  then 'Approved'  
+	 else 'Pending' end as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id = verticalid;
+	 
+	 elseif (quote_status='Approved') then
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     'Approved' as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id = verticalid and fq.is_approve=1; 
+	 
+	 elseif (quote_status='Pending') then  
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     'Pending' as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id = verticalid and fq.is_approve!=1;
+	 
+	 end if;
+     
+     elseif(usertypeid=3) then
+	 
+	  if(quote_status='All') then
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     case when fq.is_approve =1  then 'Approved'  
+	 else 'Pending' end as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid    
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id
+     where um.reporting_emp=emp_code;
+	 
+	 elseif (quote_status='Approved') then
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     'Approved' as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.reporting_emp=emp_code and fq.is_approve=1;
+	 
+	 elseif (quote_status='Pending') then  
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     'Pending' as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.reporting_emp=emp_code and fq.is_approve!=1;
+	 
+	 end if;
+     
+     elseif(usertypeid=4) then
+	 
+	  if(quote_status='All') then
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     case when fq.is_approve =1  then 'Approved'  
+	 else 'Pending' end as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where um.vertical_id=verticalid and um.branch_id=branchid and um.empcode=emp_code;
+	 
+	 elseif (quote_status='Approved') then
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     'Approved' as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where fq.is_approve=1 and um.vertical_id=verticalid and um.branch_id=branchid and um.empcode=emp_code;
+	 
+	 elseif (quote_status='Pending') then  
+	 
+	 select fq.quote_id,sm.section_name,fq.customer_name,om.occupancy_name,fq.occup_desc,fq.contact_person,
+	 fq.designation,fq.email,fq.mobile,fq.datetime_created,datediff(now(),fq.datetime_created) as days_diff,
+     'Pending' as quote_status
+	 from firecal_quote_master  fq 
+	 inner join user_master um  on fq.userid=um.userid     
+	 inner join section_master sm on fq.section_id = sm.section_id
+	 inner join occupancy_master om on fq.occ_id=om.occup_id 
+     where fq.is_approve!=1 and um.vertical_id=verticalid and um.branch_id=branchid and um.empcode=emp_code;
+	 
+	 end if;
+ 
+ end if; 
+ 
+ 
+ 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_insert_firecal_quote` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_insert_firecal_quote`(IN section_id INT, transaction_type INT, cust_action INT, customer_type INT, period_from varchar(45), period_to varchar(45),
+ current_insurer_id INT, customer_name varchar(200),address1 varchar(200),address2 varchar(200),district_id INT,
+ state_id INT, pincode INT, country Varchar(45), risk_address1 varchar(200), risk_address2 varchar(200), risk_district_id INT,
+ risk_state_id INT, risk_pincode INT, risk_country varchar(45), occ_id INT, storage_type varchar(45), sum_building decimal(18,0), 
+ sum_plith decimal(18,0), sum_plant decimal(18,0), sum_electric decimal(18,0), sum_fff decimal(18,0), sum_others decimal(18,0),
+ sum_stock decimal(18,0), is_stfi INT, sum_stfi decimal(18,0), is_earthquake INT, sum_earthquake decimal(18,0), is_terrorism INT,
+ sum_terrorism decimal(18,0), is_escalation INT, escalation_percent INT, sum_escalation decimal(18,0), is_omission INT,
+ sum_omission decimal(18,0), is_lossrent INT, sum_lossrent decimal(18,0), is_accommodation INT, sum_accommodation decimal(18,0),
+ is_architect INT, sum_architect decimal(18,0), is_removedebris INT, sum_removedebris decimal(18,0), is_spontcomb INT,
+ sum_spontcomb decimal(18,0), is_startup INT, sum_startup decimal(18,0), is_floater INT, sum_floater decimal(18,0), 
+ is_impactdamage INT, sum_impactdamage decimal(18,0), userid INT, occup_desc varchar(500), contact_person varchar(200),
+ designation varchar(100), email varchar(200), mobile varchar(20), product_id INT
+ 
+ )
+BEGIN
+  
+  declare max_quote_id int;
+  
+  insert into firecal_quote_master(section_id,transaction_type,cust_action,customer_type,period_from,period_to,current_insurer_id,
+  customer_name,address1,address2,district_id,state_id,pincode,country,risk_address1,risk_address2,risk_district_id,risk_state_id,
+  risk_pincode,risk_country,occ_id,storage_type,sum_building,sum_plith,sum_plant,sum_electric,sum_fff,sum_others,sum_stock,
+  is_stfi,sum_stfi,is_earthquake,sum_earthquake,is_terrorism,sum_terrorism,is_escalation,escalation_percent,sum_escalation,
+  is_omission,sum_omission,is_lossrent,sum_lossrent,is_accommodation,sum_accommodation,is_architect,sum_architect,is_removedebris,
+  sum_removedebris,is_spontcomb,sum_spontcomb,is_startup,sum_startup,is_floater,sum_floater,is_impactdamage,sum_impactdamage,
+  userid,datetime_created,occup_desc,contact_person,designation,email,mobile,product_id)
+  values (section_id,transaction_type,cust_action,customer_type,period_from,period_to,current_insurer_id,
+  customer_name,address1,address2,district_id,state_id,pincode,country,risk_address1,risk_address2,risk_district_id,risk_state_id,
+  risk_pincode,risk_country,occ_id,storage_type,sum_building,sum_plith,sum_plant,sum_electric,sum_fff,sum_others,sum_stock,
+  is_stfi,sum_stfi,is_earthquake,sum_earthquake,is_terrorism,sum_terrorism,is_escalation,escalation_percent,sum_escalation,
+  is_omission,sum_omission,is_lossrent,sum_lossrent,is_accommodation,sum_accommodation,is_architect,sum_architect,is_removedebris,
+  sum_removedebris,is_spontcomb,sum_spontcomb,is_startup,sum_startup,is_floater,sum_floater,is_impactdamage,sum_impactdamage,
+  userid,now(),occup_desc,contact_person,designation,email,mobile,product_id);
+  
+  select quote_id from firecal_quote_master order by quote_id desc limit 1;
+  
+  END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_insert_firecal_quote_detail` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_insert_firecal_quote_detail`(IN quote_id INT, company_id INT, company_name varchar(200), premium_amt INT,
+ gst_amt INT, net_premium_amt INT,is_selected INT )
+BEGIN
+  
+  insert into firecal_quote_detail (quote_id,company_id,company_name,premium_amt,gst_amt,net_premium_amt,is_selected,datetime_created)
+  values (quote_id,company_id,company_name,premium_amt,gst_amt,net_premium_amt,is_selected,now());
+  
+  END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `usp_show_fircal_quote` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`rbonline`@`%` PROCEDURE `usp_show_fircal_quote`(
+	IN quoteid INT  
+ )
+BEGIN
+  
+select  fq.customer_name,concat_ws(',', address1,address2,dz.district_name,sm.state,fq.country, fq.pincode ) as current_addr,
+concat_ws(',',risk_address1,risk_address2,dz1.district_name,sm1.state,fq.risk_country,fq.risk_pincode) as risk_addr,
+om.occupancy_name,cm.company_name, fq.period_from,fq.period_to,  DATE_FORMAT(fq.datetime_created, "%d/%m/%Y") AS quote_date,
+fq.sum_building,sum_plith,sum_plant,sum_electric,sum_fff,sum_others,sum_stock,is_stfi,sum_stfi,is_earthquake,sum_earthquake,
+is_terrorism,sum_terrorism,is_escalation,escalation_percent,sum_escalation,is_omission,sum_omission,is_lossrent,sum_lossrent,
+is_accommodation,sum_accommodation,is_architect,sum_architect,is_removedebris,sum_removedebris,is_spontcomb,sum_spontcomb,
+is_startup,sum_startup,is_floater,sum_floater,is_impactdamage,sum_impactdamage
+from firecal_quote_master fq
+inner join occupancy_master om on fq.occ_id=om.occup_id
+left join districtwise_zone_master dz on fq.district_id=dz.district_id
+left join state_master sm on fq.state_id=sm.state_id
+left join districtwise_zone_master dz1 on fq.risk_district_id=dz1.district_id
+left join state_master sm1 on fq.risk_state_id=sm1.state_id
+left join company_master cm on fq.current_insurer_id=cm.company_id
+where fq.quote_id =quoteid;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-09-19 11:55:36

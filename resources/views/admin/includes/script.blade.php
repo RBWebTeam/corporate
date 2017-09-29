@@ -171,7 +171,9 @@ $('#issue_form_submit').click(function(){
           var $tr    = $('.clone_row').last();
           var $clone = $tr.clone();
           $tr.after($clone);
-         $('.upload_row').last().html(parseInt($('.upload_row').last().html(), 10)+1)
+
+         $('.upload_row').last().html(parseInt($('.upload_row').last().html(), 10)+1);
+         
         });
       });
 

@@ -17,7 +17,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body table-responsive">
-                          <form id="upload_policy_form" enctype="multipart/form-data" action="upload-file" method="POST">
+                          <form id="upload_policy_form" enctype="multipart/form-data" action ="upload-file" method="POST">
                             {{csrf_field()}}
                             <table width="100%" class="table table-striped table-bordered table-hover" >
                               <!-- id="dataTables-example" -->
@@ -39,7 +39,14 @@
                                    
                                       <td><input type="text" name="client_name[]"  required></td>
                                       <td><input type="file" name="policy[]" required></td>
-                                      <td><input type="text" name="product[]"  required></td>
+                                      <td>
+                                        <select name="product[]" required="">
+                                          <option  selected="true" disabled="disabled" value="">Select</option>
+                                          @foreach($product as $prod)
+                                            <option value="{{$prod->id}}" >{{$prod->name}}</option>
+                                          @endforeach
+                                        </select>
+                                       </td>
                                       <td><input type="date" name="policy_period[]" ></td>
                                       <td><input type="text" name="net_premium[]"  required></td>
                                       <td><input type="text" name="policy_catg[]"  required></td>
@@ -49,7 +56,7 @@
                                     
                                 </tbody>
                             </table>
-                              <button>Upload</button>
+                              <button class="add-more btn btn-primary"> Upload</button>
                            </form>
                             
                            
