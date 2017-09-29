@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use DB;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+          // \App\Console\Commands\SendEmails::class,
+              
     ];
 
     /**
@@ -26,6 +29,19 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+       // $schedule->command('sendmail:command')->everyMinute();
+
+
+ 
+                 $schedule->exec('echo "Hello World"')
+               ->everyMinute()
+              ->appendOutputTo(storage_path('logs/examplecommand.log'));
+
+
+             $schedule->call(function () {
+            DB::table('firecal_quote_master')->where('is_approve',0)->delete();
+              })->everyMinute();
     }
 
     /**

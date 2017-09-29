@@ -45,7 +45,7 @@
          <div class="modal-footer">
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button> 
            <!--  <button type="button" class="btn btn-warning pull-left">Save Draft</button> -->
-            <input type="file" name="attachment_path" id="attachment_path"  class="btn btn-warning pull-left"> 
+            <input type="file" name="attachment_path" id="attachment_path"  class="btn btn-warning pull-left attachment_path"> 
             <input type="hidden" name="quote_id" value="{{$quote_id}}">
                 {{ csrf_field() }}
 

@@ -170,13 +170,31 @@ public function geoccu($occup_id){
  }
 
 
+// $file = $request->file('file_name');
+// $file = $request->file_name;
+
+// // get the original file name
+// $filename = $request->file('file_name')->getClientOriginalName();
+// $filename = $request->file_name->getClientOriginalName();
 
  public function mail_to_customer(Request $req){
+         
+        //  echo $req->file('attachment_path')->getClientOriginalName();
 
-   
- 
+  
+        $adapter = new Local(public_path('pdf'));
+        $destinationPath = public_path(). '/pdf/';
+        $file     =$req->file('attachment_path');
+        $fileName = rand(1, 999) . $file->getClientOriginalName();
+        $filePath = "/uploads/" . date("Y") . '/' . date("m") . "/" . $fileName;
+        $file->move($destinationPath, $fileName);
+
              
-              $adapter = new Local(public_path('pdf'));
+           
+
+    
+             
+              
               $filename=date('Y-m-d-h-i-s'); 
               $query_master=DB::select('call usp_show_fircal_quote("'.$req->quote_id.'")');
               $query=$query_master[0];
