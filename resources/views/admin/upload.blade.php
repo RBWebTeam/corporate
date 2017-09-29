@@ -56,7 +56,7 @@
                                     
                                 </tbody>
                             </table>
-                              <button class="add-more btn btn-primary"> Upload</button>
+                              <button class=" btn btn-primary"> Upload</button>
                            </form>
                             
                            
