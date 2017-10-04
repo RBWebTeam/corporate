@@ -49,7 +49,12 @@
                                        </td>
                                       <td><input type="date" name="policy_period[]" ></td>
                                       <td><input type="text" name="net_premium[]"  required></td>
-                                      <td><input type="text" name="policy_catg[]"  required></td>
+                                      <td><select name="policy_catg[]" required="">
+                                          <option  selected="true" disabled="disabled" value="">Select category</option>
+                                          <option value="motor">Motor</option>
+                                          <option value="non-motor">Non-Motor</option>
+                                        </select>
+                                          </td>
                                     
 
                                   </tr>
