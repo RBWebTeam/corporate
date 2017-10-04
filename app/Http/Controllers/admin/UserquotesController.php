@@ -13,6 +13,7 @@ use Mail;
 use PDF;
  
 use Storage;
+use Carbon\Carbon;
 use GrahamCampbell\Flysystem\Facades\Flysystem;
 
 use League\Flysystem\Filesystem;
@@ -51,6 +52,7 @@ class UserquotesController extends Controller
      }
 
      public function quotes_details(Request $req){
+ 
  
                try{
                 
@@ -101,12 +103,13 @@ class UserquotesController extends Controller
 
 
      public function quotes_edite(Request $req){
-
           try{
               $getdetail = DB::table('firecal_quote_master')
             ->select('firecal_quote_master.*')
             ->where('firecal_quote_master.quote_id',$req->id)
             ->first();
+
+
           
             $state_id=$this->getstate($getdetail->state_id);
             $data['st_name']=$state_id->state;
@@ -121,11 +124,13 @@ class UserquotesController extends Controller
               
             $occupancy_name=$this->geoccu($getdetail->occ_id);
             $data['occupancy_name']= $occupancy_name->occupancy_name;
-            
-           // $data['quote_id']= $getdetail->quote_id;
+          //     print_r($getdetail);
+
+          // exit;
+           $data['quote_id']= $getdetail->quote_id;
            return view('firecalculator.quotes-edite',['getdetail'=>$getdetail,'data'=>$data]);
               }catch(\Exception $ee){
-              return $e->getMessage();
+              return $ee->getMessage();
           } 
 
 
@@ -170,30 +175,22 @@ public function geoccu($occup_id){
  }
 
 
-// $file = $request->file('file_name');
-// $file = $request->file_name;
-
-// // get the original file name
-// $filename = $request->file('file_name')->getClientOriginalName();
-// $filename = $request->file_name->getClientOriginalName();
-
  public function mail_to_customer(Request $req){
          
-        //  echo $req->file('attachment_path')->getClientOriginalName();
+          try{
+              $adapter = new Local(public_path('pdf'));
+              $destinationPath = public_path(). '/pdf/';
+              $file     =$req->file('attachment_path');
 
-  
-        $adapter = new Local(public_path('pdf'));
-        $destinationPath = public_path(). '/pdf/';
-        $file     =$req->file('attachment_path');
-        $fileName = rand(1, 999) . $file->getClientOriginalName();
-        $filePath = "/uploads/" . date("Y") . '/' . date("m") . "/" . $fileName;
-        $file->move($destinationPath, $fileName);
+           if($file!=null || $file!=0){
+              $fileName = rand(1, 999) . $file->getClientOriginalName();
+              $filePath = "/uploads/" . date("Y") . '/' . date("m") . "/" . $fileName;
+              $file->move($destinationPath, $fileName);
+            }else{
+              $file=0;
+            }
 
-             
-           
 
-    
-             
               
               $filename=date('Y-m-d-h-i-s'); 
               $query_master=DB::select('call usp_show_fircal_quote("'.$req->quote_id.'")');
@@ -216,11 +213,13 @@ public function geoccu($occup_id){
             } 
 
           $attac=url('pdf'."/".$filename.".pdf");
-          $to_email=$req->to_email?$req->to_email:NULL;
-          $cc_email=$req->cc_email?$req->cc_email:NULL;
-          $bcc_email=$req->bcc_email?$req->bcc_email:NULL;
+          $to_email=$req->to?$req->to:NULL;
+          $cc_email=$req->cc?$req->cc:NULL;
+          $bcc_email=$req->bcc?$req->bcc:NULL;
           $data=$req->mail_ms?$req->mail_ms:NULL;
           $subject_email=$req->subject_email?$req->subject_email:NULL;
+ 
+
 
           $mail = Mail::send('admin.approvedmail',['data' => $data], function($message) use($to_email,$cc_email,$bcc_email,$attac) {
           $message->from('scriptdp@gmail.com', 'RupeeBoss');
@@ -241,23 +240,19 @@ public function geoccu($occup_id){
                             $error=2;
                             echo $error;
                     }
-                 
+
+
+   }catch(\Exception $ee){
+             return 0;
+         }
+        return 1;              
                    
 
 
 
          
 
-
-
-   //  try{
-   //     $quote_id=$req->quote_id;
-   //       $userid=Session::get('userid');
-   // $query_output=DB::select('Call usp_update_mail_status(?,?)',array($quote_id,$userid));
-   //               Session::flash('msg', "Mail Sent Successfully .....");
-   //        return redirect('dashboard');
-   //  }catch (\Exception $e) { return $e->getMessage(); }
-
+ 
 
   }
   public function issue_submit(Request $req){

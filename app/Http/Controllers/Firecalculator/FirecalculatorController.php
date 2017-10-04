@@ -107,8 +107,10 @@ class FirecalculatorController extends Controller
              $is_selected= $req->comapny_id?$req->comapny_id:0;
              $length=sizeof($req->c_name);
              $pdfarray=array();
+             $quote_id= $req->quote_id;
 
-               $quote_id= $req->quote_id;
+
+             print_r( $arr);
 
              
    }

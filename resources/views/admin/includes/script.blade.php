@@ -120,35 +120,26 @@ $('#issue_form_submit').click(function(){
   }
 
 
-
-
-
-
-  $('#mail_sent').click(function(e){ 
-                   e.preventDefault();
-
-
-// var form = $('#postAddProject');
-// var button = $('#project-button');
-// var name = $('#name');
-// var link = $('#link');
+$('#mail_sent').click(function(e){  e.preventDefault();
 
 var image = $('#attachment_path');
- 
-
-// var message = $('#message');
-// var name_error = $('#name-error');
-// var link_error = $('#link-error');
-// var image_error = $('#image-error');
-
- 
-
-
+var quote_id=$('#quote_id').val();
+var to=$('#to').val();
+var cc=$('#cc').val();
+var bcc=$('#bcc').val();
+var subject_email=$('#subject_email').val();
+var mail_ms=$('#mail_ms').val();
 var formData = new FormData();
- 
- 
-formData.append('attachment_path', image[0].files[0]); 
 
+if(image!=0 && to!=0 && cc!=0 &&  bcc!=0 && subject_email!=0 &&  mail_ms!=0){
+
+formData.append('attachment_path', image[0].files[0]); 
+formData.append('quote_id',quote_id); 
+formData.append('to',to); 
+formData.append('cc',cc); 
+formData.append('bcc',bcc); 
+formData.append('subject_email',subject_email); 
+formData.append('mail_ms',mail_ms); 
 $.ajax({
 url:"{{URL::to('mail-to-customer')}}",
 method: 'post',
@@ -157,46 +148,21 @@ contentType: false,
 processData: false,
 headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
 data: formData,
-
-error: function (data) {
-
-    if (data.status === 422) {
-
-         // name_error.html(data.responseJSON.name);
-         // link_error.html(data.responseJSON.link);
-         // image_error.html(data.responseJSON.image);
-
-    } else {
-
-         alert('success');
-    }
+success: function (data) {
+alert('success');
+$('#mailModal').modal('hide');
+console.log(data);
 }
-
-
 
 });
 
+}else{
 
+alert("Please fill the form carefully ...");
 
-        
-// var formData = new FormData($("#uploaded_file")[0]);
+}
 
-// $.ajax({
-//     url: "{{URL::to('mail-to-customer')}}",
-//     type: 'POST',
-//     data: formData,
-//     headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
-//     success: function (data) {
-//         alert(data)
-//     },
-//     cache: false,
-//     processData: false
-// });
-
-// return false;
-
-    
-
+ 
 })
 
 
