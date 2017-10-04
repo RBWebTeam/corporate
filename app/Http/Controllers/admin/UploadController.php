@@ -21,21 +21,22 @@ class UploadController extends Controller{
 		$userid=Session::get('userid');
 		//print_r($request->all());exit();
 		foreach ($request->policy as $photo) {
-            $filename = $photo->store('policy_container');
+            $filename = $photo->store('public/policy_container');
             //print_r($filename);
             array_push($paths,$filename);
             try{
             $query=DB::select("call usp_insert_policy_upload_files(?,?,?,?,?,?,?,?)",array($userid,$filename,$quote_id,$request->client_name[$counter],$request->product[$counter],$request->policy_period[$counter],$request->net_premium[$counter],$request->policy_catg[$counter]));
             $counter++;
+
             }catch(\Exception $ee){
             	//print_r($ee->__toString());
             	continue;
             }
         }
-		
+		//print_r( Storage::url($filename));exit();
 	
         Session::flash('msg', $counter." Files Uploaded Successfully .....");
-        return redirect('dashboard');
+        return redirect(Storage::url($filename));
 	}
 	
 	

@@ -44,7 +44,9 @@ return [
     'disks' => [
         'policy_container' => [
             'driver' => 'local',
-            'root' => storage_path('app/policies'),
+            'root' => storage_path('app/policy'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
         'local' => [
             'driver' => 'local',
