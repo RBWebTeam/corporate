@@ -8,7 +8,7 @@
         <div class="modal-content">
           <div class="modal-header modal-header-info">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title"><span class="glyphicon glyphicon-envelope"></span> Compose Message</h4>
+            <h4 class="modal-title"><span class="glyphicon glyphicon-envelope"></span> Create Message</h4>
           </div>
           <div class="modal-body">
             <form   class="form-horizontal"  enctype="multipart/form-data" id="maile_sent_form" role="form" method="POST" action="">
@@ -34,7 +34,7 @@
                      <div class="form-group">
                         <label for="bcc" class="col-sm-1 control-label">Subject:</label>
                         <div class="col-sm-11">
-                              <input type="email" name="subject_email" class="form-control select2-offscreen" id="bcc" placeholder="Subject" tabindex="-1">
+                              <input type="email" name="subject_email" class="form-control select2-offscreen" id="subject_email" placeholder="Subject" tabindex="-1">
                         </div>
                     </div>
                 <div class="form-group">
@@ -46,7 +46,7 @@
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button> 
            <!--  <button type="button" class="btn btn-warning pull-left">Save Draft</button> -->
             <input type="file" name="attachment_path" id="attachment_path"  class="btn btn-warning pull-left attachment_path"> 
-            <input type="hidden" name="quote_id" value="{{$quote_id}}">
+            <input type="text" name="quote_id" id="quote_id" value="{{$quote_id}}">
                 {{ csrf_field() }}
 
             <button type="button" class="btn btn-primary " id="mail_sent">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>

@@ -13,6 +13,7 @@ use Mail;
 use PDF;
  
 use Storage;
+use Carbon\Carbon;
 use GrahamCampbell\Flysystem\Facades\Flysystem;
 
 use League\Flysystem\Filesystem;
@@ -51,6 +52,7 @@ class UserquotesController extends Controller
      }
 
      public function quotes_details(Request $req){
+ 
  
                try{
                 
@@ -179,21 +181,26 @@ public function geoccu($occup_id){
 
  public function mail_to_customer(Request $req){
          
+
+           echo $req->quote_id; exit;
         //  echo $req->file('attachment_path')->getClientOriginalName();
+         // try{
+              $adapter = new Local(public_path('pdf'));
+              $destinationPath = public_path(). '/pdf/';
+              $file     =$req->file('attachment_path');
+
+           if($file!=null || $file!=0){
+              $fileName = rand(1, 999) . $file->getClientOriginalName();
+              $filePath = "/uploads/" . date("Y") . '/' . date("m") . "/" . $fileName;
+              $file->move($destinationPath, $fileName);
+            }else{
+              $file=0;
+            }
+
+              
+         
 
   
-        $adapter = new Local(public_path('pdf'));
-        $destinationPath = public_path(). '/pdf/';
-        $file     =$req->file('attachment_path');
-        $fileName = rand(1, 999) . $file->getClientOriginalName();
-        $filePath = "/uploads/" . date("Y") . '/' . date("m") . "/" . $fileName;
-        $file->move($destinationPath, $fileName);
-
-             
-           
-
-    
-             
               
               $filename=date('Y-m-d-h-i-s'); 
               $query_master=DB::select('call usp_show_fircal_quote("'.$req->quote_id.'")');
@@ -241,7 +248,10 @@ public function geoccu($occup_id){
                             $error=2;
                             echo $error;
                     }
-                 
+  // }catch(\Exception $ee){
+  //             return 0;
+  //         }
+  //       return 1;              
                    
 
 

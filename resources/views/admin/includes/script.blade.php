@@ -134,7 +134,12 @@ $('#issue_form_submit').click(function(){
 // var link = $('#link');
 
 var image = $('#attachment_path');
- 
+var quote_id=$('#quote_id').val();
+var to=$('#to').val();
+var cc=$('#cc').val();
+var bcc=$('#bcc').val();
+var subject_email=$('#subject_email').val();
+var mail_ms=$('#mail_ms').val();
 
 // var message = $('#message');
 // var name_error = $('#name-error');
@@ -145,9 +150,13 @@ var image = $('#attachment_path');
 
 
 var formData = new FormData();
- 
- 
 formData.append('attachment_path', image[0].files[0]); 
+formData.append('quote_id',quote_id); 
+formData.append('to',to); 
+formData.append('cc',cc); 
+formData.append('bcc',bcc); 
+formData.append('subject_email',subject_email); 
+formData.append('mail_ms',mail_ms); 
 
 $.ajax({
 url:"{{URL::to('mail-to-customer')}}",
@@ -160,6 +169,7 @@ data: formData,
 
 error: function (data) {
 
+console.log(data);
     if (data.status === 422) {
 
          // name_error.html(data.responseJSON.name);
@@ -168,7 +178,7 @@ error: function (data) {
 
     } else {
 
-         alert('success');
+         //alert('success');
     }
 }
 
