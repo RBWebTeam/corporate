@@ -44,7 +44,6 @@ class SendEmails extends Command
 foreach ($qu as $key => $value) {
 
   if($value->is_approve==1 && $value->mail_status==1){
- 
       $time_ago = strtotime($value->datetime_created);  
       $current_time = time();  
       $time_difference = $current_time - $time_ago;  

@@ -34,12 +34,12 @@
                      <div class="form-group">
                         <label for="bcc" class="col-sm-1 control-label">Subject:</label>
                         <div class="col-sm-11">
-                              <input type="email" name="subject_email" class="form-control select2-offscreen" id="bcc" placeholder="Subject" tabindex="-1">
+                              <input type="email" name="subject_email" class="form-control select2-offscreen" id="subject_email" placeholder="Subject" tabindex="-1">
                         </div>
                     </div>
                 <div class="form-group">
                   <label class="col-sm-12" for="inputBody"><span class="glyphicon glyphicon-list"></span>Message</label>
-                  <div class="col-sm-12"><textarea class="form-control" name="mail_ms" id="inputBody" rows="8" ></textarea></div>
+                  <div class="col-sm-12"><textarea class="form-control" name="mail_ms" id="mail_ms" rows="8" ></textarea></div>
                 </div>
 
          <div class="modal-footer">
@@ -462,7 +462,7 @@
               </div>
               <div class="funkyradio-danger col-md-8">
                       <input type="radio" name="radio" id="radio4" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
-                      <label for="radio4">Dis Approved</label>
+                      <label for="radio4">Rejected</label>
                </div>
                @elseif(Session::get('user_type_id')==3 )
                 <div class="funkyradio-success col-md-8"> 
@@ -471,7 +471,7 @@
               </div>
               <div class="funkyradio-danger col-md-8">
                       <input type="radio" name="radio" id="radio4" value="0" {{$query_master->is_approve==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
-                      <label for="radio4">Dis Approved</label>
+                      <label for="radio4">Rejected</label>
                </div>
                @else
               @endif

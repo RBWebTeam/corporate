@@ -74,7 +74,7 @@
               
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Pincode</span>
-                <input type="text" name="pincode"  id="pincode" minlength="6" value="{{$getdetail->pincode}}" maxlength="6" required=""> 
+                <input type="text" name="pincode"  id="pincode"   value="{{$getdetail->pincode}}"   > 
                 <span></span>
               </div>
               </div><br>
@@ -126,7 +126,7 @@
               
               <div class="styled-input agile-styled-input-top col-md-6">
               <span>Pincode</span>
-                <input type="text" name="riskpincode"  id="riskpincode"  value="{{$getdetail->risk_pincode}}" minlength="6" maxlength="6" required > 
+                <input type="text" name="riskpincode"  id="riskpincode"  value="{{$getdetail->risk_pincode}}"   > 
                 <span></span>
               </div>
               
@@ -367,11 +367,9 @@
    </div>
 </div>
 
-
-
- <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
-
-<div class="modal fade" id="occupiedPop" role="dialog">
+ 
+  
+ <div class="modal fade" id="occupiedPop" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -380,8 +378,10 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Type of Occupation</h4>
         </div>
+        
+         <input type="text" id="myInput" onkeyup="myFunction()" class="  search-query form-control" placeholder="Search for names.." />
         <div class="modal-body" id=occ_company>
-          <ul class="list-group" style="height: auto;max-height: 500px;overflow-x: hidden;"></ul>
+          <ul class="list-group" style="height: auto;max-height: 500px;overflow-x: hidden;" id="myUL"></ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -390,8 +390,6 @@
       
     </div>
   </div>
-  
- 
 
 
 
@@ -870,6 +868,25 @@ function s_spontcomb(val){
 
 });
 
+</script>
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+
+        }
+    }
+}
 </script>
 @endsection
 
