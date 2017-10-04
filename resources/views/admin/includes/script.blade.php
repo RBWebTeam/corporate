@@ -119,19 +119,62 @@ $('#issue_form_submit').click(function(){
       $('#issue_text').val('');
   }
 
-  $('#mail_sent').click(function(e){    // mail 
-     e.preventDefault();
+
+
+
+
+
+  $('#mail_sent').click(function(e){ 
+                   e.preventDefault();
+
+
+// var form = $('#postAddProject');
+// var button = $('#project-button');
+// var name = $('#name');
+// var link = $('#link');
+
+var image = $('#attachment_path');
+ 
+
+// var message = $('#message');
+// var name_error = $('#name-error');
+// var link_error = $('#link-error');
+// var image_error = $('#image-error');
 
  
 
-        $.ajax({  
-                type: "POST",  
-                url: "{{URL::to('mail-to-customer')}}",
-                data : $('#maile_sent_form').serialize(),
-                
-                success: function(msg){
-                }
-            });
+
+var formData = new FormData();
+ 
+ 
+formData.append('attachment_path', image[0].files[0]); 
+
+$.ajax({
+url:"{{URL::to('mail-to-customer')}}",
+method: 'post',
+dataType: 'json',
+contentType: false,
+processData: false,
+headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+data: formData,
+
+error: function (data) {
+
+    if (data.status === 422) {
+
+         // name_error.html(data.responseJSON.name);
+         // link_error.html(data.responseJSON.link);
+         // image_error.html(data.responseJSON.image);
+
+    } else {
+
+         alert('success');
+    }
+}
+
+
+
+});
 
 
 

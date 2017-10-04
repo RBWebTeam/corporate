@@ -1,0 +1,124 @@
+berojgar
+hyderabadi nawab
+
+5c5d
+
+$arr = array(
+    array(11, 15, 85),
+    array(66, 72, 21),
+    array(14, 21, 47),
+);
+
+$arrDiag = count($arr);
+
+$firstD = 0;
+$secondD = 0;
+
+$i = 0;
+for($j = 0; $j < $arrDiag; $j++){
+    $firstD += $arr[$i++][$j];
+    $secondD += $arr[$arrDiag - $i][$j];
+}
+
+echo abs($firstD - $secondD);//41
+
+///////////////////////////////
+
+C program to interchange diagonals of a matrix
+
+
+$ar1=array(
+  
+     array(1,2,3),
+     array(4,5,6),
+     array(7,8,9),
+          );
+$a1=sizeof($ar1);
+$ar=array();
+$tem=0; 
+$col=0;
+for($row=0;$row<$a1;$row++){
+  
+         $col=$row;
+  
+       $tem=$ar1[$row][$col];
+       $ar1[$row][$col]=$ar1[$row][($a1-$col)-1];  
+       $ar1[$row][($a1-$col)-1]=$tem;
+         
+ 
+  
+}
+
+
+ 
+for($row=0;$row<$a1;$row++){
+  
+  for($col=0;$col<$a1;$col++){
+      
+       echo $ar1[$row][$col];
+       
+         
+       
+    }
+  
+  echo "<br>";
+ 
+  
+}
+
+      //  echo $ar1[$row][$col];
+   
+  }
+  
+  
+       
+  
+  
+    echo "<br>";
+}
+
+ 106473       code
+
+
+
+
+http://www.java2novice.com/java-interview-programs/
+
+
+............. link list in java programming 
+
+
+
+import java.util.Scanner;
+// Linked List Class
+class LinkedList
+{
+	Node head; // head of list
+
+	/* Node Class */
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		// Constructor to create a new node
+		Node(int d) {data = d; next = null; }
+	}
+	public static void main(String args[]){
+	    Scanner in=new Scanner(System.in);
+	    int x=in.nextInt();
+	    Node addr=new Node(0);
+	    Node head=addr;
+	    for(int i=0;i<x;i++){
+	        int data=in.nextInt();
+	        Node n=new Node(data);
+	        addr.next=n;
+	        addr=n;
+	    }
+	    
+	    while(head!=null){
+	        System.out.println(head.data);
+	        head=head.next;
+	    }
+	}
+}
