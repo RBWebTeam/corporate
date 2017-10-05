@@ -70,4 +70,8 @@ Route::get('logout','AdminloginController@logout');
 Route::get('upload','UploadController@UploadPage');
 Route::post('upload-file','UploadController@UploadPost');
 Route::post('issue-submit','UserquotesController@issue_submit');
+
+Route::post('quote-remarks','UserquotesController@quote_remarks');
+Route::post('quote-remarks-show','UserquotesController@quote_remarks_show');
+ 
 });
