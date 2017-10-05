@@ -38,17 +38,17 @@ class LeadController extends Controller{
             return ['value'=>''];
 	}
 	public function generate(Request $req){
-		$status=0;
+		
 		try{
 				$uid=Session::get('userid');
 				$path = $req->file('file')->store('public/lead_documents');
 				$url=Storage::url($path);
 				$query=DB::select('call usp_insert_policy_lead_data(?,?,?,?,?,?,?,?,?,?,?)',array($req['catg'],$req['type'],$req['group'],$req['name'],$req['business'],$req['insurer'],$req['renew_date'],$req['sum_insured'],$req['premium'],$url,$uid));
-				$status=1;
+				$msg=" Lead Uploaded Successfully .....";
 			}catch(\Exception $ee){
-				$status=0;
+				$status="something went Wrong";
 			}
-		Session::flash('msg', " Lead Uploaded Successfully .....");
+		Session::flash('msg', $msg);
         return LeadController::generation_page();
 
 
