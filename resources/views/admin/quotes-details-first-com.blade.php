@@ -488,7 +488,7 @@
           </div>
      </div>
 
-@if(Session::get('user_type_id')==2 && Session::get('user_type_id')==3)
+@if(Session::get('user_type_id')==2 || Session::get('user_type_id')==3)
 <form class="form" id="form_remark" method="post"  >
        <div class="col-sm-8" style="margin: -20px 0 21px 0px;" >
         <div class="form-group">  <label>Remark Status</label>  <textarea class="form-control" rows="3" id="remark_text"></textarea>  </div>
@@ -497,9 +497,7 @@
 </form>
  @endif
         <div class="col-sm-8"  >
-             @if($query_master->is_approve=="1" ||  $query_master->is_approve1=="1")
-            <!--   <button type="button" class="btn btn-primary " id="mailModal">Send mail</button> -->
-
+             @if($query_master->is_approve=="1" &&  $query_master->is_approve1=="1")
                <a href="#" class="mail_status"><i class="fa fa-envelope" aria-hidden="true">Send mail</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
                <a href="{{url('downlaod-pdf')}}/{{$quote_id}}"  ><i class="fa fa-file-pdf-o " aria-hidden="true">Download PDF</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
               @endif
@@ -615,7 +613,7 @@ $(document).on('click','#remark_id',function(e){ e.preventDefault();
                 success: function(msg){
                    if(msg==1){
 
-                      $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">"<?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?>"</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+remark_text+'</p></div></li>');
+                      $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font"><?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?></strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+remark_text+'</p></div></li>');
 
 
                    }
@@ -644,11 +642,10 @@ $(document).ready(function () {
                $("#remark_chat ").empty();
               $.each(data.query_output, function( key, val ) {
                 
-               
-                if(key%2){ 
-                  $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+val.firstname+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+val.remark+'</p></div></li>');
+               if(key%2){ 
+                   $("#remark_chat").append('<li class="right clearfix"> <span class="chat-img pull-right">   <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small><strong class="pull-right primary-font">'+val.firstname+'</strong></div><p>'+val.remark+'</p></div></li>');
                 }else{
-                  $("#remark_chat").append('<li class="right clearfix"><span class="chat-img pull-right"><img src="http://placehold.it/50/FA6F57/fff" class="img-circle"/></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+val.firstname+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+val.remark+'</p></div></li>');
+                  $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+val.firstname+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+val.remark+'</p></div></li>');
                 }
 
 
