@@ -70,8 +70,16 @@ Route::get('logout','AdminloginController@logout');
 Route::get('upload','UploadController@UploadPage');
 Route::post('upload-file','UploadController@UploadPost');
 Route::post('issue-submit','UserquotesController@issue_submit');
+ 
 
 Route::post('quote-remarks','UserquotesController@quote_remarks');
 Route::post('quote-remarks-show','UserquotesController@quote_remarks_show');
+ 
+ 
+Route::get('lead-generation','LeadController@generation_page');
+Route::post('generate','LeadController@generate');
+Route::post('fetch-prod-by-catg','LeadController@fetch_product_by_catg');
+Route::get('show-leads','LeadController@show_leads');
+Route::get('autocomplete','LeadController@group_auto_complete');
  
 });
