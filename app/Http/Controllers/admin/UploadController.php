@@ -36,7 +36,7 @@ class UploadController extends Controller{
 		//print_r( Storage::url($filename));exit();
 	
         Session::flash('msg', $counter." Files Uploaded Successfully .....");
-        return redirect(Storage::url($filename));
+        return redirect('dashboard');
 	}
 	
 	

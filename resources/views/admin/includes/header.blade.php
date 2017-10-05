@@ -86,6 +86,12 @@
                         <li>
                         <a href="{{url('upload')}}"><i class="fa fa-wrench fa-fw"></i>Upload</a>
                         </li>
+                        <li>
+                        <a href="{{url('lead-generation')}}"><i class="fa fa-wrench fa-fw"></i>Upload Leads</a>
+                        </li>
+                        <li>
+                        <a href="{{url('show-leads')}}"><i class="fa fa-wrench fa-fw"></i>Show Leads</a>
+                        </li>
 
                        <!--  <li>
                             <a href="approver"><i class="fa fa-wrench fa-fw"></i> Approver </a>
