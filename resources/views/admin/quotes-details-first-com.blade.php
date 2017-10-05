@@ -443,66 +443,69 @@
 </div>
   </div>
 </div>    
+
+
 <div class="row ">
       <div class="col-lg-12 "  >
             <div class="panel panel-default">
                  <div class="panel-body">
-                   <h3 id="grid-column-ordering">Column ordering</h3>
-
-    <div class="row show-grid " >   
+                   <h3 id="grid-column-ordering">Remark</h3>
 
 
-     <div class="col-sm-12"  >
-      <div class="col-sm-4"  >
+     <div class="chat-panel panel panel-default">
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="chat" id="remark_chat">
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+
+<div class="col-sm-12"  > <div  style=" height:50px" ></div>  </div>          
+  <div class="col-sm-12"  >
+      <div class="col-sm-3"  >
           <div class="funkyradio">
           @if(Session::get('user_type_id')==2)
              <div class="funkyradio-success col-md-8"> 
-                      <input type="radio" name="radio" id="radio3" value="1" {{$query_master->is_approve1==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
+                      <input type="radio" name="approved" id="radio3" class="remar_status1" value="1" {{$query_master->is_approve1==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
                       <label for="radio3">Approved</label>
               </div>
               <div class="funkyradio-danger col-md-8">
-                      <input type="radio" name="radio" id="radio4" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
+                      <input type="radio" name="approved" id="radio4"  class="remar_status0" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
                       <label for="radio4">Rejected</label>
                </div>
                @elseif(Session::get('user_type_id')==3 )
                 <div class="funkyradio-success col-md-8"> 
-                      <input type="radio" name="radio" id="radio3" value="1" {{$query_master->is_approve==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
+                      <input type="radio" name="approved" id="radio3" class="remar_status" value="1" {{$query_master->is_approve==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
                       <label for="radio3">Approved</label>
               </div>
               <div class="funkyradio-danger col-md-8">
-                      <input type="radio" name="radio" id="radio4" value="0" {{$query_master->is_approve==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
-                      <label for="radio4">Rejected</label>
+                      <input type="radio" name="approved" id="radio4"  class="remar_status" value="0" {{$query_master->is_approve==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
+                      <label for="radio4">Rejected </label>
                </div>
                @else
               @endif
 
           </div>
-    </div>
- <div class="col-sm-8"  >
-          <div class="input-group"> 
-             <textarea class="form-control" rows="3"></textarea>
-                 <span class="input-group-btn">
-              <button class="btn btn-warning btn-sm" id="btn-chat">
-                  Send
-              </button>
-          </span>
-         </div>
-    </div>
-        <div class="col-sm-8"  >
-             @if($query_master->is_approve=="1" && $query_master->is_approve1=="1")
-            <!--   <button type="button" class="btn btn-primary " id="mailModal">Send mail</button> -->
-
-               <a href="#" class="mail_status"><i class="fa fa-envelope fa-2x" aria-hidden="true">Send mail</i></a> &nbsp;&nbsp;&nbsp;
-               <a href="{{url('downlaod-pdf')}}/{{$quote_id}}"  ><i class="fa fa-file-pdf-o fa-2x" fa-2x" aria-hidden="true">Download PDF</i></a>
-              @endif
-      </div>
-      </div> 
-
-
-    
      </div>
-    </div>
-   </div>
+
+@if(Session::get('user_type_id')==2 || Session::get('user_type_id')==3)
+<form class="form" id="form_remark" method="post"  >
+       <div class="col-sm-8" style="margin: -20px 0 21px 0px;" >
+        <div class="form-group">  <label>Remark Status</label>  <textarea class="form-control" rows="3" id="remark_text"></textarea>  </div>
+       <button type="submit" class="btn btn-default" id="remark_id" >Submit  </button>     
+      </div>
+</form>
+ @endif
+        <div class="col-sm-8"  >
+             @if($query_master->is_approve=="1" &&  $query_master->is_approve1=="1")
+               <a href="#" class="mail_status"><i class="fa fa-envelope" aria-hidden="true">Send mail</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
+               <a href="{{url('downlaod-pdf')}}/{{$quote_id}}"  ><i class="fa fa-file-pdf-o " aria-hidden="true">Download PDF</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
+              @endif
+           <a href="{{url('quotes-edit')}}/{{$quote_id}}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+        </div>
+     </div>
+
+
   </div>
  </div>
 
@@ -595,6 +598,65 @@ function Approved_fn(val){
                 });
 
 }
+
+
+
+
+$(document).on('click','#remark_id',function(e){ e.preventDefault();
+       var  is_approve=$("input[name='approved']:checked").val();
+       var  remark_text=$('#remark_text').val();
+          if(remark_text!=0 && remark_text!=null){
+     $.ajax({  
+                type: "POST",  
+                url: "{{URL::to('quote-remarks')}}?_token={{csrf_token()}}",
+                data :{"quote_id":"{{$quote_id}}","is_approve":is_approve,'remark_text':remark_text},
+                success: function(msg){
+                   if(msg==1){
+
+                      $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font"><?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?></strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+remark_text+'</p></div></li>');
+
+
+                   }
+                    
+                  }
+
+                });
+        
+            }else{
+
+              alert("please fill form carefully...");
+            }
+     
+});
+
+
+$(document).ready(function () {
+
+        $.ajax({
+          method: "POST",
+          url: "{{url('quote-remarks-show')}}",
+          //dataType: "json",
+          data: {"_token": "{{ csrf_token() }}","quote_id":{{$quote_id}}},
+          success: function(data) {
+            
+               $("#remark_chat ").empty();
+              $.each(data.query_output, function( key, val ) {
+                
+               if(key%2){ 
+                   $("#remark_chat").append('<li class="right clearfix"> <span class="chat-img pull-right">   <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small><strong class="pull-right primary-font">'+val.firstname+'</strong></div><p>'+val.remark+'</p></div></li>');
+                }else{
+                  $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+val.firstname+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+val.remark+'</p></div></li>');
+                }
+
+
+
+             });
+
+            
+          }
+             });
+
+});
 
 </script>
 

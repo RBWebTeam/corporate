@@ -232,7 +232,7 @@ $arr= array('section_id' =>$section_id,
 'designation' =>$designation,
 'email' =>$email,
 'mobile' =>$mobile,
-'pro_id' =>$pro_id,
+'product_id' =>$pro_id,
 );
 
  

@@ -202,4 +202,21 @@ alert("Please fill the form carefully ...");
                 }
             });
       });
+    function fnAllowNumeric(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+              return false;
+            }
+            return true;
+          }
+
+ </script>
+ <script type="text/javascript">
+     window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
  </script>

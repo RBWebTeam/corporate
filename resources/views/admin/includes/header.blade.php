@@ -81,10 +81,17 @@
                         @elseif (Session::get('user_type_id')==4)
                          <li>
                             <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
-                            <a href="{{url('upload')}}"><i class="fa fa-wrench fa-fw"></i>Upload</a>
                         </li>
                         @endif
-                  
+                        <li>
+                        <a href="{{url('upload')}}"><i class="fa fa-wrench fa-fw"></i>Upload</a>
+                        </li>
+                        <li>
+                        <a href="{{url('lead-generation')}}"><i class="fa fa-wrench fa-fw"></i>Upload Leads</a>
+                        </li>
+                        <li>
+                        <a href="{{url('show-leads')}}"><i class="fa fa-wrench fa-fw"></i>Show Leads</a>
+                        </li>
 
                        <!--  <li>
                             <a href="approver"><i class="fa fa-wrench fa-fw"></i> Approver </a>
