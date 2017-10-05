@@ -18,14 +18,15 @@
               <span>Name of Insured</span>
                       {{ csrf_field() }}
                      <input type="hidden" name="section_id" value="{{$getdetail->section_id}}">
-                    
+
+                      
                      <input type="hidden" name="business_type"   value="{{$getdetail->cust_action}}">
                      <input type="hidden" name="frshcash"   value="{{$getdetail->transaction_type}}">
                      <input type="hidden" name="newcustomer"   value="{{$getdetail->customer_type}}">
                      <input type="hidden" name="period_from"   value="{{$getdetail->period_from}}">
                      <input type="hidden" name="period_to"   value="{{$getdetail->period_to}}">
                      <input type="hidden" name="current_insurer_id"   value="{{$getdetail->current_insurer_id}}">
-
+                    <input type="hidden" name="pro_id" value="{{$getdetail->product_id}}">
                      
 
                 <input type="text" name="insure_name" id="insure_name" value="{{$getdetail->customer_name}}" required  > 

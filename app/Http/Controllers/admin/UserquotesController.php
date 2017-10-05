@@ -52,6 +52,8 @@ class UserquotesController extends Controller
      }
 
      public function quotes_details(Request $req){
+
+      
  
  
                try{
@@ -270,6 +272,31 @@ public function geoccu($occup_id){
  public function pdf_f(){
      return  PDF::loadHTML('<strong>Hello World</strong>')->lowquality()->pageSize('A2')->download();
  }
+
+
+
+public function quote_remarks(Request $req){
+                  try{
+                  $userid=Session::get('userid');
+                  $query_output=DB::select('Call usp_remarks(?,?,?,?)',array($req->quote_id,$userid,$req->is_approve,$req->remark_text));
+                }catch(\Exception $ee){
+             return 0;
+         }
+        return 1;              
+                   
+}
+
+public function quote_remarks_show(Request $req){
+                  try{        
+ $query_output=DB::select('Call usp_remarks_show(?)',array($req->quote_id));
+ return ['query_output'=>$query_output];
+          }catch(\Exception $ee){
+             return 0;
+         }
+        return 1;             
+}
+
+
 
 
 
