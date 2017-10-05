@@ -26,7 +26,7 @@
                                     <tr>
                                     <th>Lead ID</th>
                                     <th>Policy Category</th>
-                                    <th>Policy Type</th>
+                                    <th>Policy Name</th>
                                     <th>Group</th>
                                     <th>Client Name</th>
                                     <th>Business Type</th>
@@ -35,31 +35,26 @@
                                     <th>Sum insured</th>
                                     <th>Pre Tax Premium</th>
                                     <th>policy Copy</th>
-                                    <th>uploaded by</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
+                                    <th>Created By</th>
+                                    
                                     
                                   </tr>
                                 </thead>
                                 <tbody>
                                 	@foreach($lead as $lead)
                                   <tr class="clone_row">
-                                  	
                                   		<td> {{$lead->lead_id}}</td>
                                   		<td> {{$lead->policy_category}}</td>
-                                  		<td> {{$lead->policy_type}}</td>
-                                  		<td>{{$lead->group_id}}</td>
+                                  		<td> {{$lead->product_name}}</td>
+                                  		<td>{{$lead->group_name}}</td>
                                   		<td> {{$lead->client_name}}</td>
                                   		<td> {{$lead->business_type}}</td>
-                                  		<td> {{$lead->current_insurer_id}}</td>
+                                  		<td> {{$lead->company_name}}</td>
                                   		<td> {{$lead->renewal_date}}</td>
                                   		<td> {{$lead->sum_insured}}</td>
                                   		<td> {{$lead->pretax_premium}}</td>
-                                  		
                                   		<td><a href="{{$lead->document_path}}" target="_new">Document</a></td>
-                                  		<td> {{$lead->userid}}</td>
-                                  		<td> {{$lead->created_at}}</td>
-                                  		<td> {{$lead->updated_at}}</td>
+                                  		<td> {{$lead->created_by}}</td>
 
                                   </tr>
                                     @endforeach
