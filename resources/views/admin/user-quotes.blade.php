@@ -1,26 +1,21 @@
  @extends('admin.includes.master')
  @section('content')
  <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">All Quotes</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+             
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            DataTables Advanced Tables
+                         <div class="panel-heading">
+                            <h4  >View All Quotes</h4>
                         </div>
                         <!-- /.panel-heading -->
 
                         <div class="panel-body">
                      <!--    <input type="text" class="id='datetimepicker1'" id="myInput1" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> -->
-<table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12" id="dataTables-example" style="font-size: 14px;">
+<table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12" id="dataTables-example" style="font-size: 12px;">
                                 <thead>
-                                    <tr class="warning">
+                                    <tr  style="background-color: #0099CC; color:white">
                                         <th>Quote Id</th>
                                         <th>Customer name</th>
                                         <th>Product Name</th>
@@ -35,17 +30,10 @@
                                         <th>Reporting To</th>
                                         <th>Approver Name</th>
                                         <th>Show Quotes</th>
- 
-                                      <!--   <th>Mail Status</th> -->
-                                        <!-- <th>Download PDF</th> -->
-
- 
-                                        <th>Comment</th>
- 
-                                                                  
+                                        <th>Comment</th>                           
                                     </tr>
                                 </thead>
-                                <tbody>    <!-- class="danger" class="warning" class="info" class="success" -->
+                                <tbody>    
                                      @foreach($queryuser as $x=> $vl)  
 
                                        
@@ -67,32 +55,13 @@
                                         <td>{{$vl->empname}}</td>
                                         <td>{{$vl->reporting_empname}}</td>
                                         <td>{{$vl->approver_empname}}</td>
-                                        <td class="center"><a  href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id">View</a></td>
- 
-                                      <!--    <td>
-
-                            @if($vl->approver_status=="Approved" && $vl->manager_status=="Approved")
-
-                                          <a href="#" class="mail_status">{{$vl->mail_status}}</a>
-                                            @else
-                                            <a class="btn btn-link disabled">{{$vl->mail_status}}</a>
-                                            @endif
-                                         </td> -->
-                                        <!--  <td>
-                                          
-                                            @if($vl->approver_status=="Approved" && $vl->manager_status=="Approved")
-                                           <a href="{{url('downlaod-pdf')}}/{{$vl->quote_id}}">Download PDF</a>
-                                            @else
-                                            <a class="btn btn-link disabled">Download</a>
-                                            @endif
-                                         </td> -->
- 
+                                        <td class="center"><a  href="{{url('quotes-details')}}/{{$vl->quote_id}}" class="approved_id" style="color: #007E33">
+                                        <i class="fa fa-eye fa-1.5x" aria-hidden="true"></i> View</a></td>
                                         <td > 
-                                        <span id="{{$vl->quote_id}}" class="issue btn btn-info btn-lg" >
-                                        Open Issue</span>
+                                        <span id="{{$vl->quote_id}}" class="issue "  style="color: #007E33">
+                                         <i class="  fa fa-comments fa-1.5x"  >Open Issue</i> 
+                                        </span>
                                         </td> 
-                                        
- 
                                     </tr>
                                     @endforeach
                                     

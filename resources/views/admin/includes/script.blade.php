@@ -69,7 +69,7 @@
                $("#notification_id ").empty();
               $.each(data.is_approve, function( key, val ) {
 
-                      $("#notification_id ").append('<li><a href="{{url("dashboard/user-show-groups")}}"><div><strong>'+val.firstname+'</strong><span class="pull-right text-muted"><em>'+timeDifference(new Date(),new Date(val.datetime_created))+'</em></span></div><div>1</div></a></li><li class="divider"></li>');
+                      $("#notification_id ").append('<li><a href="{{url("user-quotes/2")}}"><div><strong>'+val.firstname+'</strong><span class="pull-right text-muted"><em>'+timeDifference(new Date(),new Date(val.datetime_created))+'</em></span></div><div>1</div></a></li><li class="divider"></li>');
              });
 
             
@@ -202,4 +202,21 @@ alert("Please fill the form carefully ...");
                 }
             });
       });
+    function fnAllowNumeric(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+              return false;
+            }
+            return true;
+          }
+
+ </script>
+ <script type="text/javascript">
+     window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
  </script>
