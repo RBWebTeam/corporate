@@ -62,8 +62,12 @@ class LeadController extends Controller{
 		return ($product);
 	}
 	public function show_leads(){
-		$leads=DB::table('policy_lead_data')->
-		select('lead_id', 'policy_category', 'policy_type', 'group_id', 'client_name', 'business_type', 'current_insurer_id', 'renewal_date', 'sum_insured', 'pretax_premium', 'document_path', 'userid', 'created_at', 'updated_at')->get();
+		$emp_code=Session::get('empcode');
+		$user_type=Session::get('user_type_id');
+		$vertical=Session::get('vertical_id');
+		$branch=Session::get('branch_id');
+		//print_r($emp_code);exit();
+		$leads=DB::select('call usp_show_lead_data (?,?,?,?)',[$emp_code,$user_type,$vertical,$branch]);
 		return view('admin/show-leads',["lead"=>$leads]);
 	}
 
