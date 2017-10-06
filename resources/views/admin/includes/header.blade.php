@@ -71,26 +71,26 @@
                         @if(Session::get('user_type_id')==2)
                          <li>
                        <!--      <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a> -->
-                             <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
+                             <a href="{{url('home')}}"><i class="fa fa-plus-circle fa-fw"></i>Add Quotes  </a>
                         </li>
                         @elseif (Session::get('user_type_id')==3)
                         <li>
                          <!--   <a href="{{url('approved')}}"><i class="fa fa-wrench fa-fw"></i>Approve Quote</a> -->
-                            <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
+                            <a href="{{url('home')}}"><i class="fa fa-plus-circle fa-fw"></i>Add Quotes  </a>
                         </li>
                         @elseif (Session::get('user_type_id')==4)
                          <li>
-                            <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
+                            <a href="{{url('home')}}"><i class="fa fa-plus-circle fa-fw"></i>Add Quotes  </a>
                         </li>
                         @endif
                         <li>
-                        <a href="{{url('upload')}}"><i class="fa fa-wrench fa-fw"></i>Upload</a>
+                        <a href="{{url('upload')}}"><i class="fa fa-upload fa-fw"></i>Upload</a>
                         </li>
                         <li>
-                        <a href="{{url('lead-generation')}}"><i class="fa fa-wrench fa-fw"></i>Upload Leads</a>
+                        <a href="{{url('lead-generation')}}"><i class="fa fa-cloud-upload fa-fw"></i>Upload Leads</a>
                         </li>
                         <li>
-                        <a href="{{url('show-leads')}}"><i class="fa fa-wrench fa-fw"></i>Show Leads</a>
+                        <a href="{{url('show-leads')}}"><i class="fa fa-eye  fa-fw"></i>Show Leads</a>
                         </li>
 
                        <!--  <li>

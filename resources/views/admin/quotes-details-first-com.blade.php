@@ -68,12 +68,12 @@
             </div>
       <div class="row">
         <div class="col-md-10 ">
-          <h3 class="text-center"> Standard Fire and Special Perils </h3>
+          <h5 class="text-center text-danger"><strong> Standard Fire and Special Perils </strong></h5>
         </div>
      <div class="col-md-10"> 
     <label class="control-label col-sm-2"  > </label>
     <div class="col-sm-8">
-   <table class="table table-bordered table-striped" style=" font-size:13px;">
+   <table class="table table-bordered table-striped" style=" font-size:11px;">
     <thead>
       <tr  >
         <th>Name of the insured</th>
@@ -114,9 +114,9 @@
 </div>   
 <br><br> 
   <div class="col-md-10 ">
-          <h3 class="text-center" > Comparision </h3>
+          <h5 class="text-center text-danger"><strong> Comparision </strong></h5>
     </div>
-  <table class="table table-bordered table-striped" style=" font-size:13px;">
+  <table class="table table-bordered table-striped" style=" font-size:11px;">
     <thead>
       <tr class="bg-info">
         <th>Sl.</th>
@@ -198,9 +198,9 @@
 <br><br> 
 
 <div class="col-md-10 ">
-     <h3 class="text-center"> Coverage  </h3>
+     <h5 class="text-center text-danger"><strong> Coverage </strong> </h5>
  </div>
-  <table class="table table-bordered table-striped" style=" font-size:13px;">
+  <table class="table table-bordered table-striped" style=" font-size:11px;">
     <thead>
       <tr class="bg-info">
         <th> </th>
@@ -313,9 +313,9 @@
 
 <br><br> 
 <div class="col-md-10 ">
-     <h3 class="text-center" > Premium Details  </h3>
+     <h5 class="text-center text-danger"><strong> Premium Details </strong> </h5>
  </div>
-  <table class="table table-bordered table-striped" style=" font-size:13px;">
+  <table class="table table-bordered table-striped" style=" font-size:11px;">
     <thead>
       <tr class="bg-info">
         <th></th>
@@ -368,14 +368,14 @@
 
 <br><br> 
 <div class="col-md-10 ">
-     <h3 class="text-center"> Deductible / Excess  </h3>
+     <h5 class="text-center text-danger"><strong>Deductible / Excess  </strong></h5>
  <p>Upto 10 crs Sum Insured – 5% of Claim amount subject to minimum of Rs. 10000/	</p>			
 <p>Above 10 crs and Upto 100 crs – 5% of Claim amount subject to miniumum of Rs. 25000/-	</p>			
 <p>Above 100 crs – 5% of Claim Amount subject to minimum of Rs. 5,00,000/-	</p>			
  </div>
 <br><br> 
 <div class="col-md-10 ">
-    <h3 class="text-center"> Warranties & Clauses:  </h3>
+    <h5 class="text-center text-danger"><strong> Warranties & Clauses: </strong> </h5>
     
 
   @if($query_master->is_stfi!=0) 
@@ -425,7 +425,7 @@
 
 
 <div class="col-md-10 ">
-    <h3 class="text-center"> Loss or damage resulting from:  </h3>
+    <h5 class="text-center text-danger"><strong>Loss or damage resulting from: </strong> </h5>
     
 <p>Fire due to own fermentation, natural heating or spontaneous combustion of the stocks or by their undergoing any heating or drying process </p>
 <p>Burning by order of any Public Authority</p> 
@@ -605,6 +605,7 @@ function Approved_fn(val){
 $(document).on('click','#remark_id',function(e){ e.preventDefault();
        var  is_approve=$("input[name='approved']:checked").val();
        var  remark_text=$('#remark_text').val();
+        var name="<?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?>";
           if(remark_text!=0 && remark_text!=null){
      $.ajax({  
                 type: "POST",  
@@ -613,8 +614,7 @@ $(document).on('click','#remark_id',function(e){ e.preventDefault();
                 success: function(msg){
                    if(msg==1){
 
-                      $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font"><?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?></strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+remark_text+'</p></div></li>');
-
+                       $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><a class="btn btn-info btn-circle btn-lg">'+name.charAt(0).toUpperCase()+'</a> </span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+name+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> Just Now</small> </div> <p>'+remark_text+'</p></div></li>');
 
                    }
                     
@@ -642,10 +642,11 @@ $(document).ready(function () {
                $("#remark_chat ").empty();
               $.each(data.query_output, function( key, val ) {
                 
+                
                if(key%2){ 
-                   $("#remark_chat").append('<li class="right clearfix"> <span class="chat-img pull-right">   <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small><strong class="pull-right primary-font">'+val.firstname+'</strong></div><p>'+val.remark+'</p></div></li>');
+                   $("#remark_chat").append('<li class="right clearfix"> <span class="chat-img pull-right"><a class="btn btn-info btn-circle btn-lg">'+val.firstname.charAt(0).toUpperCase()+'</a> </span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>'+timeDifference(new Date(),new Date(val.datetime_created))+'</small><strong class="pull-right primary-font">'+val.firstname+'</strong></div><p>'+val.remark+'</p></div></li>');
                 }else{
-                  $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+val.firstname+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> 12 mins ago</small> </div> <p>'+val.remark+'</p></div></li>');
+                  $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><a class="btn btn-success btn-circle btn-lg">'+val.firstname.charAt(0).toUpperCase()+'</a> </span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+val.firstname+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>'+timeDifference(new Date(),new Date(val.datetime_created))+'</small> </div> <p>'+val.remark+'</p></div></li>');
                 }
 
 
