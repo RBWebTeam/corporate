@@ -92,6 +92,9 @@
                         <li>
                         <a href="{{url('show-leads')}}"><i class="fa fa-wrench fa-fw"></i>Show Leads</a>
                         </li>
+                        <li>
+                        <a href="{{url('bulk-upload')}}"><i class="fa fa-wrench fa-fw"></i>Bulk Leads Upload</a>
+                        </li>
 
                        <!--  <li>
                             <a href="approver"><i class="fa fa-wrench fa-fw"></i> Approver </a>
