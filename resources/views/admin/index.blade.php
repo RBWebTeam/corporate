@@ -71,7 +71,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                             <i class="fa fa-comment-o fa-2x fa-spin"></i>
+                             <i class="fa fa-comment-o fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{$count->pending_cnt}}</div>
