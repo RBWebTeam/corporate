@@ -25,7 +25,7 @@
 	           <div class="form-group">
 	           	 <button type="submit" class="btn btn-primary  ">Upload</button>
 
-	           	 <a download="upload_fomart.csv " href="{{URL::to('upload_format/upload_format.csv')}}" class="btn btn-primary ">Download Sample Format</a>
+	           	 <a download="upload_fomart.csv" href="{{URL::to('upload_format/upload_format.csv')}}" class="btn btn-primary ">Download Sample Format</a>
 	           	</div>
         	</div>
           
