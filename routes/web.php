@@ -87,7 +87,9 @@ Route::post('generate','LeadController@generate');
 Route::post('fetch-prod-by-catg','LeadController@fetch_product_by_catg');
 Route::get('show-leads','LeadController@show_leads');
 Route::get('autocomplete','LeadController@group_auto_complete');
- 
+Route::get('bulk-upload','LeadController@bulk_upload');
+Route::post('upload-excel','LeadController@upload_excel');
+Route::get('show-xl-data','LeadController@show_xl_data');
 });
 
 /************

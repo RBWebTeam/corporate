@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use Session;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 class LeadController extends Controller{
@@ -69,6 +70,50 @@ class LeadController extends Controller{
 		//print_r($emp_code);exit();
 		$leads=DB::select('call usp_show_lead_data (?,?,?,?)',[$emp_code,$user_type,$vertical,$branch]);
 		return view('admin/show-leads',["lead"=>$leads]);
+	}
+
+	public function bulk_upload(){
+		return view('admin/bulk-lead-upload');
+	}
+	public function upload_excel(Request $req){
+			
+			$userid=Session::get('userid');
+			$file=Input::file('excel');
+			
+			$data = \Excel::load($file)->toObject();
+			$msg="Data Uploaded Successfully. \n ";
+            if($data){
+            	$count=0;
+            	try{
+            		foreach ($data as $k => $val) {
+	                	foreach ($val as $key => $value) {
+	                		# code...
+	                	try{
+	                		$id = DB::table('bulk_upload')->insertGetId(
+	                						    ['serial_number' => $value->serial_number, 'name_of_insured' => $value->name_of_insured,'occupancy_business'=>$value->occupancy_business,'policy_category'=>$value->policy_category,'policy_type'=>$value->policy_type,'renewal_date'=>$value->renewal_date,'current_insurer'=>$value->current_insurer,'sum_insured'=>$value->sum_insured,'pre_tax_premium'=>$value->pre_tax_premium,'user_id'=>$userid]
+	                						);
+	                	    $count++;
+	                	}catch(\Exception $ee){
+	                		if(isset($value->serial_number)){
+            					$msg+="but serial No. ".$value->serial_number."Not uploaded \n";
+            				}
+            				else
+            					$msg+="but your XL break down something hence partial data uploaded";
+            				continue;
+	                	}
+                	  }
+                	}
+            	}catch(\Exception $ee){
+            		$msg+="but your XL breaks down something";
+            	}
+              
+               Session::flash('msg',$msg);
+               return redirect('dashboard');
+		}
+	}
+	public function show_xl_data(){
+		$data=DB::table('bulk_upload')->get();
+		return $data;
 	}
 
 }
