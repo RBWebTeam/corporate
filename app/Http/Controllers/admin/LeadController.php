@@ -90,12 +90,13 @@ class LeadController extends Controller{
 	                		# code...
 	                	try{
 	                		$id = DB::table('bulk_upload')->insertGetId(
-	                						    ['serial_number' => $value->serial_number, 'name_of_insured' => $value->name_of_insured,'occupancy_business'=>$value->occupancy_business,'policy_category'=>$value->policy_category,'policy_type'=>$value->policy_type,'renewal_date'=>$value->renewal_date,'current_insurer'=>$value->current_insurer,'sum_insured'=>$value->sum_insured,'pre_tax_premium'=>$value->pre_tax_premium,'user_id'=>$userid]
+	                						    ['group_name' => $value->group_name, 'name_of_insured' => $value->name_of_insured,'occupancy_business'=>$value->occupancy_business,'policy_category'=>$value->policy_category,'policy_type'=>$value->policy_type,'renewal_date'=>$value->renewal_date,'current_insurer'=>$value->current_insurer,'sum_insured'=>$value->sum_insured,'pre_tax_premium'=>$value->pre_tax_premium,'user_id'=>$userid]
 	                						);
 	                	    $count++;
 	                	}catch(\Exception $ee){
-	                		if(isset($value->serial_number)){
-            					$msg+="but serial No. ".$value->serial_number."Not uploaded \n";
+	                		if(isset($value->name_of_insured)){
+	                			//print_r($ee);
+            					$msg+="but lead of ".$value->name_of_insured."Not uploaded \n";
             				}
             				else
             					$msg+="but your XL break down something hence partial data uploaded";
@@ -104,6 +105,7 @@ class LeadController extends Controller{
                 	  }
                 	}
             	}catch(\Exception $ee){
+            		//$print_r($ee);
             		$msg+="but your XL breaks down something";
             	}
               
