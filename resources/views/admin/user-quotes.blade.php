@@ -13,9 +13,9 @@
 
                         <div class="panel-body">
                      <!--    <input type="text" class="id='datetimepicker1'" id="myInput1" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> -->
-<table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12" id="dataTables-example" style="font-size: 12px;">
+<table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12 " id="dataTables-example" style="font-size: 12px;" >
                                 <thead>
-                                    <tr  style="background-color: #0099CC; color:white">
+                                    <tr  style="background-color: #0099CC; color:white;" >
                                         <th>Quote Id</th>
                                         <th>Customer name</th>
                                         <th>Product Name</th>
@@ -30,7 +30,8 @@
                                         <th>Reporting To</th>
                                         <th>Approver Name</th>
                                         <th>Show Quotes</th>
-                                        <th>Comment</th>                           
+                                        <th>Comment</th>  
+                                                                 
                                     </tr>
                                 </thead>
                                 <tbody>    
@@ -62,6 +63,7 @@
                                          <i class="  fa fa-comments fa-1.5x"  >Open Issue</i> 
                                         </span>
                                         </td> 
+
                                     </tr>
                                     @endforeach
                                     

@@ -24,7 +24,7 @@
 	  
 	  <div class="col-md-2">
         <ul class="nav navbar-nav navbar-right pad pad-top center-btn">
-            <a href="{{url('dashboard')}}"  class="btn btn-danger">DASHBOARD</a>
+            <a href="{{url('dashboard')}}"  class="dashboard-clr">DASHBOARD</a>
         </ul>
 		</div>
 		
@@ -102,6 +102,8 @@
 {
     font-size: 87px;
 }
+.dashboard-clr {background:#e3000f; padding:10px 15px; color:#fff;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;}
+.dashboard-clr:hover {color:#fff;background:#333;}
     </style>
    
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>

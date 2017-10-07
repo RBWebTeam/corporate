@@ -3,8 +3,10 @@
     $(document).ready(function() {    // for table script
         $('#dataTables-example').DataTable({
             "order": [[0, "desc" ]],
-
-            responsive: true
+          
+            "scrollX": true,
+            
+            //  responsive: true,
         });
     });
 
