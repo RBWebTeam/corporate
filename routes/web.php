@@ -30,7 +30,13 @@ Route::get('thank-you','FirecalculatorController@thank_You');
 Route::get('downlaod-pdf/{quote_id}','FirecalculatorController@downlaod_pdf');
 Route::get('my-profile','ProfileController@my_profile');
 
-    });
+ });
+
+
+
+
+
+
 Route::get('insurercompany',array('as'=>'insurercompany','uses'=>'AutoCompleteController@insurercompany')); 
 Route::get('searchoccupiedajax',array('as'=>'searchoccupiedajax','uses'=>'AutoCompleteController@autoComplete_occupied_as'));
 Route::get('searchstateajax',array('as'=>'searchstateajax','uses'=>'AutoCompleteController@autoComplete_state'));  
@@ -85,3 +91,12 @@ Route::get('bulk-upload','LeadController@bulk_upload');
 Route::post('upload-excel','LeadController@upload_excel');
 Route::get('show-xl-data','LeadController@show_xl_data');
 });
+
+/************
+//  Group Health Insurance
+******************/
+Route::group(['middleware' => 'dashboard','namespace' => 'GroupHealthInsurance',  ], function() {
+        Route::get('transaction-type/{id}','GHIcontroller@policy_type');
+        Route::post('GHI-quote','GHIcontroller@ghi_quote');
+    });
+
