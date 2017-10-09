@@ -1,6 +1,6 @@
  
 <div class="container-fluid">
- <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0;">
+ <nav class="navbar navbar-default navbar-static-top nav-pad" role="navigation" style="margin-bottom:0; height:73px;">
 
             <div class="navbar-header" >
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -11,7 +11,7 @@
                 </button>
                 <a class="navbar-brand" href="{{url('dashboard')}}"> 
 
-<img src="{{url('images/landmark.png')}}" width="60"  style="margin:  -16px 10px 4px 41px"  >
+<img src="{{url('images/landmark.png')}}" width="100"  style="margin:  -16px 10px 4px 41px"  >
                <!--   <?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?> --></a>
             </div>
             <!-- /.navbar-header -->
