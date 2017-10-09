@@ -378,12 +378,13 @@ body {
 .bg-white {background:#fff;float:left:}
 .mrg-btm {margin-bottom:20px;}
 .pad {padding:20px;}
-.pad-top {padding-top:44px;}
+.pad-top {padding-top:35px;}
 .clr-wht {color:#fff;}
 .clr-wht:hover {color:#fff;}
 .mrg-0 {margin:0px;}
 .gray-txt {color:#999;}
 .mrg-top {margin-top:30px;}
+
 @media only screen and (max-width:768px) {
 	
 	.center-btn {margin-left:30%;padding-top:10px;}

@@ -24,8 +24,9 @@
 	  
 	  <div class="col-md-2">
         <ul class="nav navbar-nav navbar-right pad pad-top center-btn">
-            <a href="{{url('dashboard')}}"  class="dashboard-clr">DASHBOARD</a>
-        </ul>
+
+            <a href="{{url('dashboard')}}"  class="btn btn-info btn-lg">DASHBOARD</a>
+
 		</div>
 		
       </div> 
