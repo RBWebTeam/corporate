@@ -29,7 +29,7 @@ a:focus, a:hover {
 	outline: none;
 }
 .register-full {
-    width: 60%;
+    width: 100%;
     margin: 0 auto;
 }
 .register-left {
@@ -305,8 +305,7 @@ body {
 }
    .logo img {margin:0 auto;}
   .padd {padding:8px;}
-  .fluid-bg {background:rgba(255, 255, 255, 0.8);margin-bottom: 20px;}
-  .fluid-bg:hover {box-shadow:1px 1px 3px 1px #999;}
+  .fluid-bg {background:rgba(255, 255, 255, 0.9);margin-bottom: 20px; box-shadow:1px 1px 3px 1px #ccc;}
   .mrg-tp {margin-top:0px;}
   .bg {background:rgba(255, 255, 255, 0.8);}
    .mrg-top {margin-top:40px;}
@@ -316,18 +315,19 @@ body {
   .menu li a {font-size:16px;background:#e3000f;color:#fff;padding:15px;display:block;border-bottom:1px dashed #f3636d;transition:all 0.3s linear;-moz-transition:all 0.3s linear;-webkit-transition:all 0.3s linear;}
   .menu li a:hover {margin-left:10px;background:#f8f8f8;color:#666;text-decoration:none;transition:all 0.3s linear;-moz-transition:all 0.3s linear;-webkit-transition:all 0.3s linear;}
   .menu {height:320px;margin:0px; padding:0px;border-radius:5px;}
-  .righ-col {height:320px;border:1px solid #eee;padding:20px;background:#fff;border-radius:5px;}
+  .righ-col {height:320px;padding:20px;background:#fff; opacity:0.9;}
   .righ-col ul {margin:0px;padding:0px;}
   .righ-col li {padding:4px;margin-bottom:5px;list-style-type:none; text-decoration:underline;}
   .bg-white {background:#fff;}
   .head-3 {background:#fff;padding:10px;margin:0px; text-align:center;}
   .landmark-txt {line-height:86px;color:#999; font-size:18px;}
   .login  {
-    background:rgba(255, 255, 255, 0.56);
+    background:rgba(255, 255, 255, 0.9);
     -webkit-box-shadow: 0px 35px 44px -22px rgba(0,0,0,0.72);
     -moz-box-shadow: 0px 35px 44px -22px rgba(0,0,0,0.72);
     box-shadow: 0px 35px 44px -22px #1f181b;
     padding: 20px 40px;
+	border: 10px solid #dcdcdc;
 }
 .login h2 {
     color: #666;
@@ -377,3 +377,15 @@ body {
 .box-shadow {box-shadow:1px 1px 3px 1px #ccc;}
 .bg-white {background:#fff;float:left:}
 .mrg-btm {margin-bottom:20px;}
+.pad {padding:20px;}
+.pad-top {padding-top:35px;}
+.clr-wht {color:#fff;}
+.clr-wht:hover {color:#fff;}
+.mrg-0 {margin:0px;}
+.gray-txt {color:#999;}
+.mrg-top {margin-top:30px;}
+
+@media only screen and (max-width:768px) {
+	
+	.center-btn {margin-left:30%;padding-top:10px;}
+}

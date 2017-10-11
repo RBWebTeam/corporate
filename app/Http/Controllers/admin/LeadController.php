@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use Session;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 class LeadController extends Controller{
@@ -62,9 +63,59 @@ class LeadController extends Controller{
 		return ($product);
 	}
 	public function show_leads(){
-		$leads=DB::table('policy_lead_data')->
-		select('lead_id', 'policy_category', 'policy_type', 'group_id', 'client_name', 'business_type', 'current_insurer_id', 'renewal_date', 'sum_insured', 'pretax_premium', 'document_path', 'userid', 'created_at', 'updated_at')->get();
+		$emp_code=Session::get('empcode');
+		$user_type=Session::get('user_type_id');
+		$vertical=Session::get('vertical_id');
+		$branch=Session::get('branch_id');
+		//print_r($emp_code);exit();
+		$leads=DB::select('call usp_show_lead_data (?,?,?,?)',[$emp_code,$user_type,$vertical,$branch]);
 		return view('admin/show-leads',["lead"=>$leads]);
+	}
+
+	public function bulk_upload(){
+		return view('admin/bulk-lead-upload');
+	}
+	public function upload_excel(Request $req){
+			
+			$userid=Session::get('userid');
+			$file=Input::file('excel');
+			
+			$data = \Excel::load($file)->toObject();
+			$msg="Data Uploaded Successfully. \n ";
+            if($data){
+            	$count=0;
+            	try{
+            		foreach ($data as $k => $val) {
+	                	foreach ($val as $key => $value) {
+	                		# code...
+	                	try{
+	                		$id=DB::select('call usp_insert_bulk_upload(?,?,?,?,?,?,?,?,?,?,?)',[$value->group_name,$value->name_of_insured,$value->occupancy_business,$value->policy_category,$value->policy_type,$value->renewal_date,$value->current_insurer,$value->sum_insured,$value->pre_tax_premium,$userid,0]);
+
+	                	    $count++;
+	                	}catch(\Exception $ee){
+	                		if(isset($value->name_of_insured)){
+	                			print_r($ee->getMessage());exit();
+            					$msg+="but lead of ".$value->name_of_insured."Not uploaded \n";
+            				}
+            				else
+            					$msg+="but your XL break down something hence partial data uploaded";
+            				continue;
+	                	}
+                	  }
+                	}
+                	$update=DB::select('call usp_insert_bulk_lead_data()');
+            	}catch(\Exception $ee){
+            		//$print_r($ee);
+            		$msg+="but your XL breaks down something";
+            	}
+              	
+               Session::flash('msg',$msg);
+               return redirect('dashboard');
+		}
+	}
+	public function show_xl_data(){
+		$data=DB::table('bulk_upload')->get();
+		return $data;
 	}
 
 }

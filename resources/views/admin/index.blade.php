@@ -4,7 +4,7 @@
  <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">LANDMARK CORPORATE INSURANCE</h1>
+                    <h3 class="page-header">LANDMARK CORPORATE INSURANCE</h3>
 
                      
                 @if (Session::has('msg'))
@@ -27,7 +27,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                               </i><i class="fa fa-shield fa-5x" aria-hidden="true"></i>
+                               </i><i class="fa fa-list-alt fa-5x" aria-hidden="true"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{$count->all_cnt}}</div>
@@ -49,7 +49,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                   <i class="fa fa-clock-o fa-5x" aria-hidden="true"></i>
+                                   <i class="fa fa-check fa-5x" aria-hidden="true"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{$count->approve_cnt}}</div>
@@ -71,7 +71,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                             <i class="fa fa-comment-o fa-2x fa-spin"></i>
+                             <i class="fa fa-list-alt fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{$count->pending_cnt}}</div>

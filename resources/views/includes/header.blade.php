@@ -6,6 +6,7 @@
    </div>  -->
  
   <div class="row ">
+  <div class="col-md-2">
       <div class="navbar-header ">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
           <span class="sr-only">Toggle navigation</span>
@@ -13,18 +14,21 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-         <img src="{{url('images/landmark.png')}}" width="130" class="padd pull-right" />
-         
-      </div><h1>&ensp;&ensp;&ensp;&ensp;LANDMARK CORPORATE INSURANCE</h1>
-      
-        <ul class="nav navbar-nav navbar-right"  >
+         <img src="{{url('images/landmark.png')}}" width="140" class="padd center-btn" />
+      </div>
+	  </div>
+	  
+	  <div class="col-md-8">
+	 <marquee> <h3 class="text-center pad hidden-xs gray-txt">LANDMARK CORPORATE INSURANCE</h3></marquee> 
+      </div>
+	  
+	  <div class="col-md-2">
+        <ul class="nav navbar-nav navbar-right pad pad-top center-btn">
 
+            <a href="{{url('dashboard')}}"  class="btn btn-info btn-lg">DASHBOARD</a>
 
-          <li class="dropdown">
-            <a style="    margin: -54px;" href="{{url('dashboard')}}"  >Dashboard </a>
-             
-          </li>
-        </ul>
+		</div>
+		
       </div> 
       <!--/.nav-collapse -->
   
@@ -99,6 +103,8 @@
 {
     font-size: 87px;
 }
+.dashboard-clr {background:#e3000f; padding:10px 15px; color:#fff;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;}
+.dashboard-clr:hover {color:#fff;background:#333;}
     </style>
    
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>

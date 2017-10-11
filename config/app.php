@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Novanti\LaravelPDF\PDFServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -227,6 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Novanti\LaravelPDF\PDFFacade::class,
         'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
