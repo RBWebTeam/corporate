@@ -58,6 +58,7 @@ Route::group(['middleware' => 'dashboard','namespace'=>'admin'], function () {
 Route::get('dashboard','DashboardController@dashboard');
 Route::get('dashboard/registration','DashboardController@registration')->middleware('mainadmin');
 Route::post('dashboard/registration-form','AdminloginController@registrationform');
+Route::get('dashboard/vertical-master','AdminloginController@verticalmasterform');
 Route::post('dashboard/notification','HeaderController@notification');
 Route::get('dashboard/user-show-groups','DashboardController@user_show');
 
@@ -90,6 +91,7 @@ Route::get('autocomplete','LeadController@group_auto_complete');
 Route::get('bulk-upload','LeadController@bulk_upload');
 Route::post('upload-excel','LeadController@upload_excel');
 Route::get('show-xl-data','LeadController@show_xl_data');
+
 });
 
 /************

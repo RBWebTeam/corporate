@@ -61,6 +61,7 @@
                                 <li>
                                     <a href="{{url('dashboard/registration')}}">User Registration</a>
                                     <a href="{{url('home')}}"><i class="fa fa-wrench fa-fw"></i>Add Quotes  </a>
+                                    <a href="{{url('dashboard/vertical-master')}}"><i class="fa fa-wrench fa-fw"></i>Vertical Master  </a>
                                 </li>
                                 <li>
                                   <!--   <a href="dashboard/approve">User Approval </a> -->
