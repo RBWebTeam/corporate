@@ -1,13 +1,7 @@
  @extends('admin.includes.master')
  @section('content')
   <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Tables</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -18,12 +12,12 @@
                         <div class="panel-body table-responsive">
                           <form id="upload_policy_form" enctype="multipart/form-data" action ="upload-file" method="POST">
                             {{csrf_field()}}
-                            <table width="100%" class="table table-striped table-bordered table-hover" >
+                       <table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12 " id="dataTables-example" style="font-size: 12px;" >
                               <!-- id="dataTables-example" -->
                               
 
                                 <thead>
-                                    <tr>
+                                      <tr  style="background-color: #0099CC; color:white;" >
                                     <th>Lead ID</th>
                                     <th>Policy Category</th>
                                     <th>Policy Name</th>

@@ -137,7 +137,25 @@ public function insurercompany(Request $request){
 
 
 
+public function search_industry_ghi(Request $request){
 
+         $term = $request->term;
+         $products=DB::table('industry_type_master')->select('industry_type','industry_type_id')
+        ->where('industry_type', 'LIKE', '%'.$term.'%')
+        ->take(5)->get();
+        $data=array();
+        foreach ($products as $product) {
+                $data[]=array('value'=>$product->industry_type,'industry_type_id'=>$product->industry_type_id);
+        }
+        if(count($data)){
+             return $data;
+         }
+        else
+           return ['value'=>'No Result Found'];
+
+     
+         
+}
 
 
     }

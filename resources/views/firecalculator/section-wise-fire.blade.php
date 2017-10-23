@@ -5,7 +5,7 @@
   <br>
   <h3 class="head-3">{{$query->section_name}} </h3>
   <div class="padding-80 box-shadow bg-success ">
-  <form action="{{url('customer-details')}}" method="post">
+  <form action="{{url('customer-details')}}" method="post" enctype="multipart/form-data">
    {{ csrf_field() }}
      <input type="hidden" name="section_id" value="{{$query->section_id}}">
      <input type="hidden" name="pro_id" value="{{$pro_id}}">
@@ -46,14 +46,38 @@
     <td></td>
      <td></td>
    </tr> 
-
- 
-
    </table>
-            
-             
+
+<br>
+ <h4 class="col-md-12"><span class="text-sucsess">Policy Upload</span></h4>
+    <div class="form-group" id="tab_logic">
+      <label for="policy_copy">Policy Copy:</label>
+     <div id='addr0'>  <input    type="file" class="form-control" name="policy_copy[]" id="policy_copy"  ></div>
+     <div id='addr1'></div>
+      
+    </div>
+     <a id="add_row" class="btn btn-success pull-left">Add Row</a><a id='delete_row' class="btn btn-danger pull-right">Delete Row</a>
+    <br><br><br><br>
+
+    <div class="form-group">
+      <label for="visiting_card">Visiting card:</label>
+      <input type="file" class="form-control" name="visiting_card" >
+    </div>
+    
+     <div class="form-group">
+      <label for="mandate">Mandate letter copy:</label>
+      <input type="file" class="form-control" name="mandate" >
+    </div>
+ 
+   <div class="form-group">
+      <label for="inspection_report">Inspection report :</label>
+      <input type="file" class="form-control"  name="inspection_report">
+
+    </div>
+ 
+ 
                
-           <button>Continue</button>
+           <button class="btn btn-primary">Continue</button>
     </form>
    </div>
   </div>
@@ -138,6 +162,33 @@ $('#business_type_mar1').click(function(){
 });
 
 
+
+
+
+
+
+
+     $(document).ready(function(){
+      var i=1;
+     $("#add_row").click(function(){
+
+       if(i<=10){
+      $('#addr'+i).html('<input    type="file" class="form-control" name="policy_copy[]" id="policy_copy"  >');
+
+      $('#tab_logic').append('<div id="addr'+(i+1)+'"></div>');
+      i++; 
+    }else{
+       alert("max size 10 only");
+    }
+  });
+     $("#delete_row").click(function(){
+       if(i>1){
+     $("#addr"+(i-1)).html('');
+     i--;
+     }
+   });
+
+});
 </script>
 @endsection
 
