@@ -38,7 +38,9 @@ class FirecalculatorController extends Controller
                    $query=DB::table('section_master')->select('section_name','section_id')
                       ->where('section_id','=',$req->id)->first(); 
 
-        	    return view('firecalculator.section-wise-fire',['query'=>$query,'pro_id'=>$req->pro_id]);
+                       $lead_query=DB::table('policy_lead_data')->select('lead_id','document_path','userid','group_id')->where('userid','=',Session::get('userid'))->get();
+
+        	    return view('firecalculator.section-wise-fire',['query'=>$query,'pro_id'=>$req->pro_id,'lead_query'=>$lead_query]);
         }
 
 
@@ -48,14 +50,11 @@ class FirecalculatorController extends Controller
                  
                 $photos = $req->file('policy_copy');
                 $destinationPath = public_path(). '/upload/';
+                 if($photos!=null || $photos!=0){
                 foreach ($photos as $file) {
-                   if($file!=null || $file!=0){
                    $fileName = rand(1, 999) . $file->getClientOriginalName();
                    $file->move($destinationPath, $fileName);  
-                   }else{  $file=0;   
-                   }  
-                 }
-
+                 }}else{ $file=0;  } 
  
  
 
