@@ -43,6 +43,22 @@ class FirecalculatorController extends Controller
 
 
         public function customerdetails(Request $req){
+             
+
+                 
+                $photos = $req->file('policy_copy');
+                $destinationPath = public_path(). '/upload/';
+                foreach ($photos as $file) {
+                   if($file!=null || $file!=0){
+                   $fileName = rand(1, 999) . $file->getClientOriginalName();
+                   $file->move($destinationPath, $fileName);  
+                   }else{  $file=0;   
+                   }  
+                 }
+
+ 
+ 
+
                      try {
                       $business_type=$req->business_type;
                       $frshcash=$req->frshcash;
@@ -60,6 +76,7 @@ class FirecalculatorController extends Controller
       }
 
 
+ 
         public function quotes_add(Request $req){
 
 

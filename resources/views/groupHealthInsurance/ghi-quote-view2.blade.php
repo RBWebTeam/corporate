@@ -44,7 +44,7 @@ h3 {font-size:18px;}
       <div class="row form-group">
             <div class="col-xs-12">
                 <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-                    <li class="active"><a href="#step-1" id="step-1s">
+                    <li class="active"><a href="#step-1">
                         <h4 class="list-group-item-heading">Step 1</h4>
                         <p class="list-group-item-text">Calculate Premium</p>
                     </a></li>
@@ -83,14 +83,14 @@ h3 {font-size:18px;}
                     <td class="text-right"><label class="lbl">Location of Corporate Office*</label></td>
                     <td class="left-pad-none">
                     <div class="col-md-6">
-                 
+                    <span class="glyphicon glyphicon-chevron-down down-arr"></span>
                      <input type="hidden" name="stateid" id="stateid" value="">
-                     <input type="text"  class="form-control  search_state " placeholder="Search Location " name="state" value="" id="state" required>
+                     <input type="text"  class="form-control  search_state " name="state" value="" id="state" required>
                     </div>
                     <div class="col-md-6">
-                    
+                    <span class="glyphicon glyphicon-chevron-down down-arr"></span>
                      <input type="hidden" name="districtid" id="districtid"  >
-                      <input type="text" class="form-control  search_district"  placeholder="Search District " name="district" id="district" required >
+                      <input type="text" class="form-control  search_district" name="district" id="district" required >
                     </div>
                   </td>
               </tr>
@@ -100,7 +100,7 @@ h3 {font-size:18px;}
                     <td class="left-pad-none">
                   <div class="col-md-8 left-pad-none">
                  <input type="hidden" name="industry_id" id="industry_id" value="">
-                 <input type="text"  class="form-control  search_industry"  placeholder="Search Industry " name="industry" value="" id="industry" required>
+                 <input type="text"  class="form-control  search_industry" name="industry" value="" id="industry" required>
                   </div>
                   </td>
               </tr>
@@ -158,9 +158,10 @@ h3 {font-size:18px;}
            </form> 
         </div>
                 <!-- Table 1 End  --> 
+
     </div>  
        <button id="calc_primium" class="btn btn-primary btn-md" >Submit</button>
-       <!--    <button id="activate-step-2" class="btn btn-primary btn-md" style="display: none">Activate Step 2</button> -->
+          <button id="activate-step-2" class="btn btn-primary btn-md" style="display: none">Activate Step 2</button>
             </div>
         </div>
     </div>
@@ -169,26 +170,26 @@ h3 {font-size:18px;}
  
  
 
-<form class="container" id="sum_insured_form" name="sum_insured_form" method="POST"> 
+<form class="container" id="sum_insured_form" name="sum_insured_form" method="POST">
     <div class="row setup-content" id="step-2"   >
         <div class="col-xs-12">
             <div class="col-md-12 well text-center">
                <!-- Table 2 Start  --> 
        <h3 class="text-center heading-1 pad">Sum Insured</h3>
-      <ul class="nav nav-tabs graded">
-        <li class="active center-nav"><a data-toggle="tab" href="#home" id="flat">Flat</a></li>
-        <li><a data-toggle="tab" href="#menu1" id="graded">Graded</a></li>
+      <ul class="nav nav-tabs">
+        <li class="active center-nav"><a data-toggle="tab" href="#home">Flat</a></li>
+        <li><a data-toggle="tab" href="#menu1">Graded</a></li>
       </ul>
  <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
           <p class="text-center"><b>Sum Insured Table</b></p>
         <div class="table-responsive">
 
-           <table width="900" border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped tbl-btm-mrg" id="Gradesum_insured_table">
+           <table width="900" border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped tbl-btm-mrg">
               <tr class="bg-danger-bg">
                 <th scope="col">Grade</th>
                 <th scope="col">Sum Insured</th>
-                <th scope="col" width="13%"> </th>
+                <th scope="col" width="13%">&nbsp;</th>
                 <th scope="col">0-18</th>
                 <th scope="col">19-35</th>
                 <th scope="col">36-45</th>
@@ -271,8 +272,8 @@ h3 {font-size:18px;}
 
         <div id="menu1" class="tab-pane fade">
            <p class="text-center"><b>Sum Insured Table</b></p>
-           <!--  <div class="text-center pad">
-             <span class="small">Do want to Upload Annexure? <input type="radio" /> Yes <input type="radio" /> No</span></div> -->
+            <div class="text-center pad">
+             <span class="small">Do want to Upload Annexure? <input type="radio" /> Yes <input type="radio" /> No</span></div>
         <div class="table-responsive">
         <table width="900" border="0" cellspacing="0" cellpadding="0" class="tab_logic table table-bordered table-striped tbl-btm-mrg " id="sum_insured_table">
                 <thead>
@@ -295,7 +296,7 @@ h3 {font-size:18px;}
               </thead>
                <tbody id='addr0'>
                 <tr >
-                    <td><input type="text" data-id="@customer.Id"  name="grade[]" id="sum_grade"  class="form-control grade "   required  /></td>
+                    <td><input type="text" data-id="@customer.Id"  name="grade[]"  class="form-control grade" onkeypress="return Numeric(event)" required  /></td>
                   <td>
                   <select class="form-control" name="sum_insured" id="sum_insured" required >
                     <option>Select</option>
@@ -363,208 +364,15 @@ h3 {font-size:18px;}
 
  
  
-             
-            </table> <!--  <a id="add_row"   class="btn btn-info btn-md"><span class="glyphicon glyphicon-plus-sign"></span> Add Rows</a>  -->
-             <a id="add_row" class="btn btn-success pull-left">Add Row</a><a id='delete_row' class="btn btn-danger pull-right">Delete Row</a>
-
+              <td><a id="add_row"   class="btn btn-info btn-md"><span class="glyphicon glyphicon-plus-sign"></span> Add Rows</a></td>
+            </table>
          </div>
         </div>
       </div>
 
        <button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
-
               <!-- Table 2 End  --> 
-              <!--   <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
-            </div>
-        </div>
-    </div>
-
-</form>
-
-
-
-
-<form class="container" id="default_covers_form" name="default_covers_form" method="POST"> 
-    <div class="row setup-content" id="step-3">
-        <div class="col-xs-12">
-            <div class="col-md-12 well text-center">
-                <h1 class="text-center">Default Covers</h1>
-<!--<form></form> --> <div class="table-responsive">
-      <table   border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped">
-        <tr>
-              <th scope="col" width="40%">Room Rent</th>
-              <th scope="col">
-            <div class="col-md-6">NORMAL 
-             <select class="form-control" name="dc_normal">
-               <option>1% of Sum Insured</option>
-              </select> 
-            </div>
-            <div class="col-md-6"> ICU
-              <select class="form-control" name="dc_icu">
-            <option>2% of Sum Insured</option>
-            </select>
-            </div>  
-            <p class="small p-text">"If Insured is admitted in a higher category. then insured will bear difference of all medical 
-                   expenses as in final hospital bill in same proporation."</p>
-            </th>
-        </tr>
-        <tr>
-          <td>Disease - Wise Sub Limits</td>
-          <td><input type="radio" name="sub_limit" value="1" /> Lower Limits 
-          <input type="radio" name="sub_limit" value="2" /> Standard 
-          <input type="radio" name="sub_limit" value="3" />   Higher Limits
-           <input type="radio" name="sub_limit" value="4" />  No Sub Limits</td>
-        </tr>
-        <tr>
-          <td>Pre - Post Hospitalization cover</td>
-          <td>
-        <div class="col-md-4">
-        <select class="form-control" name="hospital_cover">
-           <option>30-60</option>
-          </select> 
-          </div>  Day Respectively
-        </td>
-        </tr>
-        <tr>
-          <td>3 Day Wait Period Waiver</td>
-          <td><input type="radio" name="period_waiver" value="1" /> Applicable
-           <input type="radio" name="period_waiver" value="2" /> Waive off</td>
-        </tr>
-        <tr>
-          <td>Premium for Addition / Deletion of Lives</td>
-          <td><input type="radio" name="primium_for"/> Short Period Scale 
-          <input type="radio" name="primium_for"/> Pro Rata Basis</td>
-        </tr>
-        <tr>
-          <td>Ambulance Charges</td>
-          <td><span class="pull-left">Rs.</span> <div class="col-md-6">
-          <input type="text" class="form-control" name="ambulance_charge" id="ambulance_charge" required="" /></div></td>
-        </tr>
-     </table>
-   </div> 
-                
-                 <button id="default_covers_id" class="btn btn-primary btn-md">next-></button>
-                <button id="activate-step-4" class="btn btn-primary btn-md">Activate Step 4</button>
-            </div>
-        </div>
-    </div>
-</form>
-<!-- Table 3 End  -->             
- 
- 
-<!-- Table  4  -->    
-<form class="container" id="add_on_covers_form" name="default_covers_form" method="POST"> 
-    <div class="row setup-content" id="step-4">
-        <div class="col-xs-12">
-            <div class="col-md-12 well text-center">
-                <h1 class="text-center">Add-On Covers</h1><!--<form></form> --> 
-
-                 <div class="table-responsive">
-       
-      <table   border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped">
-         <tr>
-           <td colspan="2"><input type="radio" name="exisiting_disease"   /> Pre-exisiting Disease</td>
-
-         </tr>
-
-        <tr>
-          <th scope="col" width="40%">Maternity</th>
-          <th scope="col">
-        <div class="col-md-6">
-        <span><input type="radio" name="maternity"  /> 9  Months waiting period</span>
-        <span class="small">Normal and C Section Limits (Metro)</span>
-         <select class="form-control" name="selection_limit">
-           <option>1% of Sum Insured</option>
-          </select> 
-          </div>
-
-
-        <div class="col-md-6">
-        <span><input type="radio" name="maternity_form_day"/> Maternity form Day 1</span>
-        <span class="small">Maternity normal and C Section Limits (Non-Metro)</span>
-          <select class="form-control" name="maternity_non">
-        <option>2% of Sum Insured</option>
-        </select>
-          </div>  
-       
-        </th>
-        </tr>
-
-        <tr>
-          <td><input type="radio" name="baby_day_cover"/> Baby Day One Cover</td>
-          <td><input type="radio" name="upto_maternity"/> Upto maternity Limit 
-               <input type="radio" name="upto_maternity"/> Upto the Family Sum Insured 
-          </td>
-        </tr>
-
-        <tr>
-          <td><input type="radio"   name="post_natal_care" /> Pre and Post Natal Care <span class="small">(max allowed limit R5 5000)</span></td>
-          <td><input type="radio" name="maternity_limit"/> Wthin Maternity Limit 
-               <input type="radio" name="maternity_limit"/>Above Maternity Limit
-          </td>
-        </tr>
- 
-
-        <tr>
-          <td><input type="radio"  name="co_payment"   /> Co-Payment</td>
-          <td><select class="form-control"  name="co_payment_nill">
-                     <option>Nill</option>
-              </select>
-          </td>
-        </tr>
-
-         <tr>
-          <td><input type="radio" name="parental_co_payment"   />Parental Co-payment</td>
-          <td><select class="form-control" name="parental_co_payment_nill">
-                     <option>Nill</option>
-              </select>
-          </td>
-        </tr>
-
-         <tr>
-          <td><input type="radio" name="corporate_floater"/> Corporate Floater  </td>
-          <td><span class="small"> Corporate Floater limit Overall</span> <input type="text" name="corporate_floater_limit"/>   </td>
-        </tr>
-
-         <tr>
-           <td colspan="2"><input type="radio" name="ppn_onlye"/> Discount for treatment in PPN only </td>
-
-         </tr>
- 
-       
-
-
-         <tr>
-          <td><input type="radio" name="opd_expenses"/> OPD Expenses </td>
-          <td><input type="radio" name="amount_expenses"/>  Amount Per Life
-               <input type="radio" name="amount_expenses"/> Amount Per Famili <br>
-                 (RS)<input type="input" name="amount_per_famili"  id="amount_per_famili"  required="" /> 
-          </td>
-        </tr>
-
-        <tr>
-          <td><input type="radio" name="addition_loading"/>Additional Loading  </td>
-          <td> 
-                  <input type="input" name="addition_loading_per"/> %
-          </td>
-        </tr>
-          
-           <tr>
-           <td colspan="2"><input type="radio" name="id_card"/> ID Cards  </td>
-         </tr>
-
-         <tr>
-          <td>Services Rendered in jammu & Kashmir  </td>
-          <td> <input type="radio" name="service_rendered"/> Yes
-               <input type="radio" name="service_rendered"/> NO <br>
-                  
-          </td>
-        </tr>
-       
-     </table>
-
-   </div>           <button id="add_on_covers_id" class="btn btn-primary btn-md">submit</button>       
-                
+                <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button>
             </div>
         </div>
     </div>
@@ -574,6 +382,231 @@ h3 {font-size:18px;}
 
 <script type="text/javascript">
 
+
+
+
+
+
+
+
+
+
+  // sum_insured_id=
+
+          $('#activate-step-2').show();
+
+            $('#sum_insured_id').click(function(e){ e.preventDefault();
+             validator=$('#sum_insured_form').validate();
+     if(! $('#sum_insured_form').valid()){
+           //validator.errorList[0].element.focus();
+        $.each(validator.errorMap, function (index, value) {
+           console.log('Id: ' + index + ' Message: ' + value);
+               $('#'+index).focus();
+                return false;
+        });
+         return false;
+    }else{
+
+        
+           
+        
+    }
+
+  });
+</script>
+
+
+<form class="container">
+    <div class="row setup-content" id="step-3">
+        <div class="col-xs-12">
+            <div class="col-md-12 well text-center">
+                <h1 class="text-center">Default Covers<</h1>
+<!--<form></form> --> <div class="table-responsive">
+      <table   border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped">
+        <tr>
+          <th scope="col" width="40%">Room Rent</th>
+          <th scope="col">
+        <div class="col-md-6">NORMAL 
+         <select class="form-control">
+           <option>1% of Sum Insured</option>
+          </select> 
+        </div>
+        <div class="col-md-6"> ICU
+          <select class="form-control">
+        <option>2% of Sum Insured</option>
+        </select>
+        </div>  
+        <p class="small p-text">"If Insured is admitted in a higher category. then insured will bear difference of all medical 
+               expenses as in final hospital bill in same proporation."</p>
+        </th>
+        </tr>
+        <tr>
+          <td>Disease - Wise Sub Limits</td>
+          <td><input type="radio" name="rdo"/> Lower Limits <input type="radio" name="rdo"/> Standard <input type="radio" name="rdo"/>   Higher Limits <input type="radio" name="rdo"/>  No Sub Limits</td>
+        </tr>
+        <tr>
+          <td>Pre - Post Hospitalization cover</td>
+          <td>
+        <div class="col-md-4">
+        <select class="form-control">
+           <option>30-60</option>
+          </select> 
+          </div>  Day Respectively
+        </td>
+        </tr>
+        <tr>
+          <td>3 Day Wait Period Waiver</td>
+          <td><input type="radio" name="rdo"/> Applicable <input type="radio" name="rdo"/> Waive off</td>
+        </tr>
+        <tr>
+          <td>Premium for Addition / Deletion of Lives</td>
+          <td><input type="radio" name="rdo"/> Short Period Scale <input type="radio" name="rdo"/> Pro Rata Basis</td>
+        </tr>
+        <tr>
+          <td>Ambulance Charges</td>
+          <td><span class="pull-left">Rs.</span> <div class="col-md-6"><input type="text" class="form-control"/></div></td>
+        </tr>
+     </table>
+   </div> 
+                
+                <button id="activate-step-4" class="btn btn-primary btn-md">Activate Step 4</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Table 3 End  -->             
+ 
+ 
+<!-- Table  4  -->    
+<form class="container">
+    
+    <div class="row setup-content" id="step-4">
+        <div class="col-xs-12">
+            <div class="col-md-12 well text-center">
+                <h1 class="text-center">Add-On Covers</h1><!--<form></form> --> 
+
+                 <div class="table-responsive">
+       
+      <table   border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped">
+         <tr>
+           <td colspan="2"><input type="radio" name="rdo"/> Pre-exisiting Disease</td>
+
+         </tr>
+
+        <tr>
+          <th scope="col" width="40%">Maternity</th>
+          <th scope="col">
+        <div class="col-md-6">
+        <span><input type="radio" name="rdo"/> 9  Months waiting period</span>
+        <span class="small">Normal and C Section Limits (Metro)</span>
+         <select class="form-control">
+           <option>1% of Sum Insured</option>
+          </select> 
+          </div>
+
+
+        <div class="col-md-6">
+        <span><input type="radio" name="rdo"/> Maternity form Day 1</span>
+        <span class="small">Maternity normal and C Section Limits (Non-Metro)</span>
+          <select class="form-control">
+        <option>2% of Sum Insured</option>
+        </select>
+          </div>  
+       
+        </th>
+        </tr>
+
+        <tr>
+          <td><input type="radio" name="rdo"/> Baby Day One Cover</td>
+          <td><input type="radio" name="rdo"/> Upto maternity Limit 
+               <input type="radio" name="rdo"/> Upto the Family Sum Insured 
+          </td>
+        </tr>
+
+        <tr>
+          <td><input type="radio" name="rdo"/> Pre and Post Natal Care <span class="small">(max allowed limit R5 5000)</span></td>
+          <td><input type="radio" name="rdo"/> Wthin Maternity Limit 
+               <input type="radio" name="rdo"/>Above Maternity Limit
+          </td>
+        </tr>
+
+
+      <!--   <tr>
+          <td><input type="radio" name="rdo"/> Pre and Post Natal Care</td>
+          <td><select class="form-control">
+                     <option>Nill</option>
+              </select>
+          </td>
+        </tr> -->
+
+        <tr>
+          <td><input type="radio" name="rdo"/> Co-Payment</td>
+          <td><select class="form-control">
+                     <option>Nill</option>
+              </select>
+          </td>
+        </tr>
+
+         <tr>
+          <td><input type="radio" name="rdo"/>Parental Co-payment</td>
+          <td><select class="form-control">
+                     <option>Nill</option>
+              </select>
+          </td>
+        </tr>
+
+         <tr>
+          <td><input type="radio" name="rdo"/> Corporate Floater  </td>
+          <td><span class="small"> Corporate Floater limit Overall</span> <input type="text" name="rdo"/>   </td>
+        </tr>
+
+         <tr>
+           <td colspan="2"><input type="radio" name="rdo"/> Discount for treatment in PPN only </td>
+
+         </tr>
+ 
+       
+
+
+         <tr>
+          <td><input type="radio" name="rdo"/> OPD Expenses </td>
+          <td><input type="radio" name="rdo"/>  Amount Per Life
+               <input type="radio" name="rdo"/> Amount Per Famili <br>
+                 (RS)<input type="input" name="rdo"/> 
+          </td>
+        </tr>
+
+        <tr>
+          <td><input type="radio" name="rdo"/>Additional Loading  </td>
+          <td> 
+                  <input type="input" name="rdo"/> %
+          </td>
+        </tr>
+          
+           <tr>
+           <td colspan="2"><input type="radio" name="rdo"/> ID Cards  </td>
+         </tr>
+
+         <tr>
+          <td>Services Rendered in jammu & Kashmir  </td>
+          <td> <input type="radio" name="rdo"/> Yes
+               <input type="radio" name="rdo"/> NO <br>
+                  
+          </td>
+        </tr>
+       
+     </table>
+
+   </div>                 
+                
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+<script type="text/javascript">
   function nancheck(rows) {
               rows=parseInt(rows);
            return a= isNaN(rows)==true ? 0 : rows;
@@ -589,7 +622,7 @@ $(document).ready(function() {
     var navListItems = $('ul.setup-panel li a'),
         allWells = $('.setup-content');
 
-       allWells.hide();
+    allWells.hide();
 
     navListItems.click(function(e)
     {
@@ -604,7 +637,6 @@ $(document).ready(function() {
             $target.show();
         }
     });
-
     
     $('ul.setup-panel li.active a').trigger('click');
     
@@ -612,38 +644,35 @@ $(document).ready(function() {
     $('#activate-step-2').on('click', function(e) {
         $('ul.setup-panel li:eq(1)').removeClass('disabled');
         $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-       // $(this).remove();
+        $(this).remove();
     })
     
     $('#activate-step-3').on('click', function(e) {
         $('ul.setup-panel li:eq(2)').removeClass('disabled');
         $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-        //$(this).remove();
+        $(this).remove();
     })
     
-    // $('#activate-step-4').on('click', function(e) {
-    //     $('ul.setup-panel li:eq(3)').removeClass('disabled');
-    //     $('ul.setup-panel li a[href="#step-4"]').trigger('click');
-    //     $(this).remove();
-    // })
+    $('#activate-step-4').on('click', function(e) {
+        $('ul.setup-panel li:eq(3)').removeClass('disabled');
+        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+        $(this).remove();
+    })
     
-    // $('#activate-step-3').on('click', function(e) {
-    //     $('ul.setup-panel li:eq(2)').removeClass('disabled');
-    //     $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-    //     $(this).remove();
-    // })
-
+    $('#activate-step-3').on('click', function(e) {
+        $('ul.setup-panel li:eq(2)').removeClass('disabled');
+        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+        $(this).remove();
+    })
 });
 
-
- 
 
 // Add , Dlelete row dynamically
 
      $(document).ready(function(){
       var i=1;
      $("#add_row").click(function(){
-      $('#addr'+i).html('<tr><td><input type="text" data-id="@customer.Id" name="grade[]" id="sum_grade" class="form-control grade"   required /></td><td> <select class="form-control" name="sum_insured" id="sum_insured" required ><option>Select</option><option value="50000">50000</option><option value="100000">100000</option><option value="150000"> 150000</option><option value="200000">200000</option><option value="250000">250000</option><option value="300000"> 300000</option><option value="350000"> 350000</option><option value="400000">400000</option><option value="450000">450000</option><option value="500000"> 500000</option><option value="600000"> 600000</option><option value="700000"> 700000</option><option value="800000"> 800000</option><option value="900000">900000</option><option value="1000000">1000000</option> </select></td><td>Employee</td><td><input type="text" name="emp_0_18[]" class="form-control emp_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_19_35[]" class="form-control emp_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_36_45[]" class="form-control emp_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_46_55[]" class="form-control emp_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_56_60[]" class="form-control emp_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_61_65[]" class="form-control emp_61_65" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_66_70[]" class="form-control emp_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_71_75[]" class="form-control emp_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_76_80" class="form-control emp_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>Non Parental Dependants</td><td><input type="text" name="npd_0_18[]" id="npd_0_18" class="form-control npd_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_19_35[]" id="npd_19_35" class="form-control npd_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_36_45[]" id="npd_36_45" class="form-control npd_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_46_55[]" id="npd_46_55" class="form-control npd_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_56_60[]" id="npd_56_60" class="form-control npd_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_61_65[]" id="npd_61_65" class="form-control npd_61_65" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_66_70[]" id="npd_66_70" class="form-control npd_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_71_75[]" id="npd_71_75" class="form-control npd_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_76_80[]" id="npd_76_80" class="form-control npd_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr><tr class="border-1"><td>&nbsp;</td><td>&nbsp;</td><td> Parental Dependants</td><td><input type="text" name="pd_0_18[]" id="pd_0_18" class="form-control pd_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_19_35[]" id="pd_19_35" class="form-control pd_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_36_45[]" id="pd_36_45" class="form-control pd_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_46_55[]" id="pd_46_55" class="form-control pd_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_56_60[]" id="pd_56_60" class="form-control pd_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_61_65[]" id="pd_61_65" class="form-control pd_61_65" onkeypress="return Numeric(event);" ></td><td><input type="text" name="pd_66_70[]" id="pd_66_70" class="form-control pd_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_71_75[]" id="pd_71_75" class="form-control pd_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_76_80[]" id="pd_76_80" class="form-control pd_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr>');
+      $('#addr'+i).html('<tr><td><input type="text" data-id="@customer.Id" name="grade[]" class="form-control grade" onkeypress="return Numeric(event)" required /></td><td> <select class="form-control" name="sum_insured" id="sum_insured" required ><option>Select</option><option value="50000">50000</option><option value="100000">100000</option><option value="150000"> 150000</option><option value="200000">200000</option><option value="250000">250000</option><option value="300000"> 300000</option><option value="350000"> 350000</option><option value="400000">400000</option><option value="450000">450000</option><option value="500000"> 500000</option><option value="600000"> 600000</option><option value="700000"> 700000</option><option value="800000"> 800000</option><option value="900000">900000</option><option value="1000000">1000000</option> </select></td><td>Employee</td><td><input type="text" name="emp_0_18[]" class="form-control emp_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_19_35[]" class="form-control emp_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_36_45[]" class="form-control emp_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_46_55[]" class="form-control emp_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_56_60[]" class="form-control emp_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_61_65[]" class="form-control emp_61_65" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_66_70[]" class="form-control emp_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_71_75[]" class="form-control emp_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_76_80" class="form-control emp_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>Non Parental Dependants</td><td><input type="text" name="npd_0_18[]" id="npd_0_18" class="form-control npd_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_19_35[]" id="npd_19_35" class="form-control npd_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_36_45[]" id="npd_36_45" class="form-control npd_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_46_55[]" id="npd_46_55" class="form-control npd_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_56_60[]" id="npd_56_60" class="form-control npd_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_61_65[]" id="npd_61_65" class="form-control npd_61_65" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_66_70[]" id="npd_66_70" class="form-control npd_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_71_75[]" id="npd_71_75" class="form-control npd_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_76_80[]" id="npd_76_80" class="form-control npd_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr><tr class="border-1"><td>&nbsp;</td><td>&nbsp;</td><td> Parental Dependants</td><td><input type="text" name="pd_0_18[]" id="pd_0_18" class="form-control pd_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_19_35[]" id="pd_19_35" class="form-control pd_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_36_45[]" id="pd_36_45" class="form-control pd_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_46_55[]" id="pd_46_55" class="form-control pd_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_56_60[]" id="pd_56_60" class="form-control pd_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_61_65[]" id="pd_61_65" class="form-control pd_61_65" onkeypress="return Numeric(event);" ></td><td><input type="text" name="pd_66_70[]" id="pd_66_70" class="form-control pd_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_71_75[]" id="pd_71_75" class="form-control pd_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_76_80[]" id="pd_76_80" class="form-control pd_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr>');
 
       $('.tab_logic').append('<tbody id="addr'+(i+1)+'"></tbody>');
 
@@ -746,87 +775,81 @@ $(".search_state").autocomplete({
     $('.no_of_Children').hide();
      $('.no_of_Parents').hide();
      $('.Total_id').hide();
-// var total=0;
-// var total1=0; 
-// var total2=0; 
-// var total3=0; 
-// var total4=0; 
-var incr=0;
 
-
-   function initialize(){
-             this.total=0;
-             this.total1=0;
-             this.total2=0;
-             this.total3=0;
-             this.total4=0;
-
-
-              
-  }
-
- 
-  var int=0;
- var initi=new  initialize();
-           function Sum_Defination(vl,el){
-            
-
-                if(el=='employees'){
-                  initi.total1=nancheck(vl.value);
-                }else if(el=='spouse'){
-                   initi.total2=nancheck(vl.value);
-                }else if(el=='children'){
-                   initi.total3=nancheck(vl.value);
-                }else if(el=='parents'){
-                   initi.total4=nancheck(vl.value);
-                }
-                   initi.total=parseInt(initi.total1)+parseInt(initi.total2)+parseInt(initi.total3)+parseInt(initi.total4);
-                  $('#total_daf').val(initi.total);
-              
-
-  }
-          
- 
+     var incr=0;
     function f_defination(element){
         // alert(element.checked = !element.checked);
+ console.log(element);
               if(element.value==1){
                 if(element.checked){
                  $('.no_of_Employees').show();
-                  }else{
+                 //element.setAttribute("required", "required");
+                // $('#no_of_emp').prop('required', true);
+                }else{
                   $('.no_of_Employees').hide();
-                  $('#no_of_emp').val('');    
-                }}else if(element.value==2){
+                 // element.removeAttribute("required", "required");
+                  //$('#no_of_emp').prop('required',false);
+                }
+              }else if(element.value==2){
                if(element.checked){
+                  
                  $('.no_of_Spouse').show();
+                  //element.setAttribute("required", "required");
+                  $('#no_of_spouse').prop('required', true);
                 }else{
                   $('.no_of_Spouse').hide();
-                  $('#no_of_spouse').val('');   
-                }}else if(element.value==3){
+                   //element.removeAttribute("required", "required");
+                  // $('#no_of_spouse').prop('required', false);
+                }
+              }else if(element.value==3){
                 if(element.checked){
                  $('.no_of_Children').show();
+                  // element.setAttribute("required", "required");
+                   //$('#no_of_children').prop('required', true);
                 }else{
                   $('.no_of_Children').hide();
-                  $('#no_of_children').val('');                         
-                }}else if(element.value==4){
+                  // element.removeAttribute("required", "required");
+                   //$('#no_of_children').prop('required', false);
+                }
+              }else if(element.value==4){
                if(element.checked){
-                  $('.no_of_Parents').show();
+                 $('.no_of_Parents').show();
+                  // element.setAttribute("required", "required");
+                  // $('#no_of_parents').prop('required', true);
                 }else{
                   $('.no_of_Parents').hide();
-                  $('#no_of_parents').val('');
-                       
-                    
+                  // element.removeAttribute('id');
+                  // element.removeAttribute("required", "required");
+                   //$('#no_of_parents').prop('required', false);
                 }
               }
 $('.Total_id').show();
 incr++;
+    }
 
 
+var total=0;
+var total1=0; 
+var total2=0; 
+var total3=0; 
+var total4=0;   
+  function Sum_Defination(vl,el){
 
+                if(el=='employees'){
+                  total1=nancheck(vl.value);
+                }else if(el=='spouse'){
+                   total2=nancheck(vl.value);
+                }else if(el=='children'){
+                   total3=nancheck(vl.value);
+                }else if(el=='parents'){
+                   total4=nancheck(vl.value);
+                }
+                   total=parseInt(total1)+parseInt(total2)+parseInt(total3)+parseInt(total4);
+                $('#total_daf').val(total);
 
+  }
+          
 
-
-
- }
         
   
  
@@ -836,22 +859,22 @@ incr++;
 
 <!-- form 1 -->
  <script type="text/javascript">
-     $('#calc_primium').click(function(e){ e.preventDefault();  
+     $('#calc_primium').click(function(e){ e.preventDefault();
              validator=$('#calculate_primium').validate();
      if(! $('#calculate_primium').valid()){
            //validator.errorList[0].element.focus();
         $.each(validator.errorMap, function (index, value) {
-          // console.log('Id: ' + index + ' Message: ' + value);
+           console.log('Id: ' + index + ' Message: ' + value);
                $('#'+index).focus();
                 return false;
         });
          return false;
     }else{
- 
+
         if(incr!=0){
         $('ul.setup-panel li:eq(1)').removeClass('disabled');
         $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-         //$(this).remove();
+        $(this).remove();
           }else{
 
             alert("Please Select Family Defination..");
@@ -957,138 +980,48 @@ var   pd_0_18=0,pd_19_35=0,pd_36_45=0,pd_46_55=0,pd_56_60=0,pd_61_65=0,pd_66_70=
              }
 
             var   pd_totla=pd_0_18+pd_19_35+pd_36_45+pd_46_55+pd_56_60+pd_61_65+pd_66_70+pd_71_75+pd_76_80;
-           //  console.log(pd_totla);
+             console.log(pd_totla);
             
              $('#parental_totla').val(pd_totla);
    }
 
 
 
- 
-//var total=0;
-var temp=0;
- $(document).ready(function () {
-    $(document).on("input", "#sum_insured_table input",function(){
-            var $tr = $(this).closest('tr'); 
-             Sum_Insured_Table($tr);
-    }).trigger('input');  
-  });
 
- function Sum_Insured_Table($tr){
-   var tot = 0;  
+// function calculateSum(){
+
+
+// }
+
+// $("table").on("keyup", ".txt", function () {
+//     calculateSum();
+// });
+
+
+
+ 
+ $('#sum_insured_table input').on('input', function() {
+
+ var $tr = $(this).closest('tr'); 
+  var tot = 0;  
   $('input', $tr).each(function(index,c) { 
-    if($(this).attr('id')=="sum_grade"){
+   
+    if($(this).attr('id')=="grade"){
     }else{
-    tot += Number(nancheck($(this).val())) || 0; 
+    tot += Number($(this).val()) || 0; 
    }
-      $('td:last', $tr).text(tot); 
-
-        
-       
-   }); 
-  
- // total+=tot;
- }
-
- 
-</script>
-<script type="text/javascript">
-var flat_graded=0;
-var addflat=0;
-var addgraded=0;
-    $(".graded li").click(function() {
-                var h= $("a",this).attr('href');
-                 
-                if(h=='#home'){
-                     flat_graded=0;
-                }else if(h=='#menu1'){
-                    flat_graded=1;
-                }else{
-                   flat_graded=0;
-                }    
-          })
- $('#activate-step-2').show();
- $('#sum_insured_id').click(function(e){ e.preventDefault();
-
-
-  $("table#sum_insured_table tr").each(function( i ) {
-  $("td:last", this).each(function( j ) {
-    //console.log( $(this).text());
-    addflat+=Number(nancheck($(this).text()));
-  });
-});
- $("table#Gradesum_insured_table tr ").each(function( i ) {
-  $("td:last", this).each(function( j ) {
-   //  console.log($(this).find('input').val());
-    addgraded+=Number(nancheck($(this).find('input').val()));
   });
 
-});
 
+  $('td:last', $tr).text(tot); // update last column value
+}).trigger('input'); // trigger input to set initial value in column
  
-  if(initi.total!=0 &&initi.total==addflat && flat_graded==1){
-        alert(addflat);
-        $('ul.setup-panel li:eq(2)').removeClass('disabled');
-        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-        //$(this).remove();
-  }else if(initi.total!=0 && initi.total==addgraded && flat_graded==0){
-        $('ul.setup-panel li:eq(2)').removeClass('disabled');
-        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-        //$(this).remove();
-  alert(addgraded);
-  }else{
-    
-    alert("Please fill form carefully");
-  }
-
-// console.log(initi.total+"+"+flat_graded+"="+addflat);
- $('#default_covers_id').click(function(e){ e.preventDefault();
-  validator=$('#default_covers_form').validate();
-     if(! $('#default_covers_form').valid()){
-        $.each(validator.errorMap, function (index, value) {
-               $('#'+index).focus();
-                return false;
-        });
-         return false;
-    }else{
-
-        $('ul.setup-panel li:eq(3)').removeClass('disabled');
-        $('ul.setup-panel li a[href="#step-4"]').trigger('click');
-        //$(this).remove();
-
-         alert("default_covers_id");
-
-       }
-});
-
-
- $('#add_on_covers_id').click(function(e){ e.preventDefault();
- validator=$('#add_on_covers_form').validate();
-     if(! $('#add_on_covers_form').valid()){
-        $.each(validator.errorMap, function (index, value) {
-               $('#'+index).focus();
-                return false;
-        });
-         return false;
-    }else{
-         alert($('#calculate_primium').serialize());
-         alert($('#sum_insured_form').serialize());
-         alert($('#default_covers_form').serialize());
-         alert($('#add_on_covers_form').serialize());
-
-       }
-});
-
-
-
-addgraded=0;
-addflat=0;
  
-  });
- 
+
+
+
 
 </script>
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 @endsection

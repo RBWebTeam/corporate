@@ -43,6 +43,9 @@ Route::get('searchstateajax',array('as'=>'searchstateajax','uses'=>'AutoComplete
 Route::get('searchdistrictajax',array('as'=>'searchdistrictajax','uses'=>'AutoCompleteController@autoComplete_district'));  
 Route::post('corporate','LoginController@corporate');
 
+Route::get('search_industry_ghi',array('as'=>'search_industry_ghi','uses'=>'AutoCompleteController@search_industry_ghi')); 
+
+
 /*
 |--------------------------------------------------------------------------
 |  Admin Pannel
