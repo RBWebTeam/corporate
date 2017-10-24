@@ -98,6 +98,12 @@ class AdminloginController extends Controller
             
 
    }  
+   public function verticalmasterform(Request $req)
+   {    
+
+    return view('admin.vertical-master');
+    
+   }
 
    public function logout(){
      Session::flush();
