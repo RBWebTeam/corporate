@@ -7,7 +7,7 @@
                 <div class="col-lg-6 mrg-top">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Vertical Master
+                            State Master
                         </div>
                          @if (Session::has('msg'))
                         <div class="alert alert-success" role="alert">
@@ -21,12 +21,12 @@
 							
                                 <div class="col-lg-12">
 								
-                                    <form role="form" method="post" action="{{url('vertical-master-save')}}" >
+                                    <form role="form" method="post" action="{{url('state-master-save')}}" >
                                       {{ csrf_field() }} 
                                     <div class="form-group col-md-6 {{ $errors->has('vertical-name') ? ' has-error' : '' }}">
-                                         <label for="verticalname">Vertical Name</label>
-                                         <input type="text" name="verticalname" class="form-control" value="{{ old('verticalname')}}">
-                                         <small class="text-danger">{{ $errors->first('verticalname') }}</small>
+                                         <label for="statename">State Name</label>
+                                         <input type="text" name="statename" class="form-control" value="{{ old('statename')}}">
+                                         <small class="text-danger">{{ $errors->first('statename') }}</small>
                                     </div>   
                                      
                                      <div class="col-md-12"> <button type="submit" class="btn btn-success">SAVE</button></div>
@@ -47,7 +47,7 @@
             </div> 
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             View
@@ -58,8 +58,8 @@
                                 <table class="table table-striped table-bordered table-hover" id="vm-table">
                                     <thead>
                                         <tr>
-                                            <th>Vertical Id</th>
-                                            <th>Vertical Name</th>
+                                            <th>State Id</th>
+                                            <th>State Name</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
@@ -67,13 +67,13 @@
                                     <tbody>
                                     @foreach($query as $value)
                                         <tr>
-                                            <td>{{$value->vertical_id}}</td>
-                                            <td>{{$value->vertical_name}}</td>
+                                            <td>{{$value->state_id}}</td>
+                                            <td>{{$value->state}}</td>
                                             <td>{{$value->created_at}}</td>
                                             <td>
-                                            <a href="{{url('vertical-master-edit-view')}}/{{$value->vertical_id}}">Edit</a>
+                                            <a href="{{url('state-master-edit-view')}}/{{$value->state_id}}">Edit</a>
                                             ||
-                                            <a href="{{url('vertical-master-delete')}}/{{$value->vertical_id}}" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                                            <a href="{{url('state-master-delete')}}/{{$value->state_id}}" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
                                             </td>
                                         </tr>
                                       @endforeach 

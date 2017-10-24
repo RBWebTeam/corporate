@@ -98,8 +98,9 @@ class AdminloginController extends Controller
             
 
    }  
-   public function verticalmasterform()
-   {
+   public function verticalmasterform(Request $req)
+   {    
+
     return view('admin.vertical-master');
     
    }

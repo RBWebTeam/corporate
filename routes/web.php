@@ -57,10 +57,41 @@ Route::post('admin-login','admin\AdminloginController@login');
 Route::group(['middleware' => 'dashboard','namespace'=>'admin'], function () {
 Route::get('dashboard','DashboardController@dashboard');
 Route::get('dashboard/registration','DashboardController@registration')->middleware('mainadmin');
+
 Route::post('dashboard/registration-form','AdminloginController@registrationform');
-Route::get('dashboard/vertical-master','AdminloginController@verticalmasterform');
+
 Route::post('dashboard/notification','HeaderController@notification');
 Route::get('dashboard/user-show-groups','DashboardController@user_show');
+
+/************
+//  Master Added - Kishor
+******************/
+Route::get('dashboard/vertical-master','MasterController@verticalmasterform');
+Route::get('dashboard/product-master','MasterController@productmasterform');
+Route::get('dashboard/state-master','MasterController@statemasterform');
+Route::get('dashboard/district-master','MasterController@districtmasterform');
+Route::post('vertical-master-save','MasterController@verticalmastersave')->middleware('mainadmin');
+Route::get('vertical-master-edit-view/{verticalid}','MasterController@verticalmastereditview')->middleware('mainadmin');
+Route::post('vertical-master-update','MasterController@verticalmasterupdate')->middleware('mainadmin');
+Route::get('vertical-master-delete/{verticalid}','MasterController@verticalmasterdelete')->middleware('mainadmin');
+Route::post('product-master-save','MasterController@productmastersave')->middleware('mainadmin');
+Route::get('product-master-edit-view/{productid}','MasterController@productmastereditview')->middleware('mainadmin');
+Route::post('product-master-update','MasterController@productmasterupdate')->middleware('mainadmin');
+Route::get('product-master-delete/{productid}','MasterController@productmasterdelete')->middleware('mainadmin');
+Route::post('state-master-save','MasterController@statemastersave')->middleware('mainadmin');
+Route::get('state-master-edit-view/{stateid}','MasterController@statemastereditview')->middleware('mainadmin');
+Route::post('state-master-update','MasterController@statemasterupdate')->middleware('mainadmin');
+Route::get('state-master-delete/{stateid}','MasterController@statemasterdelete')->middleware('mainadmin');
+Route::post('district-master-save','MasterController@districtmastersave')->middleware('mainadmin');
+Route::get('district-master-edit-view/{districtid}','MasterController@districtmastereditview')->middleware('mainadmin');
+Route::post('district-master-update','MasterController@districtmasterupdate')->middleware('mainadmin');
+Route::get('district-master-delete/{districtid}','MasterController@districtmasterdelete')->middleware('mainadmin');
+
+/************
+//  END
+******************/
+
+
 
 //Route::get('dashboard/approved','DashboardController@approved');
 //approved
