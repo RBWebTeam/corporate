@@ -21,7 +21,8 @@ Route::group(['middleware' => 'fire','namespace' => 'Firecalculator'], function 
 Route::get('home','FirecalculatorController@home');
 Route::post('firecal-sectionlist','FirecalculatorController@firecal_sectionlist');
 //Route::get('home','FirecalculatorController@home');
-Route::get('section/{id}/{pro_id}','FirecalculatorController@section');
+  //Route::get('section/{id}/{pro_id}','FirecalculatorController@section');
+Route::get('standard-fire-and-special-perils','FirecalculatorController@section');
 Route::post('customer-details','FirecalculatorController@customerdetails');
 Route::post('quotes-add','FirecalculatorController@quotes_add');
 Route::post('quotes-update','FirecalculatorController@quotes_update');
