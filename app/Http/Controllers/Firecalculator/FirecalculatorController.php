@@ -11,171 +11,171 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Response;
 class FirecalculatorController extends Controller
 {
-         public function home(Request $req){
+ public function home(Request $req){
 
-                
-        	 return view('firecalculator.fire-cal');
-        }
-
-
-        public function firecal_sectionlist(){
-
-        	      $array=array();
-                $Query=DB::select('call usp_get_firecal_sectionlist()');
-                foreach ($Query as $key => $value){
-                	 $array[]=array('section_id' =>$value->section_id,'section_name'=>$value->section_name);
-                }
-
-                return  $array;
-
-        }
+  
+  return view('firecalculator.fire-cal');
+}
 
 
-        public function section(Request $req){
+public function firecal_sectionlist(){
+
+ $array=array();
+ $Query=DB::select('call usp_get_firecal_sectionlist()');
+ foreach ($Query as $key => $value){
+  $array[]=array('section_id' =>$value->section_id,'section_name'=>$value->section_name);
+}
+
+return  $array;
+
+}
 
 
-                  
-                   $query=DB::table('section_master')->select('section_name','section_id')
-                      ->where('section_id','=',$req->id)->first(); 
-
-                       $lead_query=DB::table('policy_lead_data')->select('lead_id','document_path','userid','group_id')->where('userid','=',Session::get('userid'))->get();
-
-        	    return view('firecalculator.section-wise-fire',['query'=>$query,'pro_id'=>$req->pro_id,'lead_query'=>$lead_query]);
-        }
-
-
-        public function customerdetails(Request $req){
-             
-
-                 
-                $photos = $req->file('policy_copy');
-                $destinationPath = public_path(). '/upload/';
-                 if($photos!=null || $photos!=0){
-                foreach ($photos as $file) {
-                   $fileName = rand(1, 999) . $file->getClientOriginalName();
-                   $file->move($destinationPath, $fileName);  
-                 }}else{ $file=0;  } 
- 
- 
-
-                     try {
-                      $business_type=$req->business_type;
-                      $frshcash=$req->frshcash;
-                      $newcustomer=$req->newcustomer;
-                      $period_from=$req->period_from?$req->period_from:0;
-                      $period_to=$req->period_to?$req->period_to:0;
-                      $current_insurer_id=$req->current_insurer_id?$req->current_insurer_id:0;
-                      $pro_id=$req->pro_id; 
-        
-        	return view('firecalculator.customer-details',['section_id'=>$req->section_id,'business_type'=>$business_type,'frshcash'=>$frshcash,'newcustomer'=>$newcustomer,'period_from'=>$period_from,'period_to'=>$period_to,'current_insurer_id'=>$current_insurer_id,'pro_id'=>$pro_id]);
-             }catch (\Exception $e) {
-                   
-                             return $e->getMessage();
-                   }
-      }
-
+public function section(Request $req){
 
  
-        public function quotes_add(Request $req){
+  
+ // $query=DB::table('section_master')->select('section_name','section_id')
+ // ->where('section_id','=',$req->id)->first(); 
+
+ $lead_query=DB::table('policy_lead_data')->select('lead_id','document_path','userid','group_id','client_name','renewal_date')->where('userid','=',Session::get('userid'))->get();
+
+ return view('firecalculator.section-wise-fire',['lead_query'=>$lead_query]);
+}
 
 
-               Session::forget('pdfarray');
-               Session::forget('comapny_id');
-               Session::forget('quote_id');
-
-
-           try {
-
-
-              $arr=Session::get('quote_dataValue');
-
-
-
-              $quote_id=DB::select('call usp_insert_firecal_quote(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$arr);
-
-        
-
-                         $quote_id=$quote_id[0]->quote_id;
-                        
-
-                         $is_selected= $req->comapny_id?$req->comapny_id:0;
-                         $length=sizeof($req->c_name);
-                         $pdfarray=array();
-                         for ($i=0; $i < $length ; $i++) { 
-                               if($req->c_id[$i]==$is_selected){  $selected=$is_selected; }else{  $selected=0;   }
-                                  $pdfarray[]=array('quote_id'=>$quote_id,'c_id'=>$req->c_id[$i],'c_name'=>$req->c_name[$i],'p_amount'=>$req->p_amount[$i],'gst_amount'=>$req->gst_amount[$i],'net_p_amount'=>$req->net_p_amount[$i]);
-                                $this->quotesQuery($quote_id,$req->c_id[$i],$req->c_name[$i],$req->p_amount[$i],$req->gst_amount[$i],$req->net_p_amount[$i],$selected);
-                         }
-
-                      
-                      Session::put('pdfarray', $pdfarray);
-                      Session::put('comapny_id', $is_selected);
-                      Session::put('quote_id', $quote_id); 
-
-                   }catch (\Exception $e) {
-                             return $e->getMessage();
-                   }
-        }
-
+public function customerdetails(Request $req){
+ 
+  $destinationPath = public_path(). '/upload/';
+ 
+  $photos = $req->file('policy_copy');
+  
+  if($photos!=null || $photos!=0){
+    foreach ($photos as $file) {
+     $fileName = rand(1, 999) . $file->getClientOriginalName();
+     $file->move($destinationPath, $fileName);  
+   }}else{ $file=0;  } 
+   
    
 
-   public function quotes_update(Request $req){
+   try {
+    $business_type=$req->business_type;
+    $frshcash=$req->frshcash;
+    $newcustomer=$req->newcustomer;
+    $period_from=$req->period_from?$req->period_from:0;
+    $period_to=$req->period_to?$req->period_to:0;
+    $current_insurer_id=$req->current_insurer_id?$req->current_insurer_id:0;
+    $pro_id=$req->pro_id; 
+    
+    return view('firecalculator.customer-details',['section_id'=>$req->section_id,'business_type'=>$business_type,'frshcash'=>$frshcash,'newcustomer'=>$newcustomer,'period_from'=>$period_from,'period_to'=>$period_to,'current_insurer_id'=>$current_insurer_id,'pro_id'=>$pro_id]);
+  }catch (\Exception $e) {
+   
+   return $e->getMessage();
+ }
+}
 
-             $arr=Session::get('quote_dataValue');
-             unset($arr[57]);
-             $is_selected= $req->comapny_id?$req->comapny_id:0;
-             $length=sizeof($req->c_name);
-             $pdfarray=array();
-             $quote_id= $req->quote_id;
-          
-             $quote_id=array($quote_id);
-             $result = array_merge($quote_id, $arr);
-                      
+
+
+public function quotes_add(Request $req){
+
+
+ Session::forget('pdfarray');
+ Session::forget('comapny_id');
+ Session::forget('quote_id');
+
+
+ try {
+
+
+  $arr=Session::get('quote_dataValue');
+
+
+
+  $quote_id=DB::select('call usp_insert_firecal_quote(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$arr);
+
+  
+
+  $quote_id=$quote_id[0]->quote_id;
+  
+
+  $is_selected= $req->comapny_id?$req->comapny_id:0;
+  $length=sizeof($req->c_name);
+  $pdfarray=array();
+  for ($i=0; $i < $length ; $i++) { 
+   if($req->c_id[$i]==$is_selected){  $selected=$is_selected; }else{  $selected=0;   }
+   $pdfarray[]=array('quote_id'=>$quote_id,'c_id'=>$req->c_id[$i],'c_name'=>$req->c_name[$i],'p_amount'=>$req->p_amount[$i],'gst_amount'=>$req->gst_amount[$i],'net_p_amount'=>$req->net_p_amount[$i]);
+   $this->quotesQuery($quote_id,$req->c_id[$i],$req->c_name[$i],$req->p_amount[$i],$req->gst_amount[$i],$req->net_p_amount[$i],$selected);
+ }
+
+ 
+ Session::put('pdfarray', $pdfarray);
+ Session::put('comapny_id', $is_selected);
+ Session::put('quote_id', $quote_id); 
+
+}catch (\Exception $e) {
+ return $e->getMessage();
+}
+}
+
+
+
+public function quotes_update(Request $req){
+
+ $arr=Session::get('quote_dataValue');
+ unset($arr[57]);
+ $is_selected= $req->comapny_id?$req->comapny_id:0;
+ $length=sizeof($req->c_name);
+ $pdfarray=array();
+ $quote_id= $req->quote_id;
+ 
+ $quote_id=array($quote_id);
+ $result = array_merge($quote_id, $arr);
+ 
     //print_r($result);exit;
  
-            
+ 
  $quote_id=DB::select('call usp_update_quote(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$result);
 
 
-             
-   }
-  
  
-
-        public function  quotesQuery($quote_id,$comapny_id,$company_name,$premium_amt,$gst_amt,$net_premium_amt,$is_selected){
-
-                       DB::table('firecal_quote_detail')->insert([
-                      ['quote_id' =>$quote_id,
-                       'comapny_id' =>$comapny_id,
-                       'company_name' =>$company_name,
-                       'premium_amt' =>$premium_amt,
-                       'gst_amt' =>$gst_amt,
-                       'net_premium_amt' =>$net_premium_amt,
-                       'is_selected' =>$is_selected,
-                      ],
-                      ]);
-
-        }
+}
 
 
 
-         public function thank_You(Request $req){ 
+public function  quotesQuery($quote_id,$comapny_id,$company_name,$premium_amt,$gst_amt,$net_premium_amt,$is_selected){
+
+ DB::table('firecal_quote_detail')->insert([
+  ['quote_id' =>$quote_id,
+  'comapny_id' =>$comapny_id,
+  'company_name' =>$company_name,
+  'premium_amt' =>$premium_amt,
+  'gst_amt' =>$gst_amt,
+  'net_premium_amt' =>$net_premium_amt,
+  'is_selected' =>$is_selected,
+  ],
+  ]);
+
+}
+
+
+
+public function thank_You(Request $req){ 
 
  
-                 
+ 
                 //  return view('thank-You');
-                     
-               Session::flash('msg', "Your Quotes Successfully Added.....");
-               return redirect('dashboard');
+ 
+ Session::flash('msg', "Your Quotes Successfully Added.....");
+ return redirect('dashboard');
 
-                
-         }
+ 
+}
+
+
+public function downlaod_pdf(Request $req){
+
 
   
-      public function downlaod_pdf(Request $req){
-
-
-                  
             // $quote_id=Session::get('quote_id');
             // $query_master=DB::select('call usp_show_fircal_quote("'.$quote_id.'")');
             // $query=$query_master[0];
@@ -188,48 +188,48 @@ class FirecalculatorController extends Controller
 
  
 
-             
-        try{
+ 
+  try{
                 // $pdfarray=Session::get('pdfarray');
                 // $comapny_id=Session::get('comapny_id');
 
-              $query_master=DB::select('call usp_show_fircal_quote("'.$req->quote_id.'")');
-              $query=$query_master[0];
+    $query_master=DB::select('call usp_show_fircal_quote("'.$req->quote_id.'")');
+    $query=$query_master[0];
 
-              $loan_detail = DB::table('firecal_quote_detail')
-            ->select('firecal_quote_detail.*')
-            ->where('firecal_quote_detail.quote_id',$req->quote_id)
-            ->get();
-              $comapny_id=0;
+    $loan_detail = DB::table('firecal_quote_detail')
+    ->select('firecal_quote_detail.*')
+    ->where('firecal_quote_detail.quote_id',$req->quote_id)
+    ->get();
+    $comapny_id=0;
 
 
-             foreach ($loan_detail as $key => $value) {
-                      
-                         if($value->is_selected!=0){
-                            $comapny_id=$value->is_selected;
+    foreach ($loan_detail as $key => $value) {
+      
+     if($value->is_selected!=0){
+      $comapny_id=$value->is_selected;
 
-                            break;
-                         }
-             }
-                  
-        if($comapny_id!=0){
-          return  PDF::loadView('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id])->pageSize('A3')->download();
-        }else{
-           return  PDF::loadView('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail])->pageSize('A3')->download();
-        }
+      break;
+    }
+  }
+  
+  if($comapny_id!=0){
+    return  PDF::loadView('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id])->pageSize('A3')->download();
+  }else{
+   return  PDF::loadView('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail])->pageSize('A3')->download();
+ }
 
-        }catch (\Exception $e) { return $e->getMessage(); }
-                   
+}catch (\Exception $e) { return $e->getMessage(); }
+
    //return view('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id]);
 
- 
 
 
 
-   }
 
-        
-         
+}
 
-         
+
+
+
+
 }

@@ -1,14 +1,18 @@
 @extends('includes.master')
 @section('content')
+
+ 
+
+
 <div class="row">
   <div class="col-md-12">
     <br>
-    <h3 class="head-3">{{$query->section_name}} </h3>
+    <h3 class="head-3">Standard Fire and Special Perils (SFSP)</h3>
     <div class="padding-80 box-shadow bg-success ">
       <form action="{{url('customer-details')}}" method="post" enctype="multipart/form-data">
        {{ csrf_field() }}
-       <input type="hidden" name="section_id" value="{{$query->section_id}}">
-       <input type="hidden" name="pro_id" value="{{$pro_id}}">
+       <input type="hidden" name="section_id" value="0">
+       <input type="hidden" name="pro_id" value="1">
        
        <table class="table table-striped table-bordered col-md-8">
          <tr>
@@ -46,57 +50,112 @@
          <td></td>
          <td></td>
        </tr> 
-     </table>
+     </table>.
 
-     <br>
-     
 
-     <label class="radio-inline"><input type="radio" name="policy_type" class="policy_type" checked value="1">Policy Upload</label>
-     <label class="radio-inline"><input type="radio" name="policy_type" class="policy_type" value="2">Lead ID</label>
 
-     <div  id="policy__ID">
-      <div class="form-group" id="tab_logic">
-        <label for="policy_copy">Policy Copy:</label>
-        <div id='addr0'>  <input    type="file" class="form-control" name="policy_copy[]" id="policy_copy"  ></div>
-        <div id='addr1'></div>
-        
+
+     <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
+          <h4 class="panel-title">
+            <a class="accordion-toggle">Policy Copy</a><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse ">
+          <div class="panel-body">
+             <label class="radio-inline"><input type="radio" name="policy_type"  class="policy_type" checked value="1">Upload Policy</label> 
+              &nbsp;&nbsp;&nbsp;&nbsp;<strong>OR</strong>  &nbsp;&nbsp;&nbsp;
+             <label class="radio-inline"><input type="radio" name="policy_type" class="policy_type" value="2">Select Lead</label>
+             <br> <br>
+             <div  id="policy__ID">
+              <div class="form-group" id="tab_logic">
+                <div id='addr0'>  <input    type="file" class="filestyle btn btn-info" data-placeholder="No file" name="policy_copy[]" id="policy_copy"  ></div>
+                <div id='addr1'></div>
+              </div>
+              <a id="add_row" class="btn btn-success pull-left btn-xs">Add Row</a><a id='delete_row' class="btn btn-danger pull-right btn-xs">Delete Row</a>
+              <br><br><br><br>
+            </div>
+            <div  id="lead_id" style="display: none">
+             <select class="form-control" name="policy_document" style="width:300px">
+              <option selected value="">Select Lead</option>
+              @foreach($lead_query as $lead_id)
+              <option value="{{$lead_id->lead_id}}">{{$lead_id->client_name}}&nbsp;&nbsp;: {{$lead_id->renewal_date}}</option>
+              @endforeach 
+            </select>
+          </div>
       </div>
-      <a id="add_row" class="btn btn-success pull-left">Add Row</a><a id='delete_row' class="btn btn-danger pull-right">Delete Row</a>
-      <br><br><br><br>
     </div>
-
-    <div  id="lead_id" style="display: none">
-     <label for="policy_copy">Select Lead:</label>
-     <select class="form-control" name="policy_document" >
-      <option selected value="">Select Lead</option>
-      @foreach($lead_query as $lead_id)
-      <option value="{{$lead_id->lead_id}}">{{$lead_id->lead_id}}</option>
-      @endforeach 
-    </select>
-    
   </div>
+ 
 
-
-
-  <div class="form-group">
-    <label for="visiting_card">Visiting card:</label>
-    <input type="file" class="form-control" name="visiting_card" >
+  <div class="panel panel-default">
+    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapse2">
+      <h4 class="panel-title">
+        <a class="accordion-toggle">Visiting card</a><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse ">
+      <div class="panel-body">
+        <fieldset>
+         <div  id="visiting__ID">
+          <div class="form-group" id="visiting_tab">
+            <div id='vaddr0'>  <input    type="file" class="filestyle btn btn-info" data-placeholder="No file"  name="visiting[]" id="visiting"  ></div>
+            <div id='vaddr1'></div>
+          </div>
+          <a id="vadd_row" class="btn btn-success pull-left btn-xs">Add Row</a><a id='vdelete_row' class="btn btn-danger pull-right btn-xs">Delete Row</a>
+          <br><br><br><br>
+        </div>
+      </fieldset>
+    </div>
   </div>
-  
-  <div class="form-group">
-    <label for="mandate">Mandate letter copy:</label>
-    <input type="file" class="form-control" name="mandate" >
-  </div>
-  
-  <div class="form-group">
-    <label for="inspection_report">Inspection report :</label>
-    <input type="file" class="form-control"  name="inspection_report">
+</div>
 
+
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapse3">
+    <h4 class="panel-title">
+      <a class="accordion-toggle">Mandate letter copy</a><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+    </h4>
   </div>
-  
-  
-  
-  <button class="btn btn-primary">Continue</button>
+  <div id="collapse3" class="panel-collapse collapse ">
+    <div class="panel-body">
+      <fieldset>
+        <input type="file"  class="filestyle btn btn-info" data-placeholder="No file" name="mandate" >
+      </fieldset>
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapse4">
+    <h4 class="panel-title">
+      <a class="accordion-toggle">Inspection report:</a><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
+    </h4>
+  </div>
+  <div id="collapse4" class="panel-collapse collapse ">
+    <div class="panel-body">
+      <fieldset>
+        <input type="file" class="filestyle btn btn-info" data-placeholder="No file" name="inspection_report">
+      </fieldset>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<button class="btn btn-primary">Continue</button>
 </form>
 </div>
 </div>
@@ -133,7 +192,7 @@
 // auto complete
 $(".current_insurer_company").autocomplete({ 
   source: function(request, response) {
-    
+
     $.ajax({
       url: "{{route('insurercompany') }}",
       dataType: "json",
@@ -150,7 +209,7 @@ $(".current_insurer_company").autocomplete({
     if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
       $('#current_insurer_id').val(0);
     }else{
-     
+
      $('#current_insurer_id').val(ui.item.company_id);
 
    }
@@ -204,7 +263,7 @@ $(".current_insurer_company").autocomplete({
     $("#add_row").click(function(){
 
      if(i<=10){
-      $('#addr'+i).html('<input    type="file" class="form-control" name="policy_copy[]" id="policy_copy"  >');
+      $('#addr'+i).html('<br><input    type="file" class="filestyle btn btn-info" data-placeholder="No file" name="policy_copy[]" id="policy_copy"  >');
 
       $('#tab_logic').append('<div id="addr'+(i+1)+'"></div>');
       i++; 
@@ -219,7 +278,35 @@ $(".current_insurer_company").autocomplete({
      }
    });
 
+
+ var j=1;
+    $("#vadd_row").click(function(){
+
+     if(j<=2){
+      $('#vaddr'+j).html(' <br> <input    type="file" class="filestyle btn btn-info" data-placeholder="No file" name="visiting[]" id="visiting"  >');
+
+      $('#visiting_tab').append('<div id="vaddr'+(j+1)+'"></div>');
+      j++; 
+    }else{
+     alert("max size 3 only");
+   }
+ });
+    $("#vdelete_row").click(function(){
+     if(j>1){
+       $("#vaddr"+(j-1)).html('');
+       j--;
+     }
+   });
+
+
   });
+
+
+
 </script>
+
+ 
+
+
 @endsection
 
