@@ -72,7 +72,18 @@
        <div class="container col-xs-12">
         <!-- Table 1 Start  -->           
         <h3 class="text-center heading-1 pad">Calculate Premium</h3> <br>
-        <div class="table-responsive">    
+
+
+
+      <!--    <table id="append_id">
+          <thead><tr></tr></thead>
+           <tbody><tr></tr></tbody>
+         </table> -->
+
+
+
+
+         <div class="table-responsive">    
           <form id="calculate_primium" name="calculate_primium" method="POST"  >  
             <table width="850" border="0" cellspacing="0" cellpadding="0" class="table table-striped  table-bordered text-right">
              <tr>
@@ -80,17 +91,17 @@
               <td width="50%"> <input type="text" class="form-control input1" name="customer_name" id="customer_name"   required /></td>
             </tr>
             <tr>
-              <td class="text-right"><label class="lbl">Location of Corporate Office*</label></td>
+              <td class="text-right"><label class="lbl">Location  *</label></td>
               <td class="left-pad-none">
                 <div class="col-md-6">
-                 
+
                  <input type="hidden" name="stateid" id="stateid" value="">
-                 <input type="text"  class="form-control  search_state " placeholder="Search Location " name="state" value="" id="state" required>
+                 <input type="text"  class="form-control  search_state " placeholder="State" name="state" value="" id="state" required>
                </div>
                <div class="col-md-6">
-                
+
                  <input type="hidden" name="districtid" id="districtid"  >
-                 <input type="text" class="form-control  search_district"  placeholder="Search District " name="district" id="district" required >
+                 <input type="text" class="form-control  search_district"  placeholder="  District " name="district" id="district" required >
                </div>
              </td>
            </tr>
@@ -105,8 +116,24 @@
            </td>
          </tr>
 
-         
          <tr>
+          <td ><label class="lbl">Select Company</label></td>
+          <td class="left-pad-none">
+            <div class="col-md-8 left-pad-none">
+              <span class="glyphicon glyphicon-chevron-down down-arr"></span>
+              <select class="form-control" name="company_master" id="company_master" required>
+                <option selected value="0"> select </option>
+                @foreach($company_query as $val)
+
+                <option value="{{$val->company_id}}"> {{$val->company_name}} </option>
+                @endforeach
+              </select>
+            </div>
+          </td>
+        </tr>
+
+
+        <tr>
           <td ><label class="lbl">Service Category</label></td>
           <td class="left-pad-none">
             <div class="col-md-8 left-pad-none">
@@ -160,7 +187,7 @@
   <!-- Table 1 End  --> 
 </div>  
 <button id="calc_primium" class="btn btn-primary btn-md" >Submit</button>
-<!--    <button id="activate-step-2" class="btn btn-primary btn-md" style="display: none">Activate Step 2</button> -->
+<button id="activate-step-2" class="btn btn-primary btn-md" style="display: none">Activate Step 2</button>
 </div>
 </div>
 </div>
@@ -173,212 +200,48 @@
   <div class="row setup-content" id="step-2"   >
     <div class="col-xs-12">
       <div class="col-md-12 well text-center">
-       <!-- Table 2 Start  --> 
        <h3 class="text-center heading-1 pad">Sum Insured</h3>
        <ul class="nav nav-tabs graded">
         <li class="active center-nav"><a data-toggle="tab" href="#home" id="flat">Flat</a></li>
         <li><a data-toggle="tab" href="#menu1" id="graded">Graded</a></li>
       </ul>
-      <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
-          <p class="text-center"><b>Sum Insured Table</b></p>
-          <div class="table-responsive">
-
-           <table width="900" border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped tbl-btm-mrg" id="Gradesum_insured_table">
-            <tr class="bg-danger-bg">
-              <th scope="col">Grade</th>
-              <th scope="col">Sum Insured</th>
-              <th scope="col" width="13%"> </th>
-              <th scope="col">0-18</th>
-              <th scope="col">19-35</th>
-              <th scope="col">36-45</th>
-              <th scope="col">46-55</th>
-              <th scope="col">56-60</th>
-              <th scope="col">61-65</th>
-              <th scope="col">66-70</th>
-              <th scope="col">71-75</th>
-              <th scope="col">76-80</th>
-              <th scope="col">Total</th>
-            </tr>
-            <tr>
-              <td><input type="text"  name="grade" id="grade" class="form-control" onkeypress="return Numeric(event)" required  /></td>
-              <td>
-               <select class="form-control" name="sum_insured" id="sum_insured" required >
-                <option>Select</option>
-                <option value="50000">50000</option>
-                <option value="100000">100000</option>
-                <option value="150000"> 150000</option>
-                <option value="200000">200000</option>
-                <option value="250000">250000</option>
-                <option value="300000"> 300000</option>
-                <option value="350000"> 350000</option>
-                <option value="400000">400000</option>
-                <option value="450000">450000</option>
-                <option value="500000"> 500000</option>
-                <option value="600000"> 600000</option>
-                <option value="700000"> 700000</option>
-                <option value="800000"> 800000</option>
-                <option value="900000">900000</option>
-                <option value="1000000">1000000</option>
-              </select>
-            </td>
-            <td>Employee</td>
-            <td><input type="text" name="emp_0_18"  id="emp_0_18"    class="form-control" onkeypress="return Numeric(event);"  oninput=" return Sum_Insured(this,'emp_0_18');"/></td>
-            <td><input type="text" name="emp_19_35" id="emp_19_35"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Sum_Insured(this,'emp_19_35');"/></td>
-            <td><input type="text" name="emp_36_45" id="emp_36_45"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Sum_Insured(this,'emp_36_45');"/></td>
-            <td><input type="text" name="emp_46_55" id="emp_46_55"  class="form-control" onkeypress="return Numeric(event);" oninput=" return Sum_Insured(this,'emp_46_55');"/></td>
-            <td><input type="text" name="emp_56_60" id="emp_56_60"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Sum_Insured(this,'emp_56_60');"/></td>
-            <td><input type="text" name="emp_61_65" id="emp_61_65"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Sum_Insured(this,'emp_61_65');"/></td>
-            <td><input type="text" name="emp_66_70" id="emp_66_70"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Sum_Insured(this,'emp_66_70');"/></td>
-            <td><input type="text" name="emp_71_75" id="emp_71_75"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Sum_Insured(this,'emp_71_75');"/></td>
-            <td><input type="text" name="emp_76_80" id="emp_76_80"    class="form-control" onkeypress="return Numeric(event);" oninput=" return Sum_Insured(this,'emp_76_80');"/></td>
-            <td id=""><input type="text" name="emp_totla"  id="emp_totla" readonly=""></td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>Non Parental Dependants</td> 
-            <td><input type="text" name="npd_0_18"  id="npd_0_18"    class="form-control" onkeypress="return Numeric(event);"  oninput=" return Non_parental_Dep_insured(this,'npd_0_18');"/></td>
-            <td><input type="text" name="npd_19_35" id="npd_19_35"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Non_parental_Dep_insured(this,'npd_19_35');"/></td>
-            <td><input type="text" name="npd_36_45" id="npd_36_45"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Non_parental_Dep_insured(this,'npd_36_45');"/></td>
-            <td><input type="text" name="npd_46_55" id="npd_46_55"  class="form-control" onkeypress="return Numeric(event);" oninput=" return Non_parental_Dep_insured(this,'npd_46_55');"/></td>
-            <td><input type="text" name="npd_56_60" id="npd_56_60"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Non_parental_Dep_insured(this,'npd_56_60');"/></td>
-            <td><input type="text" name="npd_61_65" id="npd_61_65"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Non_parental_Dep_insured(this,'npd_61_65');"/></td>
-            <td><input type="text" name="npd_66_70" id="npd_66_70"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Non_parental_Dep_insured(this,'npd_66_70');"/></td>
-            <td><input type="text" name="npd_71_75" id="npd_71_75"   class="form-control" onkeypress="return Numeric(event);" oninput=" return Non_parental_Dep_insured(this,'npd_71_75');"/></td>
-            <td><input type="text" name="npd_76_80" id="npd_76_80"    class="form-control" onkeypress="return Numeric(event);" oninput=" return Non_parental_Dep_insured(this,'npd_76_80');"/></td>
-            <td id=""><input type="text" name="non_parental_totla"  id="non_parental_totla" readonly=""></td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>  Parental Dependants</td>
-            <td><input type="text" name="pd_0_18"  id="pd_0_18"    class="form-control" onkeypress="return Numeric(event);"  oninput=" return  parental_Dep_insured(this,'pd_0_18');"/></td>
-            <td><input type="text" name="pd_19_35" id="pd_19_35"   class="form-control" onkeypress="return Numeric(event);" oninput=" return  parental_Dep_insured(this,'pd_19_35');"/></td>
-            <td><input type="text" name="pd_36_45" id="pd_36_45"   class="form-control" onkeypress="return Numeric(event);" oninput=" return  parental_Dep_insured(this,'pd_36_45');"/></td>
-            <td><input type="text" name="pd_46_55" id="pd_46_55"  class="form-control" onkeypress="return Numeric(event);" oninput=" return  parental_Dep_insured(this,'pd_46_55');"/></td>
-            <td><input type="text" name="pd_56_60" id="pd_56_60"   class="form-control" onkeypress="return Numeric(event);" oninput=" return  parental_Dep_insured(this,'pd_56_60');"/></td>
-            <td><input type="text" name="pd_61_65" id="pd_61_65"   class="form-control" onkeypress="return Numeric(event);" oninput=" return  parental_Dep_insured(this,'pd_61_65');"/></td>
-            <td><input type="text" name="pd_66_70" id="pd_66_70"   class="form-control" onkeypress="return Numeric(event);" oninput=" return  parental_Dep_insured(this,'pd_66_70');"/></td>
-            <td><input type="text" name="pd_71_75" id="pd_71_75"   class="form-control" onkeypress="return Numeric(event);" oninput=" return  parental_Dep_insured(this,'pd_71_75');"/></td>
-            <td><input type="text" name="pd_76_80" id="pd_76_80"    class="form-control" onkeypress="return Numeric(event);" oninput=" return  parental_Dep_insured(this,'pd_76_80');"/></td>
-            <td id=""><input type="text" name="parental_totla"  id="parental_totla" readonly=""></td>
-          </tr>
-        </table> 
-      </div>
-    </div> 
-
-
-    <div id="menu1" class="tab-pane fade">
-     <p class="text-center"><b>Sum Insured Table</b></p>
-           <!--  <div class="text-center pad">
-           <span class="small">Do want to Upload Annexure? <input type="radio" /> Yes <input type="radio" /> No</span></div> -->
-           <div class="table-responsive">
-            <table width="900" border="0" cellspacing="0" cellpadding="0" class="tab_logic table table-bordered table-striped tbl-btm-mrg " id="sum_insured_table">
-              <thead>
-                <tr class="bg-danger-bg">
-                  <th scope="col">Grade</th>
-                  <th scope="col">Sum Insured</th>
-                  <th scope="col" width="13%">&nbsp;</th>
-                  <th scope="col">0-18</th>
-                  <th scope="col">19-35</th>
-                  <th scope="col">36-45</th>
-                  <th scope="col">46-55</th>
-                  <th scope="col">56-60</th>
-                  <th scope="col">61-65</th>
-                  <th scope="col">66-70</th>
-                  <th scope="col">71-75</th>
-                  <th scope="col">76-80</th>
-                  <th scope="col">Total</th>
-                  <th scope="col">&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody id='addr0'>
-                <tr >
-                  <td><input type="text" data-id="@customer.Id"  name="grade[]" id="sum_grade"  class="form-control grade "   required  /></td>
-                  <td>
-                    <select class="form-control" name="sum_insured" id="sum_insured" required >
-                      <option>Select</option>
-                      <option value="50000">50000</option>
-                      <option value="100000">100000</option>
-                      <option value="150000"> 150000</option>
-                      <option value="200000">200000</option>
-                      <option value="250000">250000</option>
-                      <option value="300000"> 300000</option>
-                      <option value="350000"> 350000</option>
-                      <option value="400000">400000</option>
-                      <option value="450000">450000</option>
-                      <option value="500000"> 500000</option>
-                      <option value="600000"> 600000</option>
-                      <option value="700000"> 700000</option>
-                      <option value="800000"> 800000</option>
-                      <option value="900000">900000</option>
-                      <option value="1000000">1000000</option>
-                    </select>
-                  </td>
-                  <td>Employee</td>
-                  <td><input type="text" name="emp_0_18[]"    class="form-control emp_0_18" onkeypress="return Numeric(event);"   /></td>
-                  <td><input type="text" name="emp_19_35[]"   class="form-control emp_19_35" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="emp_36_45[]"   class="form-control emp_36_45" onkeypress="return Numeric(event);" /></td>
-                  <td><input type="text" name="emp_46_55[]"   class="form-control emp_46_55" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="emp_56_60[]"   class="form-control emp_56_60" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="emp_61_65[]"   class="form-control emp_61_65" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="emp_66_70[]"   class="form-control emp_66_70" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="emp_71_75[]"   class="form-control emp_71_75" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="emp_76_80"     class="form-control emp_76_80" onkeypress="return Numeric(event);"  /></td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>Non Parental Dependants</td>
-                  <td><input type="text" name="npd_0_18[]"  id="npd_0_18"    class="form-control npd_0_18" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="npd_19_35[]" id="npd_19_35"   class="form-control npd_19_35" onkeypress="return Numeric(event);" /></td>
-                  <td><input type="text" name="npd_36_45[]" id="npd_36_45"   class="form-control npd_36_45" onkeypress="return Numeric(event);" /></td>
-                  <td><input type="text" name="npd_46_55[]" id="npd_46_55"   class="form-control  npd_46_55" onkeypress="return Numeric(event);" /></td>
-                  <td><input type="text" name="npd_56_60[]" id="npd_56_60"   class="form-control npd_56_60" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="npd_61_65[]" id="npd_61_65"   class="form-control npd_61_65" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="npd_66_70[]" id="npd_66_70"   class="form-control npd_66_70" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="npd_71_75[]" id="npd_71_75"   class="form-control npd_71_75" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="npd_76_80[]" id="npd_76_80"   class="form-control npd_76_80" onkeypress="return Numeric(event);"  /></td>
-                  <td>0</td>
-                </tr>
-                <tr class="border-1">
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td>  Parental Dependants</td>
-                  <td><input type="text" name="pd_0_18[]"  id="pd_0_18"    class="form-control pd_0_18" onkeypress="return Numeric(event);"   /></td>
-                  <td><input type="text" name="pd_19_35[]" id="pd_19_35"   class="form-control pd_19_35" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="pd_36_45[]" id="pd_36_45"   class="form-control pd_36_45" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="pd_46_55[]" id="pd_46_55"  class="form-control  pd_46_55" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="pd_56_60[]" id="pd_56_60"   class="form-control pd_56_60" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="pd_61_65[]" id="pd_61_65"   class="form-control pd_61_65" onkeypress="return Numeric(event);"  ></td>
-                  <td><input type="text" name="pd_66_70[]" id="pd_66_70"   class="form-control pd_66_70" onkeypress="return Numeric(event);" /></td>
-                  <td><input type="text" name="pd_71_75[]" id="pd_71_75"   class="form-control pd_71_75" onkeypress="return Numeric(event);"  /></td>
-                  <td><input type="text" name="pd_76_80[]" id="pd_76_80"    class="form-control pd_76_80" onkeypress="return Numeric(event);" /></td>
-                  <td>0</td>
-                </tr>
-              </tbody>
-              <tbody id='addr1'></tbody>
-
-              
-              
-              
-            </table> <!--  <a id="add_row"   class="btn btn-info btn-md"><span class="glyphicon glyphicon-plus-sign"></span> Add Rows</a>  -->
-            <a id="add_row" class="btn btn-success pull-left">Add Row</a><a id='delete_row' class="btn btn-danger pull-right">Delete Row</a>
-
-          </div>
+      <div class="tab-content"> <p class="text-center"><b>Sum Insured Table</b></p>
+       <div class="table-responsive">
+        <table id="append_id">
+          <thead><tr></tr></thead>
+          <tbody id="table0"></tbody>
+          <tbody id="table1"></tbody>
+        </table>
+        <div class="show_hide">
+          <a id="add_row_graded" class="btn btn-success pull-left ">Add Row</a><a id='delete_row_graded' class="btn btn-danger pull-right">Delete Row</a>
         </div>
+
+
+
+
+<!--  <a download="Sample_Data.csv" href="{{URL::to('ghi_Insured/Sample_Data.csv')}}" class="btn btn-primary ">Download Sample Format</a>
+          
+  -->
+
       </div>
-
-      <button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
-
-      <!-- Table 2 End  --> 
-      <!--   <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
     </div>
+    <button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
+
+    <!-- Table 2 End  --> 
+    <!-- <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
   </div>
 </div>
 
+
+</div>
+
+</form>
+
+
+<form action="{{url('insurde-ublk-upload')}}" method="post">
+  {{csrf_field()}}
+  <input type="file" name="bulk">
+  <button>submit</button>
 </form>
 
 
@@ -460,7 +323,7 @@
         <h1 class="text-center">Add-On Covers</h1><!--<form></form> --> 
 
         <div class="table-responsive">
-         
+
           <table   border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped">
            <tr>
              <td colspan="2"><input type="radio" name="exisiting_disease"   /> Pre-exisiting Disease</td>
@@ -582,10 +445,10 @@
 
 
 <script type="text/javascript">
-  
+
 // Activate Next Step
 $(document).ready(function() {
-  
+
   var navListItems = $('ul.setup-panel li a'),
   allWells = $('.setup-content');
 
@@ -638,25 +501,6 @@ $(document).ready(function() {
 
 
 
-// Add , Dlelete row dynamically
-
-$(document).ready(function(){
-  var i=1;
-  $("#add_row").click(function(){
-    $('#addr'+i).html('<tr><td><input type="text" data-id="@customer.Id" name="grade[]" id="sum_grade" class="form-control grade"   required /></td><td> <select class="form-control" name="sum_insured" id="sum_insured" required ><option>Select</option><option value="50000">50000</option><option value="100000">100000</option><option value="150000"> 150000</option><option value="200000">200000</option><option value="250000">250000</option><option value="300000"> 300000</option><option value="350000"> 350000</option><option value="400000">400000</option><option value="450000">450000</option><option value="500000"> 500000</option><option value="600000"> 600000</option><option value="700000"> 700000</option><option value="800000"> 800000</option><option value="900000">900000</option><option value="1000000">1000000</option> </select></td><td>Employee</td><td><input type="text" name="emp_0_18[]" class="form-control emp_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_19_35[]" class="form-control emp_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_36_45[]" class="form-control emp_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_46_55[]" class="form-control emp_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_56_60[]" class="form-control emp_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_61_65[]" class="form-control emp_61_65" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_66_70[]" class="form-control emp_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_71_75[]" class="form-control emp_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="emp_76_80" class="form-control emp_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>Non Parental Dependants</td><td><input type="text" name="npd_0_18[]" id="npd_0_18" class="form-control npd_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_19_35[]" id="npd_19_35" class="form-control npd_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_36_45[]" id="npd_36_45" class="form-control npd_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_46_55[]" id="npd_46_55" class="form-control npd_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_56_60[]" id="npd_56_60" class="form-control npd_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_61_65[]" id="npd_61_65" class="form-control npd_61_65" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_66_70[]" id="npd_66_70" class="form-control npd_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_71_75[]" id="npd_71_75" class="form-control npd_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="npd_76_80[]" id="npd_76_80" class="form-control npd_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr><tr class="border-1"><td>&nbsp;</td><td>&nbsp;</td><td> Parental Dependants</td><td><input type="text" name="pd_0_18[]" id="pd_0_18" class="form-control pd_0_18" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_19_35[]" id="pd_19_35" class="form-control pd_19_35" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_36_45[]" id="pd_36_45" class="form-control pd_36_45" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_46_55[]" id="pd_46_55" class="form-control pd_46_55" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_56_60[]" id="pd_56_60" class="form-control pd_56_60" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_61_65[]" id="pd_61_65" class="form-control pd_61_65" onkeypress="return Numeric(event);" ></td><td><input type="text" name="pd_66_70[]" id="pd_66_70" class="form-control pd_66_70" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_71_75[]" id="pd_71_75" class="form-control pd_71_75" onkeypress="return Numeric(event);" /></td><td><input type="text" name="pd_76_80[]" id="pd_76_80" class="form-control pd_76_80" onkeypress="return Numeric(event);" /></td><td>0</td></tr>');
-
-    $('.tab_logic').append('<tbody id="addr'+(i+1)+'"></tbody>');
-
-    i++; 
-  });
-$("#delete_row").click(function(){
- if(i>1){
-   $("#addr"+(i-1)).html('');
-   i--;
- }
-});
-
-});
 
 
 </script>
@@ -769,7 +613,7 @@ function initialize(){
 var int=0;
 var initi=new  initialize();
 function Sum_Defination(vl,el){
-  
+
 
   if(el=='employees'){
     initi.total1=nancheck(vl.value);
@@ -847,8 +691,8 @@ function f_defination(element){
         });
            return false;
          }else{
-           
-          if(incr!=0){
+
+          if(incr!=0 && initi.total==50000){
             $('ul.setup-panel li:eq(1)').removeClass('disabled');
             $('ul.setup-panel li a[href="#step-2"]').trigger('click');
          //$(this).remove();
@@ -864,231 +708,224 @@ function f_defination(element){
   }); </script>
 
 
+
+
    <script type="text/javascript">
-     var   emp_0_18=0,emp_19_35=0, emp_36_45=0,emp_46_55=0, emp_56_60=0,  emp_61_65=0,  emp_66_70=0, emp_71_75=0,emp_76_80=0;
-     function Sum_Insured(val,ele){
-       if(ele=='emp_0_18'){
-         emp_0_18=parseInt(nancheck(val.value));
-       }else if(ele=='emp_19_35'){
-        emp_19_35=parseInt(nancheck(val.value));
-      }else if(ele=='emp_36_45'){
-       emp_36_45=parseInt(nancheck(val.value));
-     }else if(ele=='emp_46_55'){
-      emp_46_55=parseInt(nancheck(val.value));
-      
-    }else if(ele=='emp_56_60'){
-     emp_56_60=parseInt(nancheck(val.value));
-     
-   }else if(ele=='emp_61_65'){
-     emp_61_65=parseInt(nancheck(val.value));
-     
-   }else if(ele=='emp_66_70'){
-     emp_66_70=parseInt(nancheck(val.value));
-     
-   }else if(ele=='emp_71_75'){
-     emp_71_75=parseInt(nancheck(val.value));
-     
-   }else if(ele=='emp_76_80'){
-     emp_76_80=parseInt(nancheck(val.value));
-     
-   }
-   
-   
-   var emp_totla=emp_0_18+emp_19_35+emp_36_45+emp_46_55+ emp_56_60+emp_61_65+emp_66_70+emp_71_75+emp_76_80;
-   
-   $('#emp_totla').val(emp_totla);
-   
-   
-   
 
- }
+    var flat_graded=0;
+    var addflat=0;
+    var addgraded=0;
+    $(".graded li").click(function() {
+      var h= $("a",this).attr('href');
 
- var   npd_0_18=0,npd_19_35=0, npd_36_45=0,npd_46_55=0, npd_56_60=0,  npd_61_65=0,  npd_66_70=0, npd_71_75=0,npd_76_80=0;
- function Non_parental_Dep_insured(val,ele){
-  if(ele=='npd_0_18'){
-   npd_0_18=parseInt(nancheck(val.value));
- }else if(ele=='npd_19_35'){
-  npd_19_35=parseInt(nancheck(val.value));
-}else if(ele=='npd_36_45'){
- npd_36_45=parseInt(nancheck(val.value));
-}else if(ele=='npd_46_55'){
-  npd_46_55=parseInt(nancheck(val.value));
-}else if(ele=='npd_56_60'){
- npd_56_60=parseInt(nancheck(val.value));
-}else if(ele=='npd_61_65'){
- npd_61_65=parseInt(nancheck(val.value));
-}else if(ele=='npd_66_70'){
- npd_66_70=parseInt(nancheck(val.value));
-}else if(ele=='npd_71_75'){
- npd_71_75=parseInt(nancheck(val.value));
-}else if(ele=='npd_76_80'){
- npd_76_80=parseInt(nancheck(val.value));
- 
-}
-
-var npd_totla=npd_0_18+npd_19_35+npd_36_45+npd_46_55+npd_56_60+npd_61_65+npd_66_70+npd_71_75+npd_76_80;
-
-$('#non_parental_totla').val(npd_totla);
-}
-
-var   pd_0_18=0,pd_19_35=0,pd_36_45=0,pd_46_55=0,pd_56_60=0,pd_61_65=0,pd_66_70=0,pd_71_75=0,pd_76_80=0;
-function parental_Dep_insured(val,ele){
-
-   // console.log(val.value);
-   if(ele=='pd_0_18'){
-     pd_0_18=parseInt(nancheck(val.value));
-   }else if(ele=='pd_19_35'){
-     pd_19_35=parseInt(nancheck(val.value));
-   } else if(ele=='pd_36_45'){
-     pd_36_45=parseInt(nancheck(val.value));
-   }else if(ele=='pd_46_55'){
-    pd_46_55=parseInt(nancheck(val.value));
-  }else if(ele=='pd_56_60'){
-   pd_56_60=parseInt(nancheck(val.value));
- }else if(ele=='pd_61_65'){
-   pd_61_65=parseInt(nancheck(val.value));
- }else if(ele=='pd_66_70'){
-   pd_66_70=parseInt(nancheck(val.value));
- }else if(ele=='pd_71_75'){
-   pd_71_75=parseInt(nancheck(val.value));
- }else if(ele=='pd_76_80'){
-   pd_76_80=parseInt(nancheck(val.value));
-   
- }
-
- var   pd_totla=pd_0_18+pd_19_35+pd_36_45+pd_46_55+pd_56_60+pd_61_65+pd_66_70+pd_71_75+pd_76_80;
-           //  console.log(pd_totla);
-           
-           $('#parental_totla').val(pd_totla);
-         }
-
-
-
-         
-//var total=0;
-var temp=0;
-$(document).ready(function () {
-  $(document).on("input", "#sum_insured_table input",function(){
-    var $tr = $(this).closest('tr'); 
-    Sum_Insured_Table($tr);
-  }).trigger('input');  
-});
-
-function Sum_Insured_Table($tr){
- var tot = 0;  
- $('input', $tr).each(function(index,c) { 
-  if($(this).attr('id')=="sum_grade"){
-  }else{
-    tot += Number(nancheck($(this).val())) || 0; 
-  }
-  $('td:last', $tr).text(tot); 
-
-  
-  
-}); 
- 
- // total+=tot;
-}
-
-
-</script>
-<script type="text/javascript">
-  var flat_graded=0;
-  var addflat=0;
-  var addgraded=0;
-  $(".graded li").click(function() {
-    var h= $("a",this).attr('href');
-    
-    if(h=='#home'){
+      if(h=='#home'){
+       flat_graded=0;
+     }else if(h=='#menu1'){
+      flat_graded=1;
+    }else{
      flat_graded=0;
-   }else if(h=='#menu1'){
-    flat_graded=1;
-  }else{
-   flat_graded=0;
- }    
-})
-  $('#activate-step-2').show();
-  $('#sum_insured_id').click(function(e){ e.preventDefault();
+   }    
+ })
+    $('#activate-step-2').show();
+
+//     $('#sum_insured_id').click(function(e){ e.preventDefault();
 
 
-    $("table#sum_insured_table tr").each(function( i ) {
-      $("td:last", this).each(function( j ) {
-    //console.log( $(this).text());
-    addflat+=Number(nancheck($(this).text()));
-  });
-    });
-    $("table#Gradesum_insured_table tr ").each(function( i ) {
-      $("td:last", this).each(function( j ) {
-   //  console.log($(this).find('input').val());
-   addgraded+=Number(nancheck($(this).find('input').val()));
+//       $("table#sum_insured_table tr").each(function( i ) {
+//         $("td:last", this).each(function( j ) {
+
+//     addflat+=Number(nancheck($(this).text()));
+//   });
+//       });
+//       $("table#Gradesum_insured_table tr ").each(function( i ) {
+//         $("td:last", this).each(function( j ) {
+
+//    addgraded+=Number(nancheck($(this).find('input').val()));
+//  });
+
+//       });
+
+
+
+
+//       if(initi.total!=0 &&initi.total==addflat && flat_graded==1){
+//         alert(addflat);
+//         $('ul.setup-panel li:eq(2)').removeClass('disabled');
+//         $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+//         //$(this).remove();
+//       }else if(initi.total!=0 && initi.total==addgraded && flat_graded==0){
+//         $('ul.setup-panel li:eq(2)').removeClass('disabled');
+//         $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+//         //$(this).remove();
+//         alert(addgraded);
+//       }else{
+
+//         alert("Please fill form carefully");
+//       }
+
+// // console.log(initi.total+"+"+flat_graded+"="+addflat);
+// $('#default_covers_id').click(function(e){ e.preventDefault();
+//   validator=$('#default_covers_form').validate();
+//   if(! $('#default_covers_form').valid()){
+//     $.each(validator.errorMap, function (index, value) {
+//      $('#'+index).focus();
+//      return false;
+//    });
+//     return false;
+//   }else{
+
+//     $('ul.setup-panel li:eq(3)').removeClass('disabled');
+//     $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+//         //$(this).remove();
+
+//         alert("default_covers_id");
+
+//       }
+//     });
+
+
+// $('#add_on_covers_id').click(function(e){ e.preventDefault();
+//  validator=$('#add_on_covers_form').validate();
+//  if(! $('#add_on_covers_form').valid()){
+//   $.each(validator.errorMap, function (index, value) {
+//    $('#'+index).focus();
+//    return false;
+//  });
+//   return false;
+// }else{
+//  alert($('#calculate_primium').serialize());
+//  alert($('#sum_insured_form').serialize());
+//  alert($('#default_covers_form').serialize());
+//  alert($('#add_on_covers_form').serialize());
+
+// }
+// });
+
+
+
+// addgraded=0;
+// addflat=0;
+
+// });
+
+
+
+
+
+// append all textbox 
+var head=0,footer=0;
+$(document).ready(function () { 
+  $('#company_master').click(function(e){ e.preventDefault();
+   var array_append_th=Array();
+   var array_append_td1=Array();
+   var array_append_td2=Array();
+   var array_append_td3=Array();
+   var slab=Array();
+   $.ajax({
+    url: "{{url('sum-insured-graded')}}",
+    type: "GET",  
+    dataType: "json",
+    data: {
+      company_id : $('#company_master').val(),
+    },
+    success: function(data) {
+
+
+
+     $('#append_id thead tr').empty();
+     $('#table0').empty();
+     $.each(data.query_slab, function( i, value ) { 
+       slab.push('<option>'+value+'</option>');
+     });
+
+     $.each(data.age_bands, function( i, value ) { 
+       array_append_th.push('<th>'+value+'</th>');
+       array_append_td1.push('<td><input type="text" name="'+value+'[]"   onkeypress="return Numeric(event);" ></td>');
+       array_append_td2.push('<td><input type="text" name="'+value+'_'+i+'[]"   onkeypress="return Numeric(event);" ></td>');
+       array_append_td3.push('<td><input type="text" name="'+value+'_'+i+'_'+i+'[]"  onkeypress="return Numeric(event);" ></td>');
+
+     });
+
+     head='<th>Grade</th><th>Sum Insured</th> <th>Employee</th> '+array_append_th+'<th>Total</th>';
+
+     footer=' <tr><td><input type="text" name="" id="m_grade" /></td><td><select ><option>Select</option>'+slab+'</select></td><td>Employee</td>'+array_append_td1+'<td><input type="text"  readonly  name="etotal" id="etotal" /></td></tr><tr><td></td><td></td><td>Non Parental Dependants</td>'+array_append_td2+'<td><input type="text"  readonly  name="ntotal" id="ntotal" /></td></tr><tr><td></td><td></td><td>Parental Dependants</td>'+array_append_td3+'<td><input type="text"  readonly  name="dtotal" id="dtotal" /></td></tr>  ';
+
+     $('#append_id thead tr').append(head);
+     $('#table0').append(footer);
+
+   }
  });
-
-    });
-
-    
-    if(initi.total!=0 &&initi.total==addflat && flat_graded==1){
-      alert(addflat);
-      $('ul.setup-panel li:eq(2)').removeClass('disabled');
-      $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-        //$(this).remove();
-      }else if(initi.total!=0 && initi.total==addgraded && flat_graded==0){
-        $('ul.setup-panel li:eq(2)').removeClass('disabled');
-        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-        //$(this).remove();
-        alert(addgraded);
-      }else{
-        
-        alert("Please fill form carefully");
-      }
-
-// console.log(initi.total+"+"+flat_graded+"="+addflat);
-$('#default_covers_id').click(function(e){ e.preventDefault();
-  validator=$('#default_covers_form').validate();
-  if(! $('#default_covers_form').valid()){
-    $.each(validator.errorMap, function (index, value) {
-     $('#'+index).focus();
-     return false;
-   });
-    return false;
-  }else{
-
-    $('ul.setup-panel li:eq(3)').removeClass('disabled');
-    $('ul.setup-panel li a[href="#step-4"]').trigger('click');
-        //$(this).remove();
-
-        alert("default_covers_id");
-
-      }
-    });
+ }); 
 
 
-$('#add_on_covers_id').click(function(e){ e.preventDefault();
- validator=$('#add_on_covers_form').validate();
- if(! $('#add_on_covers_form').valid()){
-  $.each(validator.errorMap, function (index, value) {
-   $('#'+index).focus();
-   return false;
- });
-  return false;
-}else{
- alert($('#calculate_primium').serialize());
- alert($('#sum_insured_form').serialize());
- alert($('#default_covers_form').serialize());
- alert($('#add_on_covers_form').serialize());
 
-}
+$('.show_hide').hide(); 
+
+ // in textbox field  total add
+ $(document).on("input", "#append_id input",function(){
+  var $tr = $(this).closest('tr'); 
+  Sum_Insured_Table_other($tr);
+}).trigger('input'); 
+ function Sum_Insured_Table_other($tr){
+   var tot = 0;  
+   $('input', $tr).each(function(index,c) { 
+    if($(this).attr('id')=="m_grade"){
+    }else{
+      tot += Number(nancheck($(this).val())) || 0; 
+    }$('td:last', $tr).text(tot); }); }
+
+//    add and remove function
+var i=1;
+$("#add_row_graded").click(function(){
+  $("#table"+(i)).html(footer);
+  $('#append_id').append('<tbody id="table'+(i+1)+'"></tbody>'); 
+  i++; 
+});
+$("#delete_row_graded").click(function(){
+ if(i>1){
+   $("#table"+(i-1)).html('');
+   i--;
+ }
 });
 
 
+$('#sum_insured_id').click(function(e){ e.preventDefault();
+  var total_value=0;
+  $("table#append_id tr").each(function( i ) {
+    $("td:last", this).each(function( j ) {
+      total_value+=Number(nancheck($(this).text()));
 
-addgraded=0;
-addflat=0;
+    });  }); 
+
+ if(initi.total==total_value){
+
+     alert(total_value);
+ }
+   
+
+
+}); 
+
+$('#flat').click(function(){  $('.show_hide').hide();
+  //$("#table").html(''); 
+ // if($('#table0')){
+
+ // }else{
+ //    for (var i = 0 ; i<10;i++) {
+ //     $("#table"+(i-1)).html('');
+ //    }
+ // }
 
 });
-  
+$('#graded').click(function(){  $('.show_hide').show();  });
 
+
+
+
+
+}); 
 </script>
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<!--  -->
 
 @endsection

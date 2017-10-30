@@ -135,5 +135,9 @@ Route::get('show-xl-data','LeadController@show_xl_data');
 Route::group(['middleware' => 'dashboard','namespace' => 'GroupHealthInsurance',  ], function() {
         Route::get('transaction-type/{id}','GHIcontroller@policy_type');
         Route::post('GHI-quote','GHIcontroller@ghi_quote');
+        Route::get('sum-insured-graded','GHIcontroller@sum_insured_graded');
+        Route::post('insurde-ublk-upload','GHIcontroller@insurde_ublk_upload');
+
+        
     });
 
