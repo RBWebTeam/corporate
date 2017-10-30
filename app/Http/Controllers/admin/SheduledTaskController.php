@@ -45,7 +45,8 @@ class SheduledTaskController extends Controller
 		$mail = Mail::send('admin.intimation-mail',['time' => $time], function($message) use($to_email,$cc_email,$bcc_email,$pdf) {
 			foreach ($pdf as $key => $value) {
 		  	foreach ($value as $key => $val) {
-		  		$message->attach($val->output());
+		  		$base64String=base64_encode($val->output());
+		  		$message->attachData($base64String,$key.'invoice.pdf', ['mime' => "multipart/form-data"]);
 		  	}
 		  	
 		  }
@@ -57,13 +58,9 @@ class SheduledTaskController extends Controller
 		});
 
 		if(Mail::failures()){
-		  $error=3;
-		  echo $error;
-
-		  
+		 echo "Error";
 		}else{
-		  $error=2;
-		  echo $error;
+		  echo "Mail Sent Suceeccfully";
 		}
 	}
 	public function mail_error($msg){
