@@ -187,13 +187,31 @@
   <!-- Table 1 End  --> 
 </div>  
 <button id="calc_primium" class="btn btn-primary btn-md" >Submit</button>
-<button id="activate-step-2" class="btn btn-primary btn-md" style="display: none">Activate Step 2</button>
+<!-- <button id="activate-step-2" class="btn btn-primary btn-md" style="display: none">Activate Step 2</button> -->
 </div>
 </div>
 </div>
 </section>
 
 
+
+ 
+<!-- 
+<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+    {!! csrf_field() !!}
+    <div class="form-group">
+        <label for="file" class="col-sm-3 control-label">Select CSV File</label>
+        <div class="col-sm-9">
+            <input type="file" class="form-control" id="file" name="file">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-default" id="insurde_ublk_upload">Upload</button>
+        </div>
+    </div>
+</form>
+ -->
 
 
 <form class="container" id="sum_insured_form" name="sum_insured_form" method="POST"> 
@@ -238,11 +256,8 @@
 </form>
 
 
-<form action="{{url('insurde-ublk-upload')}}" method="post">
-  {{csrf_field()}}
-  <input type="file" name="bulk">
-  <button>submit</button>
-</form>
+
+ 
 
 
 
@@ -596,7 +611,7 @@ $(".search_industry").autocomplete({
 // var total3=0; 
 // var total4=0; 
 var incr=0;
-
+var inc=0;
 
 function initialize(){
  this.total=0;
@@ -692,7 +707,7 @@ function f_defination(element){
            return false;
          }else{
 
-          if(incr!=0 && initi.total==50000){
+          if(incr!=0 && initi.total==500){
             $('ul.setup-panel li:eq(1)').removeClass('disabled');
             $('ul.setup-panel li a[href="#step-2"]').trigger('click');
          //$(this).remove();
@@ -907,19 +922,49 @@ $('#sum_insured_id').click(function(e){ e.preventDefault();
 }); 
 
 $('#flat').click(function(){  $('.show_hide').hide();
-  //$("#table").html(''); 
- // if($('#table0')){
-
- // }else{
- //    for (var i = 0 ; i<10;i++) {
- //     $("#table"+(i-1)).html('');
- //    }
- // }
-
+  for (l=1;l<i;i--) {
+     $("#table"+(i-1)).html('');
+  }
+ 
 });
 $('#graded').click(function(){  $('.show_hide').show();  });
 
 
+
+
+
+$('#insurde_ublk_upload').click(function(e){  e.preventDefault();
+var file = $('#file');
+var formData = new FormData();
+if(file!=0){
+formData.append('file', file[0].files[0]); 
+//formData.append('quote_id',quote_id); 
+  
+$.ajax({
+url:"{{URL::to('insurde-ublk-upload')}}",
+method: 'post',
+dataType: 'json',
+contentType: false,
+processData: false,
+headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+data: formData,
+success: function (data) {
+ 
+console.log(data);
+
+
+}
+
+});
+
+}else{
+
+alert("Please fill the form carefully ...");
+
+}
+
+ 
+})
 
 
 
