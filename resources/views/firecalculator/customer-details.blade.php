@@ -500,13 +500,9 @@
      $.each( data, function( key, val ) {
        $("#occ_company ul").append('<li class="list-group-item" ><a href="#" class="occupied_id" style="font-size: 15px;"><p class="mb-0">'+val.occupied +'</p></a> <input type="hidden" name="abc" class="accupied_id_name"  value='+val.occupied_id +'><input type="hidden" name="abc" class="accupied_id_section_id"  value='+val.section_id +'></li>');
 
+   
 
-
-       if(val.section_id==6){
-         $('#occupiedType').show();
-       }else{
-         $('#occupiedType').hide();
-       }
+      
      });
      $('#occupiedPop').modal('toggle');
 
@@ -716,6 +712,12 @@ $(document).on('click','.occupied_id',function(){
   section_fn(section_ids);
   $('#section_id_val').val(section_ids);
   $('html, body').animate({ scrollTop: $('#occ').offset().top -300}, 500);
+
+   if(section_ids==6){
+         $('#occupiedType').show();
+       }else{
+         $('#occupiedType').hide();
+       }
 });
 
  //refresh

@@ -1,7 +1,7 @@
 @extends('includes.master')
 @section('content')
 
- 
+
 
 
 <div class="row">
@@ -64,30 +64,30 @@
         </div>
         <div id="collapse1" class="panel-collapse collapse ">
           <div class="panel-body">
-             <label class="radio-inline"><input type="radio" name="policy_type"  class="policy_type" checked value="1">Upload Policy</label> 
-              &nbsp;&nbsp;&nbsp;&nbsp;<strong>OR</strong>  &nbsp;&nbsp;&nbsp;
-             <label class="radio-inline"><input type="radio" name="policy_type" class="policy_type" value="2">Select Lead</label>
-             <br> <br>
-             <div  id="policy__ID">
-              <div class="form-group" id="tab_logic">
-                <div id='addr0'>  <input    type="file" class="filestyle btn btn-info" data-placeholder="No file" name="policy_copy[]" id="policy_copy"  ></div>
-                <div id='addr1'></div>
-              </div>
-              <a id="add_row" class="btn btn-success pull-left btn-xs">Add Row</a><a id='delete_row' class="btn btn-danger pull-right btn-xs">Delete Row</a>
-              <br><br><br><br>
+           <label class="radio-inline"><input type="radio" name="policy_type"  class="policy_type" checked value="1">Upload Policy</label> 
+           &nbsp;&nbsp;&nbsp;&nbsp;<strong>OR</strong>  &nbsp;&nbsp;&nbsp;
+           <label class="radio-inline"><input type="radio" name="policy_type" class="policy_type" value="2">Select Lead</label>
+           <br> <br>
+           <div  id="policy__ID">
+            <div class="form-group" id="tab_logic">
+              <div id='addr0'>  <input    type="file" class="filestyle btn btn-info" data-placeholder="No file" name="policy_copy[]" id="policy_copy"  ></div>
+              <div id='addr1'></div>
             </div>
-            <div  id="lead_id" style="display: none">
-             <select class="form-control" name="policy_document" style="width:300px">
-              <option selected value="">Select Lead</option>
-              @foreach($lead_query as $lead_id)
-              <option value="{{$lead_id->lead_id}}">{{$lead_id->client_name}}&nbsp;&nbsp;: {{$lead_id->renewal_date}}</option>
-              @endforeach 
-            </select>
+            <a id="add_row" class="btn btn-success pull-left btn-xs">Add Row</a><a id='delete_row' class="btn btn-danger pull-right btn-xs">Delete Row</a>
+            <br><br><br><br>
           </div>
+          <div  id="lead_id" style="display: none">
+           <select class="form-control" name="lead_id" style="width:300px">
+            <option selected value="">Select Lead</option>
+            @foreach($lead_query as $lead_id)
+            <option value="{{$lead_id->lead_id}}">{{$lead_id->lead_id}} - {{$lead_id->client_name}} </option>
+            @endforeach 
+          </select>
+        </div>
       </div>
     </div>
   </div>
- 
+
 
   <div class="panel panel-default">
     <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapse2">
@@ -279,7 +279,7 @@ $(".current_insurer_company").autocomplete({
    });
 
 
- var j=1;
+    var j=1;
     $("#vadd_row").click(function(){
 
      if(j<=2){
@@ -305,7 +305,7 @@ $(".current_insurer_company").autocomplete({
 
 </script>
 
- 
+
 
 
 @endsection
