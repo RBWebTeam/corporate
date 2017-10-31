@@ -103,9 +103,9 @@
             <a href="{{url('home')}}"><i class="fa fa-plus-circle fa-fw"></i>Add Quotes  </a>
         </li>
         @endif
-        <li>
+       <!--  <li>
             <a href="{{url('upload')}}"><i class="fa fa-upload fa-fw"></i>Upload</a>
-        </li>
+        </li> -->
         <li>
             <a href="{{url('lead-generation')}}"><i class="fa fa-cloud-upload fa-fw"></i>Upload Leads</a>
         </li>
