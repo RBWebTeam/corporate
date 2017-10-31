@@ -45,8 +45,7 @@ class SheduledTaskController extends Controller
 		$mail = Mail::send('admin.intimation-mail',['time' => $time], function($message) use($to_email,$cc_email,$bcc_email,$pdf) {
 			foreach ($pdf as $key => $value) {
 		  	foreach ($value as $key => $val) {
-		  		$name=$key.'_invoice.pdf';
-		  		$message->attachData($val->output(),$name);
+		  		$message->attach($val->output());
 		  	}
 		  	
 		  }
@@ -87,7 +86,7 @@ class SheduledTaskController extends Controller
 			}catch(\Exception $ee){
 				print_r($ee->getMessage());
 			}
-			
+			print_r($pdf[0]);exit();
 
 	}
 
