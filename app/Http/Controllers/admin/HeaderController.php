@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use View;
+use Session;
 class HeaderController extends Controller
 {
       public function notification(){
@@ -20,13 +21,14 @@ class HeaderController extends Controller
             ->get();
             $count=$is_approve->count();
 
+            $emp_code=101181;//Session::get('emp_code');
+          $data['15']=DB::select("call usp_get_lead_15daystat('".$emp_code."')");
+          $data['30']=DB::select("call usp_get_lead_30daystat('".$emp_code."')");
+          $data['45']=DB::select("call usp_get_lead_45daystat('".$emp_code."')");
 
 
-       // $is_approve=DB::table('firecal_quote_master')->where('is_approve','=',0)->get();
-       // $count=$is_approve->count();
 
-
-       return ['is_approve'=>$is_approve,'count'=>$count];
+       return ['is_approve'=>$is_approve,'count'=>$count,'intimation'=>$data];
 
       }
 }

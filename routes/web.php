@@ -141,3 +141,5 @@ Route::group(['middleware' => 'dashboard','namespace' => 'GroupHealthInsurance',
         
     });
 
+//intiamtion
+Route::get('show-intimation/{id}','admin\ReportController@show_intimation');
