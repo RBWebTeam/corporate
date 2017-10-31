@@ -78,7 +78,7 @@
              
              $.each(data.intimation, function( key, val ) {
               console.log(key);
-                url='show-intimation/'+key;
+                url="{{url('show-intimation')}}"+'/'+key;
                 console.log(url);
                 $("#intimation_notification").append('<li><a href="'+url+'"><div><strong>'+val.length+'</strong><span class="pull-right text-muted"><em>'+key+' days</em></span></div><div>1</div></a></li><li class="divider"></li>'); 
 
