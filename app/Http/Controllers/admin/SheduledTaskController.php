@@ -86,7 +86,7 @@ class SheduledTaskController extends Controller
 			}catch(\Exception $ee){
 				print_r($ee->getMessage());
 			}
-			
+			print_r($pdf[0]);exit();
 
 	}
 
