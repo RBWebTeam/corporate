@@ -71,7 +71,17 @@
                $("#notification_id ").empty();
               $.each(data.is_approve, function( key, val ) {
 
-                      $("#notification_id ").append('<li><a href="{{url("user-quotes/2")}}"><div><strong>'+val.firstname+'</strong><span class="pull-right text-muted"><em>'+timeDifference(new Date(),new Date(val.datetime_created))+'</em></span></div><div>1</div></a></li><li class="divider"></li>');
+                  $("#notification_id").append('<li><a href="{{url("user-quotes/2")}}"><div><strong>'+val.firstname+'</strong><span class="pull-right text-muted"><em>'+timeDifference(new Date(),new Date(val.datetime_created))+'</em></span></div><div>1</div></a></li><li class="divider"></li>');     
+
+                                
+             });
+             
+             $.each(data.intimation, function( key, val ) {
+              console.log(key);
+                url='show-intimation/'+key;
+                console.log(url);
+                $("#intimation_notification").append('<li><a href="'+url+'"><div><strong>'+val.length+'</strong><span class="pull-right text-muted"><em>'+key+' days</em></span></div><div>1</div></a></li><li class="divider"></li>'); 
+
              });
 
             
