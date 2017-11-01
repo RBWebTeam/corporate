@@ -95,6 +95,7 @@
                 }
 
              });
+           
            $('#refreshID').text(count);
             
           }

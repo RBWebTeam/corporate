@@ -28,9 +28,10 @@ class HeaderController extends Controller
       }
       public function intimation_notification(){
 
-          $emp_code=101181;//Session::get('emp_code');
+          $emp_code=Session::get('empcode');
           $status=0;
           $d=[];
+         
           try {
               $data=DB::select('call usp_get_lead_tat_count('.$emp_code.') ');
              // print_r(sizeof($data->15));
