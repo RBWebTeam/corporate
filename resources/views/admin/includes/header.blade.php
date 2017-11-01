@@ -20,8 +20,8 @@
          <a class="dropdown-toggle" data-toggle="dropdown" href="#"  >
            <span class="glyphicon glyphicon-comment"></span>
        </a><span class="badge badge-notify" id="refreshID"></span>
-       <ul class="dropdown-menu dropdown-messages" id="notification_id">
-       </ul>
+       <!-- <ul class="dropdown-menu dropdown-messages" id="notification_id">
+       </ul> -->
        <ul  class="dropdown-menu" id="intimation_notification">
        </ul>
        <li class="dropdown">

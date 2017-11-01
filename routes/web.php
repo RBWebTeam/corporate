@@ -65,6 +65,8 @@ Route::get('dashboard/registration','DashboardController@registration')->middlew
 Route::post('dashboard/registration-form','AdminloginController@registrationform');
 
 Route::post('dashboard/notification','HeaderController@notification');
+Route::get('dashboard/intimation-notification','HeaderController@intimation_notification');
+
 Route::get('dashboard/user-show-groups','DashboardController@user_show');
 
 /************
