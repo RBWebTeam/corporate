@@ -21,14 +21,31 @@ class HeaderController extends Controller
             ->get();
             $count=$is_approve->count();
 
-            $emp_code=101181;//Session::get('emp_code');
-          $data['15']=DB::select("call usp_get_lead_15daystat('".$emp_code."')");
-          $data['30']=DB::select("call usp_get_lead_30daystat('".$emp_code."')");
-          $data['45']=DB::select("call usp_get_lead_45daystat('".$emp_code."')");
 
 
+       return ['is_approve'=>$is_approve,'count'=>$count];
 
-       return ['is_approve'=>$is_approve,'count'=>$count,'intimation'=>$data];
+      }
+      public function intimation_notification(){
 
+          $emp_code=Session::get('empcode');
+          $status=0;
+          $d=[];
+         
+          try {
+              $data=DB::select('call usp_get_lead_tat_count('.$emp_code.') ');
+             // print_r(sizeof($data->15));
+              if(sizeof($data)>0){
+                 $status=1;
+              }
+               
+              
+              $d=$data[0];
+          } catch (\Exception $e) {
+            
+          }
+          
+
+          return ['intimation'=>$d,'status'=>$status];
       }
 }

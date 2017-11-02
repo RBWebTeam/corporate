@@ -67,6 +67,8 @@ Route::get('dashboard/registration','DashboardController@registration')->middlew
 Route::post('dashboard/registration-form','AdminloginController@registrationform');
 
 Route::post('dashboard/notification','HeaderController@notification');
+Route::get('dashboard/intimation-notification','HeaderController@intimation_notification');
+
 Route::get('dashboard/user-show-groups','DashboardController@user_show');
 
 /************
@@ -141,7 +143,7 @@ Route::group(['middleware' => 'dashboard','namespace' => 'GroupHealthInsurance',
         Route::post('GHI-quote','GHIcontroller@ghi_quote');
         Route::get('sum-insured-graded','GHIcontroller@sum_insured_graded');
         Route::post('insurde-ublk-upload','GHIcontroller@insurde_ublk_upload');
-
+        Route::post('upload-ghi-xl','GHIcontroller@ghi_xl_upload');
         
     });
 

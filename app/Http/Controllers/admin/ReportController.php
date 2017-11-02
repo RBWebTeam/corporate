@@ -12,7 +12,7 @@ class ReportController extends Controller
 	public function show_intimation(Request $req){
 		$id=$req->id;
 
-        $emp_code=101181;//Session::get('emp_code');
+        $emp_code=Session::get('empcode');
         $data=DB::select("call usp_get_lead_".$id."daystat('".$emp_code."')");
       	
       	return view('intimation-data')->with('data',$data);
