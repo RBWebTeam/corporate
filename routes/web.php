@@ -139,7 +139,7 @@ Route::group(['middleware' => 'dashboard','namespace' => 'GroupHealthInsurance',
         Route::post('GHI-quote','GHIcontroller@ghi_quote');
         Route::get('sum-insured-graded','GHIcontroller@sum_insured_graded');
         Route::post('insurde-ublk-upload','GHIcontroller@insurde_ublk_upload');
-
+        Route::post('upload-ghi-xl','GHIcontroller@ghi_xl_upload');
         
     });
 

@@ -88,6 +88,12 @@
                         </a>
                     </div>
                 </div>
+                <form method="POST" action="{{URL::to('upload-ghi-xl')}}" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                <input type="file" name="excel">
+                <button type="submit">upload</button>
+                upload
+            </form>
                <!--  <div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">

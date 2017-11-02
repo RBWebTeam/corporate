@@ -85,7 +85,32 @@ public function insurde_ublk_upload(Request $req){
 
 }
 
-
+public function ghi_xl_upload(Request $req){
+      $userid=Session::get('userid');
+      $file=Input::file('excel');
+      
+      $data = \Excel::load($file)->toObject();
+      $msg="Data Uploaded Successfully. \n ";
+            if($data){
+              $count=0;
+              try{
+                foreach ($data as $k => $val) {
+                    foreach ($val as $key => $value) {
+                      # code...
+                   
+                    print_r($val);
+                    }
+                  }
+                  $update=DB::select('call usp_insert_bulk_lead_data()');
+              }catch(\Exception $ee){
+                //$print_r($ee);
+                $msg+="but your XL breaks down something";
+              }
+                
+               // Session::flash('msg',$msg);
+               // return redirect('dashboard');
+    }
+}
 
 
 }
