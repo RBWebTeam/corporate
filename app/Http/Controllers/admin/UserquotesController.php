@@ -53,7 +53,7 @@ class UserquotesController extends Controller
 
 public function quotes_details(Request $req){
 
-  
+ 
  
  
  try{
@@ -80,10 +80,14 @@ public function quotes_details(Request $req){
 
 }
 
+$policy_query=DB::table('policy_documents')->where('quote_id','=',$req->id)->first();
+
+//print_r($policy_query->quote_id);exit;
+
 if($comapny_id!=0){
-  return view('admin.quotes-details-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id]);
+  return view('admin.quotes-details-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query]);
 }else{
- return view('admin.quotes-details',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id]);
+ return view('admin.quotes-details',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query]);
 }}catch(\Exception $ee){
  return $ee->getMessage();
 } 

@@ -387,10 +387,144 @@
 
 
 
+<div class="modal fade fade bd-example-modal-lg" id="is_floater_popup" role="dialog">
+  <div class="modal-dialog modal-lg"">
+    <div class="modal-content">
+      <form   method="post" id="risk_form_id">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Risk Location Address</h4>
+        </div>
+        <table class="table table-hover table-condensed table-striped table-bordered">
+          <thead><tr><th >No</th><th>Address</th><th >Select State</th><th >Select city</th><th >Pincode</th></tr></thead>
+          <tbody id="tab_risk">
+            <tr id='addr0'>
+             <td >1</td>
+             <td class="col-xs-4">
+              <input class="form-control" type="text" name="riskaddress_add[]"  id="riskaddress_add"  required /></td>
+              <td  >
+                <!-- <input class="form-control risk_class_search" type="text" name="riskstat_add[]"   id="riskstat_add_0" required/> -->
+                <select class="form-control risk_class_search" type="text" name="riskstatename[]"   id="search_0"> </select>
+              </td>
+              <td  ><!-- <input class="form-control" type="text" name="riskcity_add[]" id="riskcity_add" required/> -->
+                <select class="form-control risk_id_search" type="text" name="riskcityname[]"   id="search_id_0"> </select>
+              </td>
+              <td  ><input class="form-control" type="text" name="riskpinname[]"     /></td>
+            </tr>
+            <tr id='addr1'></tr>
+
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <a id="add_row_risk" class="btn btn-success pull-left btn-xs">Add Row</a><a id='delete_row_risk' class="btn btn-danger pull-right btn-xs">Delete Row</a>
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary " id="risk_submit_id"  >submit</button></center>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 
 
 <script type="text/javascript">
+ var risk_location_address=0;
+  $(document).ready(function(){
+    var  arra=Array('<option value="0">Select</option>');
+   
+    var i=1;
+    var n=2;
+    
+    $.ajax({
+      url: "{{route('risk_addresh_show') }}",
+      dataType: "json",
+      data: {},
+      success: function(data) {
+        $('#search_0').empty();
+        $.each(data, function( key, val ) {
+          arra.push('<option value="'+val.state_id+'">'+val.state_Name+'</option>');
+        });
+        $('#search_0').empty();
+        $('#search_0').append(arra);
 
+      }
+
+    });
+
+    $("#add_row_risk").click(function(){
+     if(i<=10){
+      $('#addr'+i).html('<td >'+ n++ +'</td><td class="col-xs-4"><input class="form-control" type="text" name="riskaddress_add[]" id="riskaddress_add" required /></td><td ><select class="form-control risk_class_search" type="text" name="riskstatename[]"   id="search_'+i+'"></td><td ><select class="form-control risk_id_search" type="text" name="riskcityname[]"   id="search_id_'+i+'"> </select></td><td ><input class="form-control" type="text" name="riskpinname[]"    /></td>');
+
+      $('#tab_risk').append('<tr id="addr'+(i+1)+'"></tr>');
+      $("#search_"+i).empty();
+      $("#search_"+i).append(arra);  
+      i++; 
+    }else{
+     alert("max size 10 only");
+   }
+ });
+    $("#delete_row_risk").click(function(){
+     if(i>1){
+       $("#addr"+(i-1)).html('');
+       i--;
+     }
+   });
+
+
+    $(document).on('change', '.risk_class_search', function() {   
+      var st_id =$(this).val();    
+      id=this.id;
+      var  get_last_id=id.substr(id.length - 1);
+      var  city_arra=Array('<option value="0">Select</option>');
+      $.ajax({
+        url: "{{route('risk_city_show') }}",
+        dataType: "json",
+        data: {st_id:st_id},
+        success: function(data) {
+         $("#search_id_"+get_last_id).empty();
+         $.each(data, function( key, val ) {
+          city_arra.push('<option value="'+val.district_id+'">'+val.district_name+'</option>');
+        });
+         $("#search_id_"+get_last_id).empty();
+         $("#search_id_"+get_last_id).append(city_arra);
+               // alert("#search_id_"+i);
+
+             }
+
+           });
+
+
+
+    });
+
+
+
+
+
+
+    $(document).on("click", "#risk_submit_id",function(e){
+     e.preventDefault();
+     validator=$('#risk_form_id').validate();
+     if(! $('#risk_form_id').valid()){
+
+
+       console.log(validator.errorList[0].element);
+
+
+       return false;
+     }else{
+           $('#is_floater_popup').modal('hide');
+      risk_location_address=$('#risk_form_id').serialize();
+       alert(risk_location_address);
+  
+     }
+ 
+
+   })
+
+  });
 
  //var section_id='{{$section_id}}';
  var escalationval=0;
@@ -500,9 +634,9 @@
      $.each( data, function( key, val ) {
        $("#occ_company ul").append('<li class="list-group-item" ><a href="#" class="occupied_id" style="font-size: 15px;"><p class="mb-0">'+val.occupied +'</p></a> <input type="hidden" name="abc" class="accupied_id_name"  value='+val.occupied_id +'><input type="hidden" name="abc" class="accupied_id_section_id"  value='+val.section_id +'></li>');
 
-   
 
-      
+
+
      });
      $('#occupiedPop').modal('toggle');
 
@@ -685,7 +819,15 @@ $('input[type="checkbox"]').click(function(){
                        sum_omissionpublic=totlacal;
                        $('#sum_startup').val(0);
                      }else if(attr_id=='is_floater'){
+
+
                       totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
+
+
+                      $('#is_floater_popup').modal('show');
+
+
+
                       $('#sum_floater').val(0);
                     }else if(attr_id=='is_impactdamage'){
                       totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
@@ -713,11 +855,11 @@ $(document).on('click','.occupied_id',function(){
   $('#section_id_val').val(section_ids);
   $('html, body').animate({ scrollTop: $('#occ').offset().top -300}, 500);
 
-   if(section_ids==6){
-         $('#occupiedType').show();
-       }else{
-         $('#occupiedType').hide();
-       }
+  if(section_ids==6){
+   $('#occupiedType').show();
+ }else{
+   $('#occupiedType').hide();
+ }
 });
 
  //refresh
@@ -788,7 +930,6 @@ $('#insurance').click(function(e){
  e.preventDefault();
 
 
-
  validator=$('#corporate_insurance').validate();
  if(! $('#corporate_insurance').valid()){
            //validator.errorList[0].element.focus();
@@ -801,13 +942,16 @@ $('#insurance').click(function(e){
          }else{
 
           if( $('#section_id_val').val()!=''){
-
+            
             $.ajax({  
               type: "POST",  
               url: "{{URL::to('corporate')}}",
-              data : $('#corporate_insurance').serialize(),
+              data : $('#corporate_insurance').serialize()+'&'+risk_location_address,
               success: function(msg){
 
+                    if(msg==0){
+                      $('#premium_table').empty();
+                    }else{
                 $('html, body').animate({
                   scrollTop: $("#premium_table").offset().top
                 }, 300);
@@ -825,6 +969,7 @@ $('#insurance').click(function(e){
                   $('#premium_table').empty().append('No Result Found');
                 }          
               }  
+            }
             });
 
           }else{
@@ -848,7 +993,7 @@ $(document).on('click','.getval',function(){
  gst_amount=$(this).closest('tr').find('.gst_amount').val();
  net_p_amount=$(this).closest('tr').find('.net_p_amount').val();
 
-
+ 
        // var  serialize=$('#getquote').serialize();
        var data = $('#getquote').serializeArray();
        data.push({name: 'comapny_id', value: comapny_id});
@@ -859,8 +1004,12 @@ $(document).on('click','.getval',function(){
         data :data,
         success: function(msg){
 
-          window.location.href = "{{url('thank-you')}}";
-
+     
+              if(msg==1){
+                 window.location.href = "{{url('thank-you')}}";
+              }else{
+                  console.log("error");
+              }
 
         }
 
@@ -881,8 +1030,11 @@ $(document).on('click','.apply_id',function(){
   data : $('#getquote').serialize(),
   success: function(msg){
 
-   window.location.href = "{{url('thank-you')}}";
-
+     if(msg==1){
+                window.location.href = "{{url('thank-you')}}";
+              }else{
+                  console.log("error");
+              }
 
  }
 
@@ -940,21 +1092,21 @@ $(document).on('click','#sameas',function(){
 </script>
 
 
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&libraries=places"></script>
-   <script type="text/javascript">
-        google.maps.event.addDomListener(window, 'load', function () {
-            var places = new google.maps.places.Autocomplete(document.getElementById('insure_name'));
-            google.maps.event.addListener(places, 'place_changed', function () {
-                var place = places.getPlace();
-                var address = place.formatted_address;
-                var latitude = place.geometry.location.lat();
-                var longitude = place.geometry.location.lng();
-                var mesg = "Address: " + address;
-                mesg += "\nLatitude: " + latitude;
-                mesg += "\nLongitude: " + longitude;
-                alert(mesg);
-            });
-        });
-    </script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&libraries=places"></script>
+<script type="text/javascript">
+  google.maps.event.addDomListener(window, 'load', function () {
+    var places = new google.maps.places.Autocomplete(document.getElementById('insure_name'));
+    google.maps.event.addListener(places, 'place_changed', function () {
+      var place = places.getPlace();
+      var address = place.formatted_address;
+      var latitude = place.geometry.location.lat();
+      var longitude = place.geometry.location.lng();
+      var mesg = "Address: " + address;
+      mesg += "\nLatitude: " + latitude;
+      mesg += "\nLongitude: " + longitude;
+      alert(mesg);
+    });
+  });
+</script>
 @endsection
 

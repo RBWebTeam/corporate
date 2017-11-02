@@ -93,14 +93,14 @@ public function customerdetails(Request $req){
      $report_arr=$report;
    }else{ $report_arr=0;  } 
 
- 
+   
 
-  Session::put('policy_copy',implode(', ',$policy_copy_arr));
-  Session::put('visiting',implode(', ',$visiting_arr));
-  Session::put('mandate', $file_mandate);
-  Session::put('inspection_report',$report_arr);
-  Session::put('lead_id',$lead_id);
-    
+   Session::put('policy_copy',implode(', ',$policy_copy_arr));
+   Session::put('visiting',implode(', ',$visiting_arr));
+   Session::put('mandate', $file_mandate);
+   Session::put('inspection_report',$report_arr);
+   Session::put('lead_id',$lead_id);
+   
 
    try {
     $business_type=$req->business_type;
@@ -123,20 +123,13 @@ public function customerdetails(Request $req){
 
 
 public function quotes_add(Request $req){
-
-
  Session::forget('pdfarray');
  Session::forget('comapny_id');
  Session::forget('quote_id');
-
+ $true=0;
 
  try {
-
-
   $arr=Session::get('quote_dataValue');
-
-
-
   $quote_id=DB::select('call usp_insert_firecal_quote(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$arr);
 
   
@@ -154,35 +147,39 @@ public function quotes_add(Request $req){
    
  }
  
+ $this->risk_location_address(Session::get('risk_location'),$quote_id);
+ 
+
  $this->policy_documents($quote_id);
  Session::put('pdfarray', $pdfarray);
  Session::put('comapny_id', $is_selected);
  Session::put('quote_id', $quote_id); 
-
+ return $true=1;
 }catch (\Exception $e) {
- return $e->getMessage();
+ //return $e->getMessage();
+   return $true=0;
 }
 }
 
 
 public function policy_documents($quote_id){
 
+ DB::select('call usp_insert_policy_docs(?,?,?,?,?,?)',array(Session::get('policy_copy'),Session::get('visiting'),Session::get('mandate'),Session::get('inspection_report'),Session::get('lead_id'),$quote_id));
  
  
-   
  
  
-  
-DB::table('policy_documents')->insert([
-  ['doc_type' =>0,
-  'policy_doc_path' =>Session::get('policy_copy'),
-  'visiting_card_path' =>Session::get('visiting'),
-  'mandate_letter_path' =>Session::get('mandate'),
-  'inspection_path' =>Session::get('inspection_report'),
-  'lead_id' =>Session::get('lead_id'),
-  'quote_id' =>$quote_id,
-  ],
-  ]);
+ 
+// DB::table('policy_documents')->insert([
+//   ['doc_type' =>0,
+//   'policy_doc_path' =>Session::get('policy_copy'),
+//   'visiting_card_path' =>Session::get('visiting'),
+//   'mandate_letter_path' =>Session::get('mandate'),
+//   'inspection_path' =>Session::get('inspection_report'),
+//   'lead_id' =>Session::get('lead_id'),
+//   'quote_id' =>$quote_id,
+//   ],
+//   ]);
 
 }
 
@@ -224,6 +221,11 @@ public function  quotesQuery($quote_id,$comapny_id,$company_name,$premium_amt,$g
 
 }
 
+public function risk_location_address($risk_location,$quote_id){
+       
+      DB::select('call usp_insert_floater_riskaddress(?,?,?,?,?)',array($risk_location['riskaddress'],$risk_location['riskstates'],$risk_location['riskdistricts'],$risk_location['riskpincodes'],$quote_id));
+
+}
 
 
 public function thank_You(Request $req){ 

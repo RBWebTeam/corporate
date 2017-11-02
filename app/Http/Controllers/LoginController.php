@@ -85,8 +85,22 @@ $validator = Validator::make($request->all(), [
     
     public function corporate(Request $req){
       Session::forget('quote_dataValue');
+      Session::forget('risk_location');
+      $riskaddress_add=0;
+       $riskstatename=0;
+        $riskcityname=0;
+         $riskpinname=0;
 
-      
+try {
+
+            if($req->is_floater!=0 && $req->riskstatename!=0){
+          $riskaddress_add=implode(",",$req->riskaddress_add);
+          $riskstatename=implode(",",$req->riskstatename);
+          $riskcityname=implode(",",$req->riskcityname);
+          $riskpinname=implode(",",$req->riskpinname);
+
+        }
+    
      
        $section_id=$req['section_id'];
        $transaction_type=$req['frshcash'];
@@ -239,13 +253,19 @@ $arr= array('section_id' =>$section_id,
  
 $array = array_values($arr);
          Session::put('quote_dataValue', $array);
+         Session::put('risk_location',array('riskaddress' =>$riskaddress_add ,'riskstates' =>$riskstatename ,'riskdistricts' =>$riskcityname ,'riskpincodes' =>$riskpinname ));
+       
+       
+        
  
- 
-      $quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'")');
+      $quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'",'.$riskcityname.')');
        
            //$this::CorporateSave($req);
      return $quote_data;
-
+}catch (\Exception $e) {
+ //return $e->getMessage();
+   return $true=0;
+}
 
     }
 

@@ -46,6 +46,8 @@ Route::post('corporate','LoginController@corporate');
 
 Route::get('search_industry_ghi',array('as'=>'search_industry_ghi','uses'=>'AutoCompleteController@search_industry_ghi')); 
 
+Route::get('risk_addresh_show',array('as'=>'risk_addresh_show','uses'=>'AutoCompleteController@risk_addresh_show')); 
+Route::get('risk_city_show',array('as'=>'risk_city_show','uses'=>'AutoCompleteController@risk_city_show')); 
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +128,8 @@ Route::get('autocomplete','LeadController@group_auto_complete');
 Route::get('bulk-upload','LeadController@bulk_upload');
 Route::post('upload-excel','LeadController@upload_excel');
 Route::get('show-xl-data','LeadController@show_xl_data');
+
+ 
 
 });
 
