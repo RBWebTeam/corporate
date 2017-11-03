@@ -196,7 +196,7 @@
 
 
  
-<!-- 
+
 <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
     {!! csrf_field() !!}
     <div class="form-group">
@@ -211,7 +211,7 @@
         </div>
     </div>
 </form>
- -->
+
 
 
 <form class="container" id="sum_insured_form" name="sum_insured_form" method="POST"> 
@@ -707,7 +707,7 @@ function f_defination(element){
            return false;
          }else{
 
-          if(incr!=0 && initi.total==500){
+          if(incr!=0 && initi.total<=500){
             $('ul.setup-panel li:eq(1)').removeClass('disabled');
             $('ul.setup-panel li a[href="#step-2"]').trigger('click');
          //$(this).remove();
