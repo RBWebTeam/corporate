@@ -11,6 +11,7 @@ use Session;
 use URL;
 use Mail;
 use PDF;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 class GHIcontroller extends Controller
 {
@@ -87,36 +88,55 @@ public function insurde_ublk_upload(Request $req){
 public function ghi_xl_upload(Request $req){
       $userid=Session::get('userid');
       $file=Input::file('excel');
-      
+      $counter_ghi=[];
       $data = \Excel::load($file)->toObject();
-      $msg="Data Uploaded Successfully. \n ";
-     // print "<pre>";
+      $msg="Data Upload Intruptted. \n ";
       $last_self_id=0;
+      $status=1;
             if($data){
               
               try{
-
-                foreach ($data as $k => $val) {
-                  if($val->relation=='SELF' || $val->relation=='self'){
-                    if(isset($get_id))
-                      $last_self_id=0;
-                  }
-                  $dob=date_format($val->date_of_birth_ddmmyyyy,"Y-m-d");
-                  $doj=date_format($val->date_of_joining_ddmmyyyy,"Y-m-d");
-                   $get_id=DB::table('ghi_xl_data')->insertGetId(['employee_id'=>$val->employee_id, 'grade'=>$val->grade, 'name_of_insured'=>$val->name_of_insured, 'date_of_birth'=> $dob, 'gender'=>$val->gender, 'relation'=>$val->relation, 'date_of_joining'=>$doj, 'sum_insured'=>$val->sum_insured, 'related_to'=>$last_self_id]);
+                foreach ($data as $key => $value) {
+                  foreach ($value as $k => $val) {
                     if($val->relation=='SELF' || $val->relation=='self'){
-                        $last_self_id=$get_id;
+                      if(isset($get_id))
+                        $last_self_id=0;
                     }
-                  
-                  }
-                  $update=DB::select('call usp_insert_bulk_lead_data()');
+                    $dob=date_format($val->date_of_birth_ddmmyyyy,"Y-m-d");
+                    $doj=date_format($val->date_of_joining_ddmmyyyy,"Y-m-d");
+                    $dob_at=date_format((Carbon::now()),"Y-m-d");
+                    $age=($dob_at-$dob);
+                   
+                    //$age=Carbon::createFromDate($dob)->diff(Carbon::now())->format('%y years, %m months and %d days');
+                    $str=$val->grade."_".$val->sum_insured."_".$val->relation."_".$age; 
+                    if(! isset($counter_ghi[$str])){
+                        $counter_ghi[$str]=1;
+                    }else{
+                      $counter_ghi[$str]++;
+                    }
+
+                    
+                    
+                     
+                     $get_id=DB::table('ghi_xl_data')->insertGetId(['employee_id'=>$val->employee_id, 'grade'=>$val->grade, 'name_of_insured'=>$val->name_of_insured, 'date_of_birth'=> $dob, 'gender'=>$val->gender, 'relation'=>$val->relation, 'date_of_joining'=>$doj, 'sum_insured'=>$val->sum_insured, 'related_to'=>$last_self_id,'created_by'=>$userid]);
+                      if($val->relation=='SELF' || $val->relation=='self'){
+                          $last_self_id=$get_id;
+                      }
+                    
+                    }
+                }
+                 
+                  //$update=DB::select('call usp_insert_bulk_lead_data()');
+                  //$msg="Data Uploaded Successfully";
               }catch(\Exception $ee){
-                print_r($ee->getMessage());
-                $msg+="but your XL breaks down something";
+                $status=0;
+                // //print_r($ee->getMessage());
+                // $msg+="but your XL breaks down something";
               }
-                
-                Session::flash('msg',$msg);
-                return redirect('dashboard');
+                $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
+                //Session::flash('msg',$msg);
+                //return redirect('dashboard');
+              return $result;
     }
 }
 

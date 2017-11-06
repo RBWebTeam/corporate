@@ -183,6 +183,15 @@
         
       </table>
     </form> 
+     <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Upload GHI sheet here</h2>
+                <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
+                    {{csrf_field()}}
+                    <input type="file" name="excel" required>
+                    <button type="submit" id="ghi_xl_submit">upload</button>
+                    upload
+                </form>
+      </div>
   </div>
   <!-- Table 1 End  --> 
 </div>  
@@ -969,6 +978,20 @@ alert("Please fill the form carefully ...");
 
 
 }); 
+
+$('#ghi_xl_submit').click(){
+  if(!$('ghi_xl_form').valid()){
+    return;
+  }else{
+    $.ajax({
+      url:"{{URL::to('upload_ghi_xl')}}",
+      data:$('ghi_xl_form').serialize(),
+      success:function(msg){
+        console.log(msg);
+      }
+    });
+  }
+}
 </script>
 
 <!--  -->
