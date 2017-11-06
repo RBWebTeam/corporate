@@ -322,7 +322,7 @@
        <tr class="addon9">
          <td><input type="checkbox" name="is_floater" id="is_floater" value="0" /></td>
          <td>Floater Clause</td>
-         <td><input type="text" class="is_floater" name="sum_floater" id="sum_floater" value="0" onkeypress="return Numeric(event)" readonly/></td>
+         <td><input type="text" class="is_floater" name="sum_floater" id="sum_floater" value="0" onkeypress="return Numeric(event)"  /></td>
        </tr>
 
        <tr class="addon10">
@@ -409,7 +409,7 @@
               <td  ><!-- <input class="form-control" type="text" name="riskcity_add[]" id="riskcity_add" required/> -->
                 <select class="form-control risk_id_search" type="text" name="riskcityname[]"   id="search_id_0"> </select>
               </td>
-              <td  ><input class="form-control" type="text" name="riskpinname[]"     /></td>
+              <td  ><input class="form-control" type="text" name="riskpinname[]" minlength="6" maxlength="6"   onkeypress="return Numeric(event)" /></td>
             </tr>
             <tr id='addr1'></tr>
 
@@ -455,7 +455,7 @@
 
     $("#add_row_risk").click(function(){
      if(i<=10){
-      $('#addr'+i).html('<td >'+ n++ +'</td><td class="col-xs-4"><input class="form-control" type="text" name="riskaddress_add[]" id="riskaddress_add" required /></td><td ><select class="form-control risk_class_search" type="text" name="riskstatename[]"   id="search_'+i+'"></td><td ><select class="form-control risk_id_search" type="text" name="riskcityname[]"   id="search_id_'+i+'"> </select></td><td ><input class="form-control" type="text" name="riskpinname[]"    /></td>');
+      $('#addr'+i).html('<td >'+ n++ +'</td><td class="col-xs-4"><input class="form-control" type="text" name="riskaddress_add[]" id="riskaddress_add" required /></td><td ><select class="form-control risk_class_search" type="text" name="riskstatename[]"   id="search_'+i+'"></td><td ><select class="form-control risk_id_search" type="text" name="riskcityname[]"   id="search_id_'+i+'"> </select></td><td ><input class="form-control" type="text" name="riskpinname[]"  onkeypress="return Numeric(event)" minlength="6" maxlength="6" /></td>');
 
       $('#tab_risk').append('<tr id="addr'+(i+1)+'"></tr>');
       $("#search_"+i).empty();
@@ -517,7 +517,7 @@
      }else{
            $('#is_floater_popup').modal('hide');
       risk_location_address=$('#risk_form_id').serialize();
-       alert(risk_location_address);
+       //alert(risk_location_address);
   
      }
  

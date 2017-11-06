@@ -110,17 +110,22 @@
             <td ><label class="lbl">Industry</label></td>
             <td class="left-pad-none">
               <div class="col-md-8 left-pad-none">
-               <input type="hidden" name="industry_id" id="industry_id" value="">
-               <input type="text"  class="form-control  search_industry"  placeholder="Search Industry " name="industry" value="" id="industry" required>
+               <!-- <input type="hidden" name="industry_id" id="industry_id" value="">
+               <input type="text"  class="form-control  search_industry"  placeholder="Search Industry " name="industry" value="" id="industry" required> -->
+               <select class="form-control" name="industry_id" id="industry_id" required>
+                <option selected value="0"> Select </option>
+                <option value="1">Medical And Paramedical Staff </option>
+                <option value="2"> Other </option>
+                
+              </select>
              </div>
            </td>
          </tr>
 
          <tr>
           <td ><label class="lbl">Select Company</label></td>
-          <td class="left-pad-none">
-            <div class="col-md-8 left-pad-none">
-              <span class="glyphicon glyphicon-chevron-down down-arr"></span>
+            <td class="left-pad-none">
+              <div class="col-md-8 left-pad-none">
               <select class="form-control" name="company_master" id="company_master" required>
                 <option selected value="0"> select </option>
                 @foreach($company_query as $val)
@@ -128,12 +133,12 @@
                 <option value="{{$val->company_id}}"> {{$val->company_name}} </option>
                 @endforeach
               </select>
-            </div>
+              </div>
           </td>
         </tr>
 
 
-        <tr>
+        <!-- <tr>
           <td ><label class="lbl">Service Category</label></td>
           <td class="left-pad-none">
             <div class="col-md-8 left-pad-none">
@@ -159,7 +164,7 @@
              </select>
            </div>
          </td>
-       </tr>
+       </tr> -->
        <tr>
         <td>Family Defination*</td>
         <td><div class="pull-left">
@@ -188,8 +193,8 @@
                 <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
                     {{csrf_field()}}
                     <input type="file" name="excel" required>
-                    <button type="submit" id="ghi_xl_submit">upload</button>
-                    upload
+                    <a type="submit" id="ghi_xl_submit">upload</a>
+                    
                 </form>
       </div>
   </div>
@@ -205,8 +210,8 @@
 
 
  
-<!-- 
-<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+
+<!-- <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
     {!! csrf_field() !!}
     <div class="form-group">
         <label for="file" class="col-sm-3 control-label">Select CSV File</label>
@@ -219,8 +224,8 @@
             <button type="submit" class="btn btn-default" id="insurde_ublk_upload">Upload</button>
         </div>
     </div>
-</form>
- -->
+</form> -->
+
 
 
 <form class="container" id="sum_insured_form" name="sum_insured_form" method="POST"> 
@@ -580,29 +585,29 @@ $(".search_district").autocomplete({
  }    
 });
 
-$(".search_industry").autocomplete({ 
-  source: function(request, response) {  
-    $.ajax({
-      url: "{{ route('search_industry_ghi') }}",
-      dataType: "json",
-      data: {
-        term :request.term,
-      },
-      success: function(data) {  response(data);}
-    });
-  },
-  change: function (event, ui) {  
-    if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
-     $(".search_industry").attr("data-value",""); 
-     $("#industry").val('');
+// $(".search_industry").autocomplete({ 
+//   source: function(request, response) {  
+//     $.ajax({
+//       url: "{{ route('search_industry_ghi') }}",
+//       dataType: "json",
+//       data: {
+//         term :request.term,
+//       },
+//       success: function(data) {  response(data);}
+//     });
+//   },
+//   change: function (event, ui) {  
+//     if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
+//      $(".search_industry").attr("data-value",""); 
+//      $("#industry").val('');
      
-     alert("Please Select Industry");
-   }else{
-     $(".search_industry").attr("data-value", ui.item.datavalue);
-     $("#industry_id").val(ui.item.datavalue);       
-   }
- }    
-});
+//      alert("Please Select Industry");
+//    }else{
+//      $(".search_industry").attr("data-value", ui.item.datavalue);
+//      $("#industry_id").val(ui.item.datavalue);       
+//    }
+//  }    
+// });
 
 
 </script>
@@ -716,9 +721,13 @@ function f_defination(element){
            return false;
          }else{
 
-          if(incr!=0 && initi.total==500){
+          if(incr!=0 ){
+            if(initi.total<=500){
             $('ul.setup-panel li:eq(1)').removeClass('disabled');
             $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+          }else{
+            alert("Max. Limit For No. of Lives-500..");
+          }
          //$(this).remove();
        }else{
 
@@ -979,19 +988,22 @@ alert("Please fill the form carefully ...");
 
 }); 
 
-$('#ghi_xl_submit').click(){
-  if(!$('ghi_xl_form').valid()){
+$('#ghi_xl_submit').click(function (){
+  if(!$('#ghi_xl_form').valid()){
     return;
   }else{
     $.ajax({
-      url:"{{URL::to('upload_ghi_xl')}}",
-      data:$('ghi_xl_form').serialize(),
+      url:"{{URL::to('upload-ghi-xl')}}",
+      data:{"excel": $('input[name=excel]').val(),
+            "_token":"{{csrf_filed()}}"},
+      enctype:"multipart/form-data",
+      type:"POST",
       success:function(msg){
         console.log(msg);
       }
     });
   }
-}
+});
 </script>
 
 <!--  -->

@@ -88,6 +88,7 @@ public function insurde_ublk_upload(Request $req){
 public function ghi_xl_upload(Request $req){
       $userid=Session::get('userid');
       $file=Input::file('excel');
+      print_r($file);exit();
       $counter_ghi=[];
       $data = \Excel::load($file)->toObject();
       $msg="Data Upload Intruptted. \n ";
@@ -129,7 +130,7 @@ public function ghi_xl_upload(Request $req){
                   //$update=DB::select('call usp_insert_bulk_lead_data()');
                   //$msg="Data Uploaded Successfully";
               }catch(\Exception $ee){
-                $status=0;
+                $status=0 ;
                 // //print_r($ee->getMessage());
                 // $msg+="but your XL breaks down something";
               }

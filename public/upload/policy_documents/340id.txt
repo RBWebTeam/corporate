@@ -1,0 +1,62 @@
+1> Working Capital Calculator : 
+
+
+Turnover/Topline
+Profit Before TAx
+Depreciation
+Finance Cost
+Inventory
+Debtors
+Creditors
+Existing OD/CC
+
+
+1. Turnover- 20%
+2. (( Inventory + Debtors ) - Creditors) * 75% which ever is lower with 1 option minus existing OD/CC == Proposed Limit
+3. If Profit Before Tax is negative then proposed limit reject
+4. (PBT - Finance Cost) = if negative then proposed limit reject
+
+
+
+
+................ working capital formate
+
+
+
+{
+    "status": 1,
+    "data": {
+       
+        "roi_type": "Fixed"
+    },
+    "err_code": ""
+}
+
+
+
+................................
+
+
+
+
+WORKING CAPITAL CALCULATOR
+
+Turnover/Topline
+Profit Before TAx
+Depreciation
+Finance Cost
+Inventory
+Debtors
+Creditors
+Existing OD/CC
+
+PBDIT = (Profit Before Tax + Finance Cost + Depreciation)
+
+1. Turnover- 20%
+2. (( Inventory - Creditors ) + Debtator) * 75% which ever is lower with 1 option minus existing OD/CC == Proposed Limit
+3. If (Profit Before Tax + Depreciation) is negative, then proposed limit 0
+4. PBDIT - Finance Cost = if negative then proposed limit reject
+
+
+1721736906   MI ID
+
