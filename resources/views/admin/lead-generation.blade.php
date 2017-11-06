@@ -57,6 +57,10 @@
       <input type="text" class="form-control" id="sum_insured" name="sum_insured" onkeypress="return fnAllowNumeric(event)">
     </div>
     <div class="form-group col-md-6">
+      <label for="premium" class="col-form-label"> Sum Insured</label>
+      <input type="text" class="form-control" id="premium" name="premium" onkeypress="return fnAllowNumeric(event)">
+    </div>
+    <div class="form-group col-md-6">
       <label for="inputCity" class="col-form-label">Current Insurer</label>
       <select id="insurer" name="insurer" class="form-control">
         <option disabled selected>Select Insurer</option>

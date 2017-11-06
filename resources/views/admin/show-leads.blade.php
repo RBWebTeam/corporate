@@ -12,7 +12,7 @@
                         <div class="panel-body table-responsive">
                           <form id="upload_policy_form" enctype="multipart/form-data" action ="upload-file" method="POST">
                             {{csrf_field()}}
-                       <table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12 " id="dataTables-example" style="font-size: 12px;" >
+                      <table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12 " id="dataTables-example" style="font-size: 12px;" >
                               <!-- id="dataTables-example" -->
                               
 
