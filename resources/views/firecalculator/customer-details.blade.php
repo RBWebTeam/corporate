@@ -825,6 +825,7 @@ $('input[type="checkbox"]').click(function(){
 
 
                       $('#is_floater_popup').modal('show');
+                      $('#premium_table').empty();
 
 
 

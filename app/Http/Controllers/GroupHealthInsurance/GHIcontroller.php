@@ -140,8 +140,7 @@ public function ghi_xl_upload(Request $req){
                 // $msg+="but your XL breaks down something";
               }
                 $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
-                //Session::flash('msg',$msg);
-                //return redirect('dashboard');
+                
               return $result;
     }
 }
