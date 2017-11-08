@@ -111,8 +111,9 @@ public function ghi_xl_upload(Request $req){
                     $doj=date_format($val->date_of_joining_ddmmyyyy,"Y-m-d");
                     $dob_at=date_format((Carbon::now()),"Y-m-d");
                     $age=($dob_at-$dob);
-                   $relation=($val->relation=="Spouse" || $val->relation=="spouse" || $val->relation=="Husband" || $val->relation=="Wife" || $val->relation=="husband" || $val->relation=="wife" || $val->relation=="son" || $val->relation=="Son" || $val->relation=="Daughter" || $val->relation=="daughter")?"Non-parental":"Parental";
-                    //$age=Carbon::createFromDate($dob)->diff(Carbon::now())->format('%y years, %m months and %d days');
+                    //relational status parental or non-parental
+                    $relation=($val->relation=="Spouse" || $val->relation=="spouse" || $val->relation=="Husband" || $val->relation=="Wife" || $val->relation=="husband" || $val->relation=="wife" || $val->relation=="son" || $val->relation=="Son" || $val->relation=="Daughter" || $val->relation=="daughter")?"Non-parental":"Parental";
+                    //making a string to make array key of required data
                     $str=$val->grade."_".$val->sum_insured."_".$relation."_".$age; 
                     if(! isset($counter_ghi[$str])){
                         $counter_ghi[$str]=1;
@@ -131,18 +132,18 @@ public function ghi_xl_upload(Request $req){
                     }
                 }
                  
+
+
+
               }catch(\Exception $ee){
+               // print_r($ee->getMessage());
                 $status=0 ;
                
               }
-<<<<<<< HEAD
+
             $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
             return $result;
-=======
-                $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
-                
-              return $result;
->>>>>>> 055114ddb880fc0a4394a75a34450300de8515f5
+
     }
 }
 

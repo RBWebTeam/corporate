@@ -188,19 +188,7 @@
         
       </table>
     </form> 
-<<<<<<< HEAD
-     <div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>Upload GHI sheet here</h2>
-                <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
-                    {{csrf_field()}}
-                    
-                    <input type="file" class="form-control" id="excel" name="excel" required>
-                    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
-                    
-                </form>
-      </div>
-=======
->>>>>>> 055114ddb880fc0a4394a75a34450300de8515f5
+    
   </div>
   <!-- Table 1 End  --> 
 </div>  
@@ -211,11 +199,20 @@
 </div>
 </section>
 
+ <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Upload GHI sheet here</h2>
+                <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
+                    {{csrf_field()}}
+                    
+                    <input type="file" class="form-control" id="excel" name="excel" required>
+                    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
+                    
+                </form>
+      </div>
 
 
 
-
-<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+<!-- <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
   {!! csrf_field() !!}
   <div class="form-group">
     <label for="file" class="col-sm-3 control-label">Select CSV File</label>
@@ -229,7 +226,7 @@
     </div>
   </div>
 </form>
-
+ -->
 
 
 <form class="container" id="sum_insured_form" name="sum_insured_form" method="POST"> 
@@ -1019,11 +1016,8 @@ $('#ghi_xl_submit').click(function(e){
         processData: false,
         headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
         data: formData,
-        success: function (data) {
-          alert("dsfdfsdfsd");
-          ghi_xl_data=data;
-          console.log("asd");
-          console.log(ghi_xl_data);
+        success: function (msg) {
+          console.log(msg);
         }
 
     });
