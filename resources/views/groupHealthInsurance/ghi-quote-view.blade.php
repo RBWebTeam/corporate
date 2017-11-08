@@ -192,8 +192,9 @@
                     <h2>Upload GHI sheet here</h2>
                 <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
                     {{csrf_field()}}
-                    <input type="file" name="excel" required>
-                    <a type="submit" id="ghi_xl_submit">upload</a>
+                    
+                    <input type="file" class="form-control" id="excel" name="excel" required>
+                    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
                     
                 </form>
       </div>
@@ -847,6 +848,7 @@ function f_defination(element){
 
 // append all textbox 
 var head=0,footer=0;
+var append_data;
 $(document).ready(function () { 
   $('#company_master').click(function(e){ e.preventDefault();
    var array_append_th=Array();
@@ -872,6 +874,7 @@ $(document).ready(function () {
      });
 
      $.each(data.age_bands, function( i, value ) { 
+      append_data=(value.split('-') );
        array_append_th.push('<th>'+value+'</th>');
        array_append_td1.push('<td><input type="text" name="'+value+'[]"   onkeypress="return Numeric(event);" ></td>');
        array_append_td2.push('<td><input type="text" name="'+value+'_'+i+'[]"   onkeypress="return Numeric(event);" ></td>');
@@ -987,23 +990,37 @@ alert("Please fill the form carefully ...");
 
 
 }); 
-
-$('#ghi_xl_submit').click(function (){
-  if(!$('#ghi_xl_form').valid()){
-    return;
-  }else{
+var ghi_xl_data;
+$('#ghi_xl_submit').click(function(e){  
+  e.preventDefault();
+  if(! $('#excel').val())return false;
+  var file = $('#excel');
+  var formData = new FormData();
+  if(file!=0){
+    formData.append('file', file[0].files[0]); 
     $.ajax({
-      url:"{{URL::to('upload-ghi-xl')}}",
-      data:{"excel": $('input[name=excel]').val(),
-            "_token":"{{csrf_filed()}}"},
-      enctype:"multipart/form-data",
-      type:"POST",
-      success:function(msg){
-        console.log(msg);
-      }
+        url:"{{URL::to('upload-ghi-xl')}}",
+        method: 'post',
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+        data: formData,
+        success: function (data) {
+          alert("dsfdfsdfsd");
+          ghi_xl_data=data;
+          console.log("asd");
+          console.log(ghi_xl_data);
+        }
+
     });
-  }
-});
+
+  }else{
+
+    alert("Please fill the form carefully ...");
+
+  } 
+ });
 </script>
 
 <!--  -->

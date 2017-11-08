@@ -87,8 +87,7 @@ public function insurde_ublk_upload(Request $req){
 
 public function ghi_xl_upload(Request $req){
       $userid=Session::get('userid');
-      $file=Input::file('excel');
-      print_r($file);exit();
+      $file=$req['file'];//Input::file('excel');
       $counter_ghi=[];
       $data = \Excel::load($file)->toObject();
       $msg="Data Upload Intruptted. \n ";
@@ -107,9 +106,9 @@ public function ghi_xl_upload(Request $req){
                     $doj=date_format($val->date_of_joining_ddmmyyyy,"Y-m-d");
                     $dob_at=date_format((Carbon::now()),"Y-m-d");
                     $age=($dob_at-$dob);
-                   
+                   $relation=($val->relation=="Spouse" || $val->relation=="spouse" || $val->relation=="Husband" || $val->relation=="Wife" || $val->relation=="husband" || $val->relation=="wife" || $val->relation=="son" || $val->relation=="Son" || $val->relation=="Daughter" || $val->relation=="daughter")?"Non-parental":"Parental";
                     //$age=Carbon::createFromDate($dob)->diff(Carbon::now())->format('%y years, %m months and %d days');
-                    $str=$val->grade."_".$val->sum_insured."_".$val->relation."_".$age; 
+                    $str=$val->grade."_".$val->sum_insured."_".$relation."_".$age; 
                     if(! isset($counter_ghi[$str])){
                         $counter_ghi[$str]=1;
                     }else{
@@ -127,17 +126,12 @@ public function ghi_xl_upload(Request $req){
                     }
                 }
                  
-                  //$update=DB::select('call usp_insert_bulk_lead_data()');
-                  //$msg="Data Uploaded Successfully";
               }catch(\Exception $ee){
                 $status=0 ;
-                // //print_r($ee->getMessage());
-                // $msg+="but your XL breaks down something";
+               
               }
-                $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
-                //Session::flash('msg',$msg);
-                //return redirect('dashboard');
-              return $result;
+            $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
+            return $result;
     }
 }
 
