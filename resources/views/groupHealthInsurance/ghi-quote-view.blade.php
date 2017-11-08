@@ -118,14 +118,14 @@
                 <option value="2"> Other </option>
                 
               </select>
-             </div>
-           </td>
-         </tr>
+            </div>
+          </td>
+        </tr>
 
-         <tr>
+        <tr>
           <td ><label class="lbl">Select Company</label></td>
-            <td class="left-pad-none">
-              <div class="col-md-8 left-pad-none">
+          <td class="left-pad-none">
+            <div class="col-md-8 left-pad-none">
               <select class="form-control" name="company_master" id="company_master" required>
                 <option selected value="0"> select </option>
                 @foreach($company_query as $val)
@@ -133,7 +133,7 @@
                 <option value="{{$val->company_id}}"> {{$val->company_name}} </option>
                 @endforeach
               </select>
-              </div>
+            </div>
           </td>
         </tr>
 
@@ -188,6 +188,7 @@
         
       </table>
     </form> 
+<<<<<<< HEAD
      <div class="col-lg-6 col-md-6 col-sm-12">
                     <h2>Upload GHI sheet here</h2>
                 <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
@@ -198,6 +199,8 @@
                     
                 </form>
       </div>
+=======
+>>>>>>> 055114ddb880fc0a4394a75a34450300de8515f5
   </div>
   <!-- Table 1 End  --> 
 </div>  
@@ -210,22 +213,22 @@
 
 
 
- 
 
-<!-- <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
-    {!! csrf_field() !!}
-    <div class="form-group">
-        <label for="file" class="col-sm-3 control-label">Select CSV File</label>
-        <div class="col-sm-9">
-            <input type="file" class="form-control" id="file" name="file">
-        </div>
+
+<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+  {!! csrf_field() !!}
+  <div class="form-group">
+    <label for="file" class="col-sm-3 control-label">Select CSV File</label>
+    <div class="col-sm-9">
+      <input type="file" class="form-control" id="file" name="file">
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-default" id="insurde_ublk_upload">Upload</button>
-        </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-default" id="insurde_ublk_upload">Upload</button>
     </div>
-</form> -->
+  </div>
+</form>
 
 
 
@@ -240,7 +243,7 @@
       </ul>
       <div class="tab-content"> <p class="text-center"><b>Sum Insured Table</b></p>
        <div class="table-responsive">
-        <table id="append_id">
+        <table id="append_id" class="table table-hover table-condensed table-striped table-bordered">
           <thead><tr></tr></thead>
           <tbody id="table0"></tbody>
           <tbody id="table1"></tbody>
@@ -254,15 +257,15 @@
 
 <!--  <a download="Sample_Data.csv" href="{{URL::to('ghi_Insured/Sample_Data.csv')}}" class="btn btn-primary ">Download Sample Format</a>
           
-  -->
+-->
 
-      </div>
-    </div>
-    <button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
+</div>
+</div>
+<button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
 
-    <!-- Table 2 End  --> 
-    <!-- <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
-  </div>
+<!-- Table 2 End  --> 
+<!-- <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
+</div>
 </div>
 
 
@@ -272,7 +275,7 @@
 
 
 
- 
+
 
 
 
@@ -601,7 +604,7 @@ $(".search_district").autocomplete({
 //     if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
 //      $(".search_industry").attr("data-value",""); 
 //      $("#industry").val('');
-     
+
 //      alert("Please Select Industry");
 //    }else{
 //      $(".search_industry").attr("data-value", ui.item.datavalue);
@@ -724,11 +727,11 @@ function f_defination(element){
 
           if(incr!=0 ){
             if(initi.total<=500){
-            $('ul.setup-panel li:eq(1)').removeClass('disabled');
-            $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-          }else{
-            alert("Max. Limit For No. of Lives-500..");
-          }
+              $('ul.setup-panel li:eq(1)').removeClass('disabled');
+              $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+            }else{
+              alert("Max. Limit For No. of Lives-500..");
+            }
          //$(this).remove();
        }else{
 
@@ -895,7 +898,7 @@ $(document).ready(function () {
 
 
 
-$('.show_hide').hide(); 
+  $('.show_hide').hide(); 
 
  // in textbox field  total add
  $(document).on("input", "#append_id input",function(){
@@ -933,19 +936,19 @@ $('#sum_insured_id').click(function(e){ e.preventDefault();
 
     });  }); 
 
- if(initi.total==total_value){
+  if(initi.total==total_value){
 
-     alert(total_value);
+   alert(total_value);
  }
-   
+ 
 
 
 }); 
 
 $('#flat').click(function(){  $('.show_hide').hide();
   for (l=1;l<i;i--) {
-     $("#table"+(i-1)).html('');
-  }
+   $("#table"+(i-1)).html('');
+ }
  
 });
 $('#graded').click(function(){  $('.show_hide').show();  });
@@ -955,24 +958,34 @@ $('#graded').click(function(){  $('.show_hide').show();  });
 
 
 $('#insurde_ublk_upload').click(function(e){  e.preventDefault();
-var file = $('#file');
-var formData = new FormData();
-if(file!=0){
-formData.append('file', file[0].files[0]); 
+  var file = $('#file');
+  var formData = new FormData();
+  if(file!=0){
+    formData.append('file', file[0].files[0]); 
 //formData.append('quote_id',quote_id); 
-  
-$.ajax({
-url:"{{URL::to('insurde-ublk-upload')}}",
-method: 'post',
-dataType: 'json',
-contentType: false,
-processData: false,
-headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
-data: formData,
-success: function (data) {
- 
-console.log(data);
 
+$.ajax({
+  url:"{{URL::to('insurde-ublk-upload')}}",
+  method: 'post',
+  dataType: 'json',
+  contentType: false,
+  processData: false,
+  headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+  data: formData,
+  success: function (data) {
+   
+//console.log(data);
+
+
+$.each(data.temp_array, function( i, value ) { 
+  var d = new Date(value.date_of_birth_ddmmyyyy.date);
+  var c = new Date(value.date_of_joining_ddmmyyyy.date);
+  
+  console.log(((new Date().getFullYear()))-(d.getFullYear()));
+  console.log(((new Date().getFullYear()))-(c.getFullYear()));
+  
+
+});
 
 }
 
@@ -980,11 +993,11 @@ console.log(data);
 
 }else{
 
-alert("Please fill the form carefully ...");
+  alert("Please fill the form carefully ...");
 
 }
 
- 
+
 })
 
 

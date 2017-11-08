@@ -57,13 +57,17 @@ class GHIcontroller extends Controller
 public function sum_insured_graded(Request $req){
 
   $arr=array();
+   try{
   $query=DB::table('company_age_band_mapping')->where('company_id','=',$req->company_id)->first();
   $query_slab=DB::table('company_slab_mapping')->where('company_id','=',$req->company_id)->first();
 
   return  $arr[]=array('age_bands'=> explode(",",$query->age_bands),'query_slab'=>explode(",",$query_slab->company_slabs));
 
          //  return explode(",",$query->age_bands);
-
+ }catch(\Exception $ee){
+                 $ee->getMessage();
+              
+              }
 
 
 }
@@ -71,6 +75,7 @@ public function sum_insured_graded(Request $req){
 public $temp=0;
 public $temp_array=array();
 public function insurde_ublk_upload(Request $req){
+   date_default_timezone_set('Asia/Kolkata');
  $query=\Excel::load(Input::file('file'), function ($reader )   {
   foreach ($reader->toArray() as $ke=>$row) {
     foreach ($row as $key => $value) {
@@ -130,8 +135,14 @@ public function ghi_xl_upload(Request $req){
                 $status=0 ;
                
               }
+<<<<<<< HEAD
             $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
             return $result;
+=======
+                $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
+                
+              return $result;
+>>>>>>> 055114ddb880fc0a4394a75a34450300de8515f5
     }
 }
 
