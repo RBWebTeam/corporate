@@ -142,7 +142,7 @@ public function ghi_xl_upload(Request $req){
               }
 
             $result="{'status'=>".$status.",'data'=>".json_encode($counter_ghi)."}";
-            return $result;
+           return json_encode($result);// response(array('result' => $result  ), 200)->header('Content-Type', 'application/json');
 
     }
 }

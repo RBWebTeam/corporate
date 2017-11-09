@@ -954,48 +954,48 @@ $('#graded').click(function(){  $('.show_hide').show();  });
 
 
 
-$('#insurde_ublk_upload').click(function(e){  e.preventDefault();
-  var file = $('#file');
-  var formData = new FormData();
-  if(file!=0){
-    formData.append('file', file[0].files[0]); 
-//formData.append('quote_id',quote_id); 
+// $('#insurde_ublk_upload').click(function(e){  e.preventDefault();
+//   var file = $('#file');
+//   var formData = new FormData();
+//   if(file!=0){
+//     formData.append('file', file[0].files[0]); 
+// //formData.append('quote_id',quote_id); 
 
-$.ajax({
-  url:"{{URL::to('insurde-ublk-upload')}}",
-  method: 'post',
-  dataType: 'json',
-  contentType: false,
-  processData: false,
-  headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
-  data: formData,
-  success: function (data) {
+// $.ajax({
+//   url:"{{URL::to('insurde-ublk-upload')}}",
+//   method: 'post',
+//   dataType: 'json',
+//   contentType: false,
+//   processData: false,
+//   headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+//   data: formData,
+//   success: function (data) {
    
-//console.log(data);
+// //console.log(data);
 
 
-$.each(data.temp_array, function( i, value ) { 
-  var d = new Date(value.date_of_birth_ddmmyyyy.date);
-  var c = new Date(value.date_of_joining_ddmmyyyy.date);
+// $.each(data.temp_array, function( i, value ) { 
+//   var d = new Date(value.date_of_birth_ddmmyyyy.date);
+//   var c = new Date(value.date_of_joining_ddmmyyyy.date);
   
-  console.log(((new Date().getFullYear()))-(d.getFullYear()));
-  console.log(((new Date().getFullYear()))-(c.getFullYear()));
+//   console.log(((new Date().getFullYear()))-(d.getFullYear()));
+//   console.log(((new Date().getFullYear()))-(c.getFullYear()));
   
 
-});
+// });
 
-}
+// }
 
-});
+// });
 
-}else{
+// }else{
 
-  alert("Please fill the form carefully ...");
+//   alert("Please fill the form carefully ...");
 
-}
+// }
 
 
-})
+// })
 
 
 
@@ -1016,9 +1016,13 @@ $('#ghi_xl_submit').click(function(e){
         processData: false,
         headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
         data: formData,
-        success: function (msg) {
-          console.log(msg);
+        success: function (message) {
+          console.log(message);
+        },
+        error :function(err){
+          console.log(err);
         }
+
 
     });
 
