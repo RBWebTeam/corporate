@@ -825,7 +825,7 @@ $('input[type="checkbox"]').click(function(){
 
 
                       $('#is_floater_popup').modal('show');
-                      $('#premium_table').empty();
+                         $('#premium_table').empty();
 
 
 
@@ -1093,7 +1093,7 @@ $(document).on('click','#sameas',function(){
 </script>
 
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&libraries=places"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&libraries=places&region=IN"></script>
 <script type="text/javascript">
   google.maps.event.addDomListener(window, 'load', function () {
     var places = new google.maps.places.Autocomplete(document.getElementById('insure_name'));

@@ -9,6 +9,9 @@ use PDF;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Response;
+
+use Ddeboer\Tesseract\Tesseract;
+use TesseractOCR;
 class FirecalculatorController extends Controller
 {
  public function home(Request $req){
@@ -43,6 +46,7 @@ public function section(Request $req){
  return view('firecalculator.section-wise-fire',['lead_query'=>$lead_query]);
 }
 
+public $pattern = "/(?:[a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/";
 
 public function customerdetails(Request $req){
   Session::forget('policy_copy');
@@ -50,8 +54,15 @@ public function customerdetails(Request $req){
   Session::forget('mandate');
   Session::forget('inspection_report');
   Session::forget('lead_id');
+  //Session::forget('uniqid');
+  //$uniqid_arr=array();
   
+  // $uniqid=hexdec(uniqid());
+  // Session::put('uniqid',$uniqid);
+  $string=array();
+  $str=0;
 
+  
   $destinationPath = public_path(). '/upload/policy_documents/';
   $policy_copy_arr=array();
   $policy_copy = $req->file('policy_copy');
@@ -61,6 +72,16 @@ public function customerdetails(Request $req){
   $mandate = $req->file('mandate');
   $report_arr=0;
   $inspection_report = $req->file('inspection_report');
+  $lead_id=$req->lead_id;
+
+
+
+// $tsaInstance = new TesseractOCR($destinationPath."text.jpeg");
+// $executablePath = '"C:/Program Files (x86)/Tesseract-OCR/tesseract.exe"';
+// $tsaInstance->executable($executablePath);
+// echo $tsaInstance->run();
+//   exit;
+
 
 
   if($policy_copy!=null || $policy_copy!=0){
@@ -76,31 +97,58 @@ public function customerdetails(Request $req){
      $filevisiting = rand(1, 999) . $filefilevisiting->getClientOriginalName();
      $filefilevisiting->move($destinationPath, $filevisiting);  
      $visiting_arr[]=$filevisiting;
+
+
+     $tsaInstance = new TesseractOCR($destinationPath.$filevisiting);
+     $executablePath = '"C:/Program Files (x86)/Tesseract-OCR/tesseract.exe"';
+     $tsaInstance->executable($executablePath)
+     ->whitelist(range('A', 'Z'))
+     ->lang('eng', 'jpn', 'por');
+     $str=$tsaInstance->run();
+     $string = explode("\n", $str);
+     $get_num=$this->In_textfile_get_num($string);
+     $get_gmail=$this->In_textfile_get_gmail($str);
+     $this->visiting_card_detail(implode(',',$get_num),implode(',',$get_gmail),$str,$filevisiting);
+
+     
+
+
    }}else{ $filefilevisiting=0;  } 
 
-   $lead_id=$req->lead_id;
 
-   
+ 
+
+
+
    if($mandate!=null || $mandate!=0){
      $file_mandate = rand(1, 999) . $mandate->getClientOriginalName();
      $mandate->move($destinationPath, $file_mandate);  
      $mandate_arr=$file_mandate;
+
+
+
+
+
    }else{ $file_mandate=0;  } 
 
    if($inspection_report!=null || $inspection_report!=0){
      $report = rand(1, 999) . $inspection_report->getClientOriginalName();
      $inspection_report->move($destinationPath, $report);  
      $report_arr=$report;
+
+
+
    }else{ $report_arr=0;  } 
 
-   
 
-   Session::put('policy_copy',implode(', ',$policy_copy_arr));
-   Session::put('visiting',implode(', ',$visiting_arr));
+
+   Session::put('policy_copy',implode(',',$policy_copy_arr));
+   Session::put('visiting',implode(',',$visiting_arr));
    Session::put('mandate', $file_mandate);
    Session::put('inspection_report',$report_arr);
    Session::put('lead_id',$lead_id);
-   
+
+
 
    try {
     $business_type=$req->business_type;
@@ -110,7 +158,7 @@ public function customerdetails(Request $req){
     $period_to=$req->period_to?$req->period_to:0;
     $current_insurer_id=$req->current_insurer_id?$req->current_insurer_id:0;
     $pro_id=$req->pro_id; 
-    
+
     return view('firecalculator.customer-details',['section_id'=>$req->section_id,'business_type'=>$business_type,'frshcash'=>$frshcash,'newcustomer'=>$newcustomer,'period_from'=>$period_from,'period_to'=>$period_to,'current_insurer_id'=>$current_insurer_id,'pro_id'=>$pro_id]);
   }catch (\Exception $e) {
 
@@ -119,8 +167,56 @@ public function customerdetails(Request $req){
 }
 
 
+public function In_textfile_get_num($string){
+
+  $phonea = array();
+  foreach ($string as $key => $value) {
+    $number=preg_replace("/[^0-9]/", '', $value);
+    if(9<strlen((int)$number) && 12>strlen((int)$number) ){
+      $phonea[]=$number;
+    }
+  }
 
 
+  return $phonea;
+
+}
+
+
+public function In_textfile_get_gmail($str){
+
+ $emaila = array();
+ preg_match_all($this->pattern, $str, $matches);
+ foreach($matches[0] as $email){
+  if($email!=null && $email!=0)
+   $emaila[]=$email;
+
+
+}
+
+return $emaila;
+
+}
+
+
+public function  visiting_card_detail ($num,$email,$text,$filevisiting){
+
+  DB::table('visiting_card_detail')->insert([
+    ['description' =>$text,
+    'name' =>0,
+    'company_name' =>0,
+    'email_ids' =>$email,
+    'mobile_nos' =>$num,
+    'designation' =>0,
+    'address' =>0,
+    'quote_id' =>0,
+    'userid' =>Session::get('userid'),
+    'run_time_id' =>$filevisiting,
+    ]
+    ]);
+
+
+}
 
 public function quotes_add(Request $req){
  Session::forget('pdfarray');
@@ -144,20 +240,20 @@ public function quotes_add(Request $req){
    if($req->c_id[$i]==$is_selected){  $selected=$is_selected; }else{  $selected=0;   }
    $pdfarray[]=array('quote_id'=>$quote_id,'c_id'=>$req->c_id[$i],'c_name'=>$req->c_name[$i],'p_amount'=>$req->p_amount[$i],'gst_amount'=>$req->gst_amount[$i],'net_p_amount'=>$req->net_p_amount[$i]);
    $this->quotesQuery($quote_id,$req->c_id[$i],$req->c_name[$i],$req->p_amount[$i],$req->gst_amount[$i],$req->net_p_amount[$i],$selected);
-   
  }
- 
- $this->risk_location_address(Session::get('risk_location'),$quote_id);
- 
 
+ $this->risk_location_address(Session::get('risk_location'),$quote_id);
+ $this->visiting_card_quotes_update($quote_id);
  $this->policy_documents($quote_id);
+
  Session::put('pdfarray', $pdfarray);
  Session::put('comapny_id', $is_selected);
  Session::put('quote_id', $quote_id); 
- return $true=1;
+
+   return $true=1;
 }catch (\Exception $e) {
- //return $e->getMessage();
-   return $true=0;
+// return $e->getMessage();
+ return $true=0;
 }
 }
 
@@ -166,20 +262,22 @@ public function policy_documents($quote_id){
 
  DB::select('call usp_insert_policy_docs(?,?,?,?,?,?)',array(Session::get('policy_copy'),Session::get('visiting'),Session::get('mandate'),Session::get('inspection_report'),Session::get('lead_id'),$quote_id));
  
- 
- 
- 
- 
-// DB::table('policy_documents')->insert([
-//   ['doc_type' =>0,
-//   'policy_doc_path' =>Session::get('policy_copy'),
-//   'visiting_card_path' =>Session::get('visiting'),
-//   'mandate_letter_path' =>Session::get('mandate'),
-//   'inspection_path' =>Session::get('inspection_report'),
-//   'lead_id' =>Session::get('lead_id'),
-//   'quote_id' =>$quote_id,
-//   ],
-//   ]);
+
+}
+
+
+
+public function visiting_card_quotes_update($quote_id){
+
+
+  $qu_id=explode(',',Session::get('visiting'));
+  foreach ($qu_id  as $key => $value) {
+   DB::table('visiting_card_detail')
+ ->where('run_time_id',$value)
+ ->update(['quote_id' =>$quote_id]);
+  }
+  
+
 
 }
 
@@ -222,8 +320,8 @@ public function  quotesQuery($quote_id,$comapny_id,$company_name,$premium_amt,$g
 }
 
 public function risk_location_address($risk_location,$quote_id){
-       
-      DB::select('call usp_insert_floater_riskaddress(?,?,?,?,?)',array($risk_location['riskaddress'],$risk_location['riskstates'],$risk_location['riskdistricts'],$risk_location['riskpincodes'],$quote_id));
+
+  DB::select('call usp_insert_floater_riskaddress(?,?,?,?,?)',array($risk_location['riskaddress'],$risk_location['riskstates'],$risk_location['riskdistricts'],$risk_location['riskpincodes'],$quote_id));
 
 }
 

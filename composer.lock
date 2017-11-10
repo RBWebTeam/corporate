@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8d3a79b8fa5735ff8138dbf08368528",
+    "content-hash": "066f24c39218d469722cf09c88f34e19",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -124,6 +124,40 @@
                 "pdf"
             ],
             "time": "2017-07-29T19:01:17+00:00"
+        },
+        {
+            "name": "ddeboer/tesseract",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ddeboer/tesseract.git",
+                "reference": "a1c10ae25bef599472be12ae9efdd1376a3ca29e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ddeboer/tesseract/zipball/a1c10ae25bef599472be12ae9efdd1376a3ca29e",
+                "reference": "a1c10ae25bef599472be12ae9efdd1376a3ca29e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ddeboer\\Tesseract": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl",
+                    "homepage": "http://ddeboer.nl"
+                }
+            ],
+            "description": "A wrapper for the Tesseract OCR engine",
+            "time": "2013-04-11T21:14:39+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -902,6 +936,55 @@
             "time": "2016-12-07T09:37:55+00:00"
         },
         {
+            "name": "jfuentestgn/ocr-space",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jfuentestgn/ocr-space.git",
+                "reference": "3b5d2ece62d9928a0327310e7654a2c52d51922c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jfuentestgn/ocr-space/zipball/3b5d2ece62d9928a0327310e7654a2c52d51922c",
+                "reference": "3b5d2ece62d9928a0327310e7654a2c52d51922c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "laravel/framework": "5.3.*",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~5.0",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JFuentesTgn\\OcrSpace\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Juan Fuentes",
+                    "email": "jfuentestgna@gmail.com"
+                }
+            ],
+            "description": "Laravel OCR.space API Client",
+            "keywords": [
+                "OCR",
+                "api",
+                "laravel",
+                "service"
+            ],
+            "time": "2017-01-19T20:24:14+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.4.36",
             "source": {
@@ -1381,7 +1464,7 @@
         },
         {
             "name": "mtdowling/cron-expression",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mtdowling/cron-expression.git",
@@ -1478,16 +1561,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a"
+                "reference": "08131e7ff29de6bb9f12275c7d35df71f25f4d89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a1e8e1a30e1352f118feff1a8481066ddc2f234a",
-                "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/08131e7ff29de6bb9f12275c7d35df71f25f4d89",
+                "reference": "08131e7ff29de6bb9f12275c7d35df71f25f4d89",
                 "shasum": ""
             },
             "require": {
@@ -1525,7 +1608,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-09-02T17:10:46+00:00"
+            "time": "2017-11-04T11:48:34+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1808,16 +1891,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.8.13",
+            "version": "v0.8.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "cdb5593c3684bab74e10fcfffe4a0c8d1c39695d"
+                "reference": "91e53c16560bdb8b9592544bb38429ae00d6baee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/cdb5593c3684bab74e10fcfffe4a0c8d1c39695d",
-                "reference": "cdb5593c3684bab74e10fcfffe4a0c8d1c39695d",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/91e53c16560bdb8b9592544bb38429ae00d6baee",
+                "reference": "91e53c16560bdb8b9592544bb38429ae00d6baee",
                 "shasum": ""
             },
             "require": {
@@ -1877,7 +1960,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-10-19T06:13:20+00:00"
+            "time": "2017-11-04T16:06:49+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2913,6 +2996,48 @@
                 "dump"
             ],
             "time": "2017-10-02T06:42:24+00:00"
+        },
+        {
+            "name": "thiagoalessio/tesseract_ocr",
+            "version": "1.0.0-RC",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thiagoalessio/tesseract-ocr-for-php.git",
+                "reference": "b22008ee163330aaaaae97424aa8b7dde8246882"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thiagoalessio/tesseract-ocr-for-php/zipball/b22008ee163330aaaaae97424aa8b7dde8246882",
+                "reference": "b22008ee163330aaaaae97424aa8b7dde8246882",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Alessio Pereira",
+                    "email": "thiagoalessio@me.com",
+                    "homepage": "http://thiagoalessio.me"
+                }
+            ],
+            "description": "A wrapper to work with Tesseract OCR inside PHP.",
+            "keywords": [
+                "OCR",
+                "Tesseract",
+                "text recognition"
+            ],
+            "time": "2016-04-20T23:29:55+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -4602,7 +4727,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "jfuentestgn/ocr-space": 20,
+        "thiagoalessio/tesseract_ocr": 5
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
