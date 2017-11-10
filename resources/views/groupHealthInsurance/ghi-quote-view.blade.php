@@ -188,6 +188,7 @@
         
       </table>
     </form> 
+    
   </div>
   <!-- Table 1 End  --> 
 </div>  
@@ -198,11 +199,20 @@
 </div>
 </section>
 
+ <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Upload GHI sheet here</h2>
+                <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
+                    {{csrf_field()}}
+                    
+                    <input type="file" class="form-control" id="excel" name="excel" required>
+                    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
+                    
+                </form>
+      </div>
 
 
 
-
-<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+<!-- <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
   {!! csrf_field() !!}
   <div class="form-group">
     <label for="file" class="col-sm-3 control-label">Select CSV File</label>
@@ -216,7 +226,7 @@
     </div>
   </div>
 </form>
-
+ -->
 
 
 <form class="container" id="sum_insured_form" name="sum_insured_form" method="POST"> 
@@ -838,6 +848,7 @@ function f_defination(element){
 
 // append all textbox 
 var head=0,footer=0;
+var append_data;
 $(document).ready(function () { 
   $('#company_master').click(function(e){ e.preventDefault();
    var array_append_th=Array();
@@ -863,6 +874,7 @@ $(document).ready(function () {
      });
 
      $.each(data.age_bands, function( i, value ) { 
+      append_data=(value.split('-') );
        array_append_th.push('<th>'+value+'</th>');
        array_append_td1.push('<td><input type="text" name="'+value+'[]"   onkeypress="return Numeric(event);" ></td>');
        array_append_td2.push('<td><input type="text" name="'+value+'_'+i+'[]"   onkeypress="return Numeric(event);" ></td>');
@@ -942,52 +954,84 @@ $('#graded').click(function(){  $('.show_hide').show();  });
 
 
 
-$('#insurde_ublk_upload').click(function(e){  e.preventDefault();
-  var file = $('#file');
-  var formData = new FormData();
-  if(file!=0){
-    formData.append('file', file[0].files[0]); 
-//formData.append('quote_id',quote_id); 
+// $('#insurde_ublk_upload').click(function(e){  e.preventDefault();
+//   var file = $('#file');
+//   var formData = new FormData();
+//   if(file!=0){
+//     formData.append('file', file[0].files[0]); 
+// //formData.append('quote_id',quote_id); 
 
-$.ajax({
-  url:"{{URL::to('insurde-ublk-upload')}}",
-  method: 'post',
-  dataType: 'json',
-  contentType: false,
-  processData: false,
-  headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
-  data: formData,
-  success: function (data) {
+// $.ajax({
+//   url:"{{URL::to('insurde-ublk-upload')}}",
+//   method: 'post',
+//   dataType: 'json',
+//   contentType: false,
+//   processData: false,
+//   headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+//   data: formData,
+//   success: function (data) {
    
-//console.log(data);
+// //console.log(data);
 
 
-$.each(data.temp_array, function( i, value ) { 
-  var d = new Date(value.date_of_birth_ddmmyyyy.date);
-  var c = new Date(value.date_of_joining_ddmmyyyy.date);
+// $.each(data.temp_array, function( i, value ) { 
+//   var d = new Date(value.date_of_birth_ddmmyyyy.date);
+//   var c = new Date(value.date_of_joining_ddmmyyyy.date);
   
-  console.log(((new Date().getFullYear()))-(d.getFullYear()));
-  console.log(((new Date().getFullYear()))-(c.getFullYear()));
+//   console.log(((new Date().getFullYear()))-(d.getFullYear()));
+//   console.log(((new Date().getFullYear()))-(c.getFullYear()));
   
 
-});
+// });
 
-}
+// }
 
-});
+// });
 
-}else{
+// }else{
 
-  alert("Please fill the form carefully ...");
+//   alert("Please fill the form carefully ...");
 
-}
+// }
 
 
-})
+// })
 
 
 
 }); 
+var ghi_xl_data;
+$('#ghi_xl_submit').click(function(e){  
+  e.preventDefault();
+  if(! $('#excel').val())return false;
+  var file = $('#excel');
+  var formData = new FormData();
+  if(file!=0){
+    formData.append('file', file[0].files[0]); 
+    $.ajax({
+        url:"{{URL::to('upload-ghi-xl')}}",
+        method: 'post',
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+        data: formData,
+        success: function (message) {
+          console.log(message);
+        },
+        error :function(err){
+          console.log(err);
+        }
+
+
+    });
+
+  }else{
+
+    alert("Please fill the form carefully ...");
+
+  } 
+ });
 </script>
 
 <!--  -->
