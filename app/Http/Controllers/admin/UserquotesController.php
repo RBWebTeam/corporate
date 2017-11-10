@@ -52,24 +52,24 @@ class UserquotesController extends Controller
 }
 
 public function quotes_details(Request $req){
-
- 
- 
- 
  try{
-  
+ 
    $query_master=DB::select('call usp_show_fircal_quote("'.$req->id.'")');
    $query=$query_master[0];
    $loan_detail = DB::table('firecal_quote_detail')
    ->select('firecal_quote_detail.*')
    ->where('firecal_quote_detail.quote_id',$req->id)
    ->get();
-   $comapny_id=0;
+ 
+  $visi_card= DB::table('visiting_card_detail')
+   ->where('quote_id','=',$req->id)
+   ->get();
 
+ 
+
+   $comapny_id=0;
    if(Session::get('user_type_id')==2 || Session::get('user_type_id')==3 || Session::get('user_type_id')==1){
     $comapny_id=0;
-    
-
   }else{
    foreach ($loan_detail as $key => $value) {
      if($value->is_selected!=0){
@@ -85,9 +85,9 @@ $policy_query=DB::table('policy_documents')->where('quote_id','=',$req->id)->fir
 //print_r($policy_query->quote_id);exit;
 
 if($comapny_id!=0){
-  return view('admin.quotes-details-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query]);
+  return view('admin.quotes-details-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query,'visi_card'=>$visi_card]);
 }else{
- return view('admin.quotes-details',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query]);
+ return view('admin.quotes-details',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query,'visi_card'=>$visi_card]);
 }}catch(\Exception $ee){
  return $ee->getMessage();
 } 

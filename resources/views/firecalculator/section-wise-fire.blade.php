@@ -146,13 +146,8 @@
 
 </div>
 
-
-
-
-
-
-
-
+ 
+ 
 
 
 <button class="btn btn-primary">Continue</button>

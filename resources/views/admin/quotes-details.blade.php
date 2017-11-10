@@ -503,7 +503,6 @@
     @if($val)
     <a download="{{$val}}" href="{{URL::to('upload/policy_documents')}}/{{$val}}" class="btn btn-primary">Download</a>  
     @else
-    0
     @endif
     @endforeach
   </ul>
@@ -516,33 +515,44 @@
  <ul>  @if($policy_query->lead_id!=0 || $policy_query->lead_id!=null)
    {{$policy_query->lead_id}}
    @else
-   0
    @endif      
  </ul></p>
  
 
 
-
+  <?php  $arra=array();
+           foreach ($visi_card as $key => $value) {
+             $arra[]=$value->run_time_id; } ?>
 
  <p>Visiting card
-   <ul>@foreach(explode(",",$policy_query->visiting_card_path) as $val)
+   <ul>@foreach(explode(",",$policy_query->visiting_card_path) as $ky=>$val)
      @if($val)
-     <a download="{{$val}}" href="{{URL::to('upload/policy_documents')}}/{{$val}}" class="btn btn-primary">Download</a>
+     <a   href="{{URL::to('upload/policy_documents')}}/{{$val}}" class="btn btn-primary" attributes="#" target="_blank" >View</a>
+           
+             
+      
+            <!--@if (!isset($arra[$ky]))
+                {{$arra[$ky]= null}}
+               @else
+                  <textarea>{{$visi_card[$ky]->description}}</textarea>
+                  <br>
+               @endif  -->
+     
+            
      @else
-     0
      @endif
      @endforeach </ul></p>
      
+
+
+
      <p>Mandate letter copy
        <ul> @if($policy_query->mandate_letter_path)
          <a download="{{$val}}" href="{{URL::to('upload/policy_documents')}}/{{$policy_query->mandate_letter_path}}" class="btn btn-primary">Download</a>
          @else
-         0
          @endif
        </ul></p>
        
-
-
        <p>Inspection report
 
 
@@ -550,7 +560,6 @@
            <a download="{{$val}}" href="{{URL::to('upload/policy_documents')}}/{{$policy_query->inspection_path}}" class="btn btn-primary">Download</a>
 
            @else
-           0
            @endif</ul></p>
            
 

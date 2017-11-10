@@ -168,6 +168,11 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
 
+         /*
+         * OCR...
+         */
+        JFuentesTgn\OcrSpace\OcrServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -229,6 +234,7 @@ return [
         'PDF' => Novanti\LaravelPDF\PDFFacade::class,
         'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'OCR' => JFuentesTgn\OcrSpace\OcrFacade::class, 
         
 
     ],
