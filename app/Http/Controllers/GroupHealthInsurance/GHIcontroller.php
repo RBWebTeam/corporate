@@ -94,10 +94,14 @@ public function ghi_xl_upload(Request $req){
       $userid=Session::get('userid');
       $file=$req['file'];//Input::file('excel');
       $counter_ghi=[];
+      //  
+      // if(!$vald)return json_encode(['errors'=> $errors]);
+
       $data = \Excel::load($file)->toObject();
       $msg="Data Upload Intruptted. \n ";
       $last_self_id=0;
       $status=1;
+
             if($data){
               
               try{
@@ -136,7 +140,7 @@ public function ghi_xl_upload(Request $req){
 
 
               }catch(\Exception $ee){
-               // print_r($ee->getMessage());
+                print_r($ee->getMessage());
                 $status=0 ;
                
               }
