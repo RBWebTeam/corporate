@@ -206,6 +206,7 @@
                     
                     <input type="file" class="form-control" id="excel" name="excel" required>
                     <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
+                    <p class="error hidden" id="xl_error"></p>
                     
                 </form>
       </div>
@@ -1003,6 +1004,7 @@ $('#graded').click(function(){  $('.show_hide').show();  });
 var ghi_xl_data;
 $('#ghi_xl_submit').click(function(e){  
   e.preventDefault();
+  $('#xl_error').addClass('hidden');
   if(! $('#excel').val())return false;
   var file = $('#excel');
   var formData = new FormData();
@@ -1019,8 +1021,8 @@ $('#ghi_xl_submit').click(function(e){
         success: function (message) {
           console.log(message);
         },
-        error :function(err){
-          console.log(err);
+        error :function(error){
+          console.log(error);
         }
 
 
