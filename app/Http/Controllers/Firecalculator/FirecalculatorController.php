@@ -116,7 +116,7 @@ public function customerdetails(Request $req){
    }}else{ $filefilevisiting=0;  } 
 
 
- 
+ echo $str;exit;
 
 
 
