@@ -199,17 +199,7 @@
 </div>
 </section>
 
- <div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>Upload GHI sheet here</h2>
-                <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
-                    {{csrf_field()}}
-                    
-                    <input type="file" class="form-control" id="excel" name="excel" required>
-                    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
-                    <p class="error hidden" id="xl_error"></p>
-                    
-                </form>
-      </div>
+ 
 
 
 
@@ -246,10 +236,15 @@
           <tbody id="table0"></tbody>
           <tbody id="table1"></tbody>
         </table>
+
+        <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
+          <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
+          <tbody id="append_table_xl"></tbody>
+        </table>
         <div class="show_hide">
           <a id="add_row_graded" class="btn btn-success pull-left ">Add Row</a><a id='delete_row_graded' class="btn btn-danger pull-right">Delete Row</a>
         </div>
-
+        
 
 
 
@@ -265,11 +260,22 @@
 <!-- <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
 </div>
 </div>
-
+<div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Upload GHI sheet here</h2>
+                <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
+                    {{csrf_field()}}
+                    
+                    <input type="file" class="form-control" id="excel" name="excel" required>
+                    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
+                    <p class="error hidden" id="xl_error"></p>
+                    
+                </form>
+      </div>
 
 </div>
 
 </form>
+
 
 
 
@@ -850,6 +856,7 @@ function f_defination(element){
 // append all textbox 
 var head=0,footer=0;
 var append_data;
+var appending_data;
 $(document).ready(function () { 
   $('#company_master').click(function(e){ e.preventDefault();
    var array_append_th=Array();
@@ -865,7 +872,7 @@ $(document).ready(function () {
       company_id : $('#company_master').val(),
     },
     success: function(data) {
-
+      appending_data=data;
 
 
      $('#append_id thead tr').empty();
@@ -1003,6 +1010,7 @@ $('#graded').click(function(){  $('.show_hide').show();  });
 }); 
 var ghi_xl_data;
 $('#ghi_xl_submit').click(function(e){  
+  //console.log(appending_data);return;
   e.preventDefault();
   $('#xl_error').addClass('hidden');
   if(! $('#excel').val())return false;
@@ -1019,9 +1027,25 @@ $('#ghi_xl_submit').click(function(e){
         headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
         data: formData,
         success: function (message) {
-          console.log(message);
+          $('#xl_data_table').removeClass("hidden");
+          $.each(message.data,function(i,value){
+            catg=i.split("_");
+            $.each(appending_data.age_bands,function(j,val){
+              
+              age_arr=val.split("-");
+              
+              if(catg[3] >= age_arr[0] && catg[3] <= age_arr[1]){
+                age_band=age_arr;
+                $('#append_table_xl').append("<tr><td>"+catg[0]+"</td><td>"+catg[1]+"</td><td>"+catg[2]+"</td><td>"+age_arr[0]+"-"+age_arr[1]+"</td><td>"+value+"</td></tr>")
+
+
+              }
+            });
+          });
+
         },
         error :function(error){
+          console.log("error \n");
           console.log(error);
         }
 
