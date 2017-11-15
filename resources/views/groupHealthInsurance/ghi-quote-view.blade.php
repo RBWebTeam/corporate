@@ -1030,20 +1030,14 @@ $('#ghi_xl_submit').click(function(e){
         headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
         data: formData,
         success: function (message) {
+          //console.log(message);return;
           $('#xl_data_table').removeClass("hidden");
+          $('#append_table_xl').empty();
           $.each(message.data,function(i,value){
             catg=i.split("_");
-            $.each(appending_data.age_bands,function(j,val){
-              
-              age_arr=val.split("-");
-              
-              if(catg[3] >= age_arr[0] && catg[3] <= age_arr[1]){
-                age_band=age_arr;
-                $('#append_table_xl').append("<tr><td>"+catg[0]+"</td><td>"+catg[1]+"</td><td>"+catg[2]+"</td><td>"+age_arr[0]+"-"+age_arr[1]+"</td><td>"+value+"</td></tr>")
-
-
-              }
-            });
+            
+             $('#append_table_xl').append("<tr><td>"+catg[0]+"</td><td>"+catg[1]+"</td><td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
+           
           });
 
         },
