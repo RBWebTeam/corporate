@@ -829,13 +829,13 @@ $('input[type="checkbox"]').click(function(){
                        $('#sum_electric').val(0).prop('disabled',true);
                        $('#sum_fff').val(0).prop('disabled',true);
 
-                       $('#is_escalation').prop('checked',false);
-                       $('#is_omission').prop('checked',false);
-                       $('#is_lossrent').prop('checked',false);
-                       $('#is_accommodation').prop('checked',false);
-                       $('#is_architect').prop('checked',false);
-                       $('#is_removedebris').prop('checked',false);
-                       $('#is_spontcomb').prop('checked',false);
+                       $('#is_escalation').prop('checked',false).prop('disabled',true);
+                       $('#is_omission').prop('checked',false).prop('disabled',true);
+                       $('#is_lossrent').prop('checked',false).prop('disabled',true);
+                       $('#is_accommodation').prop('checked',false).prop('disabled',true);
+                       $('#is_architect').prop('checked',false).prop('disabled',true);
+                       $('#is_removedebris').prop('checked',false).prop('disabled',true);
+                       $('#is_spontcomb').prop('checked',false).prop('disabled',true);
 
                        $('.is_escalation').val(0).prop('disabled',true);
                        $('.is_omission').val(0).prop('disabled',true);
@@ -849,6 +849,9 @@ $('input[type="checkbox"]').click(function(){
                        $('#is_floater_popup').modal('show');
                        $('#premium_table').empty();
                        $('#sum_floater').val(totlacal);
+
+ 
+
                      }else if(attr_id=='is_impactdamage'){
                       totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
                       sum_omissionpublic=totlacal;
@@ -862,6 +865,11 @@ $('input[type="checkbox"]').click(function(){
                   }else if($(this).prop("checked") == false){
                    attr_ids= $(this).attr('id');
                    $('.'+attr_ids).val(0);
+
+
+
+
+
                    $('#sum_building').prop('disabled',false);
                    $('#sum_plith').prop('disabled',false);
                    $('#sum_building').prop('disabled',false);
@@ -876,6 +884,15 @@ $('input[type="checkbox"]').click(function(){
                    $('.is_architect').prop('disabled',false);
                    $('.is_removedebris').prop('disabled',false);
                    $('.is_spontcomb').prop('disabled',false);
+
+
+                   $('#is_escalation').prop('disabled',false);
+                   $('#is_omission').prop('disabled',false);
+                   $('#is_lossrent').prop('disabled',false);
+                   $('#is_accommodation').prop('disabled',false);
+                   $('#is_architect').prop('disabled',false);
+                   $('#is_removedebris').prop('disabled',false);
+                   $('#is_spontcomb').prop('disabled',false);
 
 
                  }
