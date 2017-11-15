@@ -262,7 +262,7 @@
 <div class="col-lg-6 col-md-6 col-sm-12">
                     <h2>Upload GHI sheet here</h2>
 
-                      <a download="sample_ghi_xl.csv" href="{{URL::to('ghi_Insured/sample_ghi_xl.csv')}}" class="btn btn-primary ">Download Sample Format</a>
+                      <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-primary ">Download Sample Format</a>
     
      <br>
                 <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
