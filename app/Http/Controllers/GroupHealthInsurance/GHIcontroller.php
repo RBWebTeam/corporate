@@ -60,8 +60,11 @@ public function sum_insured_graded(Request $req){
    try{
   $query=DB::table('company_age_band_mapping')->where('company_id','=',$req->company_id)->first();
   $query_slab=DB::table('company_slab_mapping')->where('company_id','=',$req->company_id)->first();
-
-  return  $arr[]=array('age_bands'=> explode(",",$query->age_bands),'query_slab'=>explode(",",$query_slab->company_slabs));
+  $bands=explode(",",$query->age_bands);
+  //to find age band for xl upload 
+  Session::put('age_bands',$bands);
+  //print_r($bands);exit();
+  return  $arr[]=array('age_bands'=>$bands ,'query_slab'=>explode(",",$query_slab->company_slabs));
 
          //  return explode(",",$query->age_bands);
  }catch(\Exception $ee){
@@ -115,10 +118,19 @@ public function ghi_xl_upload(Request $req){
                     $doj=date_format($val->date_of_joining_ddmmyyyy,"Y-m-d");
                     $dob_at=date_format((Carbon::now()),"Y-m-d");
                     $age=($dob_at-$dob);
-                    //relational status parental or non-parental
+                    $age_bands=Session::get('age_bands');
+                    foreach ($age_bands as $index => $age_limit) {
+                        $age_limit_arr=explode("-", $age_limit);
+                        if($age>$age_limit_arr[0] && $age<=$age_limit_arr[1]){
+                            $band=$age_limit_arr[0]."-".$age_limit_arr[1];
+                            break;
+                        }
+                    }
+                  
                     $relation=($val->relation=="Spouse" || $val->relation=="spouse" || $val->relation=="Husband" || $val->relation=="Wife" || $val->relation=="husband" || $val->relation=="wife" || $val->relation=="son" || $val->relation=="Son" || $val->relation=="Daughter" || $val->relation=="daughter")?"Non-parental":"Parental";
                     //making a string to make array key of required data
-                    $str=$val->grade."_".$val->sum_insured."_".$relation."_".$age; 
+
+                    $str=$val->grade."_".$val->sum_insured."_".$relation."_".$band; 
                     if(! isset($counter_ghi[$str])){
                         $counter_ghi[$str]=1;
                     }else{
@@ -128,15 +140,15 @@ public function ghi_xl_upload(Request $req){
                     
                     
                      
-                     $get_id=DB::table('ghi_xl_data')->insertGetId(['employee_id'=>$val->employee_id, 'grade'=>$val->grade, 'name_of_insured'=>$val->name_of_insured, 'date_of_birth'=> $dob, 'gender'=>$val->gender, 'relation'=>$val->relation, 'date_of_joining'=>$doj, 'sum_insured'=>$val->sum_insured, 'related_to'=>$last_self_id,'created_by'=>$userid]);
-                      if($val->relation=='SELF' || $val->relation=='self'){
-                          $last_self_id=$get_id;
-                      }
+                     //$get_id=DB::table('ghi_xl_data')->insertGetId(['employee_id'=>$val->employee_id, 'grade'=>$val->grade, 'name_of_insured'=>$val->name_of_insured, 'date_of_birth'=> $dob, 'gender'=>$val->gender, 'relation'=>$val->relation, 'date_of_joining'=>$doj, 'sum_insured'=>$val->sum_insured, 'related_to'=>$last_self_id,'created_by'=>$userid]);
+                      // if($val->relation=='SELF' || $val->relation=='self'){
+                      //     $last_self_id=$get_id;
+                      // }
                     
                     }
                 }
                  
-
+                //print_r(json_encode($counter_ghi));exit();
 
 
               }catch(\Exception $ee){
