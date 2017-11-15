@@ -1176,13 +1176,24 @@ $('#ghi_xl_submit').click(function(e){
           //console.log(message);return;
           $('#xl_data_table').removeClass("hidden");
           $('#append_table_xl').empty();
+          last_grade="";
+          last_sum=0;
           $.each(message.data,function(i,value){
             catg=i.split("_");
-            console.log(appending_data);
-            $('#append_table_xl').append("<tr><td>"+catg[0]+"</td><td>"+catg[1]+"</td><td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
+            //console.log(appending_data);
 
+            grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
+            last_grade=catg[0];
+            last_sum=catg[1];
+            $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
+            // relation=catg[3];
+            // if(relation=="Parental"){
+            //   back_name="_3_3"
+            // }
+            // name=catg[3]+"[]";
+            // $( "input[name='"+name+"']" ).val(value);
              //
-              console.log(catg);
+             // console.log(catg);
 
           });
 

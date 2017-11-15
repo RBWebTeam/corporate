@@ -127,7 +127,13 @@ public function ghi_xl_upload(Request $req){
                         }
                     }
                   
+                    if($val->relation=='self' || $val->relation=='Self'||$val->relation=='SELF' ){
+                      $relation='Employee';
+                    }else{
+
+
                     $relation=($val->relation=="Spouse" || $val->relation=="spouse" || $val->relation=="Husband" || $val->relation=="Wife" || $val->relation=="husband" || $val->relation=="wife" || $val->relation=="son" || $val->relation=="Son" || $val->relation=="Daughter" || $val->relation=="daughter")?"Non-parental":"Parental";
+                  }
                     //making a string to make array key of required data
 
                     $str=$val->grade."_".$val->sum_insured."_".$relation."_".$band; 
