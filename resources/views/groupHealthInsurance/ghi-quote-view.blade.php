@@ -165,7 +165,10 @@
            </div>
          </td>
        </tr> -->
-       <tr>
+
+
+
+   <!--     <tr>
         <td>Family Defination*</td>
         <td><div class="pull-left">
           <input type="checkbox" onclick=" return f_defination(this);" value="1" /> Self &nbsp; 
@@ -183,14 +186,98 @@
           <td><span class="small" style="display: -webkit-box;"> (Max. Limit For No. of Lives-500)</span>
             <input type="text" class="form-control input1" readonly  name="total_daf" id="total_daf" />
           </td>
+        </tr> -->
+
+        <tr>
+          <td>Family Defination*</td>
+          <td><div class="pull-left"><input type="checkbox"  id="chkself" /> Self &nbsp; <input type="checkbox" id="chkspouse"/> Spouse &nbsp; <input type="checkbox" id="chkchild" /> Children &nbsp; <input type="checkbox" id="chkparents"  /> Parents  </div></td>
+
         </tr>
 
-        
-      </table>
-    </form> 
-    
-  </div>
-  <!-- Table 1 End  --> 
+        <tr>
+          <td>No. of Employees*</td>
+          <td><input type="text" id="NoEmp" class="form-control input1" disabled="true" /></td>
+        </tr>
+
+        <tr>
+          <td>No. of Spouse*</td>
+          <td><input type="text" id="Spouse" class="form-control input1" disabled="true"  /></td>
+        </tr>
+
+        <tr>
+          <td>No. of Children*</td>
+          <td><input type="text" id="Child" class="form-control input1"  disabled="true" /></td>
+        </tr>
+
+
+        <tr>
+          <td>No. of Parents*</td>
+          <td><input type="text" id="Parents"class="form-control input1" disabled="true"  /></td>
+        </tr>
+
+
+        <tr>
+          <td>Total Lives</td>
+          <td><span class="small" style="display: -webkit-box;"> (Max. Limit For No. of Lives-500)</span>
+            <input type="text" id="Totallives" class="form-control input1" readonly/>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td> </td>
+          <td> 
+           <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-info active pull-left">Download Sample Format</a>
+         </td>
+       </tr>
+
+
+
+       <tr>
+        <td class="text-right"><label class="lbl">Upload GHI sheet here</label></td>
+        <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">{{csrf_field()}}
+          <td class="left-pad-none">
+            <div class="col-md-6">
+             <input type="file"  class="form-control"   name="excel"  id="excel" required>
+           </div>
+           <div class="col-md-6">
+            <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
+          </div>
+        </td>
+      </form>
+    </tr>
+
+
+<!-- <div class="col-lg-6 col-md-6 col-sm-12">
+  <h2>Upload GHI sheet here</h2>
+
+  <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-primary ">Download Sample Format</a>
+
+  <br>
+  <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
+    {{csrf_field()}}
+
+    <input type="file" class="form-control" id="excel" name="excel" required>
+    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
+    <p class="error hidden" id="xl_error"></p>
+
+  </form>
+</div> -->
+ 
+          
+         
+</table>
+</form> 
+
+
+<table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
+          <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
+          <tbody id="append_table_xl"></tbody>
+</table>
+ 
+
+</div>
+<!-- Table 1 End  --> 
 </div>  
 <button id="calc_primium" class="btn btn-primary btn-md" >Submit</button>
 <!-- <button id="activate-step-2" class="btn btn-primary btn-md" style="display: none">Activate Step 2</button> -->
@@ -199,7 +286,7 @@
 </div>
 </section>
 
- 
+
 
 
 
@@ -217,7 +304,7 @@
     </div>
   </div>
 </form>
- -->
+-->
 
 
 <form class="container" id="sum_insured_form" name="sum_insured_form" method="POST"> 
@@ -237,10 +324,10 @@
           <tbody id="table1"></tbody>
         </table>
 
-        <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
+        <!-- <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
           <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
           <tbody id="append_table_xl"></tbody>
-        </table>
+        </table> -->
         <div class="show_hide">
           <a id="add_row_graded" class="btn btn-success pull-left ">Add Row</a><a id='delete_row_graded' class="btn btn-danger pull-right">Delete Row</a>
         </div>
@@ -248,32 +335,18 @@
 
 
 
-      
 
 
-</div>
-</div>
-<button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
 
-<!-- Table 2 End  --> 
-<!-- <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
-</div>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12">
-                    <h2>Upload GHI sheet here</h2>
-
-                      <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-primary ">Download Sample Format</a>
-    
-     <br>
-                <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
-                    {{csrf_field()}}
-                    
-                    <input type="file" class="form-control" id="excel" name="excel" required>
-                    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
-                    <p class="error hidden" id="xl_error"></p>
-                    
-                </form>
       </div>
+    </div>
+    <button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
+
+    <!-- Table 2 End  --> 
+    <!-- <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
+  </div>
+</div>
+
 
 </div>
 
@@ -624,7 +697,7 @@ $(".search_district").autocomplete({
 </script>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $('.no_of_Employees').hide();
   $('.no_of_Spouse').hide();
   $('.no_of_Children').hide();
@@ -705,24 +778,94 @@ function f_defination(element){
       incr++;
 
 
-
-
-
-
-
     }
-    
-    
-    
-
 
   </script>
+-->
 
-  <!-- form 1 -->
-  <script type="text/javascript">
-   $('#calc_primium').click(function(e){ e.preventDefault();  
-     validator=$('#calculate_primium').validate();
-     if(! $('#calculate_primium').valid()){
+
+
+<script>
+  $(document).ready(function(){
+    Control_Enable_Disable();
+    Calculate_Amount();
+    $(".calc").keyup(function(){
+      var total=0;
+      $(this).closest('tr').find('input[type="text"]').each(function(){
+        total= total+ parseInt($(this).val()==""?0:$(this).val());        
+      });   
+      $(this).closest('tr').find("td:eq(12)").text(total);
+    });
+    $("#cloneButton1").click(function(){
+      $(this).closest('tr').prev().prev().clone().appendTo("#divid");
+    });
+  });
+  function Calculate_Amount(){
+   $("#NoEmp").keyup(function(){
+     onCal_Check();
+   }); 
+   $("#Spouse").keyup(function(){
+    onCal_Check();
+  }); 
+   $("#Child").keyup(function(){
+    onCal_Check();
+  }); 
+   $("#Parents").keyup(function(){
+     onCal_Check();
+   }); 
+ }
+ function onCal_Check(){
+   var total=0;
+   var em = $("#NoEmp").val() ==""?0:$("#NoEmp").val();
+   var sp = $("#Spouse").val()==""?0:$("#Spouse").val();
+   var cl = $("#Child").val()==""?0:$("#Child").val();
+   var pt = $("#Parents").val()==""?0:$("#Parents").val();
+   total = total + (parseInt(em)+ parseInt(sp)+ parseInt(cl)+parseInt(pt)); 
+   if($('#Totallives').val()<=500){
+     $("#Totallives").val(total);
+   }else{
+     alert("Max. Limit For No. of Lives-500..");
+     $("#Totallives").val(total);
+   }}
+   function Control_Enable_Disable(){
+    $("#NoEmp").closest('tr').hide();
+    $("#Spouse").closest('tr').hide();
+    $("#Child").closest('tr').hide();
+    $("#Parents").closest('tr').hide();
+    $("#chkself").change(function(){
+      TotalHide(this,"NoEmp");
+    });
+    $("#chkspouse").change(function(){
+      TotalHide(this,"Spouse");
+    });
+    $("#chkchild").change(function(){
+      TotalHide(this,"Child");
+    });
+    $("#chkparents").change(function(){
+      TotalHide(this,"Parents");
+    });
+  }
+  function TotalHide(chk,txt){
+    if($(chk).is(':checked')){
+      $("#"+txt+"").closest('tr').show();
+      $("#"+txt+"").removeAttr('disabled');
+    }else{
+      $("#"+txt+"").closest('tr').hide();
+      $("#"+txt+"").val(0);
+      onCal_Check();
+    }
+  }
+</script>
+
+
+
+
+
+<!-- form 1 -->
+<script type="text/javascript">
+ $('#calc_primium').click(function(e){ e.preventDefault();  
+   validator=$('#calculate_primium').validate();
+   if(! $('#calculate_primium').valid()){
            //validator.errorList[0].element.focus();
            $.each(validator.errorMap, function (index, value) {
           // console.log('Id: ' + index + ' Message: ' + value);
@@ -732,8 +875,8 @@ function f_defination(element){
            return false;
          }else{
 
-          if(incr!=0 ){
-            if(initi.total<=500){
+          if($('#Totallives').val()!=0 ){    
+            if($('#Totallives').val()<=500){
               $('ul.setup-panel li:eq(1)').removeClass('disabled');
               $('ul.setup-panel li a[href="#step-2"]').trigger('click');
             }else{
@@ -754,23 +897,23 @@ function f_defination(element){
 
 
 
-   <script type="text/javascript">
+ <script type="text/javascript">
 
-    var flat_graded=0;
-    var addflat=0;
-    var addgraded=0;
-    $(".graded li").click(function() {
-      var h= $("a",this).attr('href');
+  var flat_graded=0;
+  var addflat=0;
+  var addgraded=0;
+  $(".graded li").click(function() {
+    var h= $("a",this).attr('href');
 
-      if(h=='#home'){
-       flat_graded=0;
-     }else if(h=='#menu1'){
-      flat_graded=1;
-    }else{
+    if(h=='#home'){
      flat_graded=0;
-   }    
- })
-    $('#activate-step-2').show();
+   }else if(h=='#menu1'){
+    flat_graded=1;
+  }else{
+   flat_graded=0;
+ }    
+})
+  $('#activate-step-2').show();
 
 //     $('#sum_insured_id').click(function(e){ e.preventDefault();
 
@@ -878,30 +1021,30 @@ $(document).ready(function () {
       appending_data=data;
 
 
-     $('#append_id thead tr').empty();
-     $('#table0').empty();
-     $.each(data.query_slab, function( i, value ) { 
+      $('#append_id thead tr').empty();
+      $('#table0').empty();
+      $.each(data.query_slab, function( i, value ) { 
        slab.push('<option>'+value+'</option>');
      });
 
-     $.each(data.age_bands, function( i, value ) { 
-      append_data=(value.split('-') );
-       array_append_th.push('<th>'+value+'</th>');
-       array_append_td1.push('<td><input type="text" name="'+value+'[]"   onkeypress="return Numeric(event);" ></td>');
-       array_append_td2.push('<td><input type="text" name="'+value+'_'+i+'[]"   onkeypress="return Numeric(event);" ></td>');
-       array_append_td3.push('<td><input type="text" name="'+value+'_'+i+'_'+i+'[]"  onkeypress="return Numeric(event);" ></td>');
+      $.each(data.age_bands, function( i, value ) { 
+        append_data=(value.split('-') );
+        array_append_th.push('<th>'+value+'</th>');
+        array_append_td1.push('<td><input type="text" name="'+value+'[]"   onkeypress="return Numeric(event);" ></td>');
+        array_append_td2.push('<td><input type="text" name="'+value+'_'+i+'[]"   onkeypress="return Numeric(event);" ></td>');
+        array_append_td3.push('<td><input type="text" name="'+value+'_'+i+'_'+i+'[]"  onkeypress="return Numeric(event);" ></td>');
 
-     });
+      });
 
-     head='<th>Grade</th><th>Sum Insured</th> <th>Employee</th> '+array_append_th+'<th>Total</th>';
+      head='<th>Grade</th><th>Sum Insured</th> <th>Employee</th> '+array_append_th+'<th>Total</th>';
 
-     footer=' <tr><td><input type="text" name="" id="m_grade" /></td><td><select ><option>Select</option>'+slab+'</select></td><td>Employee</td>'+array_append_td1+'<td><input type="text"  readonly  name="etotal" id="etotal" /></td></tr><tr><td></td><td></td><td>Non Parental Dependants</td>'+array_append_td2+'<td><input type="text"  readonly  name="ntotal" id="ntotal" /></td></tr><tr><td></td><td></td><td>Parental Dependants</td>'+array_append_td3+'<td><input type="text"  readonly  name="dtotal" id="dtotal" /></td></tr>  ';
+      footer=' <tr><td><input type="text" name="" id="m_grade" /></td><td><select ><option>Select</option>'+slab+'</select></td><td>Employee</td>'+array_append_td1+'<td><input type="text"  readonly  name="etotal" id="etotal" /></td></tr><tr><td></td><td></td><td>Non Parental Dependants</td>'+array_append_td2+'<td><input type="text"  readonly  name="ntotal" id="ntotal" /></td></tr><tr><td></td><td></td><td>Parental Dependants</td>'+array_append_td3+'<td><input type="text"  readonly  name="dtotal" id="dtotal" /></td></tr>  ';
 
-     $('#append_id thead tr').append(head);
-     $('#table0').append(footer);
+      $('#append_id thead tr').append(head);
+      $('#table0').append(footer);
 
-   }
- });
+    }
+  });
  }); 
 
 
@@ -981,17 +1124,17 @@ $('#graded').click(function(){  $('.show_hide').show();  });
 //   headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
 //   data: formData,
 //   success: function (data) {
-   
+
 // //console.log(data);
 
 
 // $.each(data.temp_array, function( i, value ) { 
 //   var d = new Date(value.date_of_birth_ddmmyyyy.date);
 //   var c = new Date(value.date_of_joining_ddmmyyyy.date);
-  
+
 //   console.log(((new Date().getFullYear()))-(d.getFullYear()));
 //   console.log(((new Date().getFullYear()))-(c.getFullYear()));
-  
+
 
 // });
 
@@ -1022,22 +1165,25 @@ $('#ghi_xl_submit').click(function(e){
   if(file!=0){
     formData.append('file', file[0].files[0]); 
     $.ajax({
-        url:"{{URL::to('upload-ghi-xl')}}",
-        method: 'post',
-        dataType: 'json',
-        contentType: false,
-        processData: false,
-        headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
-        data: formData,
-        success: function (message) {
+      url:"{{URL::to('upload-ghi-xl')}}",
+      method: 'post',
+      dataType: 'json',
+      contentType: false,
+      processData: false,
+      headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+      data: formData,
+      success: function (message) {
           //console.log(message);return;
           $('#xl_data_table').removeClass("hidden");
           $('#append_table_xl').empty();
           $.each(message.data,function(i,value){
             catg=i.split("_");
-            
-             $('#append_table_xl').append("<tr><td>"+catg[0]+"</td><td>"+catg[1]+"</td><td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
-           
+            console.log(appending_data);
+            $('#append_table_xl').append("<tr><td>"+catg[0]+"</td><td>"+catg[1]+"</td><td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
+
+             //
+              console.log(catg);
+
           });
 
         },
@@ -1047,14 +1193,14 @@ $('#ghi_xl_submit').click(function(e){
         }
 
 
-    });
+      });
 
   }else{
 
     alert("Please fill the form carefully ...");
 
   } 
- });
+});
 </script>
 
 <!--  -->
