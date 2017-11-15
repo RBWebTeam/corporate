@@ -322,7 +322,7 @@
        <tr class="addon9">
          <td><input type="checkbox" name="is_floater" id="is_floater" value="0" /></td>
          <td>Floater Clause</td>
-         <td><input type="text" class="is_floater" name="sum_floater" id="sum_floater" value="0" onkeypress="return Numeric(event)"  /></td>
+         <td><input type="text" class="is_floater" name="sum_floater" id="sum_floater" value="0" onkeypress="return Numeric(event)" readonly /></td>
        </tr>
 
        <tr class="addon10">
@@ -431,64 +431,64 @@
 
 <script type="text/javascript">
  var risk_location_address=0;
-  $(document).ready(function(){
-    var  arra=Array('<option value="0">Select</option>');
-   
-    var i=1;
-    var n=2;
-    
-    $.ajax({
-      url: "{{route('risk_addresh_show') }}",
-      dataType: "json",
-      data: {},
-      success: function(data) {
-        $('#search_0').empty();
-        $.each(data, function( key, val ) {
-          arra.push('<option value="'+val.state_id+'">'+val.state_Name+'</option>');
-        });
-        $('#search_0').empty();
-        $('#search_0').append(arra);
+ $(document).ready(function(){
+  var  arra=Array('<option value="0">Select</option>');
 
-      }
+  var i=1;
+  var n=2;
 
-    });
+  $.ajax({
+    url: "{{route('risk_addresh_show') }}",
+    dataType: "json",
+    data: {},
+    success: function(data) {
+      $('#search_0').empty();
+      $.each(data, function( key, val ) {
+        arra.push('<option value="'+val.state_id+'">'+val.state_Name+'</option>');
+      });
+      $('#search_0').empty();
+      $('#search_0').append(arra);
 
-    $("#add_row_risk").click(function(){
-     if(i<=10){
-      $('#addr'+i).html('<td >'+ n++ +'</td><td class="col-xs-4"><input class="form-control" type="text" name="riskaddress_add[]" id="riskaddress_add" required /></td><td ><select class="form-control risk_class_search" type="text" name="riskstatename[]"   id="search_'+i+'"></td><td ><select class="form-control risk_id_search" type="text" name="riskcityname[]"   id="search_id_'+i+'"> </select></td><td ><input class="form-control" type="text" name="riskpinname[]"  onkeypress="return Numeric(event)" minlength="6" maxlength="6" /></td>');
+    }
 
-      $('#tab_risk').append('<tr id="addr'+(i+1)+'"></tr>');
-      $("#search_"+i).empty();
-      $("#search_"+i).append(arra);  
-      i++; 
-    }else{
-     alert("max size 10 only");
+  });
+
+  $("#add_row_risk").click(function(){
+   if(i<=10){
+    $('#addr'+i).html('<td >'+ n++ +'</td><td class="col-xs-4"><input class="form-control" type="text" name="riskaddress_add[]" id="riskaddress_add" required /></td><td ><select class="form-control risk_class_search" type="text" name="riskstatename[]"   id="search_'+i+'"></td><td ><select class="form-control risk_id_search" type="text" name="riskcityname[]"   id="search_id_'+i+'"> </select></td><td ><input class="form-control" type="text" name="riskpinname[]"  onkeypress="return Numeric(event)" minlength="6" maxlength="6" /></td>');
+
+    $('#tab_risk').append('<tr id="addr'+(i+1)+'"></tr>');
+    $("#search_"+i).empty();
+    $("#search_"+i).append(arra);  
+    i++; 
+  }else{
+   alert("max size 10 only");
+ }
+});
+  $("#delete_row_risk").click(function(){
+   if(i>1){
+     $("#addr"+(i-1)).html('');
+     i--;
    }
  });
-    $("#delete_row_risk").click(function(){
-     if(i>1){
-       $("#addr"+(i-1)).html('');
-       i--;
-     }
-   });
 
 
-    $(document).on('change', '.risk_class_search', function() {   
-      var st_id =$(this).val();    
-      id=this.id;
-      var  get_last_id=id.substr(id.length - 1);
-      var  city_arra=Array('<option value="0">Select</option>');
-      $.ajax({
-        url: "{{route('risk_city_show') }}",
-        dataType: "json",
-        data: {st_id:st_id},
-        success: function(data) {
-         $("#search_id_"+get_last_id).empty();
-         $.each(data, function( key, val ) {
-          city_arra.push('<option value="'+val.district_id+'">'+val.district_name+'</option>');
-        });
-         $("#search_id_"+get_last_id).empty();
-         $("#search_id_"+get_last_id).append(city_arra);
+  $(document).on('change', '.risk_class_search', function() {   
+    var st_id =$(this).val();    
+    id=this.id;
+    var  get_last_id=id.substr(id.length - 1);
+    var  city_arra=Array('<option value="0">Select</option>');
+    $.ajax({
+      url: "{{route('risk_city_show') }}",
+      dataType: "json",
+      data: {st_id:st_id},
+      success: function(data) {
+       $("#search_id_"+get_last_id).empty();
+       $.each(data, function( key, val ) {
+        city_arra.push('<option value="'+val.district_id+'">'+val.district_name+'</option>');
+      });
+       $("#search_id_"+get_last_id).empty();
+       $("#search_id_"+get_last_id).append(city_arra);
                // alert("#search_id_"+i);
 
              }
@@ -497,34 +497,34 @@
 
 
 
-    });
+  });
 
 
 
 
 
 
-    $(document).on("click", "#risk_submit_id",function(e){
-     e.preventDefault();
-     validator=$('#risk_form_id').validate();
-     if(! $('#risk_form_id').valid()){
+  $(document).on("click", "#risk_submit_id",function(e){
+   e.preventDefault();
+   validator=$('#risk_form_id').validate();
+   if(! $('#risk_form_id').valid()){
 
 
-       console.log(validator.errorList[0].element);
+     console.log(validator.errorList[0].element);
 
 
-       return false;
-     }else{
-           $('#is_floater_popup').modal('hide');
-      risk_location_address=$('#risk_form_id').serialize();
+     return false;
+   }else{
+     $('#is_floater_popup').modal('hide');
+     risk_location_address=$('#risk_form_id').serialize();
        //alert(risk_location_address);
-  
+
      }
- 
+
 
    })
 
-  });
+});
 
  //var section_id='{{$section_id}}';
  var escalationval=0;
@@ -821,16 +821,35 @@ $('input[type="checkbox"]').click(function(){
                      }else if(attr_id=='is_floater'){
 
 
-                      totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
 
+                       $('#sum_building').val(0).prop('disabled',true);
+                       $('#sum_plith').val(0).prop('disabled',true);
+                       $('#sum_building').val(0).prop('disabled',true);
+                       $('#sum_plant').val(0).prop('disabled',true);
+                       $('#sum_electric').val(0).prop('disabled',true);
+                       $('#sum_fff').val(0).prop('disabled',true);
 
-                      $('#is_floater_popup').modal('show');
-                         $('#premium_table').empty();
+                       $('#is_escalation').prop('checked',false);
+                       $('#is_omission').prop('checked',false);
+                       $('#is_lossrent').prop('checked',false);
+                       $('#is_accommodation').prop('checked',false);
+                       $('#is_architect').prop('checked',false);
+                       $('#is_removedebris').prop('checked',false);
+                       $('#is_spontcomb').prop('checked',false);
 
-
-
-                      $('#sum_floater').val(0);
-                    }else if(attr_id=='is_impactdamage'){
+                       $('.is_escalation').val(0).prop('disabled',true);
+                       $('.is_omission').val(0).prop('disabled',true);
+                       $('.is_lossrent').val(0).prop('disabled',true);
+                       $('.is_accommodation').val(0).prop('disabled',true);
+                       $('.is_architect').val(0).prop('disabled',true);
+                       $('.is_removedebris').val(0).prop('disabled',true);
+                       $('.is_spontcomb').val(0).prop('disabled',true);
+                       
+                       totlacal=sum_others+sum_stock;
+                       $('#is_floater_popup').modal('show');
+                       $('#premium_table').empty();
+                       $('#sum_floater').val(totlacal);
+                     }else if(attr_id=='is_impactdamage'){
                       totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
                       sum_omissionpublic=totlacal;
                       $('#sum_impactdamage').val(0);
@@ -843,6 +862,22 @@ $('input[type="checkbox"]').click(function(){
                   }else if($(this).prop("checked") == false){
                    attr_ids= $(this).attr('id');
                    $('.'+attr_ids).val(0);
+                   $('#sum_building').prop('disabled',false);
+                   $('#sum_plith').prop('disabled',false);
+                   $('#sum_building').prop('disabled',false);
+                   $('#sum_plant').prop('disabled',false);
+                   $('#sum_electric').prop('disabled',false);
+                   $('#sum_fff').prop('disabled',false);
+
+                   $('.is_escalation').prop('disabled',false);
+                   $('.is_omission').prop('disabled',false);
+                   $('.is_lossrent').prop('disabled',false);
+                   $('.is_accommodation').prop('disabled',false);
+                   $('.is_architect').prop('disabled',false);
+                   $('.is_removedebris').prop('disabled',false);
+                   $('.is_spontcomb').prop('disabled',false);
+
+
                  }
                });
 
@@ -943,34 +978,34 @@ $('#insurance').click(function(e){
          }else{
 
           if( $('#section_id_val').val()!=''){
-            
+
             $.ajax({  
               type: "POST",  
               url: "{{URL::to('corporate')}}",
               data : $('#corporate_insurance').serialize()+'&'+risk_location_address,
               success: function(msg){
 
-                    if(msg==0){
-                      $('#premium_table').empty();
-                    }else{
-                $('html, body').animate({
-                  scrollTop: $("#premium_table").offset().top
-                }, 300);
-
-
-
-                var tablerows = new Array();
-                $.each(msg, function( index, value ) {  
-                 tablerows.push('<tr><td class="ab">' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.premium_amt + '</td><td>' + value.gst_amt + '</td><td>' + value.net_premium_amt +'</td> <td><a href="#" class="btn btn-success getval">Apply Now</a></td>        <input type="hidden" name="c_id[]" value="'+value.company_id+'" class="c_id"><input type="hidden" name="c_name[]" value="'+value.company_name+'" class="c_name"><input type="hidden" name="p_amount[]" value="'+value.premium_amt+'" class="p_amount"><input type="hidden" name="gst_amount[]" value="'+value.gst_amt+'" class="gst_amount"><input type="hidden" name="net_p_amount[]" value="'+value.net_premium_amt+'" class="net_p_amount"></tr>');
-               }); 
-
-                if(msg){
-                  $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Compare Quotes</button></form>');
+                if(msg==0){
+                  $('#premium_table').empty();
                 }else{
-                  $('#premium_table').empty().append('No Result Found');
-                }          
-              }  
-            }
+                  $('html, body').animate({
+                    scrollTop: $("#premium_table").offset().top
+                  }, 300);
+
+
+
+                  var tablerows = new Array();
+                  $.each(msg, function( index, value ) {  
+                   tablerows.push('<tr><td class="ab">' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.premium_amt + '</td><td>' + value.gst_amt + '</td><td>' + value.net_premium_amt +'</td> <td><a href="#" class="btn btn-success getval">Apply Now</a></td>        <input type="hidden" name="c_id[]" value="'+value.company_id+'" class="c_id"><input type="hidden" name="c_name[]" value="'+value.company_name+'" class="c_name"><input type="hidden" name="p_amount[]" value="'+value.premium_amt+'" class="p_amount"><input type="hidden" name="gst_amount[]" value="'+value.gst_amt+'" class="gst_amount"><input type="hidden" name="net_p_amount[]" value="'+value.net_premium_amt+'" class="net_p_amount"></tr>');
+                 }); 
+
+                  if(msg){
+                    $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Compare Quotes</button></form>');
+                  }else{
+                    $('#premium_table').empty().append('No Result Found');
+                  }          
+                }  
+              }
             });
 
           }else{
@@ -1005,16 +1040,16 @@ $(document).on('click','.getval',function(){
         data :data,
         success: function(msg){
 
-     
-              if(msg==1){
-                 window.location.href = "{{url('thank-you')}}";
-              }else{
-                  console.log("error");
-              }
 
+          if(msg==1){
+           window.location.href = "{{url('thank-you')}}";
+         }else{
+          console.log("error");
         }
 
-      });
+      }
+
+    });
 
 
      });
@@ -1031,13 +1066,13 @@ $(document).on('click','.apply_id',function(){
   data : $('#getquote').serialize(),
   success: function(msg){
 
-     if(msg==1){
-                window.location.href = "{{url('thank-you')}}";
-              }else{
-                  console.log("error");
-              }
+   if(msg==1){
+    window.location.href = "{{url('thank-you')}}";
+  }else{
+    console.log("error");
+  }
 
- }
+}
 
 });
 
@@ -1056,6 +1091,8 @@ $(document).on('click','#sameas',function(){
     $('#risksdistrictid').val($('#districtid').val());  
     $('#riskdistrict').val($('#district').val());
     $('#riskpincode').val($('#pincode').val());
+
+
   }else{
     $('#riskaddress_one').val('');
     $('#riskaddress_two').val('');
