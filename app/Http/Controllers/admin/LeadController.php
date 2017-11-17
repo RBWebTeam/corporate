@@ -39,15 +39,16 @@ class LeadController extends Controller{
             return ['value'=>''];
 	}
 	public function generate(Request $req){
-		
+		//print "<pre>";print_r($req->all());exit();
 		try{
 				$uid=Session::get('userid');
 				$path = $req->file('file')->store('public/lead_documents');
 				$url=Storage::url($path);
-				$query=DB::select('call usp_insert_policy_lead_data(?,?,?,?,?,?,?,?,?,?,?)',array($req['catg'],$req['type'],$req['group'],$req['name'],$req['business'],$req['insurer'],$req['renew_date'],$req['sum_insured'],$req['premium'],$url,$uid));
+				$query=DB::select('call usp_insert_policy_lead_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($req['catg'],$req['type'],$req['group'],$req['name'],$req['business'],$req['insurer'],$req['renew_date'],$req['sum_insured'],$req['premium'],$url,$uid,$req['make'],$req['model'],$req['variant'],$req['mfg_year'],$req['idv'],$req['ncb']));
 				$msg=" Lead Uploaded Successfully .....";
 			}catch(\Exception $ee){
-				$status="something went Wrong";
+				//print_r($ee->getMessage());
+				$msg="something went Wrong";
 			}
 		Session::flash('msg', $msg);
         return LeadController::generation_page();
