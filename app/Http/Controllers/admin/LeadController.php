@@ -21,22 +21,22 @@ class LeadController extends Controller{
 	}
 	public function group_auto_complete(Request $req){
 
-        
-        $group = $req['term'];
-        $products=DB::table('group_master')->select('group_name')
-        ->where('group_name', 'LIKE', '%'.$group.'%')
-        ->take(5)->get();
+
+		$group = $req['term'];
+		$products=DB::table('group_master')->select('group_name')
+		->where('group_name', 'LIKE', '%'.$group.'%')
+		->take(5)->get();
         //print_r( $products);
-        $data=array();
-        foreach ($products as $product) {
-                $data[]=array('value'=>$product->group_name);
-        }
-        if(count($data)){
+		$data=array();
+		foreach ($products as $product) {
+			$data[]=array('value'=>$product->group_name);
+		}
+		if(count($data)){
              // print_r($data);
-             return $data;
-         }
-        else
-            return ['value'=>''];
+			return $data;
+		}
+		else
+			return ['value'=>''];
 	}
 	public function generate(Request $req){
 		//print "<pre>";print_r($req->all());exit();
@@ -50,8 +50,9 @@ class LeadController extends Controller{
 				//print_r($ee->getMessage());
 				$msg="something went Wrong";
 			}
+
 		Session::flash('msg', $msg);
-        return LeadController::generation_page();
+		return LeadController::generation_page();
 
 
 	}
@@ -77,46 +78,71 @@ class LeadController extends Controller{
 		return view('admin/bulk-lead-upload');
 	}
 	public function upload_excel(Request $req){
-			
-			$userid=Session::get('userid');
-			$file=Input::file('excel');
-			
-			$data = \Excel::load($file)->toObject();
-			$msg="Data Uploaded Successfully. \n ";
-            if($data){
-            	$count=0;
-            	try{
-            		foreach ($data as $k => $val) {
-	                	foreach ($val as $key => $value) {
-	                		# code...
-	                	try{
-	                		$id=DB::select('call usp_insert_bulk_upload(?,?,?,?,?,?,?,?,?,?,?)',[$value->group_name,$value->name_of_insured,$value->occupancy_business,$value->policy_category,$value->policy_type,$value->renewal_date,$value->current_insurer,$value->sum_insured,$value->pre_tax_premium,$userid,0]);
 
-	                	    $count++;
-	                	}catch(\Exception $ee){
-	                		if(isset($value->name_of_insured)){
-	                			print_r($ee->getMessage());exit();
-            					$msg+="but lead of ".$value->name_of_insured."Not uploaded \n";
-            				}
-            				else
-            					$msg+="but your XL break down something hence partial data uploaded";
-            				continue;
-	                	}
-                	  }
-                	}
-                	$update=DB::select('call usp_insert_bulk_lead_data()');
-            	}catch(\Exception $ee){
+		$userid=Session::get('userid');
+		$file=Input::file('excel');
+
+		$data = \Excel::load($file)->toObject();
+		$msg="Data Uploaded Successfully. \n ";
+		if($data){
+			$count=0;
+			try{
+				foreach ($data as $k => $val) {
+					foreach ($val as $key => $value) {
+	                		# code...
+						try{
+							$id=DB::select('call usp_insert_bulk_upload(?,?,?,?,?,?,?,?,?,?,?)',[$value->group_name,$value->name_of_insured,$value->occupancy_business,$value->policy_category,$value->policy_type,$value->renewal_date,$value->current_insurer,$value->sum_insured,$value->pre_tax_premium,$userid,0]);
+
+							$count++;
+						}catch(\Exception $ee){
+							if(isset($value->name_of_insured)){
+								print_r($ee->getMessage());exit();
+								$msg+="but lead of ".$value->name_of_insured."Not uploaded \n";
+							}
+							else
+								$msg+="but your XL break down something hence partial data uploaded";
+							continue;
+						}
+					}
+				}
+				$update=DB::select('call usp_insert_bulk_lead_data()');
+			}catch(\Exception $ee){
             		//$print_r($ee);
-            		$msg+="but your XL breaks down something";
-            	}
-              	
-               Session::flash('msg',$msg);
-               return redirect('dashboard');
+				$msg+="but your XL breaks down something";
+			}
+
+			Session::flash('msg',$msg);
+			return redirect('dashboard');
 		}
 	}
 	public function show_xl_data(){
 		$data=DB::table('bulk_upload')->get();
 		return $data;
 	}
+
+
+	public function document_upload_leads(Request $req){
+
+		try{
+			$path = $req->file('file')->store('public/lead_documents');
+			if($path){
+				$url=Storage::url($path);
+				$query=DB::table('policy_lead_data')->where('lead_id', '=',$req->lead_id)
+				->update(['document_path' =>$url]);
+				$msg="Document Uploaded Successfully...";
+			}else{
+				$msg="please fill form carefully !..";
+			}
+
+		}catch(\Exception $ee){
+            		//$print_r($ee);
+			$msg="please fill form carefully !..";
+		}
+
+		  Session::flash('msg',$msg);
+		 return redirect('dashboard');
+
+	}
+
 
 }

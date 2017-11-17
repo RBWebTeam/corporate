@@ -130,7 +130,7 @@ Route::get('autocomplete','LeadController@group_auto_complete');
 Route::get('bulk-upload','LeadController@bulk_upload');
 Route::post('upload-excel','LeadController@upload_excel');
 Route::get('show-xl-data','LeadController@show_xl_data');
-
+Route::post('document-upload-leads','LeadController@document_upload_leads');
  
 
 });

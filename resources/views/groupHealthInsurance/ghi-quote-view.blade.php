@@ -224,28 +224,11 @@
         </tr>
 
 
-        <tr>
-          <td> </td>
-          <td> 
-           <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-info active pull-left">Download Sample Format</a>
-         </td>
-       </tr>
 
 
 
-       <tr>
-        <td class="text-right"><label class="lbl">Upload GHI sheet here</label></td>
-        <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">{{csrf_field()}}
-          <td class="left-pad-none">
-            <div class="col-md-6">
-             <input type="file"  class="form-control"   name="excel"  id="excel" required>
-           </div>
-           <div class="col-md-6">
-            <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
-          </div>
-        </td>
-      </form>
-    </tr>
+
+       
 
 
 <!-- <div class="col-lg-6 col-md-6 col-sm-12">
@@ -263,18 +246,15 @@
 
   </form>
 </div> -->
- 
-          
-         
+
+
+
 </table>
 </form> 
 
 
-<table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
-          <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
-          <tbody id="append_table_xl"></tbody>
-</table>
- 
+
+
 
 </div>
 <!-- Table 1 End  --> 
@@ -315,41 +295,53 @@
        <ul class="nav nav-tabs graded">
         <li class="active center-nav"><a data-toggle="tab" href="#home" id="flat">Flat</a></li>
         <li><a data-toggle="tab" href="#menu1" id="graded">Graded</a></li>
+        <li><a data-toggle="tab" href="#excel_id" id="excel_id"> Upload GHI sheet here </a></li> 
       </ul>
       <div class="tab-content"> <p class="text-center"><b>Sum Insured Table</b></p>
        <div class="table-responsive">
-        <table id="append_id" class="table table-hover table-condensed table-striped table-bordered">
+        <table id="append_id" class="table table-hover table-condensed table-striped table-bordered  sum_insured_display">
           <thead><tr></tr></thead>
           <tbody id="table0"></tbody>
           <tbody id="table1"></tbody>
         </table>
-
-        <!-- <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
-          <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
-          <tbody id="append_table_xl"></tbody>
-        </table> -->
         <div class="show_hide">
           <a id="add_row_graded" class="btn btn-success pull-left ">Add Row</a><a id='delete_row_graded' class="btn btn-danger pull-right">Delete Row</a>
         </div>
+
+
+        <div id="xl_hidden_id" style="display:none">
+          <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
+            <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
+            <tbody id="append_table_xl"></tbody>
+          </table>
+
+          <td> 
+           <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-info active pull-left">Download Sample Format</a>
+         </td>  
+          <td class="left-pad-none">
+            <div class="col-md-6">
+             <input type="file"  class="form-control"   name="excel"  id="excel" required>
+           </div> 
+           <div class="col-md-6">
+            <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
+          </div>
+        </td>  
+
         
-
-
-
-
-
-
       </div>
+
+
+
+
     </div>
-    <button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
-
-    <!-- Table 2 End  --> 
-    <!-- <button id="activate-step-3" class="btn btn-primary btn-md">Activate Step 3</button> -->
   </div>
+  <button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
+</div>
 </div>
 
 
-</div>
 
+</div>
 </form>
 
 
@@ -786,7 +778,19 @@ function f_defination(element){
 
 
 <script>
+  var industry_id=0;
+  $(document).on("change", "#industry_id",function(){
+    industry_id=$(this).val();
+  });
+
+
   $(document).ready(function(){
+
+
+
+
+
+
     Control_Enable_Disable();
     Calculate_Amount();
     $(".calc").keyup(function(){
@@ -863,7 +867,7 @@ function f_defination(element){
 
 <!-- form 1 -->
 <script type="text/javascript">
- $('#calc_primium').click(function(e){ e.preventDefault();  
+ $('#calc_primium').click(function(e){ e.preventDefault();      
    validator=$('#calculate_primium').validate();
    if(! $('#calculate_primium').valid()){
            //validator.errorList[0].element.focus();
@@ -875,24 +879,23 @@ function f_defination(element){
            return false;
          }else{
 
-          if($('#Totallives').val()!=0 ){    
-            if($('#Totallives').val()<=500){
-              $('ul.setup-panel li:eq(1)').removeClass('disabled');
-              $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-            }else{
-              alert("Max. Limit For No. of Lives-500..");
-            }
-         //$(this).remove();
-       }else{
+          if(industry_id!=1){
 
-        alert("Please Select Family Defination..");
+            if($('#Totallives').val()!=0 ){    
+              if($('#Totallives').val()<=500){
+                $('ul.setup-panel li:eq(1)').removeClass('disabled');
+                $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+              }else{ alert("Max. Limit For No. of Lives-500..");}
+            }else{ alert("Please Select Family Defination..");
+          }
+        }else{
+          alert(" You can not create quote for Medical And Paramedical Staff .. ");
+        }
+
+
       }
 
-      
-      
-    }
-
-  }); </script>
+    }); </script>
 
 
 
@@ -1087,22 +1090,26 @@ $('#sum_insured_id').click(function(e){ e.preventDefault();
 
     });  }); 
 
-  if(initi.total==total_value){
+  if($('#Totallives').val()==total_value){
 
    alert(total_value);
  }
  
 
 
+
 }); 
 
-$('#flat').click(function(){  $('.show_hide').hide();
+$('#flat').click(function(){  $('.show_hide').hide();    $('#xl_hidden_id').hide();    $('.sum_insured_display').show();
   for (l=1;l<i;i--) {
    $("#table"+(i-1)).html('');
  }
  
 });
-$('#graded').click(function(){  $('.show_hide').show();  });
+$('#graded').click(function(){  $('.show_hide').show();  $('#xl_hidden_id').hide(); $('.sum_insured_display').show();  });
+
+$('#excel_id').click(function(){  $('.sum_insured_display').hide();  $('#xl_hidden_id').show();  $('.show_hide').hide();  });
+
 
 
 
@@ -1195,7 +1202,7 @@ $('#ghi_xl_submit').click(function(e){
              //
              // console.log(catg);
 
-          });
+           });
 
         },
         error :function(error){
