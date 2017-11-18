@@ -44,7 +44,7 @@ class LeadController extends Controller{
 				$uid=Session::get('userid');
 				$path = $req->file('file')->store('public/lead_documents');
 				$url=Storage::url($path);
-				$query=DB::select('call usp_insert_policy_lead_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($req['catg'],$req['type'],$req['group'],$req['name'],$req['business'],$req['insurer'],$req['renew_date'],$req['sum_insured'],$req['premium'],$url,$uid,$req['make'],$req['model'],$req['variant'],$req['mfg_year'],$req['idv'],$req['ncb']));
+				$query=DB::select('call usp_insert_policy_lead_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($req['catg'],$req['type'],$req['group'],$req['name'],$req['business'],$req['insurer'],$req['renew_date'],$req['sum_insured'],$req['premium'],$url,$uid,$req['make'],$req['model'],$req['variant'],$req['mfg_year'],$req['registration'],$req['idv'],$req['ncb']));
 				$msg=" Lead Uploaded Successfully .....";
 			}catch(\Exception $ee){
 				//print_r($ee->getMessage());
@@ -84,32 +84,58 @@ class LeadController extends Controller{
 
 		$data = \Excel::load($file)->toObject();
 		$msg="Data Uploaded Successfully. \n ";
+		// print "<pre>";
+		
 		if($data){
 			$count=0;
-			try{
+			//try{
 				foreach ($data as $k => $val) {
 					foreach ($val as $key => $value) {
 	                		# code...
-						try{
-							$id=DB::select('call usp_insert_bulk_upload(?,?,?,?,?,?,?,?,?,?,?)',[$value->group_name,$value->name_of_insured,$value->occupancy_business,$value->policy_category,$value->policy_type,$value->renewal_date,$value->current_insurer,$value->sum_insured,$value->pre_tax_premium,$userid,0]);
+						//try{
+						// print_r($val);
+						//  print_r($value->group_name);
+						//  print_r($value->name_of_insured);
+						//  print_r($value->occupancy_business);
+						//  print_r($value->policy_category);
+						//  print_r($value->policy_type);
+						//  print_r($value->renewal_date);
+						//  print_r($value->current_insurer);
+						//  print_r($value->sum_insured);
+						//  print_r($value->pre_tax_premium);
+						//  print_r($value->idv);
+						//  print_r($value->ncb );
+						//  print_r($value->make );
+						//  print_r( $value->model);
+						//  print_r($value->variant_sub_model );
+						//  print_r($value->year_of_mfg);
+						//  print_r( $value->registration_no);
+						//  exit();
+							$id=DB::select('call usp_insert_bulk_upload(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$val->group_name,$val->name_of_insured,$val->occupancy_business,$val->policy_category,$val->policy_type,$val->renewal_date,$val->current_insurer,$val->sum_insured,$val->pre_tax_premium,$val->idv,$val->ncb ,$val->make , $val->model,$val->variant_sub_model ,$val->year_of_mfg, $val->registration_no,$userid,0]);
+							// $value->idv,  $value->make , $value->model,$value->variant_sub_model ,$value->year_of_mfg, $value->ncb , $value->registration_no
+
+
+
+
 
 							$count++;
-						}catch(\Exception $ee){
-							if(isset($value->name_of_insured)){
-								print_r($ee->getMessage());exit();
-								$msg+="but lead of ".$value->name_of_insured."Not uploaded \n";
-							}
-							else
-								$msg+="but your XL break down something hence partial data uploaded";
-							continue;
-						}
+						// }catch(\Exception $ee){
+						// 	print_r($ee->getMessage());exit();
+						// 	if(isset($value->name_of_insured)){
+								
+						// 		$msg+="but lead of ".$value->name_of_insured."Not uploaded \n";
+						// 	}
+						// 	else
+						// 		$msg+="but your XL break down something hence partial data uploaded";
+						// 	continue;
+						// }
 					}
 				}
 				$update=DB::select('call usp_insert_bulk_lead_data()');
-			}catch(\Exception $ee){
-            		//$print_r($ee);
-				$msg+="but your XL breaks down something";
-			}
+			// }catch(\Exception $ee){
+   //          		//$print_r($ee);
+			// 	$msg+="but your XL breaks down something";
+			// }
 
 			Session::flash('msg',$msg);
 			return redirect('dashboard');
