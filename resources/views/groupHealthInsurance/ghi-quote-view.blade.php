@@ -309,25 +309,30 @@
         </div>
 
 
+
+
         <div id="xl_hidden_id" style="display:none">
+
           <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
             <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
             <tbody id="append_table_xl"></tbody>
           </table>
 
+        
+        
           <td> 
            <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-info active pull-left">Download Sample Format</a>
-         </td>  
+         </td>
+        
+           
           <td class="left-pad-none">
             <div class="col-md-6">
              <input type="file"  class="form-control"   name="excel"  id="excel" required>
-           </div> 
+           </div>
            <div class="col-md-6">
             <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
           </div>
-        </td>  
-
-        
+        </td>
       </div>
 
 
@@ -1185,14 +1190,27 @@ $('#ghi_xl_submit').click(function(e){
           $('#append_table_xl').empty();
           last_grade="";
           last_sum=0;
+
+           arr={};
           $.each(message.data,function(i,value){
             catg=i.split("_");
-            //console.log(appending_data);
+           // par_cat=value.split("_");
+             $.each(value,function(k,v){
+                 console.log(k.split("_")[1]);
+                  arr.push();
+                //alert(value);
+              });
 
-            grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
-            last_grade=catg[0];
-            last_sum=catg[1];
-            $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
+            // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
+            // last_grade=catg[0];
+            // last_sum=catg[1];
+
+            // if(last_grade==catg[0] && last_sum==catg[1]){
+              
+            // }
+
+            // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
+
             // relation=catg[3];
             // if(relation=="Parental"){
             //   back_name="_3_3"

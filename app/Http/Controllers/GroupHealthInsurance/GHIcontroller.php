@@ -64,7 +64,8 @@ public function sum_insured_graded(Request $req){
   //to find age band for xl upload 
   Session::put('age_bands',$bands);
   //print_r($bands);exit();
-  return  $arr[]=array('age_bands'=>$bands ,'query_slab'=>explode(",",$query_slab->company_slabs));
+   $company_name=DB::table('company_master')->select('company_name')->where('company_id','=',$req->company_id)->first();
+  return  $arr[]=array('age_bands'=>$bands ,'query_slab'=>explode(",",$query_slab->company_slabs),'company_name'=>$company_name);
 
          //  return explode(",",$query->age_bands);
  }catch(\Exception $ee){
@@ -136,14 +137,18 @@ public function ghi_xl_upload(Request $req){
                   }
                     //making a string to make array key of required data
 
-                    $str=$val->grade."_".$val->sum_insured."_".$relation."_".$band; 
-                    if(! isset($counter_ghi[$str])){
-                        $counter_ghi[$str]=1;
-                    }else{
-                      $counter_ghi[$str]++;
-                    }
 
-                    
+
+
+                    $str=$val->grade."_".$val->sum_insured;
+if(! isset($counter_ghi[$str])){                         $counter_ghi[$str]=
+array($relation."_".$band=>1);                     }else{
+if(!isset($counter_ghi[$str][$relation]))
+$counter_ghi[$str][$relation."_".$band]=1;                         else{
+$counter_ghi[$str][$relation."_".$band]++;                         }
+}
+
+                     
                     
                      
                      //$get_id=DB::table('ghi_xl_data')->insertGetId(['employee_id'=>$val->employee_id, 'grade'=>$val->grade, 'name_of_insured'=>$val->name_of_insured, 'date_of_birth'=> $dob, 'gender'=>$val->gender, 'relation'=>$val->relation, 'date_of_joining'=>$doj, 'sum_insured'=>$val->sum_insured, 'related_to'=>$last_self_id,'created_by'=>$userid]);
@@ -154,16 +159,16 @@ public function ghi_xl_upload(Request $req){
                     }
                 }
                  
-                //print_r(json_encode($counter_ghi));exit();
+                //dd($counter_ghi);exit();
 
-
+ 
               }catch(\Exception $ee){
                 print_r($ee->getMessage());
                 $status=0 ;
                
               }
-
-            $result=['status'=>$status,'data'=>($counter_ghi)];
+              //print_r($counter_ghi);exit();
+            $result=['status'=>$status,'data'=>($counter_ghi),'age_bands'=>($age_bands)];
            return json_encode($result);// response(array('result' => $result  ), 200)->header('Content-Type', 'application/json');
 
     }
