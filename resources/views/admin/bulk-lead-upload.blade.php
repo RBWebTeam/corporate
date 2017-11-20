@@ -36,7 +36,7 @@
 	           <div class="form-group">
 	           	 <button type="submit" class="btn btn-primary  ">Upload</button>
 
-	           	 <a download="upload_fomart.csv" href="{{URL::to('upload_format/upload_format_non_motor.csv')}}" class="btn btn-primary ">Download Sample Format</a>
+	           	 <a download="upload_format_non_motor.xls" href="{{URL::to('upload_format/upload_format_non_motor.xls')}}" class="btn btn-primary ">Download Sample Format</a>
 	           	</div>
         	</div>
           <div class="vl">
@@ -55,7 +55,7 @@
              <div class="form-group">
                <button type="submit" class="btn btn-primary  ">Upload</button>
 
-               <a download="upload_fomart.csv" href="{{URL::to('upload_format/upload_format_motor.csv')}}" class="btn btn-primary ">Download Sample Format</a>
+               <a download="upload_format_motor.xls" href="{{URL::to('upload_format/upload_format_motor.xls')}}" class="btn btn-primary ">Download Sample Format</a>
               </div>
           </div>
           
