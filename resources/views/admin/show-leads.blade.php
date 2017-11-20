@@ -28,25 +28,39 @@
                   <th>Renewal date</th>
                   <th>Sum insured</th>
                   <th>Pre Tax Premium</th>
+                  <th>IDV</th>
+                  <th>NCB</th>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Variant</th>
+                  <th>Manufacturing Date</th>
+                  <th>Registration Number</th>
                   <th>policy Copy</th>
                   <th>Created By</th>
-
+           
 
                 </tr>
               </thead>
               <tbody>
                @foreach($lead as $lead)
                <tr class="clone_row">
-                <td> {{$lead->lead_id}}</td>
-                <td> {{$lead->policy_category}}</td>
-                <td> {{$lead->product_name}}</td>
-                <td>{{$lead->group_name}}</td>
-                <td> {{$lead->client_name}}</td>
-                <td> {{$lead->business_type}}</td>
-                <td> {{$lead->company_name}}</td>
+                <td> {{$lead->lead_id?$lead->lead_id:"-"}}</td>
+                <td> {{$lead->policy_category?$lead->policy_category:"-"}}</td>
+                <td> {{$lead->product_name?$lead->product_name:"-"}}</td>
+                <td>{{$lead->group_name?$lead->group_name:"-"}}</td>
+                <td> {{$lead->client_name?$lead->client_name:"-"}}</td>
+                <td> {{$lead->business_type?$lead->business_type:"-"}}</td>
+                <td> {{$lead->company_name?$lead->company_name:"-"}}</td>
                 <td> {{$lead->renewal_date}}</td>
-                <td> {{$lead->sum_insured}}</td>
-                <td> {{$lead->pretax_premium}}</td>
+                <td> {{$lead->sum_insured?$lead->sum_insured:"-"}}</td>
+                <td> {{$lead->pretax_premium?$lead->pretax_premium:"-"}}</td>
+                <td> {{$lead->IDV?$lead->IDV:"-"}}</td>
+                <td> {{$lead->NCB?$lead->NCB:"-"}}</td>
+                <td> {{$lead->make?$lead->make:"-"}}</td>
+                <td> {{$lead->model?$lead->model:"-"}}</td>
+                <td> {{$lead->variant?$lead->variant:"-"}}</td>
+                <td> {{$lead->manufacturing_year?$lead->manufacturing_year:"-"}}</td>
+                <td> {{$lead->registration_no?$lead->registration_no:"-"}}</td>
                 <td>
                   @if($lead->document_path)
                   <a href="{{$lead->document_path}}" target="_new">Document </a>
@@ -54,7 +68,7 @@
                   <a href="{{$lead->lead_id}}" id="upload_lead_id">Upload</a>
                   @endif
                 </td>
-                <td> {{$lead->created_by}}</td>
+                <td> {{$lead->created_by?$lead->created_by:"-"}}</td>
               </tr>
               @endforeach
             </tbody>
