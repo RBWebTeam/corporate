@@ -80,6 +80,22 @@
            <tbody><tr></tr></tbody>
          </table> -->
 
+ <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
+           <!--  <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead> -->
+           <thead></thead>
+            <tbody id="append_table_xl"></tbody>
+          </table>
+
+
+    <td class="left-pad-none">
+            <div class="col-md-6">
+             <input type="file"  class="form-control"   name="excel"  id="excel" required>
+           </div>
+           <div class="col-md-6">
+            <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
+          </div>
+        </td>
+
 
 
 
@@ -313,10 +329,10 @@
 
         <div id="xl_hidden_id" style="display:none">
 
-          <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
+        <!--   <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
             <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
             <tbody id="append_table_xl"></tbody>
-          </table>
+          </table> -->
 
         
         
@@ -330,7 +346,7 @@
              <input type="file"  class="form-control"   name="excel"  id="excel" required>
            </div>
            <div class="col-md-6">
-            <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
+            <a type="submit" id="ghi_xl_submit1" class="btn btn-info btn-md pull-left">upload</a>
           </div>
         </td>
       </div>
@@ -1166,6 +1182,7 @@ $('#excel_id').click(function(){  $('.sum_insured_display').hide();  $('#xl_hidd
 
 
 }); 
+var inisialbarnd=0;
 var ghi_xl_data;
 $('#ghi_xl_submit').click(function(e){  
   //console.log(appending_data);return;
@@ -1191,16 +1208,47 @@ $('#ghi_xl_submit').click(function(e){
           last_grade="";
           last_sum=0;
 
-           arr={};
+           arr0=Array();
+           arr1=Array();
+           arr2=Array();
+           grade =Array();
+           incc=0;
+           inisialbarnd=message.age_bands;
           $.each(message.data,function(i,value){
-            catg=i.split("_");
+             catg=i.split("_");
            // par_cat=value.split("_");
              $.each(value,function(k,v){
-                 console.log(k.split("_")[1]);
-                  arr.push();
-                //alert(value);
+                  // console.log(k.split("_")[1]);
+                  if('Employee'==k.split("_")[0]){
+                      arr0.push(k.split("_")[1]);
+                    // arr0.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
+                  }else if('Non-parental'==k.split("_")[0]){
+                        arr1.push(k.split("_")[1]);
+                   
+                    //arr1.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
+              
+                  }else if('parental'==k.split("_")[0]){
+                     //arr2.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
+                  }
+                // console.log(arr1);
               });
 
+                    
+            
+               
+               var tra= ' <td><input type="text" value="Employee"/ ></td> '+adds0(arr0.sort(),'emp')+'</tr> <tr><td></td><td></td> <td><input type="text" value="Non-parental"/ ></td>  '+adds1(arr1.sort(),'noemp')+' </tr> <tr><td></td><td></td> <td><input type="text" value="parental"/ ></td> '+arr2+' ';
+              
+              grade.push(' <tr><td><input type="text" value="'+catg[0]+'"/ ></td><td><input type="text" value="'+catg[1]+'"/ ></td>    '+tra+' </tr>');
+
+         
+                   
+
+             //console.log(arr1);
+             arr0.splice(incc-1);
+               arr1.splice(incc-1);
+                 arr2.splice(incc-1);
+             incc++;
+              
             // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
             // last_grade=catg[0];
             // last_sum=catg[1];
@@ -1211,16 +1259,35 @@ $('#ghi_xl_submit').click(function(e){
 
             // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
 
+
+
+
+
+
+           //return false;
+            // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
+            // last_grade=catg[0];
+            // last_sum=catg[1];
+
+            // if(last_grade==catg[0] && last_sum==catg[1]){
+              
+            // }
+
+            // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
+
+
             // relation=catg[3];
             // if(relation=="Parental"){
             //   back_name="_3_3"
             // }
             // name=catg[3]+"[]";
             // $( "input[name='"+name+"']" ).val(value);
-             //
-             // console.log(catg);
+             
+            //  console.log(catg);
 
            });
+
+            $('#append_table_xl').append(grade);
 
         },
         error :function(error){
@@ -1237,6 +1304,41 @@ $('#ghi_xl_submit').click(function(e){
 
   } 
 });
+
+
+
+
+function adds0(va){
+   var ar0=Array();
+   $.each(inisialbarnd,function(k,v){
+          if(va==v){
+             //console.log(arr);
+            ar0.push('<td><input type="text" value="'+v+'"/ ><td>');
+          }else{
+             ar0.push('<td><input type="text" value="0"/ ><td>');
+          }
+        
+   })
+ return ar0;
+
+}
+
+function adds1(va =Array()){
+        var ar1=Array();
+        var len=va.length;
+
+   $.each(inisialbarnd,function(k,v){
+    console.log(va[k]+"  "+v);
+
+    
+         
+  });
+  return ar1;
+}
+
+
+
+
 </script>
 
 <!--  -->
