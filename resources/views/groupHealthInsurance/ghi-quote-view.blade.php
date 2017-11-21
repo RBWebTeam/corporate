@@ -1202,92 +1202,109 @@ $('#ghi_xl_submit').click(function(e){
       headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
       data: formData,
       success: function (message) {
-          //console.log(message);return;
-          $('#xl_data_table').removeClass("hidden");
-          $('#append_table_xl').empty();
-          last_grade="";
-          last_sum=0;
+          
+          makeTableData(message.data,message.age_bands);
+          makeTableHeader(message.age_bands);
 
-           arr0=Array();
-           arr1=Array();
-           arr2=Array();
-           grade =Array();
-           incc=0;
-           inisialbarnd=message.age_bands;
-          $.each(message.data,function(i,value){
-             catg=i.split("_");
-           // par_cat=value.split("_");
-             $.each(value,function(k,v){
-                  // console.log(k.split("_")[1]);
-                  if('Employee'==k.split("_")[0]){
-                      arr0.push(k.split("_")[1]);
-                    // arr0.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
-                  }else if('Non-parental'==k.split("_")[0]){
-                        arr1.push(k.split("_")[1]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          // $('#xl_data_table').removeClass("hidden");
+          // $('#append_table_xl').empty();
+          // last_grade="";
+          // last_sum=0;
+
+          //  arr0=Array();
+          //  arr1=Array();
+          //  arr2=Array();
+          //  grade =Array();
+          //  incc=0;
+          //  inisialbarnd=message.age_bands;
+          // $.each(message.data,function(i,value){
+          //    catg=i.split("_");
+          //  // par_cat=value.split("_");
+          //    $.each(value,function(k,v){
+          //         // console.log(k.split("_")[1]);
+          //         if('Employee'==k.split("_")[0]){
+          //             arr0.push(k.split("_")[1]);
+          //           // arr0.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
+          //         }else if('Non-parental'==k.split("_")[0]){
+          //               arr1.push(k.split("_")[1]);
                    
-                    //arr1.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
+          //           //arr1.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
               
-                  }else if('parental'==k.split("_")[0]){
-                     //arr2.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
-                  }
-                // console.log(arr1);
-              });
+          //         }else if('parental'==k.split("_")[0]){
+          //            //arr2.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
+          //         }
+          //       // console.log(arr1);
+          //     });
 
                     
             
                
-               var tra= ' <td><input type="text" value="Employee"/ ></td> '+adds0(arr0.sort(),'emp')+'</tr> <tr><td></td><td></td> <td><input type="text" value="Non-parental"/ ></td>  '+adds1(arr1.sort(),'noemp')+' </tr> <tr><td></td><td></td> <td><input type="text" value="parental"/ ></td> '+arr2+' ';
+          //      var tra= ' <td><input type="text" value="Employee"/ ></td> '+adds0(arr0.sort(),'emp')+'</tr> <tr><td></td><td></td> <td><input type="text" value="Non-parental"/ ></td>  '+adds1(arr1.sort(),'noemp')+' </tr> <tr><td></td><td></td> <td><input type="text" value="parental"/ ></td> '+arr2+' ';
               
-              grade.push(' <tr><td><input type="text" value="'+catg[0]+'"/ ></td><td><input type="text" value="'+catg[1]+'"/ ></td>    '+tra+' </tr>');
+          //     grade.push(' <tr><td><input type="text" value="'+catg[0]+'"/ ></td><td><input type="text" value="'+catg[1]+'"/ ></td>    '+tra+' </tr>');
 
          
                    
 
-             //console.log(arr1);
-             arr0.splice(incc-1);
-               arr1.splice(incc-1);
-                 arr2.splice(incc-1);
-             incc++;
+          //    //console.log(arr1);
+          //    arr0.splice(incc-1);
+          //      arr1.splice(incc-1);
+          //        arr2.splice(incc-1);
+          //    incc++;
               
-            // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
-            // last_grade=catg[0];
-            // last_sum=catg[1];
+          //   // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
+          //   // last_grade=catg[0];
+          //   // last_sum=catg[1];
 
-            // if(last_grade==catg[0] && last_sum==catg[1]){
+          //   // if(last_grade==catg[0] && last_sum==catg[1]){
               
-            // }
+          //   // }
 
-            // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
-
-
+          //   // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
 
 
 
 
-           //return false;
-            // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
-            // last_grade=catg[0];
-            // last_sum=catg[1];
 
-            // if(last_grade==catg[0] && last_sum==catg[1]){
+
+          //  //return false;
+          //   // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
+          //   // last_grade=catg[0];
+          //   // last_sum=catg[1];
+
+          //   // if(last_grade==catg[0] && last_sum==catg[1]){
               
-            // }
+          //   // }
 
-            // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
+          //   // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
 
 
-            // relation=catg[3];
-            // if(relation=="Parental"){
-            //   back_name="_3_3"
-            // }
-            // name=catg[3]+"[]";
-            // $( "input[name='"+name+"']" ).val(value);
+          //   // relation=catg[3];
+          //   // if(relation=="Parental"){
+          //   //   back_name="_3_3"
+          //   // }
+          //   // name=catg[3]+"[]";
+          //   // $( "input[name='"+name+"']" ).val(value);
              
-            //  console.log(catg);
+          //   //  console.log(catg);
 
-           });
+          //  });
 
-            $('#append_table_xl').append(grade);
+          //   $('#append_table_xl').append(grade);
 
         },
         error :function(error){
@@ -1308,36 +1325,65 @@ $('#ghi_xl_submit').click(function(e){
 
 
 
-function adds0(va){
-   var ar0=Array();
-   $.each(inisialbarnd,function(k,v){
-          if(va==v){
-             //console.log(arr);
-            ar0.push('<td><input type="text" value="'+v+'"/ ><td>');
-          }else{
-             ar0.push('<td><input type="text" value="0"/ ><td>');
-          }
+// function adds0(va){
+//    var ar0=Array();
+//    $.each(inisialbarnd,function(k,v){
+//           if(va==v){
+//              //console.log(arr);
+//             ar0.push('<td><input type="text" value="'+v+'"/ ><td>');
+//           }else{
+//              ar0.push('<td><input type="text" value="0"/ ><td>');
+//           }
         
-   })
- return ar0;
+//    })
+//  return ar0;
 
-}
+// }
 
-function adds1(va =Array()){
-        var ar1=Array();
-        var len=va.length;
+// function adds1(va =Array()){
+//         var ar1=Array();
+//         var len=va.length;
 
-   $.each(inisialbarnd,function(k,v){
-    console.log(va[k]+"  "+v);
+//    $.each(inisialbarnd,function(k,v){
+//     console.log(va[k]+"  "+v);
 
     
          
+//   });
+//   return ar1;
+// }
+function makeTableHeader(age_bands){
+  arr="<thead><th>Grade</th><th>Sum Insured</th>";
+  $.each(age_bands,function(key,value){
+    arr+="<th>"+value+"</th>";
   });
-  return ar1;
+  arr+="</thead";
+  $('#xl_data_table').append(arr);
+  $('#xl_data_table').removeClass('hidden');
 }
-
-
-
+function makeTableData(data,age_band){
+  //arr=[];
+  row="";
+  row_data="";
+   $.each(data,function(key,value){
+            band_grade=key.split("_");
+            row+="<tr><td>"+band_grade[0]+"</td><td>"+band_grade[1]+"</td>";
+            $.each(age_band,function(k,v){
+              console.log(v);
+              console.log(value);
+              
+                if(v in value){
+                  row_data+='<td><input type="text" value='+value[v]+'></td>';
+                }else{
+                  row_data+='<td><input type="text" value=0></td>';
+                }
+            });
+            row+=row_data+"</tr>";
+          });
+   $('#xl_data_table').append(row);
+  //arr.push('<td><input type="text" value="'+v+'"/ ><td>');
+}
+function makeRow(){}
 
 </script>
 
