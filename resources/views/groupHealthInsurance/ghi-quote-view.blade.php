@@ -80,52 +80,52 @@
            <tbody><tr></tr></tbody>
          </table> -->
 
- <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
+         <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
            <!--  <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead> -->
-           <thead></thead>
-            <tbody id="append_table_xl"></tbody>
-          </table>
+           <thead id="append_table_xlhead"></thead>
+           <tbody id="append_table_xl"></tbody>
+         </table>
 
 
-    <td class="left-pad-none">
-            <div class="col-md-6">
-             <input type="file"  class="form-control"   name="excel"  id="excel" required>
-           </div>
-           <div class="col-md-6">
-            <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
-          </div>
-        </td>
+         <td class="left-pad-none">
+          <div class="col-md-6">
+           <input type="file"  class="form-control"   name="excel"  id="excel" required>
+         </div>
+         <div class="col-md-6">
+          <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
+        </div>
+      </td>
 
 
 
 
-         <div class="table-responsive">    
-          <form id="calculate_primium" name="calculate_primium" method="POST"  >  
-            <table width="850" border="0" cellspacing="0" cellpadding="0" class="table table-striped  table-bordered text-right">
-             <tr>
-              <td class="text-right" width="45%"><label class="lbl">Customer Name*</label></td>
-              <td width="50%"> <input type="text" class="form-control input1" name="customer_name" id="customer_name"   required /></td>
-            </tr>
-            <tr>
-              <td class="text-right"><label class="lbl">Location  *</label></td>
-              <td class="left-pad-none">
-                <div class="col-md-6">
-
-                 <input type="hidden" name="stateid" id="stateid" value="">
-                 <input type="text"  class="form-control  search_state " placeholder="State" name="state" value="" id="state" required>
-               </div>
-               <div class="col-md-6">
-
-                 <input type="hidden" name="districtid" id="districtid"  >
-                 <input type="text" class="form-control  search_district"  placeholder="  District " name="district" id="district" required >
-               </div>
-             </td>
-           </tr>
-           
+      <div class="table-responsive">    
+        <form id="calculate_primium" name="calculate_primium" method="POST"  >  
+          <table width="850" border="0" cellspacing="0" cellpadding="0" class="table table-striped  table-bordered text-right">
            <tr>
-            <td ><label class="lbl">Industry</label></td>
+            <td class="text-right" width="45%"><label class="lbl">Customer Name*</label></td>
+            <td width="50%"> <input type="text" class="form-control input1" name="customer_name" id="customer_name"   required /></td>
+          </tr>
+          <tr>
+            <td class="text-right"><label class="lbl">Location  *</label></td>
             <td class="left-pad-none">
-              <div class="col-md-8 left-pad-none">
+              <div class="col-md-6">
+
+               <input type="hidden" name="stateid" id="stateid" value="">
+               <input type="text"  class="form-control  search_state " placeholder="State" name="state" value="" id="state" required>
+             </div>
+             <div class="col-md-6">
+
+               <input type="hidden" name="districtid" id="districtid"  >
+               <input type="text" class="form-control  search_district"  placeholder="  District " name="district" id="district" required >
+             </div>
+           </td>
+         </tr>
+
+         <tr>
+          <td ><label class="lbl">Industry</label></td>
+          <td class="left-pad-none">
+            <div class="col-md-8 left-pad-none">
                <!-- <input type="hidden" name="industry_id" id="industry_id" value="">
                <input type="text"  class="form-control  search_industry"  placeholder="Search Industry " name="industry" value="" id="industry" required> -->
                <select class="form-control" name="industry_id" id="industry_id" required>
@@ -244,7 +244,7 @@
 
 
 
-       
+
 
 
 <!-- <div class="col-lg-6 col-md-6 col-sm-12">
@@ -334,29 +334,29 @@
             <tbody id="append_table_xl"></tbody>
           </table> -->
 
-        
-        
+
+
           <td> 
            <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-info active pull-left">Download Sample Format</a>
          </td>
-        
-           
-          <td class="left-pad-none">
-            <div class="col-md-6">
-             <input type="file"  class="form-control"   name="excel"  id="excel" required>
-           </div>
-           <div class="col-md-6">
-            <a type="submit" id="ghi_xl_submit1" class="btn btn-info btn-md pull-left">upload</a>
-          </div>
-        </td>
-      </div>
 
 
-
-
+         <td class="left-pad-none">
+          <div class="col-md-6">
+           <input type="file"  class="form-control"   name="excel"  id="excel" required>
+         </div>
+         <div class="col-md-6">
+          <a type="submit" id="ghi_xl_submit1" class="btn btn-info btn-md pull-left">upload</a>
+        </div>
+      </td>
     </div>
+
+
+
+
   </div>
-  <button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
+</div>
+<button id="sum_insured_id" class="btn btn-primary btn-md" >Submit</button>
 </div>
 </div>
 
@@ -1208,53 +1208,61 @@ $('#ghi_xl_submit').click(function(e){
           last_grade="";
           last_sum=0;
 
-           arr0=Array();
-           arr1=Array();
-           arr2=Array();
-           grade =Array();
-           incc=0;
-           inisialbarnd=message.age_bands;
+          arr0=Array();
+          arr1=Array();
+          arr2=Array();
+          arr0val=Array();
+          arr1val=Array();
+          arr2val=Array();
+          grade =Array();
+          incc=0;
+          inisialbarnd=message.age_bands;
           $.each(message.data,function(i,value){
-             catg=i.split("_");
+           catg=i.split("_");
            // par_cat=value.split("_");
-             $.each(value,function(k,v){
+           $.each(value,function(k,v){
                   // console.log(k.split("_")[1]);
                   if('Employee'==k.split("_")[0]){
-                      arr0.push(k.split("_")[1]);
+                    arr0.push(k.split("_")[1]);
+                    arr0val.push(v);
                     // arr0.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
                   }else if('Non-parental'==k.split("_")[0]){
-                        arr1.push(k.split("_")[1]);
-                   
+                    arr1.push(k.split("_")[1]);
+                    arr1val.push(v);
+                  
                     //arr1.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
-              
+
                   }else if('parental'==k.split("_")[0]){
+                     arr2.push(k.split("_")[1]);
+                       arr2val.push(v);
                      //arr2.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
-                  }
+                   }
                 // console.log(arr1);
               });
 
-                    
-            
-               
-               var tra= ' <td><input type="text" value="Employee"/ ></td> '+adds0(arr0.sort(),'emp')+'</tr> <tr><td></td><td></td> <td><input type="text" value="Non-parental"/ ></td>  '+adds1(arr1.sort(),'noemp')+' </tr> <tr><td></td><td></td> <td><input type="text" value="parental"/ ></td> '+arr2+' ';
-              
-              grade.push(' <tr><td><input type="text" value="'+catg[0]+'"/ ></td><td><input type="text" value="'+catg[1]+'"/ ></td>    '+tra+' </tr>');
 
-         
-                   
+               //console.log(adds1(arr0.sort(),arr0val).join(""));
+          
+           var tra= ' <td><label>Employee</label></td>'+adds1(arr0.sort(),arr0val).join("")+'<tr><td></td><td></td> <td><label>Non-parental</label> </td>  '+adds1(arr1.sort(),arr1val).join("")+' </tr> <tr><td></td><td></td> <td><label>parental</label> </td> '+adds1(arr2.sort(),arr2val).join("")+' </tr> ';
+
+           grade.push('<tr><td> <label>'+catg[0]+'</label></td><td><input type="text" value="'+catg[1]+'"/></td>'+tra+'</tr>');
+
+
+
 
              //console.log(arr1);
              arr0.splice(incc-1);
-               arr1.splice(incc-1);
-                 arr2.splice(incc-1);
+             arr1.splice(incc-1);
+             arr2.splice(incc-1);
+             arr1val.splice(incc-1);
              incc++;
-              
+
             // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
             // last_grade=catg[0];
             // last_sum=catg[1];
 
             // if(last_grade==catg[0] && last_sum==catg[1]){
-              
+
             // }
 
             // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
@@ -1270,7 +1278,7 @@ $('#ghi_xl_submit').click(function(e){
             // last_sum=catg[1];
 
             // if(last_grade==catg[0] && last_sum==catg[1]){
-              
+
             // }
 
             // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
@@ -1282,12 +1290,17 @@ $('#ghi_xl_submit').click(function(e){
             // }
             // name=catg[3]+"[]";
             // $( "input[name='"+name+"']" ).val(value);
-             
+
             //  console.log(catg);
 
-           });
+          });
+           var arrayheadtr=Array();
+            $.each(inisialbarnd,function(k,v){
+              arrayheadtr.push('<td>'+v+'</td>');
+            })
 
-            $('#append_table_xl').append(grade);
+          $('#append_table_xlhead').append('<tr><td>Grade</td><td>Sum Insured</td> <td>Employee</td> '+arrayheadtr+'</tr>');
+          $('#append_table_xl').append(grade);
 
         },
         error :function(error){
@@ -1308,33 +1321,55 @@ $('#ghi_xl_submit').click(function(e){
 
 
 
-function adds0(va){
-   var ar0=Array();
-   $.each(inisialbarnd,function(k,v){
-          if(va==v){
-             //console.log(arr);
-            ar0.push('<td><input type="text" value="'+v+'"/ ><td>');
-          }else{
-             ar0.push('<td><input type="text" value="0"/ ><td>');
-          }
-        
-   })
- return ar0;
+// function adds0(va){
+//  var ar0=Array();
+//  $.each(inisialbarnd,function(k,v){
+//   if(va==v){
+//              //console.log(arr);
+//              ar0.push('<td><input type="text" value="'+v+'"/ ><td>');
+//            }else{
+//              ar0.push('<td><input type="text" value="0"/ ><td>');
+//            }
 
-}
+//          })
+//  return ar0;
 
-function adds1(va =Array()){
-        var ar1=Array();
-        var len=va.length;
+// }
 
-   $.each(inisialbarnd,function(k,v){
-    console.log(va[k]+"  "+v);
 
-    
-         
-  });
-  return ar1;
-}
+
+function adds1(va =Array(),value=Array()){
+  var len=va.length;
+  var aaa=Array();
+  var v=0;
+
+ 
+
+  for (i=0,j=0; i<inisialbarnd.length  ;i++) {
+    if (inisialbarnd[i] < va[j]) {
+                //aaa[v]=0;
+                aaa.push('<td><input type="text"  / ></td>');
+              } else if (inisialbarnd[i] == va[j]) {
+           //aaa[v]=va[j];
+           aaa.push('<td><input type="text" value="'+value[j]+'"/ ></td>');
+           ++j;
+         } else {
+        //aaa[v]=0;
+        aaa.push('<td><input type="text"  / ></td>');
+
+      }
+      v++;
+    }
+
+
+    return aaa;
+
+
+
+
+
+
+  }
 
 
 
