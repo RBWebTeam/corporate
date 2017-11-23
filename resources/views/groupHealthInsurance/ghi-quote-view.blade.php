@@ -73,29 +73,7 @@
         <!-- Table 1 Start  -->           
         <h3 class="text-center heading-1 pad">Calculate Premium</h3> <br>
 
-
-
-      <!--    <table id="append_id">
-          <thead><tr></tr></thead>
-           <tbody><tr></tr></tbody>
-         </table> -->
-
-         <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
-           <!--  <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead> -->
-           <thead id="append_table_xlhead"></thead>
-           <tbody id="append_table_xl"></tbody>
-         </table>
-
-
-         <td class="left-pad-none">
-          <div class="col-md-6">
-           <input type="file"  class="form-control"   name="excel"  id="excel" required>
-         </div>
-         <div class="col-md-6">
-          <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
-        </div>
-      </td>
-
+ 
 
 
 
@@ -126,8 +104,7 @@
           <td ><label class="lbl">Industry</label></td>
           <td class="left-pad-none">
             <div class="col-md-8 left-pad-none">
-               <!-- <input type="hidden" name="industry_id" id="industry_id" value="">
-               <input type="text"  class="form-control  search_industry"  placeholder="Search Industry " name="industry" value="" id="industry" required> -->
+               
                <select class="form-control" name="industry_id" id="industry_id" required>
                 <option selected value="0"> Select </option>
                 <option value="1">Medical And Paramedical Staff </option>
@@ -154,56 +131,7 @@
         </tr>
 
 
-        <!-- <tr>
-          <td ><label class="lbl">Service Category</label></td>
-          <td class="left-pad-none">
-            <div class="col-md-8 left-pad-none">
-              <span class="glyphicon glyphicon-chevron-down down-arr"></span>
-              <select class="form-control" name="service_category" id="service_category" required>
-                <option value=""> Select </option>
-                <option value="1">Cashless Only</option>
-                <option value="2">Reimbursement Only</option>
-              </select>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td ><label class="lbl">Type of Cards</label></td>
-          <td class="left-pad-none">
-            <div class="col-md-8 left-pad-none">
-              <span class="glyphicon glyphicon-chevron-down down-arr"></span>
-              <select class="form-control" name="type_of_card" id="type_of_card" required>
-               <option value=""> Select </option>
-               <option value="1">E-cards</option>
-               <option value="2">Physical Cards</option>
-               <option value="3">Both (E-cards + Physical Cards)</option>
-             </select>
-           </div>
-         </td>
-       </tr> -->
-
-
-
-   <!--     <tr>
-        <td>Family Defination*</td>
-        <td><div class="pull-left">
-          <input type="checkbox" onclick=" return f_defination(this);" value="1" /> Self &nbsp; 
-          <input type="checkbox" onclick=" return f_defination(this);" value="2" /> Spouse &nbsp;
-          <input type="checkbox" onclick=" return f_defination(this);" value="3" /> Children &nbsp;
-          <input type="checkbox" onclick=" return f_defination(this);"  value="4" /> Parents  </div></td>
-        </tr>
-        <tr class="no_of_Employees "><td>No. of Employees*</td><td><input type="text" class="form-control input1" name="no_of_emp"  id="no_of_emp"  oninput=" return Sum_Defination(this,'employees');"  /></td> </tr>
-        <tr class="no_of_Spouse"><td>No. of Spouse*</td><td><input type="text" class="form-control input1" name="no_of_spouse" id="no_of_spouse" oninput=" return Sum_Defination(this,'spouse');" /></td>  </tr> 
-        <tr class="no_of_Children"> <td>No. of Children*</td><td><input type="text" class="form-control input1" name="no_of_children" id="no_of_children"   oninput=" return Sum_Defination(this,'children');" /></td> </tr>
-        <tr class="no_of_Parents"><td>No. of Parents*</td><td><input type="text" class="form-control input1" name="no_of_parents" id="no_of_parents" 
-         oninput=" return Sum_Defination(this,'parents');" /></td> </tr>
-         <tr class="Total_id">
-          <td>Total Lives</td>
-          <td><span class="small" style="display: -webkit-box;"> (Max. Limit For No. of Lives-500)</span>
-            <input type="text" class="form-control input1" readonly  name="total_daf" id="total_daf" />
-          </td>
-        </tr> -->
-
+       
         <tr>
           <td>Family Defination*</td>
           <td><div class="pull-left"><input type="checkbox"  id="chkself" /> Self &nbsp; <input type="checkbox" id="chkspouse"/> Spouse &nbsp; <input type="checkbox" id="chkchild" /> Children &nbsp; <input type="checkbox" id="chkparents"  /> Parents  </div></td>
@@ -244,25 +172,7 @@
 
 
 
-
-
-
-<!-- <div class="col-lg-6 col-md-6 col-sm-12">
-  <h2>Upload GHI sheet here</h2>
-
-  <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-primary ">Download Sample Format</a>
-
-  <br>
-  <form method="POST" enctype="multipart/form-data" id="ghi_xl_form">
-    {{csrf_field()}}
-
-    <input type="file" class="form-control" id="excel" name="excel" required>
-    <a type="submit" id="ghi_xl_submit" class="form-control btn-primary">upload</a>
-    <p class="error hidden" id="xl_error"></p>
-
-  </form>
-</div> -->
-
+ 
 
 
 </table>
@@ -284,23 +194,7 @@
 
 
 
-
-
-<!-- <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
-  {!! csrf_field() !!}
-  <div class="form-group">
-    <label for="file" class="col-sm-3 control-label">Select CSV File</label>
-    <div class="col-sm-9">
-      <input type="file" class="form-control" id="file" name="file">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-default" id="insurde_ublk_upload">Upload</button>
-    </div>
-  </div>
-</form>
--->
+ 
 
 
 <form class="container" id="sum_insured_form" name="sum_insured_form" method="POST"> 
@@ -313,7 +207,7 @@
         <li><a data-toggle="tab" href="#menu1" id="graded">Graded</a></li>
         <li><a data-toggle="tab" href="#excel_id" id="excel_id"> Upload GHI sheet here </a></li> 
       </ul>
-      <div class="tab-content"> <p class="text-center"><b>Sum Insured Table</b></p>
+      <div class="tab-content"> <p class="text-center" id="company_name_append"><b > </b></p>
        <div class="table-responsive">
         <table id="append_id" class="table table-hover table-condensed table-striped table-bordered  sum_insured_display">
           <thead><tr></tr></thead>
@@ -328,17 +222,14 @@
 
 
         <div id="xl_hidden_id" style="display:none">
-
-        <!--   <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
-            <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead>
-            <tbody id="append_table_xl"></tbody>
-          </table> -->
+ 
 
 
-
-          <td> 
-           <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-info active pull-left">Download Sample Format</a>
-         </td>
+ <table id="xl_data_table" class="table table-hover table-condensed table-striped table-bordered hidden">
+           <!--  <thead><th>Grade</th><th>Sum Insured</th><th>Type</th><th>Age-band</th><th>count</th></thead> -->
+           <thead id="append_table_xlhead"></thead>
+           <tbody id="append_table_xl"></tbody>
+         </table>
 
 
          <td class="left-pad-none">
@@ -346,9 +237,21 @@
            <input type="file"  class="form-control"   name="excel"  id="excel" required>
          </div>
          <div class="col-md-6">
-          <a type="submit" id="ghi_xl_submit1" class="btn btn-info btn-md pull-left">upload</a>
+          <a type="submit" id="ghi_xl_submit" class="btn btn-info btn-md pull-left">upload</a>
         </div>
       </td>
+ 
+
+
+          
+ <td class="left-pad-none">
+          <div class="col-md-6">
+            <a download="sample_ghi_xl.xls" href="{{URL::to('ghi_Insured/sample_ghi_xl.xls')}}" class="btn btn-info active pull-left">Download Sample Format</a>
+         </div>
+         
+      </td>
+ 
+ 
     </div>
 
 
@@ -1043,8 +946,9 @@ $(document).ready(function () {
     },
     success: function(data) {
       appending_data=data;
-
-
+       $('#company_name_append').empty(); console.log(data.company_name.company_name);
+       $('#company_name_append').append(data.company_name.company_name);
+  
       $('#append_id thead tr').empty();
       $('#table0').empty();
       $.each(data.query_slab, function( i, value ) { 
@@ -1205,6 +1109,7 @@ $('#ghi_xl_submit').click(function(e){
           //console.log(message);return;
           $('#xl_data_table').removeClass("hidden");
           $('#append_table_xl').empty();
+          $('#append_table_xlhead').empty();
           last_grade="";
           last_sum=0;
 
@@ -1220,7 +1125,7 @@ $('#ghi_xl_submit').click(function(e){
              arr0.push(k.split("_")[1]+","+v);
            }else if('Non-parental'==k.split("_")[0]){
              arr1.push(k.split("_")[1]+","+v);
-           }else if('parental'==k.split("_")[0]){
+           }else if('Parental'==k.split("_")[0]){
             arr2.push(k.split("_")[1]+","+v);
           }
 

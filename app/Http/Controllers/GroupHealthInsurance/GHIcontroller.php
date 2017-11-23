@@ -55,6 +55,7 @@ class GHIcontroller extends Controller
 
 
 public function sum_insured_graded(Request $req){
+      Session::forget('company_master');
 
   $arr=array();
    try{
@@ -66,6 +67,8 @@ public function sum_insured_graded(Request $req){
   //print_r($bands);exit();
    $company_name=DB::table('company_master')->select('company_name')->where('company_id','=',$req->company_id)->first();
   return  $arr[]=array('age_bands'=>$bands ,'query_slab'=>explode(",",$query_slab->company_slabs),'company_name'=>$company_name);
+
+   // Sessoin::put('company_master',$company_name);
 
          //  return explode(",",$query->age_bands);
  }catch(\Exception $ee){
