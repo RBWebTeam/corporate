@@ -143,6 +143,7 @@ public function ghi_xl_upload(Request $req){
 
                        
 
+
                     $str=$val->grade."_".$val->sum_insured;
 if(! isset($counter_ghi[$str])){                         $counter_ghi[$str]=
 array($relation."_".$band=>1);                     }else{

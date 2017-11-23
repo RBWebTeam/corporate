@@ -1106,6 +1106,7 @@ $('#ghi_xl_submit').click(function(e){
       headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
       data: formData,
       success: function (message) {
+
           //console.log(message);return;
           $('#xl_data_table').removeClass("hidden");
           $('#append_table_xl').empty();
@@ -1121,6 +1122,7 @@ $('#ghi_xl_submit').click(function(e){
           $.each(message.data,function(i,value){
            catg=i.split("_");
            $.each(value,function(k,v){
+
             if('Employee'==k.split("_")[0]){
              arr0.push(k.split("_")[1]+","+v);
            }else if('Non-parental'==k.split("_")[0]){
@@ -1167,6 +1169,7 @@ $('#ghi_xl_submit').click(function(e){
 
 function adds0(va){
  var ar0=Array();
+
 
  for(i=0,j=0;i<inisialbarnd.length;i++){
 
@@ -1223,7 +1226,6 @@ return ar0;
 
 
 //   }
-
 
 
 
