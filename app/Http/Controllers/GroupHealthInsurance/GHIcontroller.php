@@ -138,8 +138,9 @@ public function ghi_xl_upload(Request $req){
                     //making a string to make array key of required data
 
 
+                       
 
-
+<<<<<<< HEAD
                       $str=$val->grade."_".$val->sum_insured;
                         if(! isset($counter_ghi[$str])){
                          $counter_ghi[$str]=array($relation."_".$band=>1);
@@ -150,9 +151,18 @@ public function ghi_xl_upload(Request $req){
                           $counter_ghi[$str][$relation."_".$band]++;                         
                         }
                   } 
+=======
+                    $str=$val->grade."_".$val->sum_insured;
+if(! isset($counter_ghi[$str])){                         $counter_ghi[$str]=
+array($relation."_".$band=>1);                     }else{
+if(!isset($counter_ghi[$str][$relation."_".$band]))
+$counter_ghi[$str][$relation."_".$band]=1;                         else{
+$counter_ghi[$str][$relation."_".$band]++;                         }
+}
+>>>>>>> f739b6bdccc064cf3382793a0055e3a0ae238547
 
                      
-                    
+      //print_r( $counter_ghi);exit();              
                      
                      //$get_id=DB::table('ghi_xl_data')->insertGetId(['employee_id'=>$val->employee_id, 'grade'=>$val->grade, 'name_of_insured'=>$val->name_of_insured, 'date_of_birth'=> $dob, 'gender'=>$val->gender, 'relation'=>$val->relation, 'date_of_joining'=>$doj, 'sum_insured'=>$val->sum_insured, 'related_to'=>$last_self_id,'created_by'=>$userid]);
                       // if($val->relation=='SELF' || $val->relation=='self'){
@@ -162,7 +172,7 @@ public function ghi_xl_upload(Request $req){
                     }
                 }
                  
-                //dd($counter_ghi);exit();
+               
 
  
               }catch(\Exception $ee){
@@ -170,7 +180,7 @@ public function ghi_xl_upload(Request $req){
                 $status=0 ;
                
               }
-              //print_r($counter_ghi);exit();
+               // print_r($counter_ghi);exit();
             $result=['status'=>$status,'data'=>($counter_ghi),'age_bands'=>($age_bands)];
            return json_encode($result);// response(array('result' => $result  ), 200)->header('Content-Type', 'application/json');
 
