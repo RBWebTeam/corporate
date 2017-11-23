@@ -140,18 +140,7 @@ public function ghi_xl_upload(Request $req){
 
                        
 
-<<<<<<< HEAD
-                      $str=$val->grade."_".$val->sum_insured;
-                        if(! isset($counter_ghi[$str])){
-                         $counter_ghi[$str]=array($relation."_".$band=>1);
-                        }else{
-                          if(!isset($counter_ghi[$str][$relation]))
-                          $counter_ghi[$str][$relation."_".$band]=1;                         
-                        else{
-                          $counter_ghi[$str][$relation."_".$band]++;                         
-                        }
-                  } 
-=======
+
                     $str=$val->grade."_".$val->sum_insured;
 if(! isset($counter_ghi[$str])){                         $counter_ghi[$str]=
 array($relation."_".$band=>1);                     }else{
@@ -159,7 +148,6 @@ if(!isset($counter_ghi[$str][$relation."_".$band]))
 $counter_ghi[$str][$relation."_".$band]=1;                         else{
 $counter_ghi[$str][$relation."_".$band]++;                         }
 }
->>>>>>> f739b6bdccc064cf3382793a0055e3a0ae238547
 
                      
       //print_r( $counter_ghi);exit();              
