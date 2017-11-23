@@ -1208,96 +1208,36 @@ $('#ghi_xl_submit').click(function(e){
           last_grade="";
           last_sum=0;
 
-          arr0=Array();
-          arr1=Array();
-          arr2=Array();
-          arr0val=Array();
-          arr1val=Array();
-          arr2val=Array();
-          grade =Array();
-          incc=0;
+          var  arr0=Array();
+          var  arr1=Array();
+          var  arr2=Array();
+          var grade =Array();
           inisialbarnd=message.age_bands;
           $.each(message.data,function(i,value){
            catg=i.split("_");
-           // par_cat=value.split("_");
            $.each(value,function(k,v){
-                  // console.log(k.split("_")[1]);
-                  if('Employee'==k.split("_")[0]){
-                    arr0.push(k.split("_")[1]);
-                    arr0val.push(v);
-                    // arr0.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
-                  }else if('Non-parental'==k.split("_")[0]){
-                    arr1.push(k.split("_")[1]);
-                    arr1val.push(v);
-                  
-                    //arr1.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
+            if('Employee'==k.split("_")[0]){
+             arr0.push(k.split("_")[1]+","+v);
+           }else if('Non-parental'==k.split("_")[0]){
+             arr1.push(k.split("_")[1]+","+v);
+           }else if('parental'==k.split("_")[0]){
+            arr2.push(k.split("_")[1]+","+v);
+          }
 
-                  }else if('parental'==k.split("_")[0]){
-                     arr2.push(k.split("_")[1]);
-                       arr2val.push(v);
-                     //arr2.push('<td><input type="text" value="'+k.split("_")[1]+'"/ ><td>');
-                   }
-                // console.log(arr1);
-              });
+        });
 
-
-               //console.log(adds1(arr0.sort(),arr0val).join(""));
-          
-           var tra= ' <td><label>Employee</label></td>'+adds1(arr0.sort(),arr0val).join("")+'<tr><td></td><td></td> <td><label>Non-parental</label> </td>  '+adds1(arr1.sort(),arr1val).join("")+' </tr> <tr><td></td><td></td> <td><label>parental</label> </td> '+adds1(arr2.sort(),arr2val).join("")+' </tr> ';
-
+           var tra='<td><label>Employee</label></td>'+adds0(arr0.sort())+'<tr><td></td><td></td> <td><label>Non-parental</label> </td>'+adds0(arr1.sort())+'</tr> <tr><td></td><td></td> <td><label>parental</label></td>'+adds0(arr2.sort())+' </tr> ';
            grade.push('<tr><td> <label>'+catg[0]+'</label></td><td><input type="text" value="'+catg[1]+'"/></td>'+tra+'</tr>');
+           arr0=Array();
+           arr1=Array();
+           arr2=Array();
+         });
 
 
-
-
-             //console.log(arr1);
-             arr0.splice(incc-1);
-             arr1.splice(incc-1);
-             arr2.splice(incc-1);
-             arr1val.splice(incc-1);
-             incc++;
-
-            // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
-            // last_grade=catg[0];
-            // last_sum=catg[1];
-
-            // if(last_grade==catg[0] && last_sum==catg[1]){
-
-            // }
-
-            // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
-
-
-
-
-
-
-           //return false;
-            // grade_and_sum=(last_grade==catg[0] && last_sum==catg[1])?"<tr><td>-</td><td>-</td>":"<tr style='background-color:skyblue'><td>"+catg[0]+"</td><td>"+catg[1]+"</td>";
-            // last_grade=catg[0];
-            // last_sum=catg[1];
-
-            // if(last_grade==catg[0] && last_sum==catg[1]){
-
-            // }
-
-            // $('#append_table_xl').append(grade_and_sum+"<td>"+catg[2]+"</td><td>"+catg[3]+"</td><td>"+value+"</td></tr>");
-
-
-            // relation=catg[3];
-            // if(relation=="Parental"){
-            //   back_name="_3_3"
-            // }
-            // name=catg[3]+"[]";
-            // $( "input[name='"+name+"']" ).val(value);
-
-            //  console.log(catg);
-
-          });
-           var arrayheadtr=Array();
-            $.each(inisialbarnd,function(k,v){
-              arrayheadtr.push('<td>'+v+'</td>');
-            })
+          var arrayheadtr=Array();
+          $.each(inisialbarnd,function(k,v){
+            arrayheadtr.push('<td>'+v+'</td>');
+          })
 
           $('#append_table_xlhead').append('<tr><td>Grade</td><td>Sum Insured</td> <td>Employee</td> '+arrayheadtr+'</tr>');
           $('#append_table_xl').append(grade);
@@ -1320,56 +1260,64 @@ $('#ghi_xl_submit').click(function(e){
 
 
 
+function adds0(va){
+ var ar0=Array();
 
-// function adds0(va){
-//  var ar0=Array();
-//  $.each(inisialbarnd,function(k,v){
-//   if(va==v){
-//              //console.log(arr);
-//              ar0.push('<td><input type="text" value="'+v+'"/ ><td>');
-//            }else{
-//              ar0.push('<td><input type="text" value="0"/ ><td>');
-//            }
+ for(i=0,j=0;i<inisialbarnd.length;i++){
 
-//          })
-//  return ar0;
+  if(va[j]!=null && va[j]!="" && va[j]!='undefined'){
+    if(inisialbarnd[i]==va[j].split(",")[0]){
 
-// }
-
-
-
-function adds1(va =Array(),value=Array()){
-  var len=va.length;
-  var aaa=Array();
-  var v=0;
-
- 
-
-  for (i=0,j=0; i<inisialbarnd.length  ;i++) {
-    if (inisialbarnd[i] < va[j]) {
-                //aaa[v]=0;
-                aaa.push('<td><input type="text"  / ></td>');
-              } else if (inisialbarnd[i] == va[j]) {
-           //aaa[v]=va[j];
-           aaa.push('<td><input type="text" value="'+value[j]+'"/ ></td>');
-           ++j;
-         } else {
-        //aaa[v]=0;
-        aaa.push('<td><input type="text"  / ></td>');
-
-      }
-      v++;
+      ar0.push('<td><input type="text" value="'+va[j].split(',')[1]+'"/ ></td>');
+      j++;
+    }else{
+      ar0.push('<td><input type="text" value=""/ ></td>');
     }
 
-
-    return aaa;
-
-
-
+  }else{
+   ar0.push('<td><input type="text" value=""/ ></td>');
+ }
 
 
+}
+return ar0;
 
-  }
+}
+
+
+
+// function adds1(va =Array(),value=Array()){
+//   var len=va.length;
+//   var aaa=Array();
+//   var v=0;
+
+
+
+//   for (i=0,j=0; i<inisialbarnd.length  ;i++) {
+//     if (inisialbarnd[i] < va[j]) {
+//                 //aaa[v]=0;
+//                 aaa.push('<td><input type="text"  / ></td>');
+//               } else if (inisialbarnd[i] == va[j]) {
+//            //aaa[v]=va[j];
+//            aaa.push('<td><input type="text" value="'+value[j]+'"/ ></td>');
+//            ++j;
+//          } else {
+//         //aaa[v]=0;
+//         aaa.push('<td><input type="text"  / ></td>');
+
+//       }
+//       v++;
+//     }
+
+
+//     return aaa;
+
+
+
+
+
+
+//   }
 
 
 
