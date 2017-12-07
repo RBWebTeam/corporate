@@ -531,12 +531,12 @@
            
              
       
-            <!--@if (!isset($arra[$ky]))
+            @if (!isset($arra[$ky]))
                 {{$arra[$ky]= null}}
                @else
                   <textarea>{{$visi_card[$ky]->description}}</textarea>
                   <br>
-               @endif  -->
+               @endif  
      
             
      @else

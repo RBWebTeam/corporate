@@ -63,7 +63,7 @@
                 <td> {{$lead->registration_no?$lead->registration_no:"-"}}</td>
                 <td>
                   @if($lead->document_path)
-                  <a href="{{$lead->document_path}}" target="_new">Document </a>
+                  <a href="{{url('upload_format/lead_documents')}}/{{$lead->document_path}}" target="_new">Document </a>
                   @else
                   <a href="{{$lead->lead_id}}" id="upload_lead_id">Upload</a>
                   @endif

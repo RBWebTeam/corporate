@@ -31,6 +31,8 @@ Route::get('thank-you','FirecalculatorController@thank_You');
 Route::get('downlaod-pdf/{quote_id}','FirecalculatorController@downlaod_pdf');
 Route::get('my-profile','ProfileController@my_profile');
 
+Route::get('test','FirecalculatorController@test');
+
  });
 
 

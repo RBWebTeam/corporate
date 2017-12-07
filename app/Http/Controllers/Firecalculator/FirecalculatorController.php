@@ -111,7 +111,7 @@ public function customerdetails(Request $req){
      $this->visiting_card_detail(implode(',',$get_num),implode(',',$get_gmail),$str,$filevisiting);
 
      
-
+  //$str=(new TesseractOCR($destinationPath.$filevisiting ))->run();
 
    }}else{ $filefilevisiting=0;  } 
 
@@ -396,6 +396,23 @@ public function downlaod_pdf(Request $req){
 }
 
 
+
+public function test(){
+
+ 
+$note="<<<XML
+<note>
+<to>Tove</to>
+<from>Jani</from>
+<heading>Reminder</heading>
+<body>Don't forget me this weekend!</body>
+</note>
+XML";
+
+$xml=new SimpleXMLElement($note);
+echo $xml->asXML();
+ 
+}
 
 
 

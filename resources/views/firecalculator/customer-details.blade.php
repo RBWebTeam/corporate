@@ -1009,15 +1009,15 @@ $('#insurance').click(function(e){
                     scrollTop: $("#premium_table").offset().top
                   }, 300);
 
-
+ 
 
                   var tablerows = new Array();
                   $.each(msg, function( index, value ) {  
-                   tablerows.push('<tr><td class="ab">' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.premium_amt + '</td><td>' + value.gst_amt + '</td><td>' + value.net_premium_amt +'</td> <td><a href="#" class="btn btn-success getval">Apply Now</a></td>        <input type="hidden" name="c_id[]" value="'+value.company_id+'" class="c_id"><input type="hidden" name="c_name[]" value="'+value.company_name+'" class="c_name"><input type="hidden" name="p_amount[]" value="'+value.premium_amt+'" class="p_amount"><input type="hidden" name="gst_amount[]" value="'+value.gst_amt+'" class="gst_amount"><input type="hidden" name="net_p_amount[]" value="'+value.net_premium_amt+'" class="net_p_amount"></tr>');
+                   tablerows.push('<tr><td class="ab">' + value.company_id + '</td><td>' + value.company_name + '</td><td>' + value.premium_amt + '</td><td>' + value.gst_amt + '</td><td>' + value.net_premium_amt +'</td> <td>' + value.company_status +'</td> <td><a href="#" class="btn btn-success getval">Apply Now</a></td>        <input type="hidden" name="c_id[]" value="'+value.company_id+'" class="c_id"><input type="hidden" name="c_name[]" value="'+value.company_name+'" class="c_name"><input type="hidden" name="p_amount[]" value="'+value.premium_amt+'" class="p_amount"><input type="hidden" name="gst_amount[]" value="'+value.gst_amt+'" class="gst_amount"><input type="hidden" name="net_p_amount[]" value="'+value.net_premium_amt+'" class="net_p_amount"> <input type="hidden" name="company_status[]" class="company_status" value="'+value.company_status+'"></tr>');
                  }); 
 
                   if(msg){
-                    $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Compare Quotes</button></form>');
+                    $('#premium_table').empty().append(' <form method="post" action="#" id="getquote">  {{ csrf_field() }}<table class="table table-striped table-bordered "><tr class="text-capitalize"><td><strong>Company ID</strong></td><td><strong>Company Name</strong></td><td><strong>Premium Amount</strong></td><td><strong>GST Amount</strong></td><td><strong>Net Premium Amount</strong> </td><td><strong>Remark</strong></td><td><strong>Action</strong></td></tr><tr>'+tablerows.join("")+'</tr></table> <button  class="btn btn-success  apply_id col-md-offset-5">Compare Quotes</button></form>');
                   }else{
                     $('#premium_table').empty().append('No Result Found');
                   }          
@@ -1046,36 +1046,63 @@ $(document).on('click','.getval',function(){
  gst_amount=$(this).closest('tr').find('.gst_amount').val();
  net_p_amount=$(this).closest('tr').find('.net_p_amount').val();
 
+company_status=$(this).closest('tr').find('.company_status').val();
+
+
  
        // var  serialize=$('#getquote').serialize();
        var data = $('#getquote').serializeArray();
        data.push({name: 'comapny_id', value: comapny_id});
+
+                     if(company_status=="Decline"){   
+                           alert("Declined by company Name i.e. Reliance, Liberty etc.");
+                     }else if(company_status=="Preferred" || company_status=="Referral" ){      
+                            if(company_status=="Referral"){
+                              alert(" Referred it to insurance company for higher discount.");
+                            }
 
        $.ajax({  
         type: "POST",  
         url: "{{URL::to('quotes-add')}}",
         data :data,
         success: function(msg){
+               
+                 
+                      if(msg==1){
+                       window.location.href = "{{url('thank-you')}}";
+                       }else{
+                     console.log("error");
+                      }
+                   
 
-
-          if(msg==1){
-           window.location.href = "{{url('thank-you')}}";
-         }else{
-          console.log("error");
-        }
+          
 
       }
 
     });
-
+}
 
      });
 
 $(document).on('click','.apply_id',function(){
  event.preventDefault(); 
 
+var incdecline=0;
+var increferal=0;
+var values = $("input[name='company_status[]']")
+              .map(function(){
+               if($(this).val()=="Decline"){
+                    incdecline++;
+               }if($(this).val()=="Referral"){
+                    increferal++;
+               } return $(this).val();
+              }).get();
 
- 
+if(5<=incdecline){
+  alert("Declined by company Name i.e. Reliance, Liberty etc.");
+}else{
+
+if(increferal){   alert(" Referred it to insurance company for higher discount.");}
 
  $.ajax({  
   type: "POST",  
@@ -1086,14 +1113,14 @@ $(document).on('click','.apply_id',function(){
    if(msg==1){
     window.location.href = "{{url('thank-you')}}";
   }else{
-    console.log("error");
+    console.log("error"); 
   }
 
 }
 
 });
 
- 
+ }
  
 
 });

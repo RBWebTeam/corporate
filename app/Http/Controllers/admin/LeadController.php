@@ -41,15 +41,26 @@ class LeadController extends Controller{
 	public function generate(Request $req){
 		//print "<pre>";print_r($req->all());exit();
 		try{
-				$uid=Session::get('userid');
-				$path = $req->file('file')->store('public/lead_documents');
-				$url=Storage::url($path);
-				$query=DB::select('call usp_insert_policy_lead_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($req['catg'],$req['type'],$req['group'],$req['name'],$req['business'],$req['insurer'],$req['renew_date'],$req['sum_insured'],$req['premium'],$url,$uid,$req['make'],$req['model'],$req['variant'],$req['mfg_year'],$req['registration'],$req['idv'],$req['ncb']));
-				$msg=" Lead Uploaded Successfully .....";
-			}catch(\Exception $ee){
+
+
+			$uid=Session::get('userid');
+				// $path = $req->file('file')->store('public/lead_documents');
+				// $url=Storage::url($path);
+
+			$destinationPath = public_path(). '/upload_format/lead_documents/';
+			$path = $req->file('file');
+			if($path!=null || $path!=0){
+				$report =rand(1, 999).$path->getClientOriginalName();
+				$path->move($destinationPath, $report);  
+				$url=$report;
+			}else{ $url=0;  } 
+
+			$query=DB::select('call usp_insert_policy_lead_data(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($req['catg'],$req['type'],$req['group'],$req['name'],$req['business'],$req['insurer'],$req['renew_date'],$req['sum_insured'],$req['premium'],$url,$uid,$req['make'],$req['model'],$req['variant'],$req['mfg_year'],$req['registration'],$req['idv'],$req['ncb']));
+			$msg=" Lead Uploaded Successfully .....";
+		}catch(\Exception $ee){
 				//print_r($ee->getMessage());
-				$msg="something went Wrong";
-			}
+			$msg="something went Wrong";
+		}
 
 		Session::flash('msg', $msg);
 		return LeadController::generation_page();
@@ -91,16 +102,16 @@ class LeadController extends Controller{
 		if($data){
 			$count=0;
 			//try{
-				foreach ($data as $k => $value) {
+			foreach ($data as $k => $value) {
 				//foreach ($val as $key => $value) {
 	                		# code...
 					//try{
-						$id=DB::select('call usp_insert_bulk_upload(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$value->group_name,$value->name_of_insured,$value->occupancy_business,$value->policy_category,$value->policy_type,$value->renewal_date,$value->current_insurer,$value->sum_insured,$value->pre_tax_premium,$value->idv,$value->ncb ,$value->make , $value->model,$value->variant_sub_model ,$value->year_of_mfg, $value->registration_no,$userid,0]);
-							$count++;
+				$id=DB::select('call usp_insert_bulk_upload(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$value->group_name,$value->name_of_insured,$value->occupancy_business,$value->policy_category,$value->policy_type,$value->renewal_date,$value->current_insurer,$value->sum_insured,$value->pre_tax_premium,$value->idv,$value->ncb ,$value->make , $value->model,$value->variant_sub_model ,$value->year_of_mfg, $value->registration_no,$userid,0]);
+				$count++;
 					// }catch(\Exception $ee){
 					// 	print_r($ee->getMessage());exit();
 					// 	if(isset($value->name_of_insured)){
-								
+
 					// 		$msg+="but lead of ".$value->name_of_insured."Not uploaded \n";
 					// 	}
 					// 	else{
@@ -108,8 +119,8 @@ class LeadController extends Controller{
 					// 		continue;
 					// 	}
 					// }
-				}
-				$update=DB::select('call usp_insert_bulk_lead_data()');
+			}
+			$update=DB::select('call usp_insert_bulk_lead_data()');
 			//}
 			// }catch(\Exception $ee){
    //          		//$print_r($ee);
@@ -127,11 +138,19 @@ class LeadController extends Controller{
 
 
 	public function document_upload_leads(Request $req){
-
 		try{
-			$path = $req->file('file')->store('public/lead_documents');
-			if($path){
-				$url=Storage::url($path);
+			   //$path = $req->file('file')->store('public/lead_documents');
+
+			$destinationPath = public_path(). '/upload_format/lead_documents/';
+			$path = $req->file('file');
+			if($path!=null || $path!=0){
+				$report =rand(1, 999).$path->getClientOriginalName();
+				$path->move($destinationPath, $report);  
+				$url=$report;
+			}else{ $url=0;  } 
+
+			if($url!=0){
+				//$url=Storage::url($path);
 				$query=DB::table('policy_lead_data')->where('lead_id', '=',$req->lead_id)
 				->update(['document_path' =>$url]);
 				$msg="Document Uploaded Successfully...";
@@ -144,8 +163,8 @@ class LeadController extends Controller{
 			$msg="please fill form carefully !..";
 		}
 
-		  Session::flash('msg',$msg);
-		 return redirect('dashboard');
+		Session::flash('msg',$msg);
+		return redirect('dashboard');
 
 	}
 
