@@ -117,6 +117,17 @@
             <a href="{{url('bulk-upload')}}"><i class="fa fa-wrench fa-fw"></i>Bulk Leads Upload</a>
         </li>
 
+         <li>     
+            <a href="#"><i class="fa fa-files-o fa-fw"></i> Visiting<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">        
+                     <li>
+                      <a href="{{url('dashboard/visiting-cart')}}"><i class="fa fa-wrench fa-fw"></i>Visiting Cart</a>
+                  </li>
+              </ul>
+          </li>
+
+
+
                        <!--  <li>
                             <a href="approver"><i class="fa fa-wrench fa-fw"></i> Approver </a>
                         </li>

@@ -188,7 +188,7 @@ $designation=$req['designation']?$req['designation']:0;
 $email=$req['email']?$req['email']:0;
 $mobile=$req['mobile']?$req['mobile']:0;
 $pro_id=$req['pro_id'];
-
+$additions_info=$req['additions_info']?$req['additions_info']:0;
 
 
 $arr= array('section_id' =>$section_id,
@@ -256,6 +256,7 @@ $arr= array('section_id' =>$section_id,
  'email' =>$email,
  'mobile' =>$mobile,
  'product_id' =>$pro_id,
+ 'additions_info'=>$additions_info,
  );
 
 

@@ -440,6 +440,11 @@
 <p>Pollution or contamination </p>
 
 <p><strong>Note</strong>: The above are only the salient features of the Policy, for complete terms and conditions please refer to Policy Wordings.</p>
+
+@if($query_master->additions_info!=0 || $query_master->additions_info!=null)
+ <p><strong>Additional Information</strong>: {{$query_master->additions_info}}</p>  
+ @endif
+
 </div>
   </div>
 </div>    
@@ -482,6 +487,18 @@
                       <input type="radio" name="approved" id="radio4"  class="remar_status" value="0" {{$query_master->is_approve==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
                       <label for="radio4">Rejected </label>
                </div>
+
+                @elseif(Session::get('user_type_id')==1 )
+             <div class="funkyradio-success col-md-8"> 
+                <input type="radio" name="approved" id="radio3" class="remar_status1" value="1" {{$query_master->is_approve1==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
+                <label for="radio3">Approved</label>
+              </div>
+              <div class="funkyradio-danger col-md-8">
+                <input type="radio" name="approved" id="radio4"  class="remar_status0" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
+                <label for="radio4">Rejected</label>
+              </div>
+
+              
                @else
               @endif
 

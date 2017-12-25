@@ -447,10 +447,11 @@
 
     });
 
-console.log(jsonData);
+ 
 function onload_(arra){ n=1;
+       if(jsonData!=0)
   $.each(jsonData, function(ke,va) {  
-      if( va.st_ass.state_id!=null && va.st_ass.state_id!='undefined'  && va.city_ass.district_id!=null){
+       
        arra.push('<option value="'+va.st_ass.state_id+'" selected>'+va.st_ass.state+'</option>');
       
       $('#addr'+i).html('<td >'+ n++ +'</td><td class="col-xs-4"><input class="form-control" value="'+va.add_ass+'" type="text" name="riskaddress_add[]" id="riskaddress_add" required /></td><td ><select class="form-control risk_class_search"  name="riskstatename[]"   id="search_'+i+'"></select></td><td ><select class="form-control risk_id_search"  name="riskcityname[]"   id="search_id_'+i+'"> <option value="'+va.city_ass.district_id+'" selected>'+va.city_ass.district_name+'</option></select></td><td ><input class="form-control" value="'+va.pin_ass+'" type="text" name="riskpinname[]"  onkeypress="return Numeric(event)" minlength="6" maxlength="6" /></td>');
@@ -459,7 +460,7 @@ function onload_(arra){ n=1;
       $("#search_"+i).empty();
       $("#search_"+i).append(arra);  
       i++;
-      }
+       
   });
  }
 

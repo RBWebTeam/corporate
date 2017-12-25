@@ -490,6 +490,12 @@
   <p><li>Pollution or contamination </li> </p>
 
   <p><strong>Note</strong>: The above are only the salient features of the Policy, for complete terms and conditions please refer to Policy Wordings.</p>
+
+  @if($query_master->additions_info!=0 || $query_master->additions_info!=null)
+ <p><strong>Additional Information</strong>: {{$query_master->additions_info}}</p> 
+  @endif 
+
+
 </div>
 
 
@@ -520,135 +526,126 @@
  
 
 
-  <?php  $arra=array();
-           foreach ($visi_card as $key => $value) {
-             $arra[]=$value->run_time_id; } ?>
+ 
+ 
 
- <p>Visiting card
-   <ul>@foreach(explode(",",$policy_query->visiting_card_path) as $ky=>$val)
-     @if($val)
-     <a   href="{{URL::to('upload/policy_documents')}}/{{$val}}" class="btn btn-primary" attributes="#" target="_blank" >View</a>
-           
-             
-      
-            @if (!isset($arra[$ky]))
-                {{$arra[$ky]= null}}
-               @else
-                  <textarea>{{$visi_card[$ky]->description}}</textarea>
-                  <br>
-               @endif  
-     
-            
+
+
+ <p>Mandate letter copy
+   <ul> @if($policy_query->mandate_letter_path)
+     <a download="{{$val}}" href="{{URL::to('upload/policy_documents')}}/{{$policy_query->mandate_letter_path}}" class="btn btn-primary">Download</a>
      @else
      @endif
-     @endforeach </ul></p>
-     
+   </ul></p>
+   
+   <p>Inspection report
 
 
+     <ul> @if($policy_query->inspection_path)
+       <a download="{{$val}}" href="{{URL::to('upload/policy_documents')}}/{{$policy_query->inspection_path}}" class="btn btn-primary">Download</a>
 
-     <p>Mandate letter copy
-       <ul> @if($policy_query->mandate_letter_path)
-         <a download="{{$val}}" href="{{URL::to('upload/policy_documents')}}/{{$policy_query->mandate_letter_path}}" class="btn btn-primary">Download</a>
-         @else
-         @endif
-       </ul></p>
+       @else
+       @endif</ul></p>
        
-       <p>Inspection report
 
-
-         <ul> @if($policy_query->inspection_path)
-           <a download="{{$val}}" href="{{URL::to('upload/policy_documents')}}/{{$policy_query->inspection_path}}" class="btn btn-primary">Download</a>
-
-           @else
-           @endif</ul></p>
-           
-
-         </div>
+     </div>
 
 
 
 
-       </div>
-     </div>   
+   </div>
+ </div>   
 
 
 
 
-     <div class="row ">
-      <div class="col-lg-12 "  >
-        <div class="panel panel-default">
-         <div class="panel-body">
-           <h4 id="grid-column-ordering">Remark</h4>
+ <div class="row ">
+  <div class="col-lg-12 "  >
+    <div class="panel panel-default">
+     <div class="panel-body">
+       <h4 id="grid-column-ordering">Remark</h4>
 
 
-           <div class="chat-panel panel panel-default">
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-              <ul class="chat" id="remark_chat">
-              </ul>
+       <div class="chat-panel panel panel-default">
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <ul class="chat" id="remark_chat">
+          </ul>
+        </div>
+        <!-- /.panel-body -->
+
+        <div class="col-sm-12"  > <div  style=" height:50px" ></div>  </div>          
+        <div class="col-sm-12"  >
+          <div class="col-sm-3"  >
+            <div class="funkyradio">
+              @if(Session::get('user_type_id')==2)
+              <div class="funkyradio-success col-md-8"> 
+                <input type="radio" name="approved" id="radio3" class="remar_status1" value="1" {{$query_master->is_approve1==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
+                <label for="radio3">Approved</label>
+              </div>
+              <div class="funkyradio-danger col-md-8">
+                <input type="radio" name="approved" id="radio4"  class="remar_status0" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
+                <label for="radio4">Rejected</label>
+              </div>
+              @elseif(Session::get('user_type_id')==3 )
+              <div class="funkyradio-success col-md-8"> 
+                <input type="radio" name="approved" id="radio3" class="remar_status" value="1" {{$query_master->is_approve==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
+                <label for="radio3">Approved</label>
+              </div>
+              <div class="funkyradio-danger col-md-8">
+                <input type="radio" name="approved" id="radio4"  class="remar_status" value="0" {{$query_master->is_approve==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
+                <label for="radio4">Rejected </label>
+              </div>
+              
+              @elseif(Session::get('user_type_id')==1 )
+             <div class="funkyradio-success col-md-8"> 
+                <input type="radio" name="approved" id="radio3" class="remar_status1" value="1" {{$query_master->is_approve1==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
+                <label for="radio3">Approved</label>
+              </div>
+              <div class="funkyradio-danger col-md-8">
+                <input type="radio" name="approved" id="radio4"  class="remar_status0" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
+                <label for="radio4">Rejected</label>
+              </div>
+
+
+              @else
+              @endif
+
             </div>
-            <!-- /.panel-body -->
+          </div>
 
-            <div class="col-sm-12"  > <div  style=" height:50px" ></div>  </div>          
-            <div class="col-sm-12"  >
-              <div class="col-sm-3"  >
-                <div class="funkyradio">
-                  @if(Session::get('user_type_id')==2)
-                  <div class="funkyradio-success col-md-8"> 
-                    <input type="radio" name="approved" id="radio3" class="remar_status1" value="1" {{$query_master->is_approve1==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
-                    <label for="radio3">Approved</label>
-                  </div>
-                  <div class="funkyradio-danger col-md-8">
-                    <input type="radio" name="approved" id="radio4"  class="remar_status0" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
-                    <label for="radio4">Rejected</label>
-                  </div>
-                  @elseif(Session::get('user_type_id')==3 )
-                  <div class="funkyradio-success col-md-8"> 
-                    <input type="radio" name="approved" id="radio3" class="remar_status" value="1" {{$query_master->is_approve==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
-                    <label for="radio3">Approved</label>
-                  </div>
-                  <div class="funkyradio-danger col-md-8">
-                    <input type="radio" name="approved" id="radio4"  class="remar_status" value="0" {{$query_master->is_approve==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
-                    <label for="radio4">Rejected </label>
-                  </div>
-                  @else
-                  @endif
-
-                </div>
-              </div>
-
-              @if(Session::get('user_type_id')==2 || Session::get('user_type_id')==3)
-              <form class="form" id="form_remark" method="post"  >
-               <div class="col-sm-8" style="margin: -20px 0 21px 0px;" >
-                <div class="form-group">  <label>Remark Status</label>  <textarea class="form-control" rows="3" id="remark_text"></textarea>  </div>
-                <button type="submit" class="btn btn-default" id="remark_id" >Submit  </button>     
-              </div>
-            </form>
-            @endif
-            <div class="col-sm-8"  >
-             @if($query_master->is_approve=="1" && $query_master->is_approve1=="1")
-             <a href="#" class="mail_status"><i class="fa fa-envelope" aria-hidden="true">Send mail</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
-             <a href="{{url('downlaod-pdf')}}/{{$quote_id}}"  ><i class="fa fa-file-pdf-o " aria-hidden="true">Download PDF</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
-             @endif
-             <a href="{{url('quotes-edit')}}/{{$quote_id}}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-           </div>
-         </div>
-
-
-
+          @if(Session::get('user_type_id')==2 || Session::get('user_type_id')==3 || Session::get('user_type_id')==1)
+          <form class="form" id="form_remark" method="post"  >
+           <div class="col-sm-8" style="margin: -20px 0 21px 0px;" >
+            <div class="form-group">  <label>Remark Status</label>  <textarea class="form-control" rows="3" id="remark_text"></textarea>  </div>
+            <button type="submit" class="btn btn-default" id="remark_id" >Submit  </button>     
+          </div>
+        </form>
+        @endif
+        <div class="col-sm-8"  >
+         @if($query_master->is_approve=="1" && $query_master->is_approve1=="1"   )
+         <a href="#" class="mail_status"><i class="fa fa-envelope" aria-hidden="true">Send mail</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
+         <a href="{{url('downlaod-pdf')}}/{{$quote_id}}"  ><i class="fa fa-file-pdf-o " aria-hidden="true">Download PDF</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
+         @endif
+         <a href="{{url('quotes-edit')}}/{{$quote_id}}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
        </div>
      </div>
+
+
+
    </div>
-
  </div>
- <hr>
+</div>
 
- <!--popupmodel-->
+</div>
+<hr>
+
+<!--popupmodel-->
 
 
- @endsection
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script type="text/javascript">
+@endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
 
   $(document).ready(function(){
     function nancheck(rows) {

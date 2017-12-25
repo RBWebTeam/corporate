@@ -32,7 +32,9 @@ Route::get('downlaod-pdf/{quote_id}','FirecalculatorController@downlaod_pdf');
 Route::get('my-profile','ProfileController@my_profile');
 
 Route::get('test','FirecalculatorController@test');
-
+Route::get('dashboard/visiting-cart','VisitingcartController@visiting_cart');
+Route::get('dashboard/visiting-cart-edit/{id}','VisitingcartController@visiting_cart_edit');
+Route::post('dashboard/visiting-cart-update','VisitingcartController@visiting_cart_update');
  });
 
 
@@ -146,6 +148,9 @@ Route::group(['middleware' => 'dashboard','namespace' => 'GroupHealthInsurance',
         Route::get('sum-insured-graded','GHIcontroller@sum_insured_graded');
         Route::post('insurde-ublk-upload','GHIcontroller@insurde_ublk_upload');
         Route::post('upload-ghi-xl','GHIcontroller@ghi_xl_upload');
+        Route::post('excel-quotes-add','GHIcontroller@excel_quotes_add');
+
+        
         
     });
 

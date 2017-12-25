@@ -109,14 +109,14 @@ public function approved(Request $req){
 
 
 public function quotes_edite(Request $req){
-  try{
+  //try{
     $getdetail = DB::table('firecal_quote_master')
     ->select('firecal_quote_master.*')
     ->where('firecal_quote_master.quote_id',$req->id)
     ->first();
 
 
-    
+     $array_ass=array();  
     $state_id=$this->getstate($getdetail->state_id);
     $data['st_name']=$state_id->state;
     $district_id=$this->getcity($getdetail->district_id); 
@@ -131,13 +131,34 @@ public function quotes_edite(Request $req){
     $occupancy_name=$this->geoccu($getdetail->occ_id);
     $data['occupancy_name']= $occupancy_name->occupancy_name;
           //     print_r($getdetail);
+    $floater_address=DB::table('floater_risk_address_data')->where('quote_id','=',$req->id)->first();
 
-          // exit;
+          if(isset($floater_address)){
+            $risk_address=explode(',', $floater_address->risk_address);
+            $st_id=explode(',', $floater_address->risk_states);
+            $city_id=explode(',', $floater_address->risk_states);
+            $risk_pincodes=explode(',', $floater_address->risk_pincodes);
+                     
+             
+               for ($i=0; $i <sizeof($st_id) ; $i++) { 
+                          $add_ass=$risk_address[$i];
+                          $st_ass=$this->getstate($st_id[$i]);
+                          $city_ass=$this->getcity($city_id[$i]);
+                          $pin_ass=$risk_pincodes[$i];
+                          $array_ass[]=array('add_ass' =>$add_ass,'st_ass'=>$st_ass,'city_ass'=>$city_ass,'pin_ass'=>$pin_ass );
+                         //echo  "<option  value='".$st_ass->state_id."' >'".$st_ass->state."'</option>";
+                              
+               }
+}else{
+  $array_ass[0]=0;
+}
+           
+         
     $data['quote_id']= $getdetail->quote_id;
-    return view('firecalculator.quotes-edite',['getdetail'=>$getdetail,'data'=>$data]);
-  }catch(\Exception $ee){
-    return $ee->getMessage();
-  } 
+    return view('firecalculator.quotes_edite',['getdetail'=>$getdetail,'data'=>$data,'floater_address'=>$array_ass]);
+ // }catch(\Exception $ee){
+   // return $ee->getMessage();
+ // } 
 
 
 }

@@ -179,4 +179,36 @@ $counter_ghi[$str][$relation."_".$band]++;                         }
 }
 
 
+
+
+public function excel_quotes_add(Request $req){
+        
+ 
+      for ($i=0; $i<$req->conut; $i++) { 
+
+        
+
+             echo  implode(',', $req['employee'.$i]);
+             echo "<br>";
+              echo  implode(',', $req['non_parental'.$i]);
+                echo "<br>";
+               echo  implode(',', $req['parental'.$i]);
+                 echo "<br>";
+ 
+         // foreach ($req['employee'.$i] as $key => $value) {
+         //       echo $value?$value:"0";
+         //  }
+         //  foreach ($req['non_parental'.$i]  as $key => $value) {
+         //     echo $value?$value:"0";
+         //  } 
+         //   foreach ($req['parental'.$i]  as $key => $value) {
+         //    echo $value?$value:"0";
+         //  } 
+
+
+          
+              
+       }       
+}
+
 }
