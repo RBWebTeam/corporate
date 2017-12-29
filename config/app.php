@@ -162,7 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Barryvdh\Snappy\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -231,10 +231,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'PDF' => Novanti\LaravelPDF\PDFFacade::class,
+       // 'PDF' => Novanti\LaravelPDF\PDFFacade::class,
         'Flysystem' => GrahamCampbell\Flysystem\Facades\Flysystem::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'OCR' => JFuentesTgn\OcrSpace\OcrFacade::class, 
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         
 
     ],

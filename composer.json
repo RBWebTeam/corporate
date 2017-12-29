@@ -6,14 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "barryvdh/laravel-dompdf": "^0.8.1",
+        "barryvdh/laravel-snappy": "^0.4.0",
         "ddeboer/tesseract": "1.0",
         "graham-campbell/flysystem": "^4.0",
-        "guzzlehttp/guzzle": "^6.3",
         "jfuentestgn/ocr-space": "dev-master",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "league/flysystem-aws-s3-v2": "^1.0",
         "maatwebsite/excel": "~2.1.0",
         "thiagoalessio/tesseract_ocr": "1.0.0-RC",
         "wemersonjanuario/laravelpdf": "1.1.*"

@@ -390,9 +390,9 @@ public function downlaod_pdf(Request $req){
   }
   
   if($comapny_id!=0){
-    return  PDF::loadView('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id])->pageSize('A3')->download();
+    return  PDF::loadView('downloadpdf-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id]) ->download();
   }else{
-   return  PDF::loadView('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail])->pageSize('A3')->download();
+   return  PDF::loadView('downloadpdf',['query_master'=>$query,'loan_detail'=>$loan_detail]) ->download();
  }
 
 }catch (\Exception $e) { return $e->getMessage(); }
