@@ -84,6 +84,18 @@ public function fire_calculator(){
 }
 
 public function corporate(Request $req){
+
+
+   if(isset($req->comanyname)){
+          $comanyname=implode(",",$req->comanyname);
+   }else{
+          $comanyname='';
+   }
+
+    
+ 
+ 
+
   Session::forget('quote_dataValue');
   Session::forget('risk_location');
   $riskaddress_add=0;
@@ -165,8 +177,10 @@ $is_omission=  $req['is_omission']?$req['is_omission']:0;
 $sum_omission=  $req['sum_omission']?$req['sum_omission']:0;
 $is_lossrent=$req['is_lossrent']?$req['is_lossrent']:0;
 $sum_lossrent=$req['sum_lossrent']?$req['sum_lossrent']:0;
+$lossinteminity=$req['lossinteminity']?$req['lossinteminity']:0; // extra parameters 
 $is_accommodation=$req['is_accommodation']?$req['is_accommodation']:0;
 $sum_accommodation=$req['sum_accommodation']?$req['sum_accommodation']:0;
+$ioainteminity=$req['ioainteminity']?$req['ioainteminity']:0;   // extra parameters 
 $is_architect=$req['is_architect']?$req['is_architect']:0;
 $sum_architect=$req['sum_architect']?$req['sum_architect']:0;
 $is_removedebris=$req['is_removedebris']?$req['is_removedebris']:0;
@@ -234,8 +248,10 @@ $arr= array('section_id' =>$section_id,
  'sum_omission' =>$sum_omission,
  'is_lossrent' =>$is_lossrent,
  'sum_lossrent' =>$sum_lossrent,
+ 'lossinteminity'=>$lossinteminity, //extra parameters 
  'is_accommodation' =>$is_accommodation,
  'sum_accommodation' =>$sum_accommodation,
+ 'ioainteminity'=>$ioainteminity, //extra parameters 
  'is_architect' =>$is_architect,
  'sum_architect' =>$sum_architect,
  'is_removedebris' =>$is_removedebris,
@@ -270,7 +286,7 @@ Session::put('risk_location',array('riskaddress' =>$riskaddress_add ,'riskstates
 
 
 
-$quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'",'.$min_zone_id.')');
+ $quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'",'.$min_zone_id.',"'.$comanyname.'")');
 
            //$this::CorporateSave($req);
 return $quote_data;
@@ -290,6 +306,13 @@ public function CorporateSave($req){
 
 }
 
+
+
+public function company_details(){
+ 
+    return $query=DB::table('company_master')->get();
+
+}
 
 
 

@@ -45,7 +45,7 @@ class UserquotesController extends Controller
   $comments=DB::select('Select * from quote_comment_thread');
   return view('admin.user-quotes',['queryuser'=>$queryuser,'comments'=>($comments)]);
   
-}catch(\Exception $ee){
+}catch(\Exception $e){
  return $e->getMessage();
 }         
 

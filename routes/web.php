@@ -40,7 +40,7 @@ Route::post('dashboard/visiting-cart-update','VisitingcartController@visiting_ca
 
 
 
-
+Route::group(['middleware' => 'fire'], function () {
 
 Route::get('insurercompany',array('as'=>'insurercompany','uses'=>'AutoCompleteController@insurercompany')); 
 Route::get('searchoccupiedajax',array('as'=>'searchoccupiedajax','uses'=>'AutoCompleteController@autoComplete_occupied_as'));
@@ -52,6 +52,8 @@ Route::get('search_industry_ghi',array('as'=>'search_industry_ghi','uses'=>'Auto
 
 Route::get('risk_addresh_show',array('as'=>'risk_addresh_show','uses'=>'AutoCompleteController@risk_addresh_show')); 
 Route::get('risk_city_show',array('as'=>'risk_city_show','uses'=>'AutoCompleteController@risk_city_show')); 
+Route::get('get-company-details','LoginController@company_details');
+});
 
 /*
 |--------------------------------------------------------------------------
