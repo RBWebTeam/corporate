@@ -46,7 +46,12 @@
 
        <tr style="display: none" class="policy_in">
          <td><b>Current Insurer </b></td>
-         <td ><input type="text" placeholder="Select Insurer" value=" " class="newsletter-name  current_insurer_company" name="current_insurer" value=" " id="current_insurer" required /> <input type="hidden" name="current_insurer_id" id="current_insurer_id" value="0"> </td>
+         <td ><!-- <input type="text" placeholder="Select Insurer" value=" " class="newsletter-name  current_insurer_company" name="current_insurer" value=" " id="current_insurer" required /> <input type="hidden" name="current_insurer_id" id="current_insurer_id" value="0"> --> 
+         <select name="current_insurer_id" id="current_insurer_id">
+
+           
+         </select>
+          </td>
          <td></td>
          <td></td>
        </tr> 
@@ -185,31 +190,51 @@
     });
 
 // auto complete
-$(".current_insurer_company").autocomplete({ 
-  source: function(request, response) {
+// $(".current_insurer_company").autocomplete({ 
+//   source: function(request, response) {
 
-    $.ajax({
-      url: "{{route('insurercompany') }}",
-      dataType: "json",
-      data: {
-        term : request.term
-      },
-      success: function(data) {
-        response(data);
+//     $.ajax({
+//       url: "{{route('insurercompany') }}",
+//       dataType: "json",
+//       data: {
+//         term : request.term
+//       },
+//       success: function(data) {
+//         response(data);
         
-      }
-    });
-  },
-  change: function (event, ui) {
-    if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
-      $('#current_insurer_id').val(0);
-    }else{
+//       }
+//     });
+//   },
+//   change: function (event, ui) {
+//     if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
+//       $('#current_insurer_id').val(0);
+//     }else{
 
-     $('#current_insurer_id').val(ui.item.company_id);
+//      $('#current_insurer_id').val(ui.item.company_id);
 
-   }
- }
-});
+//    }
+//  }
+// });
+
+$.ajax({
+         type:"get",
+         url:"get-company-details",
+         success:function(data){
+              arr=Array('<option selected>Select Current Insurer</option>');
+
+              $('#current_insurer_id').empty();
+              $.each(data,function(index,val){
+                 arr.push('<option value="'+val.company_id+'">'+val.company_name+'</option');
+              });
+              $('#current_insurer_id').append(arr);
+               
+
+
+         }
+   })
+
+
+
 });
 
   $('#business_type_mar3').click(function(){

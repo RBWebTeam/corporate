@@ -118,6 +118,58 @@
                 <!-- /.col-lg-12 -->
             </div>       
              
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          DataTables Advanced Tables
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body table-responsive">
+          
+      
+            <table width="100%" class="table table-striped table-bordered table-hover myInputsearc myInput12 " id="dataTables-example" style="font-size: 12px;" >
+              <!-- id="dataTables-example" -->
+
+
+              <thead>
+                <tr  style="background-color: #0099CC; color:white;" >
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email ID</th>
+                  <th>Mobile</th>
+                  <th>Empcode ID</th>
+                  <th>Reporting Empcode ID</th>
+                  <th>User Type</th>
+                  <th>Vertical</th>
+                  <th>Branch Name</th>
+                </tr>
+               
+               @foreach($details_show as $val)
+                <tr>
+                 <td>{{$val->firstname}}</td>
+                   <td>{{$val->lastname}}</td>
+                  <td>{{$val->email}}</td>
+                    <td>{{$val->mobile}}</td>
+                     <td>{{$val->empcode}}</td>
+                      <td>{{$val->reporting_emp}}</td>
+                       <td>{{$val->user_type_name}}</td>
+                        <td>{{$val->vertical_name}}</td>
+                         <td>{{$val->branch_name}}</td>
+
+                    
+
+                </tr>
+               @endforeach
+
+              </thead>
+              <tbody>
+              
+            </tbody>
+          </table>
+         
+
+      </div>
+
+    </div>
           
 </div>
 

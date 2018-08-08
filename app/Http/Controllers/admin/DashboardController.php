@@ -46,8 +46,11 @@ class DashboardController extends Controller
          $vertical_master= DB::table('vertical_master')->get();
          $branch_master= DB::table('branch_master')->get();
         
+         $details_show=DB::select('call sp_registration_show()');
 
-     	return view('admin.registration-form',['user_type_master'=>$user_type_master,'vertical_master'=>$vertical_master,'branch_master'=>$branch_master]);
+     	return view('admin.registration-form',['user_type_master'=>$user_type_master,'vertical_master'=>$vertical_master,'branch_master'=>$branch_master,'details_show'=>$details_show]);
+
+
      }
 
         public function user_show(){
