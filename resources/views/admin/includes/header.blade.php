@@ -78,6 +78,12 @@
                                      <li>
                                       <a href="{{url('dashboard/district-master')}}"><i class="fa fa-wrench fa-fw"></i>District Master  </a>
                                   </li>
+                                   <li>
+                                      <a href="{{url('dashboard/occupancy-master')}}"><i class="fa fa-wrench fa-fw"></i>Occupancy Master  </a>
+                                  </li>
+                                  <li>
+                                      <a href="{{url('dashboard/company-occupancy-mapping')}}"><i class="fa fa-wrench fa-fw"></i>Company Occupancy Mapping  </a>
+                                  </li>
                               </ul>
                           </li>
                       </li>
