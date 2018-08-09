@@ -115,6 +115,12 @@ Route::get('occupancy-master-edit-view/{id}','MasterController@occupancymastered
 
 Route::post('occupancy-master-update','MasterController@occupancymasterupdate')->middleware('mainadmin');
 Route::get('occupancy-master-delete/{id}','MasterController@occupancymasterdelete')->middleware('mainadmin');
+
+
+Route::get('dashboard/registration-edit/{id}','DashboardController@registration_edit')->middleware('mainadmin');
+Route::post('dashboard/registration-update','DashboardController@registration_update')->middleware('mainadmin');
+Route::get('dashboard/registration-delete/{id}','DashboardController@registration_delete')->middleware('mainadmin');
+
 /************
 //  END
 ******************/
