@@ -84,6 +84,9 @@ Route::get('dashboard/vertical-master','MasterController@verticalmasterform');
 Route::get('dashboard/product-master','MasterController@productmasterform');
 Route::get('dashboard/state-master','MasterController@statemasterform');
 Route::get('dashboard/district-master','MasterController@districtmasterform');
+Route::get('dashboard/occupancy-master','MasterController@occupancymasterform');
+Route::get('dashboard/company-occupancy-mapping','MasterController@occupancymappingform');
+
 Route::post('vertical-master-save','MasterController@verticalmastersave')->middleware('mainadmin');
 Route::get('vertical-master-edit-view/{verticalid}','MasterController@verticalmastereditview')->middleware('mainadmin');
 Route::post('vertical-master-update','MasterController@verticalmasterupdate')->middleware('mainadmin');
@@ -101,6 +104,17 @@ Route::get('district-master-edit-view/{districtid}','MasterController@districtma
 Route::post('district-master-update','MasterController@districtmasterupdate')->middleware('mainadmin');
 Route::get('district-master-delete/{districtid}','MasterController@districtmasterdelete')->middleware('mainadmin');
 
+Route::post('company-occupancy-save','MasterController@occupancymappingsave')->middleware('mainadmin');
+Route::get('company-occupancy-edit-view/{id}','MasterController@occupancycompanyeditview')->middleware('mainadmin');
+Route::post('company-occupancy-update','MasterController@occupancycompanyupdate')->middleware('mainadmin');
+Route::get('company-occupancy-delete/{id}','MasterController@occupancycompanydelete')->middleware('mainadmin');
+
+Route::post('occupancy-master-save','MasterController@occupancymastersave')->middleware('mainadmin');
+
+Route::get('occupancy-master-edit-view/{id}','MasterController@occupancymastereditview')->middleware('mainadmin');
+
+Route::post('occupancy-master-update','MasterController@occupancymasterupdate')->middleware('mainadmin');
+Route::get('occupancy-master-delete/{id}','MasterController@occupancymasterdelete')->middleware('mainadmin');
 /************
 //  END
 ******************/

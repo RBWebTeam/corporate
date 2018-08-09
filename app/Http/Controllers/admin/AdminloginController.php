@@ -67,7 +67,7 @@ class AdminloginController extends Controller
                 'user_type_id'=>'required',
                 'vertical_id'=>'required',
                 'branch_id'=>'required',
-                'empcode'=>'required|numeric',
+                'empcode'=>'required|numeric|unique:user_master',
                 'reporting_emp'=>'required|numeric',
 
                             ]);

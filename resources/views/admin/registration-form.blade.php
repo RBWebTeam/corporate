@@ -45,9 +45,14 @@
                                     </div>
 
                                      <div class="form-group col-md-6 {{ $errors->has('reporting_emp') ? ' has-error' : '' }}">
-                                         <label for="reporting_emp">Reporting Empcode ID</label>
-                                         <input type="text" name="reporting_emp" class="form-control" value="{{ old('reporting_emp')}}">
-                                         <small class="text-danger">{{ $errors->first('reporting_emp') }}</small>
+                                         <label for="reporting_emp">Reporting Employee</label> 
+                                         <select class="form-control" name="reporting_emp" >
+                                         <option selected>Select Employee</option>
+                                          @foreach ($userempcode as $user)
+                                          <option value="{{$user->empcode}}"> {{$user->empname}}</option>
+                                         @endforeach 
+                                         </select>
+
                                     </div>
 
                                     
