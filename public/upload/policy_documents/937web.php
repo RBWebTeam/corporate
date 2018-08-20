@@ -157,12 +157,7 @@ Route::get('bulk-upload','LeadController@bulk_upload');
 Route::post('upload-excel','LeadController@upload_excel');
 Route::get('show-xl-data','LeadController@show_xl_data');
 Route::post('document-upload-leads','LeadController@document_upload_leads');
-
-
-
-Route::get('menu-mapping','MenuController@menu_mapping');
-Route::post(' grouprights-add','MenuController@grouprights_add');
-Route::post('menu-rights','MenuController@menu_rights');
+ 
 
 });
 

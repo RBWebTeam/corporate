@@ -1,4 +1,10 @@
- 
+ <?php  use App\Http\Controllers\InitialController; $cl=new InitialController(); ?>
+
+  <?php //echo $cl->user_right_group_menu();  exit;?> 
+
+
+
+
 <div class="container-fluid">
    <nav class="navbar navbar-default navbar-static-top nav-pad" role="navigation" style="margin-bottom:0; height:73px;">
 

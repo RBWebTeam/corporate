@@ -220,7 +220,7 @@ $.ajax({
          type:"get",
          url:"get-company-details",
          success:function(data){
-              arr=Array('<option selected>Select Current Insurer</option>');
+              arr=Array('<option selected value="0">Select Current Insurer</option>');
 
               $('#current_insurer_id').empty();
               $.each(data,function(index,val){
