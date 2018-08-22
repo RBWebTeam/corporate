@@ -29,8 +29,6 @@ Route::post('quotes-update','FirecalculatorController@quotes_update');
  
 Route::get('thank-you','FirecalculatorController@thank_You');
 Route::get('downlaod-pdf/{quote_id}','FirecalculatorController@downlaod_pdf');
-Route::get('downlaod-rfq-pdf/{rfq_id}','FirecalculatorController@downlaod_rfq_pdf');
-
 Route::get('my-profile','ProfileController@my_profile');
 
 Route::get('test','FirecalculatorController@test');
@@ -138,8 +136,6 @@ Route::post('mail-to-customer','UserquotesController@mail_to_customer');
 //user-quotes
 Route::get('user-quotes/{id}','UserquotesController@user_quotes');
 Route::get('quotes-details/{id}','UserquotesController@quotes_details');
-Route::get('quotes-rfq/{id}','UserquotesController@quotes_rfq');
-
 Route::get('quotes-edit/{id}','UserquotesController@quotes_edite');
 Route::get('logout','AdminloginController@logout');
  //document upload
@@ -161,12 +157,7 @@ Route::get('bulk-upload','LeadController@bulk_upload');
 Route::post('upload-excel','LeadController@upload_excel');
 Route::get('show-xl-data','LeadController@show_xl_data');
 Route::post('document-upload-leads','LeadController@document_upload_leads');
-
-
-
-Route::get('menu-mapping','MenuController@menu_mapping');
-Route::post(' grouprights-add','MenuController@grouprights_add');
-Route::post('menu-rights','MenuController@menu_rights');
+ 
 
 });
 

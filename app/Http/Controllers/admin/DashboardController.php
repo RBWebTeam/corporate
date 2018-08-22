@@ -9,7 +9,11 @@ use PDF;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Response;
-use View;
+use Validator;
+ 
+ 
+ 
+
 class DashboardController extends Controller
 {
 
@@ -45,9 +49,12 @@ class DashboardController extends Controller
          $user_type_master= DB::table('user_type_master')->get();
          $vertical_master= DB::table('vertical_master')->get();
          $branch_master= DB::table('branch_master')->get();
-        
+         $userempcode=DB::select('call usp_get_user_emp()');
+         $details_show=DB::select('call sp_registration_show()');
 
-     	return view('admin.registration-form',['user_type_master'=>$user_type_master,'vertical_master'=>$vertical_master,'branch_master'=>$branch_master]);
+     	return view('admin.registration-form',['user_type_master'=>$user_type_master,'vertical_master'=>$vertical_master,'branch_master'=>$branch_master,'details_show'=>$details_show,'userempcode'=>$userempcode]);
+
+
      }
 
         public function user_show(){
@@ -64,6 +71,75 @@ class DashboardController extends Controller
 
              
              return view('admin.user-show',['queryuser'=>$queryuser]);
+        }
+
+
+        public function registration_edit(Request $req){
+
+           
+          
+          $user_type_master= DB::table('user_type_master')->get();
+         $vertical_master= DB::table('vertical_master')->get();
+         $branch_master= DB::table('branch_master')->get();
+         //$details_show=DB::select('call sp_registration_show()');
+        $details_show=DB::select('call sp_registration_update(?)',[$req->id]);
+
+      return view('admin.registration-update',['user_type_master'=>$user_type_master,'vertical_master'=>$vertical_master,'branch_master'=>$branch_master,'details_show'=>$details_show[0]]);
+
+             
+
+        }
+
+
+        public function registration_update(Request $req){
+              
+             $vali=Validator::make($req->all(), [
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'email' => 'required|email',
+                'mobile' => 'required|regex:/^[0-9]{10}+$/',
+              
+                
+                'user_type_id'=>'required',
+                'vertical_id'=>'required',
+                'branch_id'=>'required',
+                'empcode'=>'required|numeric',
+                'reporting_emp'=>'required|numeric',
+
+                            ]);
+
+           if ($vali->fails()){
+                return Redirect::back()
+                        ->withErrors($vali)
+                        ->withInput();
+              }else{
+
+              $arr= array('firstname' =>$req->firstname,
+              'lastname' =>$req->lastname,
+              'email' =>$req->email,
+              'mobile' =>$req->mobile,
+              'empcode'=>$req->empcode,
+             
+              'user_type_id' =>$req->user_type_id,
+              'vertical_id' =>$req->vertical_id,
+              'branch_id' =>$req->branch_id,
+              'reporting_emp'=>$req->reporting_emp,
+              //'datetime_created' =>date('Y-m-d H:i:s'),
+                        );
+
+              DB::table('user_master')->where("userid","=",$req->userid)->update($arr);
+              Session::flash('msg', "registration successfully updated.....");
+               return redirect('dashboard');
+
+             }
+
+        }
+
+
+
+        public function registration_delete(Request $req){
+
+            DB::table('user_master')->where("userid","=",$req->id)->delete();
         }
 
          
@@ -100,3 +176,5 @@ class DashboardController extends Controller
        //  }
 
 }
+
+

@@ -224,16 +224,20 @@ public function quotes_add(Request $req){
  Session::forget('quote_id');
  $true=0;
 
+  
+
+ 
  try {
   $arr=Session::get('quote_dataValue');
-  $quote_id=DB::select('call usp_insert_firecal_quote(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$arr);
-
+  $quote_id=DB::select('call usp_insert_firecal_quote(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$arr);
   
 
   $quote_id=$quote_id[0]->quote_id;
+
   
 
   $is_selected= $req->comapny_id?$req->comapny_id:0;
+
   $length=sizeof($req->c_name);
   $pdfarray=array();
   for ($i=0; $i < $length ; $i++) { 
@@ -246,12 +250,12 @@ public function quotes_add(Request $req){
  $this->visiting_card_quotes_update($quote_id);
  $this->policy_documents($quote_id);
 
+ 
+
  Session::put('pdfarray', $pdfarray);
  Session::put('comapny_id', $is_selected);
  Session::put('quote_id', $quote_id); 
 
-
- 
  
 
 }catch (\Exception $e) {
@@ -404,6 +408,30 @@ public function downlaod_pdf(Request $req){
 
 
 }
+
+
+
+public function downlaod_rfq_pdf(Request $req){
+ 
+
+  try{
+                
+ $query_master=DB::select('call usp_show_fircal_rfq("'.$req->rfq_id.'")');
+   $query=$query_master[0];
+   $loan_detail = DB::table('firecal_rfq_detail')
+   ->select('firecal_rfq_detail.*')
+   ->where('firecal_rfq_detail.rfq_id',$req->rfq_id)
+   ->get();
+ 
+ 
+ 
+  return  PDF::loadView('downloadpdf_rfq',['query_master'=>$query,'loan_detail'=>$loan_detail]) ->download();
+ 
+
+       }catch (\Exception $e) { return $e->getMessage(); }
+
+}
+
 
 
 

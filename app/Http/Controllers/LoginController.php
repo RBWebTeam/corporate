@@ -13,6 +13,7 @@ use Session;
 use URL;
 use Mail;
 
+use App\Http\Controllers\Firecalculator\FirecalculatorController;
 class LoginController extends Controller
 {
 
@@ -84,6 +85,18 @@ public function fire_calculator(){
 }
 
 public function corporate(Request $req){
+
+
+   if(isset($req->comanyname)){
+          $comanyname=implode(",",$req->comanyname);
+   }else{
+          $comanyname='';
+   }
+
+    
+ 
+ 
+
   Session::forget('quote_dataValue');
   Session::forget('risk_location');
   $riskaddress_add=0;
@@ -165,8 +178,10 @@ $is_omission=  $req['is_omission']?$req['is_omission']:0;
 $sum_omission=  $req['sum_omission']?$req['sum_omission']:0;
 $is_lossrent=$req['is_lossrent']?$req['is_lossrent']:0;
 $sum_lossrent=$req['sum_lossrent']?$req['sum_lossrent']:0;
+$lossinteminity=$req['lossinteminity']?$req['lossinteminity']:0; // extra parameters 
 $is_accommodation=$req['is_accommodation']?$req['is_accommodation']:0;
 $sum_accommodation=$req['sum_accommodation']?$req['sum_accommodation']:0;
+$ioainteminity=$req['ioainteminity']?$req['ioainteminity']:0;   // extra parameters 
 $is_architect=$req['is_architect']?$req['is_architect']:0;
 $sum_architect=$req['sum_architect']?$req['sum_architect']:0;
 $is_removedebris=$req['is_removedebris']?$req['is_removedebris']:0;
@@ -234,8 +249,10 @@ $arr= array('section_id' =>$section_id,
  'sum_omission' =>$sum_omission,
  'is_lossrent' =>$is_lossrent,
  'sum_lossrent' =>$sum_lossrent,
+ 'lossinteminity'=>$lossinteminity, //extra parameters 
  'is_accommodation' =>$is_accommodation,
  'sum_accommodation' =>$sum_accommodation,
+ 'ioainteminity'=>$ioainteminity, //extra parameters 
  'is_architect' =>$is_architect,
  'sum_architect' =>$sum_architect,
  'is_removedebris' =>$is_removedebris,
@@ -266,14 +283,33 @@ Session::put('quote_dataValue', $array);
 Session::put('risk_location',array('riskaddress' =>$riskaddress_add ,'riskstates' =>$riskstatename ,'riskdistricts' =>$riskcityname ,'riskpincodes' =>$riskpinname ));
 
 
+ 
+ if($req->checkinsured==0){
+ $quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'",'.$min_zone_id.',"'.$comanyname.'")');
+ return $quote_data;
+}
 
+if($req->checkinsured==1){   // get rfq premium
+ $quote_data=DB::select('call usp_get_rfq_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'",'.$min_zone_id.',"'.$comanyname.'")');
 
+  $quote_id=DB::select('call usp_insert_firecal_rfq(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$array);
+  DB::table('firecal_rfq_detail')->insert([
+  ['rfq_id' =>$quote_id[0]->rfq_id,
+  'comapny_id' =>$quote_data[0]->company_id,
+  'company_name' =>$quote_data[0]->company_name,
+  'premium_amt' =>$quote_data[0]->premium_amt,
+  'gst_amt' =>$quote_data[0]->gst_amt,
+  'net_premium_amt' =>$quote_data[0]->net_premium_amt,
+  'is_selected' =>0,
+  ],
+  ]);
+ 
+   return $quote_id[0]->rfq_id;
 
-
-$quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'",'.$min_zone_id.')');
+} 
 
            //$this::CorporateSave($req);
-return $quote_data;
+// return $quote_data;
 //}catch (\Exception $e) {
  //return $e->getMessage();
    //return $true=0;
@@ -290,6 +326,13 @@ public function CorporateSave($req){
 
 }
 
+
+
+public function company_details(){
+ 
+    return $query=DB::table('company_master')->get();
+
+}
 
 
 

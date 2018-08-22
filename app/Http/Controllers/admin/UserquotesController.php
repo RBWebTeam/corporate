@@ -45,7 +45,7 @@ class UserquotesController extends Controller
   $comments=DB::select('Select * from quote_comment_thread');
   return view('admin.user-quotes',['queryuser'=>$queryuser,'comments'=>($comments)]);
   
-}catch(\Exception $ee){
+}catch(\Exception $e){
  return $e->getMessage();
 }         
 
@@ -81,8 +81,7 @@ public function quotes_details(Request $req){
 }
 
 $policy_query=DB::table('policy_documents')->where('quote_id','=',$req->id)->first();
-
-//print_r($policy_query->quote_id);exit;
+ 
 
 if($comapny_id!=0){
   return view('admin.quotes-details-first-com',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query,'visi_card'=>$visi_card]);
@@ -91,6 +90,30 @@ if($comapny_id!=0){
 }}catch(\Exception $ee){
  return $ee->getMessage();
 } 
+}
+
+
+public function quotes_rfq(Request $req){
+
+ 
+ $query_master=DB::select('call usp_show_fircal_rfq("'.$req->id.'")');
+   $query=$query_master[0];
+   $loan_detail = DB::table('firecal_rfq_detail')
+   ->select('firecal_rfq_detail.*')
+   ->where('firecal_rfq_detail.rfq_id',$req->id)
+   ->get();
+ 
+
+ $visi_card= DB::table('visiting_card_detail')
+   ->where('quote_id','=',$req->id)
+   ->get();
+$policy_query=DB::table('policy_documents')->where('quote_id','=',$req->id)->first();
+
+$comapny_id=0;
+ return view('admin.quotes-rfq',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query,'visi_card'=>$visi_card]);
+
+
+
 }
 
 public function approved(Request $req){

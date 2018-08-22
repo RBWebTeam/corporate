@@ -273,4 +273,149 @@ class MasterController extends Controller
     
     }
 
+    public function occupancymappingform(Request $req)
+    {
+      try
+      {
+        $occupancy= DB::select('call usp_get_occupancy_master()');
+        $product = DB::select('call usp_get_product_master()');
+        $company = DB::select('call usp_get_company_master()');
+         $query=DB::select("call usp_comp_occup_mapping(?,?,?,?,?,?,?,?,?)",[null,null,null,null,null,null,null,null,'get']);      
+
+        return view('admin.companywise-occupancy',['occupancy'=>$occupancy,'product'=>$product,'company'=> $company,'query'=>$query]);
+
+      }
+      catch(\Exception $ee)
+      {
+        print_r($ee->__toString());
+      }
+    }
+
+    public function occupancymappingsave(Request $req)
+    {
+               $vali=Validator::make($req->all(), [
+                'occup_id' => 'required|not_in:0', 'product_id' => 'required|not_in:0','company_id' => 'required|not_in:0','company_status' => 'required|not_in:0','storagetype' => 'required|not_in:0','discount_rate'=> 'required' ]);
+           if ($vali->fails()){
+                return Redirect::back()
+                        ->withErrors($vali)
+                        ->withInput();
+              }else{
+            try{
+
+              $query=DB::select("call usp_comp_occup_mapping(?,?,?,?,?,?,?,?,?)",[null,$req['occup_id'],$req['product_id'],$req['company_id'],$req['discount_rate'],$req['company_status'],$req['storagetype'],Session::get('userid'),'insert']);             
+              Session::flash('msg',"Record Successfully Added...");
+              return Redirect::back();
+
+                }catch(\Exception $ee){
+                  print_r($ee->__toString());
+                  //continue;
+                }
+              }
+    }
+
+    public function occupancycompanyeditview(Request $req) {
+        
+        $occupancy= DB::select('call usp_get_occupancy_master()');
+        $product = DB::select('call usp_get_product_master()');
+        $company = DB::select('call usp_get_company_master()');
+        $query=DB::select("call usp_comp_occup_mapping(?,?,?,?,?,?,?,?,?)",[$req->id,null,null,null,null,null,null,null,'get']);   
+             
+            // print_r($query);exit;
+           return view('admin.companywise-occupancy-edit',['query1'=>$query[0],'occupancy'=>$occupancy,'product'=>$product,'company'=>$company]);
+         
+    }
+
+    public function occupancycompanyupdate(Request $req) {
+        try{
+        
+             $ar=array($req->mapid,$req->occup_id,$req->product_id,$req->company_id,$req->discount_rate,$req->company_status,$req->storagetype,Session::get('userid'),'update');
+
+  
+         $query=DB::select("call usp_comp_occup_mapping(?,?,?,?,?,?,?,?,?)",$ar);          
+         Session::flash('msg',"Record Successfully Updated...");
+          return redirect('dashboard/company-occupancy-mapping');
+            
+            }catch(\Exception $ee){                
+           print_r($ee->__toString());
+              }
+      
+    }
+    public function occupancycompanydelete(Request $req){
+         
+          try{
+               
+           $query=DB::select("call usp_comp_occup_mapping(?,?,?,?,?,?,?,?,?)",[$req->id,null,null,null,null,null,null,null,'delete']);
+            Session::flash('msg',"Record Successfully Deleted...");
+                return Redirect::back();            
+              }catch(\Exception $ee){              
+                print_r($ee->__toString());
+                }
+        
+    }
+
+    public function occupancymasterform(Request $req)
+    {
+        try
+        {
+           $section= DB::select('call usp_get_section_master()');
+
+          $query=DB::select("call usp_occupancy_master(?,?,?,?,?,?,?,?,?,?)",[null,null,null,null,null,null,null,null,null,'get']);      
+
+        return view('admin.occupancy-master',['section'=>$section,'query'=>$query]);
+          }
+          catch(\Exception $ee){              
+                print_r($ee->__toString());
+                }
+        
+    }
+
+    public function occupancymastersave(Request $req)
+    { 
+      $vali=Validator::make($req->all(), [
+                'occupancy_name' => 'required', 'building_rate' => 'required','content_rate' => 'required','stfi_rate'=>'required','eq_rate' => 'required' , 'terrorism_rate' => 'required' ]);
+           if ($vali->fails()){
+                return Redirect::back()
+                        ->withErrors($vali)
+                        ->withInput();
+              }else{
+         $query=DB::select("call usp_occupancy_master(?,?,?,?,?,?,?,?,?,?)",[null,$req['occupancy_name'],$req['building_rate'],$req['content_rate'],$req['stfi_rate'],$req['stfi_open_rate'],$req['eq_rate'],$req['terrorism_rate'],$req['section_id'],'insert']);             
+              Session::flash('msg',"Record Successfully Added...");
+              return Redirect::back();
+            }
+    }
+
+    public function occupancymastereditview(Request $req)
+    {
+      
+        $section= DB::select('call usp_get_section_master()');
+        $query=DB::select("call usp_occupancy_master(?,?,?,?,?,?,?,?,?,?)",[$req->id,null,null,null,null,null,null,null,null,'get']);   
+               
+              // print_r($query);exit;
+             return view('admin.occupancy-master-edit',['query1'=>$query[0],'section'=>$section]);
+    }
+
+    public function occupancymasterupdate(Request $req)
+    {
+      
+       $ar=array($req->id,$req->occupancy_name,$req->building_rate,$req->content_rate,$req->stfi_rate,$req->stfi_open_rate,$req->eq_rate,$req->terrorism_rate,$req->section_id,'update');
+
+       
+         $query=DB::select("call usp_occupancy_master(?,?,?,?,?,?,?,?,?,?)",$ar);          
+         Session::flash('msg',"Record Successfully Updated...");
+          return redirect('dashboard/occupancy-master');
+    }
+  public function occupancymasterdelete(Request $req)
+  {
+
+    try{
+      
+               
+           $query=DB::select("call usp_occupancy_master(?,?,?,?,?,?,?,?,?,?)",[$req->id,null,null,null,null,null,null,null,null,'delete']);
+            Session::flash('msg',"Record Successfully Deleted...");
+                return Redirect::back();            
+        }catch(\Exception $ee){              
+                print_r($ee->__toString());
+        }
+  }
+
 } 

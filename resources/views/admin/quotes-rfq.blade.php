@@ -122,7 +122,7 @@
         <th>Interest to be covered </th>
         @foreach($loan_detail as $key=> $val)
         <?php  $class =($val->is_selected!=0)? 'color: #00C851': '';  ?>
-        <th class="company_name{{$key}} {{$class}}" style='{{$class}} '>{{ $val->company_name}}  </th>
+        <th class="company_name{{$key}} {{$class}}" style='{{$class}} '><!-- {{ $val->company_name}} -->  </th>
         @endforeach
       </tr>
     </thead>
@@ -213,7 +213,7 @@
       <th> </th>
       @foreach($loan_detail as $key=> $val)
       <?php  $class =($val->is_selected!=0)? 'color: #00C851': '';  ?>
-      <th class="company_name{{$key}}" style='{{ $class}}'>{{ $val->company_name}} </th>
+      <th class="company_name{{$key}}" style='{{ $class}}'><!-- {{ $val->company_name}} --> </th>
       @endforeach
     </tr>
   </thead>
@@ -340,7 +340,7 @@
       <th></th>
       @foreach($loan_detail as $key=> $val)
       <?php  $class =($val->is_selected!=0)? 'color: #00C851': '';  ?>
-      <th class="company_name{{$key}}" style='{{$class}}'>{{ $val->company_name}} </th>
+      <th class="company_name{{$key}}" style='{{$class}}'><!-- {{ $val->company_name}}  --></th>
       @endforeach
     </tr>
   </thead>
@@ -521,77 +521,10 @@
   <div class="col-lg-12 "  >
     <div class="panel panel-default">
      <div class="panel-body">
-       <h4 id="grid-column-ordering">Remark</h4>
+       
 
 
-       <div class="chat-panel panel panel-default">
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-          <ul class="chat" id="remark_chat">
-          </ul>
-        </div>
-        <!-- /.panel-body -->
-
-        <div class="col-sm-12"  > <div  style=" height:50px" ></div>  </div>          
-        <div class="col-sm-12"  >
-          <div class="col-sm-3"  >
-            <div class="funkyradio">
-              @if(Session::get('user_type_id')==2)
-              <div class="funkyradio-success col-md-8"> 
-                <input type="radio" name="approved" id="radio3" class="remar_status1" value="1" {{$query_master->is_approve1==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
-                <label for="radio3">Approved</label>
-              </div>
-              <div class="funkyradio-danger col-md-8">
-                <input type="radio" name="approved" id="radio4"  class="remar_status0" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
-                <label for="radio4">Rejected</label>
-              </div>
-              @elseif(Session::get('user_type_id')==3 )
-              <div class="funkyradio-success col-md-8"> 
-                <input type="radio" name="approved" id="radio3" class="remar_status" value="1" {{$query_master->is_approve==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
-                <label for="radio3">Approved</label>
-              </div>
-              <div class="funkyradio-danger col-md-8">
-                <input type="radio" name="approved" id="radio4"  class="remar_status" value="0" {{$query_master->is_approve==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
-                <label for="radio4">Rejected </label>
-              </div>
-              
-              @elseif(Session::get('user_type_id')==1 )
-             <div class="funkyradio-success col-md-8"> 
-                <input type="radio" name="approved" id="radio3" class="remar_status1" value="1" {{$query_master->is_approve1==1 ? 'checked' : ''}} onclick="Approved_fn(this);"  />
-                <label for="radio3">Approved</label>
-              </div>
-              <div class="funkyradio-danger col-md-8">
-                <input type="radio" name="approved" id="radio4"  class="remar_status0" value="0" {{$query_master->is_approve1==0 ? 'checked' : ''}} onclick="Approved_fn(this);" />
-                <label for="radio4">Rejected</label>
-              </div>
-
-
-              @else
-              @endif
-
-            </div>
-          </div>
-
-          @if(Session::get('user_type_id')==2 || Session::get('user_type_id')==3 || Session::get('user_type_id')==1)
-          <form class="form" id="form_remark" method="post"  >
-           <div class="col-sm-8" style="margin: -20px 0 21px 0px;" >
-            <div class="form-group">  <label>Remark Status</label>  <textarea class="form-control" rows="3" id="remark_text"></textarea>  </div>
-            <button type="submit" class="btn btn-default" id="remark_id" >Submit  </button>     
-          </div>
-        </form>
-        @endif
-        <div class="col-sm-8"  >
-         @if($query_master->is_approve=="1" && $query_master->is_approve1=="1"   )
-         <a href="#" class="mail_status"><i class="fa fa-envelope" aria-hidden="true">Send mail</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
-         <a href="{{url('downlaod-pdf')}}/{{$quote_id}}"  ><i class="fa fa-file-pdf-o " aria-hidden="true">Download PDF</i></a> &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;
-         @endif
-         <a href="{{url('quotes-edit')}}/{{$quote_id}}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-       </div>
-     </div>
-
-
-
-   </div>
+      <a href="{{url('downlaod-rfq-pdf')}}/{{$quote_id}}"  ><i class="fa fa-file-pdf-o " aria-hidden="true">Download PDF</i></a>
  </div>
 </div>
 
@@ -661,85 +594,7 @@
   });
 
 
-  function Approved_fn(val){
-    var appr_id=val.value;
-    $.ajax({  
-      type: "POST",  
-      url: "{{URL::to('approve-it')}}?_token={{csrf_token()}}",
-      data :{"approved_id":"{{$quote_id}}","is_approve":appr_id},
-      success: function(msg){
-
-        parent=elem.parent();
-        if(msg==1){
-          parent.empty().text('Approved');
-        }
-
-
-      } 
-
-    });
-
-  }
-
-
-  $(document).on('click','#remark_id',function(e){ e.preventDefault();
-   var  is_approve=$("input[name='approved']:checked").val();
-   var  remark_text=$('#remark_text').val();
-   var name="<?php if(Session::get('firstname')){ echo Session::get('firstname'); } ?>";
-
-   if(remark_text!=0 && remark_text!=null){
-     $.ajax({  
-      type: "POST",  
-      url: "{{URL::to('quote-remarks')}}?_token={{csrf_token()}}",
-      data :{"quote_id":"{{$quote_id}}","is_approve":is_approve,'remark_text':remark_text},
-      success: function(msg){
-       if(msg==1){
-        $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><a class="btn btn-info btn-circle btn-lg">'+name.charAt(0).toUpperCase()+'</a> </span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+name+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i> Just Now</small> </div> <p>'+remark_text+'</p></div></li>');
-
-
-      }
-
-    }
-
-  });
-
-   }else{
-
-    alert("please fill form carefully...");
-  }
-
-});
-
-
-  $(document).ready(function () {
-
-    $.ajax({
-      method: "POST",
-      url: "{{url('quote-remarks-show')}}",
-          //dataType: "json",
-          data: {"_token": "{{ csrf_token() }}","quote_id":{{$quote_id}}},
-          success: function(data) {
-
-           $("#remark_chat ").empty();
-           $.each(data.query_output, function( key, val ) {
-
-
-             if(key%2){ 
-               $("#remark_chat").append('<li class="right clearfix"> <span class="chat-img pull-right"><a class="btn btn-info btn-circle btn-lg">'+val.firstname.charAt(0).toUpperCase()+'</a> </span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><i class="fa fa-clock-o fa-fw"></i>'+timeDifference(new Date(),new Date(val.datetime_created))+'</small><strong class="pull-right primary-font">'+val.firstname+'</strong></div><p>'+val.remark+'</p></div></li>');
-             }else{
-              $("#remark_chat").append('<li class="left clearfix"><span class="chat-img pull-left"><a class="btn btn-success btn-circle btn-lg">'+val.firstname.charAt(0).toUpperCase()+'</a> </span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+val.firstname+'</strong> <small class="pull-right text-muted"><i class="fa fa-clock-o fa-fw"></i>'+timeDifference(new Date(),new Date(val.datetime_created))+'</small> </div> <p>'+val.remark+'</p></div></li>');
-            }
-
-
-
-          });
-
-
-         }
-       });
-
-  });
-
+  
 </script>
 
 

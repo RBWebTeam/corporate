@@ -182,6 +182,34 @@
 
 
 
+          <div class="styled-input agile-styled-input-top col-md-12">
+             <a id="get_company_btn" href="#" title="click here!"  ><h5>Select Company</h5></a>
+                  <div class="modal fade" id="Company_Name_model" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">  Company List</h4>
+                      </div>
+                   
+                    
+                     <ul  id="Company_Name_id" style="height: auto;max-height: 500px;overflow-x: hidden;"></ul>
+                   
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+
+
+
+   
+
+ 
+
+
           <div class="styled-input agile-styled-input-top col-md-12"  id="occupiedType" style="display: none;">
            <input type="radio" name="storage_type" value="Closed" checked="true">Closed
            <input type="radio" name="storage_type" value="Open"  >Open 
@@ -298,15 +326,30 @@
 
      <tr class="addon3">
        <td><input type="checkbox" name="is_lossrent" id="is_lossrent" value="0" /></td>
-       <td>Loss Of Rent clause</td>
-       <td><input type="text" class="is_lossrent" name="sum_lossrent" id="sum_lossrent" value="0" onkeypress="return Numeric(event)" oninput=" return sum_lossrentfn(this);"/></td>
+
+      <td > 
+        <p id="sum_lossrent_ 1">Loss Of Rent clause</p> 
+        <p style="display: none" id="sum_lossrent_11">Indemnity Period
+          <select id="lossinteminity" name='lossinteminity'> <option value="0" selected>--Select Month--</option> <option   value='1'>1</option> <option value='2'>2</option> <option value='3'>3</option> <option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option> <option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option> <option value='10'>10</option> <option value='11'>11</option> <option value='12'>12</option> </select>
+         </p>
+      </td>
+       <td><input type="text" class="is_lossrent" name="sum_lossrent" id="sum_lossrent" value="0" onkeypress="return Numeric(event)" oninput=" return sum_lossrentfn(this);"/>
+       </td>
      </tr>
 
 
      <tr class="addon4">
        <td><input type="checkbox" name="is_accommodation" id="is_accommodation" value="0"/></td>
-       <td>Insurance Of Additional Expenses of Rent For An Alternative Accommodation</td>
-       <td><input type="text" class="is_accommodation" name="sum_accommodation" id="sum_accommodation" value="0" onkeypress="return Numeric(event)" oninput=" return sum_lossrentfn(this);"/></td>
+       <td>
+       <p id="sum_accommodation_ 1">Insurance Of Additional Expenses of Rent For An Alternative Accommodation</p>
+
+       <p id="sum_accommodation_11"  style="display: none">Indemnity Period
+        <select  id="ioainteminity" name='ioainteminity'> <option  value="0" selected>--Select Month--</option> <option   value='1'>1</option> <option value='2'>2</option> <option value='3'>3</option> <option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option> <option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option> <option value='10'>10</option> <option value='11'>11</option> <option value='12'>12</option> </select> 
+       </td>
+       </p>
+
+       <td><input type="text" class="is_accommodation" name="sum_accommodation" id="sum_accommodation" value="0" onkeypress="return Numeric(event)" oninput=" return sum_lossrentfn(this);"/>
+       </td>
      </tr>
 
 
@@ -351,11 +394,17 @@
                     <span>Additional Information</span>
                     <input type="text" name="additions_info" id=additions_info  > 
                     <span></span>
-                  </div>
-   <div class="col-md-12 mrg-btm">
-    <div class="col-md-2 col-md-offset-5">
-      <button id="insurance" class="btn btn-success">Get Quote</button>
     </div>
+   <div class="col-md-12 mrg-btm">
+    <div class="col-md-6 col-md-offset-5">
+      <button id="insurance" class="btn btn-success">Get Quote</button>
+        
+         <button id="rfqinsurance" class="btn btn-success">Get RFQ</button>
+    </div>
+
+     
+
+      
   </div>
   <div class="clear"> </div>  
 </form>
@@ -434,6 +483,11 @@
     </div>
   </div>
 </div>
+
+
+
+
+
 
 
 
@@ -684,40 +738,6 @@ $(document).ready(function(){
 
 });
 
-
-// $(".search_state").autocomplete({ 
-//   source: function(request, response) {
-//     $.ajax({
-//       url: "{{ route('searchstateajax') }}",
-//       dataType: "json",
-//       data: {
-//         term : request.term
-//       },
-//       success: function(data) {
-//         response(data);
-//       }
-//     });
-//   },
-//   change: function (event, ui) {
-
-
-//     if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
-//      $(".search_state").attr("data-value",""); 
-//      $("#state").val("");
-//    }else{
-//      $(".search_state").attr("data-value", ui.item.datavalue);
-//      $("#stateid").val(ui.item.datavalue);       
-//      stateid=ui.item.datavalue;
-//    }
-
-
-
-//  }
-// });
-
-
-//
-
 $(document).on('change', '#search_state', function() {   
  var fstate_id=$(this).val();  
  var  city_array=Array('<option value="0">Select</option>');  
@@ -764,96 +784,18 @@ $(document).on('change', '#riskstateid', function() {
 });
 
 });
-
-// $(".search_district").autocomplete({ 
-//   source: function(request, response) {
-//     $.ajax({
-//       url: "{{ route('searchdistrictajax') }}",
-//       dataType: "json",
-//       data: {
-//         term : stateid, district:request.term
-//       },
-//       success: function(data) { response(data);}
-//     });
-//   },
-//   change: function (event, ui) {
-//     if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
-//      $(".search_district").attr("data-value",""); 
-//      $("#district").val('');
-//      $('#state').focus();
-//      alert("Please Select State");
-//    }else{
-//      $(".search_district").attr("data-value", ui.item.datavalue);
-//      $("#districtid").val(ui.item.datavalue);       
-//    }
-//  }    
-// });
-
-
-
- //
-//  var risksstateid=0;
-//  $(".risksearch_state").autocomplete({ 
-//   source: function(request, response) {
-//     $.ajax({
-//       url: "{{ route('searchstateajax') }}",
-//       dataType: "json",
-//       data: {
-//         term : request.term
-//       },
-//       success: function(data) {
-//         response(data);
-//       }
-//     });
-//   },
-//   change: function (event, ui) {
-//     if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
-//      $(".risksearch_state").attr("data-value",""); 
-//      $("#risksearch_state").val("");
-//    }else{
-//      $(".risksearch_state").attr("data-value", ui.item.datavalue);
-//      $("#riskstateid").val(ui.item.datavalue);       
-//      risksstateid=ui.item.datavalue;
-//    }
-//  }
-// });
-// //
-// $(".risksearchdistrict").autocomplete({ 
-//   source: function(request, response) {     
-//     $.ajax({
-//       url: "{{ route('searchdistrictajax') }}",
-//       dataType: "json",
-//       data: {
-//         term : risksstateid, district:request.term
-//       },
-//       success: function(data) { response(data);}
-//     });
-//   },
-//   change: function (event, ui) {
-//     if (ui.item == null || ui.item == undefined || ui.item.value=='No Result Found') {
-
-//       $("#risksdistrictid").val('');
-
-//       alert("Please Select State");
-//     }else{
-
-//       $("#risksdistrictid").val(ui.item.datavalue);       
-//     }
-//   }    
-// });
-
-///////////////
-
-
-
+ 
 
 function nancheck(rows) {
   rows=parseInt(rows);
   return a= isNaN(rows)==true ? 0 : rows;
 }
 
-$('input[type="checkbox"]').click(function(){
-  if($(this).prop("checked") == true){
+ 
+
+$('input[type="checkbox"]').click(function(){  //Block Level Add on Covers
+
+  if($(this).prop("checked") == true){ 
 
     var totlacal=0;
     var percent=0;
@@ -910,8 +852,10 @@ $('input[type="checkbox"]').click(function(){
                       //  $('#sum_removedebris').val(totalper);
                     }else if(attr_id=='is_spontcomb'){
                       totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff+sum_others+sum_stock;
-                        //$('#sum_spontcomb').val(0);
-                        sm_spontcomb=totlacal;
+                       
+                         sm_spontcomb=totlacal;
+
+                         $('#sum_spontcomb').val(totlacal);
                       }else if(attr_id=='is_startup'){
                        totlacal=sum_building+sum_plith+sum_plant+sum_electric+sum_fff;
                        sum_omissionpublic=totlacal;
@@ -1076,10 +1020,43 @@ function s_spontcomb(val){
 }
 
 
+$('#get_company_btn').click(function(e){  e.preventDefault();   // get multiple company
+   $.ajax({
+         type:"get",
+         url:"get-company-details",
+         success:function(data){
+              arr=Array();
+             $('#Company_Name_id').empty();
+              $.each(data,function(index,val){
+                 arr.push('<tr > <td class="list-group-item" >'+val.company_name+'</td> <td class="list-group-item" > <input type="checkbox" name="comanyname[]" id="selectcomanyname_id" class="checkbox_id" value="'+val.company_id+'" > </td></tr>');
+              });
+              $('#Company_Name_id').append(arr);
+              $('#Company_Name_model').modal('show');
+
+
+         }
+   })
+
+});
+
+
+$(document).on('click','.checkbox_id',function(){   // five  company  select
+      // len=$(".checkbox_id:checkbox:checked").length;
+      //   if(len<=5){
+      //   }else{
+      //      alert("only five company");
+      //     $(this).prop('checked', false);
+      //   }
+
+           
+});
+
+
 
 $('#insurance').click(function(e){
  e.preventDefault();
 
+ 
 
  validator=$('#corporate_insurance').validate();
  if(! $('#corporate_insurance').valid()){
@@ -1099,7 +1076,7 @@ $('#insurance').click(function(e){
             $.ajax({  
               type: "POST",  
               url: "{{URL::to('corporate')}}",
-              data : $('#corporate_insurance').serialize()+'&'+risk_location_address,
+              data : $('#corporate_insurance').serialize()+'&'+risk_location_address+'&checkinsured=0',
               success: function(msg){
 
 
@@ -1136,22 +1113,54 @@ $('#insurance').click(function(e){
      });
 
 
+// RFQ Quotes
+$('#rfqinsurance').click(function(e){
+ e.preventDefault();
+ validator=$('#corporate_insurance').validate();
+ if(! $('#corporate_insurance').valid()){
+           $.each(validator.errorMap, function (index, value) {
+           $('#'+index).focus();
+           return false;
+         });
+           return false;
+         }else{
+
+          if( $('#section_id_val').val()!=''){
+            $.ajax({  
+              type: "POST",  
+              url: "{{URL::to('corporate')}}",
+              data : $('#corporate_insurance').serialize()+'&'+risk_location_address+'&checkinsured=1',
+              success: function(msg){
+
+                        
+
+                      window.location.href="{{url('quotes-rfq')}}/"+msg;
+          
+           
+              }
+
+
+            });
+
+          }else{
+
+           alert("please fill form carefully !..");
+         }
+
+       }
+     });
+// END
 
 
 
-$(document).on('click','.getval',function(){
- event.preventDefault(); 
-
+$(document).on('click','.getval',function(){ event.preventDefault(); 
  comapny_id=$(this).closest('tr').find('.c_id').val();
  c_name=$(this).closest('tr').find('.c_name').val();
  p_amount=$(this).closest('tr').find('.p_amount').val();
  gst_amount=$(this).closest('tr').find('.gst_amount').val();
  net_p_amount=$(this).closest('tr').find('.net_p_amount').val();
-
  company_status=$(this).closest('tr').find('.company_status').val();
 
- 
- 
        // var  serialize=$('#getquote').serialize();
        var data = $('#getquote').serializeArray();
        data.push({name: 'comapny_id', value: comapny_id});
@@ -1232,14 +1241,9 @@ $(document).on('click','.apply_id',function(){
     }else{
       console.log("error"); 
     }
-
   }
-
 });
-
 }
-
-
 });
 
 
@@ -1247,40 +1251,43 @@ $(document).on('click','#sameas',function(){
   if($(this).is(':checked')){
     $('#riskaddress_one').val($('#address_one').val());
     $('#riskaddress_two').val($('#address_two').val());
- //   $('#riskstateid').val($('#stateid').val());
-  //  $('#risksearch_state').val($('#state').val());
-   // $('#risksdistrictid').val($('#districtid').val());  
-  //  $('#riskdistrict').val($('#district').val());
     $('#riskpincode').val($('#pincode').val());
-
-   $("#riskstateid").empty();
-   $("#risksdistrictid").empty();
-                
-$("#riskstateid").append('<option value="'+$("#search_state option:selected").val()+'">'+$("#search_state option:selected").text()+'</option>') ;
-$("#risksdistrictid").append('<option value="'+$("#search_district option:selected").val()+'">'+$("#search_district option:selected").text()+'</option>') ;
-            
-
-
+    $("#riskstateid").empty();
+    $("#risksdistrictid").empty();           
+    $("#riskstateid").append('<option value="'+$("#search_state option:selected").val()+'">'+$("#search_state option:selected").text()+'</option>') ;
+    $("#risksdistrictid").append('<option value="'+$("#search_district option:selected").val()+'">'+$("#search_district option:selected").text()+'</option>') ;        
   }else{
     $('#riskaddress_one').val('');
     $('#riskaddress_two').val('');
-   // $('#riskstateid').val('');
-    //$('#risksearch_state').val('');
-   // $('#risksdistrictid').val('');
-  //  $('#riskdistrict').val('');
     $('#riskpincode').val('');
-
     $('.riskstateid').empty();
-    $('.riskstateid').append(public_state);  
-    
-
-     
-  }
-
-  
+    $('.riskstateid').append(public_state);      
+  } 
 })
 
 
+
+
+
+
+$(document).on('click','#is_lossrent',function(){
+if($(this).attr('id')=="is_lossrent" && $(this).prop("checked") == true){  // check Loss Of Rent clause 
+      $('#sum_lossrent_11').show();
+      $("#is_accommodation").prop("checked",false);
+      $('#ioainteminity').val('');
+      $('#sum_accommodation_11').hide();}else{
+      $('#sum_lossrent_11').hide();}
+});
+$(document).on('click','#is_accommodation',function(){
+if($(this).attr('id')=="is_accommodation" && $(this).prop("checked") == true){ //and Insurance Of Additional Expenses of Rent For An Alternative Accommodation
+      $('#sum_accommodation_11').show();
+      $("#is_lossrent").prop("checked",false);
+      $('#lossinteminity').val('');
+      $('#sum_lossrent_11').hide();}else{
+      $('#sum_accommodation_11').hide();
+    // $('#sum_lossrent_111').hide();
+}
+});
 </script>
 
 
