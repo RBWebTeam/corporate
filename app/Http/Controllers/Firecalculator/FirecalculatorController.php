@@ -411,6 +411,30 @@ public function downlaod_pdf(Request $req){
 
 
 
+public function downlaod_rfq_pdf(Request $req){
+ 
+
+  try{
+                
+ $query_master=DB::select('call usp_show_fircal_rfq("'.$req->rfq_id.'")');
+   $query=$query_master[0];
+   $loan_detail = DB::table('firecal_rfq_detail')
+   ->select('firecal_rfq_detail.*')
+   ->where('firecal_rfq_detail.rfq_id',$req->rfq_id)
+   ->get();
+ 
+ 
+ 
+  return  PDF::loadView('downloadpdf_rfq',['query_master'=>$query,'loan_detail'=>$loan_detail]) ->download();
+ 
+
+       }catch (\Exception $e) { return $e->getMessage(); }
+
+}
+
+
+
+
 public function test(){
 
  

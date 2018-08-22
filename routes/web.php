@@ -29,6 +29,8 @@ Route::post('quotes-update','FirecalculatorController@quotes_update');
  
 Route::get('thank-you','FirecalculatorController@thank_You');
 Route::get('downlaod-pdf/{quote_id}','FirecalculatorController@downlaod_pdf');
+Route::get('downlaod-rfq-pdf/{rfq_id}','FirecalculatorController@downlaod_rfq_pdf');
+
 Route::get('my-profile','ProfileController@my_profile');
 
 Route::get('test','FirecalculatorController@test');
@@ -136,6 +138,8 @@ Route::post('mail-to-customer','UserquotesController@mail_to_customer');
 //user-quotes
 Route::get('user-quotes/{id}','UserquotesController@user_quotes');
 Route::get('quotes-details/{id}','UserquotesController@quotes_details');
+Route::get('quotes-rfq/{id}','UserquotesController@quotes_rfq');
+
 Route::get('quotes-edit/{id}','UserquotesController@quotes_edite');
 Route::get('logout','AdminloginController@logout');
  //document upload

@@ -396,9 +396,15 @@
                     <span></span>
     </div>
    <div class="col-md-12 mrg-btm">
-    <div class="col-md-2 col-md-offset-5">
+    <div class="col-md-6 col-md-offset-5">
       <button id="insurance" class="btn btn-success">Get Quote</button>
+        
+         <button id="rfqinsurance" class="btn btn-success">Get RFQ</button>
     </div>
+
+     
+
+      
   </div>
   <div class="clear"> </div>  
 </form>
@@ -1050,6 +1056,7 @@ $(document).on('click','.checkbox_id',function(){   // five  company  select
 $('#insurance').click(function(e){
  e.preventDefault();
 
+ 
 
  validator=$('#corporate_insurance').validate();
  if(! $('#corporate_insurance').valid()){
@@ -1069,7 +1076,7 @@ $('#insurance').click(function(e){
             $.ajax({  
               type: "POST",  
               url: "{{URL::to('corporate')}}",
-              data : $('#corporate_insurance').serialize()+'&'+risk_location_address,
+              data : $('#corporate_insurance').serialize()+'&'+risk_location_address+'&checkinsured=0',
               success: function(msg){
 
 
@@ -1106,6 +1113,43 @@ $('#insurance').click(function(e){
      });
 
 
+// RFQ Quotes
+$('#rfqinsurance').click(function(e){
+ e.preventDefault();
+ validator=$('#corporate_insurance').validate();
+ if(! $('#corporate_insurance').valid()){
+           $.each(validator.errorMap, function (index, value) {
+           $('#'+index).focus();
+           return false;
+         });
+           return false;
+         }else{
+
+          if( $('#section_id_val').val()!=''){
+            $.ajax({  
+              type: "POST",  
+              url: "{{URL::to('corporate')}}",
+              data : $('#corporate_insurance').serialize()+'&'+risk_location_address+'&checkinsured=1',
+              success: function(msg){
+
+                        
+
+                      window.location.href="{{url('quotes-rfq')}}/"+msg;
+          
+           
+              }
+
+
+            });
+
+          }else{
+
+           alert("please fill form carefully !..");
+         }
+
+       }
+     });
+// END
 
 
 

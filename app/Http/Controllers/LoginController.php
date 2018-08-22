@@ -13,6 +13,7 @@ use Session;
 use URL;
 use Mail;
 
+use App\Http\Controllers\Firecalculator\FirecalculatorController;
 class LoginController extends Controller
 {
 
@@ -282,14 +283,33 @@ Session::put('quote_dataValue', $array);
 Session::put('risk_location',array('riskaddress' =>$riskaddress_add ,'riskstates' =>$riskstatename ,'riskdistricts' =>$riskcityname ,'riskpincodes' =>$riskpinname ));
 
 
-
-
-
-
+ 
+ if($req->checkinsured==0){
  $quote_data=DB::select('call usp_get_firecal_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'",'.$min_zone_id.',"'.$comanyname.'")');
+ return $quote_data;
+}
+
+if($req->checkinsured==1){   // get rfq premium
+ $quote_data=DB::select('call usp_get_rfq_quote ('.$occ_id.',"'.$section_id.'","'.$sum_building.'","'.$sum_plith.'","'.$sum_plant.'","'.$sum_electric.'","'.$sum_fff.'","'.$sum_others.'","'.$sum_stock.'","'.$is_stfi.'","'.$sum_stfi.'","'.$is_earthquake.'","'.$sum_earthquake.'","'.$is_terrorism.'","'.$sum_terrorism.'","'.$is_escalation.'","'.$sum_escalation.'","'.$is_omission.'","'.$sum_omission.'","'.$is_lossrent.'","'.$sum_lossrent.'","'.$is_accommodation.'","'.$sum_accommodation.'","'.$is_architect.'","'.$sum_architect.'","'.$is_removedebris.'","'.$sum_removedebris.'","'.$is_spontcomb.'","'.$sum_spontcomb.'","'.$is_startup.'","'.$sum_startup.'","'.$is_floater.'","'.$sum_floater.'","'.$is_impactdamage.'","'.$sum_impactdamage.'","'.$req['risksdistrictid'].'","'.$storage_type.'",'.$min_zone_id.',"'.$comanyname.'")');
+
+  $quote_id=DB::select('call usp_insert_firecal_rfq(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$array);
+  DB::table('firecal_rfq_detail')->insert([
+  ['rfq_id' =>$quote_id[0]->rfq_id,
+  'comapny_id' =>$quote_data[0]->company_id,
+  'company_name' =>$quote_data[0]->company_name,
+  'premium_amt' =>$quote_data[0]->premium_amt,
+  'gst_amt' =>$quote_data[0]->gst_amt,
+  'net_premium_amt' =>$quote_data[0]->net_premium_amt,
+  'is_selected' =>0,
+  ],
+  ]);
+ 
+   return $quote_id[0]->rfq_id;
+
+} 
 
            //$this::CorporateSave($req);
-return $quote_data;
+// return $quote_data;
 //}catch (\Exception $e) {
  //return $e->getMessage();
    //return $true=0;
