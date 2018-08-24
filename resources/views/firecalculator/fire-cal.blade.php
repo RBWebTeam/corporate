@@ -5,7 +5,7 @@
  <ul class="menu" type="1"> 
    <li> <a href="{{ url('standard-fire-and-special-perils')}}" class="btn1" id="firecalc">Standard Fire and Special Perils (SFSP)</a></li>
     <li><a href="#" class="btn2">Group Health Insurance</a></li>
-    <li><a href="{{url('marine-product')}}" class="btn4">Marine Produc</a></li>
+    <li><a href="{{url('marine-product')}}" class="btn4">Marine product</a></li> 
     <li><a href="#" class="btn3">Group Personal Accident</a></li>
     <li><a href="#" class="btn5">Workmen's Compensation</a></li>
     <li><a href="#" class="btn6">Project Insurance – CAR / EAR</a></li>

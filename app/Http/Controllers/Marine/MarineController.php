@@ -13,8 +13,17 @@ class MarineController extends Controller
 {
       public function marine_product(Request $req){
 
+
+           $voyage_master=DB::table('marine_voyage_master')->get();
+           $commodity_master=DB::table('marine_commodity_master')->get();
+           $country_master=DB::table('marine_country_master')->get();
+           $currency_master=DB::table('marine_currency_master')->get();
+           $incoterm_master=DB::table('marine_incoterm_master')->get();
+           $packing_master=DB::table('marine_packing_master')->get();
+           $conveyance_master=DB::table('marine_conveyance_master')->get();
+             
          
-         return view('marine.marine_product');
+         return view('marine.marine_product',['voyage_master'=>$voyage_master,'commodity_master'=>$commodity_master,'country_master'=>$country_master,'currency_master'=>$currency_master,'incoterm_master'=>$incoterm_master,'packing_master'=>$packing_master,'conveyance_master'=>$conveyance_master]);
             
 
       }
@@ -38,5 +47,11 @@ class MarineController extends Controller
 
 
 
+      }
+
+
+      public function quick_quote(Request $req){
+
+      	 print_r($req->all());
       }
 }
