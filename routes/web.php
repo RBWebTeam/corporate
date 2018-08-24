@@ -184,6 +184,18 @@ Route::group(['middleware' => 'dashboard','namespace' => 'GroupHealthInsurance',
         
         
     });
+/************
+//  Merine Product
+******************/
+Route::group(['middleware' => 'dashboard','namespace' => 'Marine',  ], function() {
+        Route::get('marine-product','MarineController@marine_product');
+         Route::post('marine-user-add','MarineController@marine_user_add');
+       
+
+        
+        
+    });
+
 
 //intiamtion
 Route::get('show-intimation/{id}','admin\ReportController@show_intimation');

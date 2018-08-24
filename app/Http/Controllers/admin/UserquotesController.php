@@ -105,9 +105,9 @@ public function quotes_rfq(Request $req){
  
 
  $visi_card= DB::table('visiting_card_detail')
-   ->where('quote_id','=',$req->id)
+   ->where('quote_id','=',1)
    ->get();
-$policy_query=DB::table('policy_documents')->where('quote_id','=',$req->id)->first();
+$policy_query=DB::table('policy_documents')->where('quote_id','=',1)->first();
 
 $comapny_id=0;
  return view('admin.quotes-rfq',['query_master'=>$query,'loan_detail'=>$loan_detail,'comapny_id'=>$comapny_id,'quote_id'=>$req->id,'policy_query'=>$policy_query,'visi_card'=>$visi_card]);

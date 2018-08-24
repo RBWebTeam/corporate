@@ -21,3 +21,7 @@
  
 
 <style>body {background:#ffffff url("{{url('images/bg.jpg')}}") no-repeat; font-family: 'Raleway', sans-serif;}</style>
+
+
+
+
