@@ -21,14 +21,13 @@
  
  
   <a href="#" id="new_customer"   class="btn btn-outline-secondary">new customer</a>
-  <a href="#" id="Search_customer"  class="btn btn-outline-success"   >Search customer</a> &nbsp; <a href="#" class="pull-right" id="popup2">Popup 1</a>
-  <hr>
+  <a href="#" id="Search_customer"  class="btn btn-outline-success"   >Search customer</a> 
   </div>
   
   <div class="col-md-6">
   <div class="form-group">
   <label>Customer Type</label>
-  <input type="text" class="form-control">
+  <input type="text" class="form-control" name="cname" id="cname">
    </div>
    </div>
    
@@ -427,6 +426,7 @@
             <div class="modal-dialog">
 
               <!-- Modal content-->
+              <form id="search_form">{{ csrf_field() }}
               <div class="modal-content modal-md">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -436,34 +436,35 @@
                    <div class="col-md-6">
             <div class="form-group">
             <label>First Name</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="fname">
              </div>
              </div>
              
              <div class="col-md-6">
             <div class="form-group">
             <label>Last Name</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="lastname">
              </div>
              </div>
              
              <div class="col-md-6">
             <div class="form-group">
             <label>Pnone No.</label>
-            <input type="number" class="form-control">
+            <input type="number" class="form-control" name="phone">
              </div>
              </div>
              
              <div class="col-md-6">
             <div class="form-group">
             <label>Email Id</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="email">
              </div>
              </div>
-             <div class="col-md-12"><button class="btn-nxt" data-toggle="modal" 
+             <div class="col-md-12"><button id="search_btn" class="btn-nxt" data-toggle="modal" 
              >SEARCH</button></div>
                 </div> 
               </div>
+              </form>
             </div>
           </div>
 
@@ -506,19 +507,50 @@
             </div>
           </div>
 
+
+
+  <div class="modal fade" id="occupiedPop" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Search customer</h4>
+      </div>
+
+      <input type="text" id="myInput" onkeyup="myFunction()" class="  search-query form-control" placeholder="Search for names.." />
+      <div class="modal-body" id=occ_company><td>User name</td>
+        <ul class="list-group" style="height: auto;max-height: 500px;overflow-x: hidden;width: 500;" id="myUL">
+          
+        </ul>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
  </div>
 
 
 
 <div class="row">
+
   <div class="messageContainer">
     <div id="msgbox_success" class="alert alert-success alert-position hidden " aria-hidden="true"  >
       <button type="button" class="close" aria-hidden="true">&times;</button>
       <div id="q">
-      
       </div>
     </div>
   </div>
+
+
   
 </div>
 <script type="text/javascript">
@@ -700,7 +732,7 @@ $('#commodity_details_btn').click(function(e){ e.preventDefault();
                 data : $('#commodity_details_fm').serialize(),
                 success: function(msg){  
                             
-              
+                          console.log(msg);
                  }
             });
 
@@ -711,11 +743,40 @@ $('#commodity_details_btn').click(function(e){ e.preventDefault();
 
 
        })
+
+
+
+
+$('#search_btn').click(function(e){ e.preventDefault();  
+              $.ajax({  
+                type: "POST",  
+                url: "{{URL::to('quick-quote-search')}}",
+                data : $('#search_form').serialize(),
+                success: function(data){   $('#popup11').modal('hide');
+                    $("#occ_company ul").empty();
+                    $.each( data, function( key, val ) {
+                    $("#occ_company ul").append('<li class="list-group-item" ><a href="#" class="occupied_id" style="font-size: 15px;"><p class="mb-0">'+val.firstname +" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+val.email+'</p></a> <input type="hidden" name="abc" class="accupied_id_name"  value='+val.userid +'><input type="hidden" name="abc" class="search_name"  value='+val.firstname +'><input type="hidden" name="abc" class="search_lname"  value='+val.lastname +'><input type="hidden" name="abc" class="search_phone"  value='+val.mobile +'><input type="hidden" name="abc" class="search_email"  value='+val.email +'></li><input type="hidden" name="abc" class="search_userId"  value='+val.userid +'></li>');
+                    });
+                    $('#occupiedPop').modal('toggle');
+              
+                 }
+            });
+
+
+            })
+
     
+$(document).on('click','.occupied_id',function(){ 
+ var search_name=$(this).closest('li').find('.search_name').val();
+ var search_lname=$(this).closest('li').find('.search_lname').val();
+ var search_phone=$(this).closest('li').find('.search_phone').val();
+ var search_email=$(this).closest('li').find('.search_email').val();
+ var search_userId=$(this).closest('li').find('.search_userId').val();
+ 
 
-
-
-
+  $('#cname').val(search_name);
+   $('#occupiedPop').modal('hide');
+})
  
 $(".close").click(function(){
   $("#msgbox_success").animate({left: '150%'}, "slow");

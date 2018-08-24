@@ -191,9 +191,10 @@ Route::group(['middleware' => 'dashboard','namespace' => 'Marine',  ], function(
 Route::get('marine-product','MarineController@marine_product');
 Route::post('marine-user-add','MarineController@marine_user_add');
 Route::post('quick-quote','MarineController@quick_quote');
-       
+Route::post('quick-quote-search','MarineController@quick_quote_search');       
 
-});
+        
+  });
 
 
 //intiamtion

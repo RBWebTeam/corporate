@@ -54,4 +54,17 @@ class MarineController extends Controller
 
       	 print_r($req->all());
       }
+
+
+
+      public function quick_quote_search(Request $req){
+           
+ 
+         
+             $tagsubtitle = DB::table('user_master')->where('firstname', 'LIKE', '%'.$req->fname.'%')
+              ->orWhere('lastname', 'LIKE', '%'.$req->lastname.'%')
+              ->orWhere('email', 'LIKE', '%'.$req->email.'%')
+              ->orWhere('mobile', 'LIKE', '%'.$req->phone.'%')->get();
+              return  $tagsubtitle;
+      }
 }
