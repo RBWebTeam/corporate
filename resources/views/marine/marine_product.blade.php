@@ -55,7 +55,7 @@
    <div class="col-md-12"><button class="btn-nxt" id="quick_quote">NEXT</button></div>
   </div>
    <!-- Form 1 End -->
-   
+  
    
    <!-- Form 2 Start  -->
   <div class="form1" id="s_customer" style="display: none">
@@ -87,20 +87,20 @@
    <div class="col-md-6">
   <div class="form-group">
   <label>Email</label>
-  <input type="email" class="form-control" name="email" id="email" required>
+  <input type="email" class="form-control" name="email" id="email" required value="sagar.tejuja@gmail.com">
    </div>
    </div>
    
    <div class="col-md-6">
   <div class="form-group">
   <label>Pnone No.</label>
-  <input type="text" class="form-control" name="phone" id="phone" minlength="10" maxlength="10" required onkeypress="return Numeric(event)"/>
+  <input type="text" class="form-control" value="8898540057" name="phone" id="phone" minlength="10" maxlength="10" required onkeypress="return Numeric(event)"/>
    </div>
    </div>
    <div class="col-md-6">
   <div class="form-group">
   <label>Pincode / Area</label>
-  <input type="text" class="form-control" name="pincode" id="pincode" minlength="6" maxlength="6" onkeypress="return Numeric(event)" required>
+  <input type="text" class="form-control" value="556655" name="pincode" id="pincode" minlength="6" maxlength="6" onkeypress="return Numeric(event)" required>
    </div>
    </div>
    
@@ -142,7 +142,8 @@
   <div   class="tab-pane  " id="quick_quote_show"  style="display: none">
     <h4 class="mrg-tp-10">Voyage and Commodity Details</h4>
   <hr>
-  <form id="commodity_details_fm" >
+  <form id="commodity_details_fm" >{{ csrf_field() }}
+  <input type="hidden" name="search_userId" name="search_userId" id="search_userId">
   <div class="col-md-6">
   <div class="form-group">
   <label>Voyage type</label>
@@ -540,19 +541,14 @@
 
 
 
-<div class="row">
 
-  <div class="messageContainer">
-    <div id="msgbox_success" class="alert alert-success alert-position hidden " aria-hidden="true"  >
-      <button type="button" class="close" aria-hidden="true">&times;</button>
-      <div id="q">
-      </div>
-    </div>
-  </div>
+ 
+<div class="messageContainer">
+    <div class="elements" style="    width: 404px;display: block;left: 16px !important;top: 200px;position: absolute; font-size: 18px;">
+      
 
+    </div></div>
 
-  
-</div>
 <script type="text/javascript">
   
   $('#Search_customer').click('',function(){
@@ -576,23 +572,32 @@
 
  
  $('#quick_quote').click('',function(){
+      if($('#search_userId').val()!=''){
        $('#quick_quote_show').show();
        $('#search_customer_id').hide();
        $('#s_customer').hide();
 
          $('.customer_details0').removeClass('active').addClass('inactive');
          $('.customer_details1').removeClass('inactive').addClass('active');
+       }else{
+         
+
+         toastr.warning("<h4>Search Customer .......?</h4>");
+
+        
+
+
+       }
   });
-
-
 
 
 
  
 
+ 
+
  $(document).ready(function() {    
     $('#SelectSalutaion').append('<select  name="salutaion" class="form-control" ><option value="0">Select Salutation</option><option value="1">Mr</option><option value="1">Mrs</option>><option value="1">Ms</option></select>');
-
     $('input:radio[name=customert]').change(function() { $('#SelectSalutaion').empty();  
         if ($(this).val()=='0') {
            $('#SelectSalutaion').append('<select name="salutaion" class="form-control" ><option value="0">Select Salutation</option><option value="1">Mr</option><option value="1">Mrs</option>><option value="1">Ms</option></select>');
@@ -603,11 +608,9 @@
 
         
     });
-
     $(".psdate").datepicker({
       dateFormat: 'dd-mm-yy'
     });
-
 });
 
 
@@ -627,10 +630,8 @@ $(document).ready(function(){
  
     $('.riskstateid').empty();
     $('.riskstateid').append(st_array);  
-
-  }
+    }
 });
-
 });
 
 $(document).on('change', '#search_state', function() {   
@@ -648,20 +649,10 @@ $(document).on('change', '#search_state', function() {
     });
     $('.search_district').empty();
     $('.search_district').append(city_array);
-
     $('.district').empty();
     $('.district').append(city_array);
-
-    
-
-  }
+      }
 });
-
-
-
- 
-    
-
 });
 
 
@@ -680,38 +671,22 @@ $('#btncustomer_registration').click(function(e){ e.preventDefault();
     type: "POST",  
     url: "{{URL::to('marine-user-add')}}",
     data : $('#customer_registration').serialize(),
-    success: function(msg){  
-                
+    success: function(msg){   $('.elements').empty();
           if(msg==0){
-
-            
-          }else{  $('#q').empty();
-             $("#msgbox_success").removeClass("hidden").attr("aria-hidden", false);
-  $("#msgbox_success").animate({left: '75%'}, "slow");
-    console.log("Displaying msgbox_success");
-   
-
-               
-                   arr=Array();
-
-              $.each(msg, function( key, val ) {
-                   
-                   arr.push('<p>'+key+':'+val+'</p>');
-                   console.log(key+"   :"+val);
-
-              });
-
-               $('#q').append(arr);
-
-                   
-          }
-  }
-});
-
+                $('#quick_quote_show').show();
+                $('#search_customer_id').hide();
+                $('#s_customer').hide();
+                $('.customer_details0').removeClass('active').addClass('inactive');
+                $('.customer_details1').removeClass('inactive').addClass('active');
+          }else{ 
+                $.each(msg, function( key, val ) { i=0;
+                       toastr.error('<p>'+key+': &nbsp;&nbsp;'+val+'');
+                });
+              }
          }
-
-
-       });
+      });
+    }
+ });
     
 
 
@@ -725,7 +700,6 @@ $('#commodity_details_btn').click(function(e){ e.preventDefault();
          });
            return false;
          }else{
-
               $.ajax({  
                 type: "POST",  
                 url: "{{URL::to('quick-quote')}}",
@@ -735,16 +709,8 @@ $('#commodity_details_btn').click(function(e){ e.preventDefault();
                           console.log(msg);
                  }
             });
-
-
-           
          }
-
-
-
-       })
-
-
+})
 
 
 $('#search_btn').click(function(e){ e.preventDefault();  
@@ -755,7 +721,7 @@ $('#search_btn').click(function(e){ e.preventDefault();
                 success: function(data){   $('#popup11').modal('hide');
                     $("#occ_company ul").empty();
                     $.each( data, function( key, val ) {
-                    $("#occ_company ul").append('<li class="list-group-item" ><a href="#" class="occupied_id" style="font-size: 15px;"><p class="mb-0">'+val.firstname +" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+val.email+'</p></a> <input type="hidden" name="abc" class="accupied_id_name"  value='+val.userid +'><input type="hidden" name="abc" class="search_name"  value='+val.firstname +'><input type="hidden" name="abc" class="search_lname"  value='+val.lastname +'><input type="hidden" name="abc" class="search_phone"  value='+val.mobile +'><input type="hidden" name="abc" class="search_email"  value='+val.email +'></li><input type="hidden" name="abc" class="search_userId"  value='+val.userid +'></li>');
+                    $("#occ_company ul").append('<li class="list-group-item" ><a href="#" class="occupied_id" style="font-size: 15px;"><p class="mb-0">'+val.firstname +" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+val.email+'</p></a> <input type="hidden" name="abc" class="search_userId"  value='+val.userid +'><input type="hidden" name="abc" class="search_name"  value='+val.firstname +'><input type="hidden" name="abc" class="search_lname"  value='+val.lastname +'><input type="hidden" name="abc" class="search_phone"  value='+val.mobile +'><input type="hidden" name="abc" class="search_email"  value='+val.email +'></li> ');
                     });
                     $('#occupiedPop').modal('toggle');
               
@@ -765,31 +731,23 @@ $('#search_btn').click(function(e){ e.preventDefault();
 
             })
 
+
     
 $(document).on('click','.occupied_id',function(){ 
  var search_name=$(this).closest('li').find('.search_name').val();
  var search_lname=$(this).closest('li').find('.search_lname').val();
  var search_phone=$(this).closest('li').find('.search_phone').val();
  var search_email=$(this).closest('li').find('.search_email').val();
- var search_userId=$(this).closest('li').find('.search_userId').val();
- 
-
+ var search_userId=$(this).closest('li').find('.search_userId').val();  
+  $('#search_userId').val(search_userId);
   $('#cname').val(search_name);
-   $('#occupiedPop').modal('hide');
+  $('#occupiedPop').modal('hide');
 })
  
-$(".close").click(function(){
-  $("#msgbox_success").animate({left: '150%'}, "slow");
-    console.log("Hiding msgbox_success");
-  var adjustMsgBox = function(){
-    $("#msgbox_success").addClass("hidden").attr("aria-hidden", true);
-  };
-  setTimeout(adjustMsgBox, 2000);
-}); 
-
 </script>
+
+
 <style type="text/css">
-  
   #messageContainer {
   position: absolute;
   margin: 0px;
@@ -799,7 +757,6 @@ $(".close").click(function(){
   min-height: 100px;
   overflow: hidden;  
 }
-
 .alert-position {
   position: absolute;
   width:50%;

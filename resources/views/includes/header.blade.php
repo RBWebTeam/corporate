@@ -14,7 +14,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-         <img src="{{url('images/landmark.png')}}" width="140" class="padd center-btn" />
+       <a href="{{url('dashboard')}}"   >  <img src="{{url('images/landmark.png')}}" width="140" class="padd center-btn" /></a>
       </div>
 	  </div>
 	  
@@ -22,12 +22,12 @@
 	 <marquee> <h3 class="text-center pad hidden-xs gray-txt">LANDMARK CORPORATE INSURANCE</h3></marquee> 
       </div>
 	  
-	  <div class="col-md-2">
+	 <!--  <div class="col-md-2">
         <ul class="nav navbar-nav navbar-right pad pad-top center-btn">
 
             <a href="{{url('dashboard')}}"  class="btn btn-info btn-lg">DASHBOARD</a>
 
-		</div>
+		</div> -->
 		
       </div> 
       <!--/.nav-collapse -->
