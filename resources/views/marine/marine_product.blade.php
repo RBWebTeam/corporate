@@ -130,7 +130,7 @@
    </div>
    </div>
    
-   <div class="col-md-12"><button class="btn-nxt">CANCEL</button> &nbsp; <button class="btn-nxt" id="btncustomer_registration">SAVE</button></div>
+   <div class="col-md-12"><button type="reset"  class="btn-nxt">CANCEL</button> &nbsp; <button class="btn-nxt" id="btncustomer_registration">SAVE</button></div>
 
   </form>
    </div>
@@ -582,7 +582,7 @@
        }else{
          
 
-         toastr.warning("<h4>Search Customer .......?</h4>");
+         toastr.warning("<h4>Search Customer...</h4>");
 
         
 

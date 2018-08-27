@@ -5,7 +5,7 @@
 <link href="{{url('css/style.css')}}" type="text/css" rel="stylesheet" media="all">   
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/1.3.1/css/toastr.css">
+<link rel="stylesheet" type="text/css" href="{{url('css/toastr.css')}}">
 
  
 
